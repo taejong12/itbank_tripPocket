@@ -56,7 +56,7 @@ function fn_joinForm() {
         return false;
     } else {
         var age = parseInt(form.memberAge.value); // 정수로 변환
-        if (isNaN(age) || age <= 0) { // 나이가 숫자가 아니거나 0보다 작거나 같으면 false
+        if (isNaN(age) || age <= 0 || age >= 100) { // 나이가 숫자가 아니거나 0보다 작거나 같고 100보다 크거나 같으면 false
             alert("유효한 나이를 입력해 주세요.");
             form.memberAge.focus();
             return false;
@@ -137,7 +137,7 @@ function fn_memberIdCheck() {
             </tr>
             <tr align="center">
                 <td>나이</td>
-                <td><input type="number" name="memberAge" size="20"></td>
+                <td><input type="text" name="memberAge" size="20"></td>
             </tr>
             <tr align="center">
                 <td>닉네임</td>

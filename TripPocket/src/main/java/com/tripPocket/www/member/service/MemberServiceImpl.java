@@ -15,9 +15,18 @@ public class MemberServiceImpl implements MemberService {
 	public void insertMember(MemberDTO memberDTO) {
 		memberDAO.insertMember(memberDTO);
 	}
+	
+	@Override
+	public int login(MemberDTO memberDTO) {
+	      
+		return memberDAO.login(memberDTO);
+	}
+
 
 	@Override
 	public boolean isMemberIdDuplicated(String memberId) {
 		return memberDAO.isMemberIdDuplicated(memberId);
 	}
+	
+	
 }

@@ -17,8 +17,8 @@
 				<td>비밀번호</td>
 			</tr>
 			<tr align="center">
-				<td><input type="text" name="id" size="20"></td>
-				<td><input type="password" name="pwd" size="20"></td>
+				<td><input type="text" name="memberId" size="20"></td>
+				<td><input type="password" name="memberPwd" size="20"></td>
 			</tr>
 			<tr align="center">
 				<td colspan="2">

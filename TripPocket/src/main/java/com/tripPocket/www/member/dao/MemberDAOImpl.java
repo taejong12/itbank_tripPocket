@@ -21,6 +21,13 @@ public class MemberDAOImpl implements MemberDAO{
         int count = sqlSession.selectOne("mapper.member.isMemberIdDuplicated", memberId);
         return count > 0;
 	 }
+	 
+	 
+	 @Override
+	 public int login(MemberDTO memberDTO) {
+	      
+	    return sqlSession.selectOne("mapper.member.login",memberDTO);
+	 }
 
 	
 }
