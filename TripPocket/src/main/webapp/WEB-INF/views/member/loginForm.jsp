@@ -12,6 +12,7 @@
 <body>
 	<form method="post" action="${contextPath}/member/login.do">
 		<table border="1" width="80%" align="center">
+		
 			<tr align="center">
 				<td>아이디</td>
 				<td>비밀번호</td>

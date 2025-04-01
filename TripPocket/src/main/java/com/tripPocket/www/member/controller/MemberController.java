@@ -51,7 +51,9 @@ public class MemberController {
 	      if(result == 1 ) {
 	         session.setAttribute("isLogin",true);
 	         session.setAttribute("member", memberDTO);
+	         
 	         out.write("<script>");
+	         out.write("alert('로그인에 성공했습니다');");
 	         out.write("location.href='/www/main.do';");
 	         out.write("</script>");
 	      }else {
@@ -65,7 +67,7 @@ public class MemberController {
 
 	   @RequestMapping(value = "logout.do", method = RequestMethod.GET)
 	   public ModelAndView logout(@ModelAttribute() MemberDTO memberDTO, HttpServletRequest request,HttpServletResponse response) {
-	      ModelAndView mav = new ModelAndView("redirect:/main.do");
+	      ModelAndView mav = new ModelAndView("redirect:/member/loginForm.do");
 	      HttpSession session = request.getSession();
 	      session.invalidate();
 	      return mav;
