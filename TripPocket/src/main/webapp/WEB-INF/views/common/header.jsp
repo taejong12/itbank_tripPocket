@@ -22,7 +22,7 @@
             <c:when test="${isLogin == true || member != null}">
                <td>
                   <h3>${member.memberId}</h3>
-                  <h3><a href="${contextPath}/member/myPage.do?memberId=${member.memberId }">내정보</a></h3>
+                  <h3><a href="${contextPath}/member/myPage.do?memberId=${member.memberId }">마이페이지</a></h3>
                   <h3><a href="${contextPath}/member/logout.do">로그아웃</a></h3>
                </td>
             </c:when>
