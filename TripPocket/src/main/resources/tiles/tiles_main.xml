@@ -17,10 +17,3 @@
 		<put-attribute name="body" value="/WEB-INF/views/main/main.jsp" />
 	</definition>
 </tiles-definitions>
-
-
-
-
-
-
-
