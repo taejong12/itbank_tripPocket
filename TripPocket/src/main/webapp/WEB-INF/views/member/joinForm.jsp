@@ -11,11 +11,19 @@
 <meta charset="UTF-8">
 <title>회원가입</title>
 <script>
+var isMemberIdValid = false;
+
 function fn_joinForm() {
     var form = document.joinForm;
     
     if (form.memberId.value.trim() === "") {
         alert("아이디를 입력해 주세요.");
+        form.memberId.focus();
+        return false;
+    }
+    
+    if (!isMemberIdValid) {
+        alert("아이디 중복 체크를 해주세요.");
         form.memberId.focus();
         return false;
     }
@@ -76,9 +84,10 @@ function fn_joinForm() {
             return false;
         }
     }
+    
     return true;
-
 }
+
 function fn_memberIdCheck() {
     var memberId = document.joinForm.memberId.value.trim();
     if (memberId === "") {
@@ -95,9 +104,11 @@ function fn_memberIdCheck() {
             var responseText = xhr.responseText.trim(); // 서버로부터 받은 응답 텍스트를 공백제거
             if (responseText === "OK") { // ok면 아이디 중복 X
                 alert("사용 가능한 아이디입니다.");
+                isMemberIdValid = true;
             } else { // 아니면 아이디 중복 O
                 alert("중복된 아이디입니다. 다른 아이디를 입력해 주세요.");
                 document.joinForm.memberId.focus(); // 중복이면 id 포커스
+                isMemberIdValid = false;
             }
         }
     };
@@ -106,13 +117,13 @@ function fn_memberIdCheck() {
 </script>
 </head>
 <body>
-    <form name="joinForm" method="post" action="${contextPath}/member/join.do">
+    <form name="joinForm" method="post" action="${contextPath}/member/join.do" onsubmit="return fn_joinForm();">
         <table border="1" width="80%" align="center">
             <tr align="center">
                 <td>아이디</td>
                 <td>
-                	<input type="text" name="memberId" size="20">
-                	<input type="button" name="memberIdCheck" value="중복확인" onclick="fn_memberIdCheck()">
+                    <input type="text" name="memberId" size="20">
+                    <input type="button" name="memberIdCheck" value="중복확인" onclick="fn_memberIdCheck()">
                 </td>
             </tr>
             <tr align="center">
@@ -129,7 +140,7 @@ function fn_memberIdCheck() {
             </tr>
             <tr align="center">
                 <td>나이</td>
-                <td><input type="text" name="memberAge" size="20"></td>
+                <td><input type="number" name="memberAge" size="20"></td>
             </tr>
             <tr align="center">
                 <td>닉네임</td>
@@ -137,7 +148,7 @@ function fn_memberIdCheck() {
             </tr>
             <tr align="center">
                 <td>전화번호</td>
-                <td><input type="tel" name="memberTel" size="20"></td>
+                <td><input type="tel" name="memberTel" size="20" pattern="\d{10,11}"></td>
             </tr>
             <tr align="center">
                 <td>성별</td>
@@ -150,7 +161,7 @@ function fn_memberIdCheck() {
             </tr>
             <tr align="center">
                 <td colspan="2">
-                    <input type="submit" value="회원가입" onclick="return fn_joinForm();">
+                    <input type="submit" value="회원가입">
                     <a href="${contextPath}/main.do">메인페이지</a>
                 </td>
             </tr>
