@@ -8,6 +8,6 @@ public interface MemberService {
 
 	boolean isMemberIdDuplicated(String memberId);
 	
-	int login(MemberDTO memberDTO);
+	MemberDTO login(MemberDTO memberDTO);
 
 }

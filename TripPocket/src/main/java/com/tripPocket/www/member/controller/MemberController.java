@@ -44,14 +44,14 @@ public class MemberController {
 	@RequestMapping(value = "login.do", method = RequestMethod.POST)
 	   public ModelAndView login(@ModelAttribute() MemberDTO memberDTO, HttpServletRequest request,HttpServletResponse response) throws Exception {
 	      
+	      
 	      PrintWriter out = response.getWriter();
 	      response.setContentType("text/html;charset=utf-8");
-	      int result = memberService.login(memberDTO);
+	      MemberDTO member = memberService.login(memberDTO);
 	      HttpSession session = request.getSession();
-	      if(result == 1 ) {
+	      if(member != null ) {
 	         session.setAttribute("isLogin",true);
-	         session.setAttribute("member", memberDTO);
-	         
+	         session.setAttribute("member", member);
 	         out.write("<script>");
 	         out.write("alert('로그인에 성공했습니다');");
 	         out.write("location.href='/www/main.do';");

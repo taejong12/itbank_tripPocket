@@ -4,6 +4,19 @@
 
 <mapper namespace="mapper.member">
 
+		<resultMap type="memberDTO" id="MemberResultMap">
+			<result property="memberId" column="member_id"/>
+			<result property="memberPwd" column="member_pwd"/>
+			<result property="memberName" column="member_name"/>
+			<result property="memberEmail" column="member_email"/>
+			<result property="memberAge" column="member_age"/>
+			<result property="memberNickname" column="member_nickname"/>
+			<result property="memberTel" column="member_tel"/>
+			<result property="memberGender" column="member_gender"/>
+			<result property="memberAddAate" column="member_add_date"/>
+			<result property="memberModDate" column="member_mod_date"/>
+		</resultMap>
+
 	<insert id="insertMember" parameterType="memberDTO">
 		insert into member(
 			member_id,
@@ -30,8 +43,8 @@
         select count(*) from member where member_id = #{member_id}
     </select>
     
-     <select id="login" parameterType="memberDTO" resultType="int"> 
-      	select count(*) from member where member_id = #{memberId} and member_pwd = #{memberPwd}
+     <select id="login" parameterType="memberDTO" resultMap="MemberResultMap"> 
+      select * from member where member_id = #{memberId} and member_pwd = #{memberPwd}
    </select>
     
 </mapper>
