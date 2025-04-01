@@ -13,9 +13,14 @@ public class MemberDAOImpl implements MemberDAO{
 	private SqlSession sqlSession;
 	
 	@Override
-	public void inertMember(MemberDTO memberDTO) {
-		sqlSession.insert("mapper.member.insertMember", memberDTO);
+	public void insertMember(MemberDTO memberDTO) {
+	 sqlSession.insert("mapper.member.insertMember", memberDTO);
 	}
+
+	 public boolean isMemberIdDuplicated(String memberId) {
+        int count = sqlSession.selectOne("mapper.member.isMemberIdDuplicated", memberId);
+        return count > 0;
+	 }
 
 	
 }

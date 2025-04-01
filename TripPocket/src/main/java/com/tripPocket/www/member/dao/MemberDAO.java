@@ -4,6 +4,8 @@ import com.tripPocket.www.member.dto.MemberDTO;
 
 public interface MemberDAO {
 
-	void inertMember(MemberDTO memberDTO);
+	void insertMember(MemberDTO memberDTO);
+
+	boolean isMemberIdDuplicated(String memberId);
 
 }

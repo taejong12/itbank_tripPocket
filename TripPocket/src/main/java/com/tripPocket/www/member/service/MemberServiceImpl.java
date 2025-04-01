@@ -13,6 +13,11 @@ public class MemberServiceImpl implements MemberService {
 	private MemberDAO memberDAO;
 	
 	public void insertMember(MemberDTO memberDTO) {
-		memberDAO.inertMember(memberDTO);
+		memberDAO.insertMember(memberDTO);
+	}
+
+	@Override
+	public boolean isMemberIdDuplicated(String memberId) {
+		return memberDAO.isMemberIdDuplicated(memberId);
 	}
 }
