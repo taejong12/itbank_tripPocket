@@ -6,4 +6,8 @@ public interface MemberService {
 
 	void insertMember(MemberDTO memberDTO);
 
+	boolean isMemberIdDuplicated(String memberId);
+	
+	MemberDTO login(MemberDTO memberDTO);
+
 }
