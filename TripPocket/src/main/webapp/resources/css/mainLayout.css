@@ -152,7 +152,7 @@
         height: 100%;
         background-color: #f8f9fa;
         color: black;
-        position: fixed;
+        position: absolute;
         top: 0;
         right: -300px;
         z-index: 3;
@@ -162,6 +162,7 @@
         padding: 20px;
         box-sizing: border-box;
         box-shadow: -5px 0 5px -5px #333;
+        overflow-y: auto; /* 내부 스크롤 허용 */
     }
 
     .side-menu.show {
@@ -257,3 +258,4 @@
         from { transform: scale(0.8); opacity: 0; }
         to { transform: scale(1); opacity: 1; }
     }
+    

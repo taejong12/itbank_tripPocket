@@ -71,6 +71,7 @@
         window.addEventListener('load', function() {
             document.dispatchEvent(new Event('scroll'));
         });
+        
         // 스크립트 끝
     </script>
 </html>
