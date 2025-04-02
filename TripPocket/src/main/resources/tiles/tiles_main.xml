@@ -12,6 +12,14 @@
 		<put-attribute name="footer" value="/WEB-INF/views/layout/main/footer.jsp" />
 	</definition>
 	
+	<definition name="common" template="/WEB-INF/views/common/mainLayout2.jsp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="header" value="/WEB-INF/views/common/header.jsp" />
+		<put-attribute name="side" value="/WEB-INF/views/common/side.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
+	</definition>
+	
 	<definition name="main/main" extends="mainLayout">
 		<put-attribute name="title" value="메인페이지" />
 		<put-attribute name="body" value="/WEB-INF/views/main/main.jsp" />
