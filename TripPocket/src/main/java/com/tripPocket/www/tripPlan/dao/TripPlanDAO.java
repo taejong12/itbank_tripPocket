@@ -13,4 +13,8 @@ public interface TripPlanDAO {
 
 	List<TripDayDTO> selectTripDayListByPlanId(Integer tripPlanId);
 
+	int insertTripDay(TripDayDTO tripDayDTO);
+
+	TripPlanDTO selectTripPlanById(Integer tripPlanId);
+
 }

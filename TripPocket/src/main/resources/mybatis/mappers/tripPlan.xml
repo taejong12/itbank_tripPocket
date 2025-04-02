@@ -24,7 +24,8 @@
 	<select id="selectPlanList" parameterType="String" resultType="tripPlanDTO">
 			select *
 			from trip_plan
-			where member_id = 'test'
+			where member_id = #{memberId}
+			order by trip_plan_id desc
 	</select>
 	
 	<select id="selectTripDayListByPlanId" parameterType="Integer" resultType="tripDayDTO">
@@ -33,4 +34,25 @@
 			where trip_plan_id = #{tripPlanId}
 	</select>
 	
+	<insert id="insertTripDay" parameterType="tripPlanDTO">
+		insert into trip_day(
+			trip_day_day,
+			trip_day_adr,
+			trip_day_date,
+			trip_day_image,
+			trip_plan_id
+		) values (
+			#{tripDayDay},
+			#{tripDayAdr},
+			#{tripDayDate},
+			#{tripDayImage},
+			#{tripPlanId}
+		)
+	</insert>
+	
+	<select id="selectTripPlanById" parameterType="Integer" resultType="tripPlanDTO">
+		select *
+		from trip_plan
+		where trip_plan_id = #{tripPlanId}
+	</select>
 </mapper>

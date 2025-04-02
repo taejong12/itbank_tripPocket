@@ -1,0 +1,74 @@
+@charset "UTF-8";
+
+#tripDetailPage {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+}
+
+#tripDetailPage #dayList {
+    list-style: none;
+    padding: 0;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+#tripDetailPage #dayList li {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    margin: 10px 0;
+    padding: 15px;
+    text-align: left;
+}
+
+#tripDetailPage .tripDayList {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+}
+
+#tripDetailPage .tripDayList li {
+    display: flex;
+    align-items: center;
+    background: #f8f9fa;
+    padding: 8px;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+#tripDetailPage .tripDayList img {
+    margin-right: 10px;
+    border-radius: 5px;
+}
+
+#tripDetailPage button {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+#tripDetailPage button:hover {
+    background: #0056b3;
+}
+
+.plan-list {
+	display: block;
+	width: 200px;
+	margin: 20px auto;
+	padding: 10px;
+	text-align: center;
+	background-color: #28a745;
+	color: white;
+	border-radius: 5px;
+	text-decoration: none;
+	font-weight: bold;
+}
+

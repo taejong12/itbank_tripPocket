@@ -30,4 +30,14 @@ public class TripPlanServiceImpl implements TripPlanService{
 		return tripPlanDAO.selectTripDayListByPlanId(tripPlanId);
 	}
 
+	@Override
+	public int insertTripDay(TripDayDTO tripDayDTO) {
+		return tripPlanDAO.insertTripDay(tripDayDTO);
+	}
+
+	@Override
+	public TripPlanDTO selectTripPlanById(Integer tripPlanId) {
+		return tripPlanDAO.selectTripPlanById(tripPlanId);
+	}
+
 }

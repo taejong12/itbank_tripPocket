@@ -13,4 +13,8 @@ public interface TripPlanService {
 
 	List<TripDayDTO> selectTripDayListByPlanId(Integer tripPlanId);
 
+	int insertTripDay(TripDayDTO tripDayDTO);
+
+	TripPlanDTO selectTripPlanById(Integer tripPlanId);
+
 }
