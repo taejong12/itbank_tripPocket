@@ -4,18 +4,32 @@ import java.sql.Date;
 
 public class TripPlanDTO {
 
-	private String tripPlanId;
+	private Integer tripPlanId;
 	private String tripPlanTitle;
 	private String tripPlanContent;
+	private Date tripPlanStartDay;
+	private Date tripPlanArriveDay;
 	private String memberId;
 	private Date tripPlanAddDate;
 	private Date tripPlanModDate;
 	
-	public String getTripPlanId() {
+	public Integer getTripPlanId() {
 		return tripPlanId;
 	}
-	public void setTripPlanId(String tripPlanId) {
+	public void setTripPlanId(Integer tripPlanId) {
 		this.tripPlanId = tripPlanId;
+	}
+	public Date getTripPlanStartDay() {
+		return tripPlanStartDay;
+	}
+	public void setTripPlanStartDay(Date tripPlanStartDay) {
+		this.tripPlanStartDay = tripPlanStartDay;
+	}
+	public Date getTripPlanArriveDay() {
+		return tripPlanArriveDay;
+	}
+	public void setTripPlanArriveDay(Date tripPlanArriveDay) {
+		this.tripPlanArriveDay = tripPlanArriveDay;
 	}
 	public String getTripPlanTitle() {
 		return tripPlanTitle;
