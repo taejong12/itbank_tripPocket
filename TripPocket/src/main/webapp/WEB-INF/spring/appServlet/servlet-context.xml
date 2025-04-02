@@ -32,5 +32,17 @@
 		<beans:property name="maxInMemorySize" value="1000000" />
 		<beans:property name="defaultEncoding" value="utf-8" />
 	</beans:bean>
+	<interceptors>
+      <interceptor>
+         <mapping path="/"/>
+         <mapping path="/main.do"/>
+         <beans:bean class="com.tripPocket.www.common.interceptor.LoginInterceptor"></beans:bean>
+      </interceptor>
+     </interceptors>
+     <beans:bean id="viewResolverJSP" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <beans:property name="prefix" value="/WEB-INF/views/" />
+    <beans:property name="suffix" value=".jsp" />
+    <beans:property name="order" value="1" />
+</beans:bean>
 	
 </beans:beans>

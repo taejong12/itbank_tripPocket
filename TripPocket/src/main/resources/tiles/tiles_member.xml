@@ -18,6 +18,11 @@
 		<put-attribute name="title" value="회원정보" />
 		<put-attribute name="body" value="/WEB-INF/views/member/memberDetail.jsp" />
 	</definition>
+	<!--  <definition name="/member/mypage" extends="mainLayout">
+		<put-attribute name="title" value="회원정보" />
+		<put-attribute name="body" value="/WEB-INF/views/member/mypage.jsp" />
+	</definition> -->
+	
 </tiles-definitions>
 
 

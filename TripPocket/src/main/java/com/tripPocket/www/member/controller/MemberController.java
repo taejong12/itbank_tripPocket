@@ -83,5 +83,11 @@ public class MemberController {
 			return "OK"; // 존재하지 않는다
 		}
 	}
+	@RequestMapping(value = "mypage.do", method = RequestMethod.GET)
+	public ModelAndView mypage(@ModelAttribute() MemberDTO memberDTO, HttpServletRequest request,HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView("/member/mypage");
+	return mav;
+		
+	}
 	
 }
