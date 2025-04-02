@@ -67,7 +67,7 @@ public class MemberController {
 
 	   @RequestMapping(value = "logout.do", method = RequestMethod.GET)
 	   public ModelAndView logout(@ModelAttribute() MemberDTO memberDTO, HttpServletRequest request,HttpServletResponse response) {
-	      ModelAndView mav = new ModelAndView("redirect:/member/loginForm.do");
+	      ModelAndView mav = new ModelAndView("redirect:/");
 	      HttpSession session = request.getSession();
 	      session.invalidate();
 	      return mav;
