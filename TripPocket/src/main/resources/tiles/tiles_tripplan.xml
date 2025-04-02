@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+	"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+	"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+	
+<tiles-definitions>
+	<definition name="tripplan/planList" extends="mainLayout">
+		<put-attribute name="title" value="여행 계획 목록" />
+		<put-attribute name="body" value="/WEB-INF/views/tripplan/planList.jsp" />
+	</definition>
+	
+	<definition name="tripplan/dateSetting" extends="mainLayout">
+		<put-attribute name="title" value="날짜/제목 정하기" />
+		<put-attribute name="body" value="/WEB-INF/views/tripplan/dateSetting.jsp" />
+	</definition>
+	
+	<definition name="tripplan/planDetail" extends="mainLayout">
+		<put-attribute name="title" value="플랜 상세보기" />
+		<put-attribute name="body" value="/WEB-INF/views/tripplan/palnDetail.jsp" />
+	</definition>
+	
+	<definition name="tripplan/planSpace" extends="mainLayout">
+		<put-attribute name="title" value="여행 선택하기" />
+		<put-attribute name="body" value="/WEB-INF/views/tripplan/planSpace.jsp" />
+	</definition>
+	
+</tiles-definitions>
+
+
+
+
+
+
+

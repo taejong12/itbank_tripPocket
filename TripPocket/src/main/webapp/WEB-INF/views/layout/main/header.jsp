@@ -19,7 +19,7 @@
             <h1><font size="30">TripPocket</font></h1>
          </td>
          <c:choose>
-            <c:when test="${isLogin == true || member != null}">
+            <c:when test="${isLogin == true && member != null}">
                <td>
                   <h3>${member.memberId}님</h3>
                   <h3><a href="${contextPath}/member/myPage.do?memberId=${member.memberId }">마이페이지</a></h3>
