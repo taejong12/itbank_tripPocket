@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.trip.plan">
+
+
+	<insert id="insertPlanDateSet" parameterType="tripPlanDTO">
+		insert into trip_plan(
+			trip_plan_title,
+			trip_plan_content,
+			trip_plan_start_day,
+			trip_plan_arrive_day,
+			member_id
+		) values (
+			#{tripPlanTitle},
+			#{tripPlanContent},
+			#{tripPlanStartDay},
+			#{tripPlanArriveDay},
+			#{memberId}
+		)
+	</insert>
+	
+	<select id="selectPlanList" parameterType="String" resultType="tripPlanDTO">
+			select *
+			from trip_plan
+			where member_id = 'test'
+	</select>
+	
+	<select id="selectTripDayListByPlanId" parameterType="Integer" resultType="tripDayDTO">
+			select *
+			from trip_day
+			where trip_plan_id = #{tripPlanId}
+	</select>
+	
+</mapper>
