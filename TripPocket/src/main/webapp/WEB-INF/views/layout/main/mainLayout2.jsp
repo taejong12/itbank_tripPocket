@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title><tiles:insertAttribute name="title" /></title>
-<link rel="stylesheet" href="${contextPath}/resources/css/main/mainLayout.css">
+<link rel="stylesheet" href="${contextPath}/resources/css/main/common.css">
 </head>
 <body>
 	<div id="container">
@@ -71,7 +71,6 @@
         window.addEventListener('load', function() {
             document.dispatchEvent(new Event('scroll'));
         });
-        
         // 스크립트 끝
     </script>
 </html>
