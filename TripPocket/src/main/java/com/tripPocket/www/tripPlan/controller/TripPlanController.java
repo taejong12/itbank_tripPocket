@@ -65,7 +65,8 @@ public class TripPlanController {
 		
 		if (memberDTO == null) {
 	        System.out.println("세션에 회원 정보가 없습니다.");
-	        return "redirect:/member/loginForm.do"; // 로그인 페이지로 이동
+	        // 로그인 페이지로 이동
+	        return "redirect:/member/loginForm.do"; 
 	    }
 		
 		tripPlanDTO.setMemberId(memberDTO.getMemberId());
