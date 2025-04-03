@@ -15,14 +15,21 @@
 		<h2>여행 계획 리스트</h2>
 
 		<c:forEach var="tripPlan" items="${tripPlanList}">
-			<a href="${contextPath}/trip/planDetail.do?tripPlanId=${tripPlan.tripPlanId}" class="plan-box">
-				<div>기간: ${tripPlan.tripPlanStartDay} ~ ${tripPlan.tripPlanArriveDay}</div>
-				<div>제목: ${tripPlan.tripPlanTitle}</div>
-			</a>
+			<div id="tripPlan_${tripPlan.tripPlanId}" class="plan-box-wrapper">
+		        <a href="${contextPath}/trip/planDetail.do?tripPlanId=${tripPlan.tripPlanId}" class="plan-box">
+		            <div>기간: ${tripPlan.tripPlanStartDay} ~ ${tripPlan.tripPlanArriveDay}</div>
+		            <div>제목: ${tripPlan.tripPlanTitle}</div>
+		        </a>
+		        <button class="delete-btn" onclick="fu_deleteTripPlan('${tripPlan.tripPlanId}')">삭제</button>
+		    </div>
 		</c:forEach>
 
 		<a class="add-plan" href="${contextPath}/trip/planDateSet.do">여행계획추가</a>
 	</div>
 	
+	<script type="text/javascript">
+		let contextPath = '${contextPath}';
+	</script>
+	<script src="${contextPath}/resources/script/tripPlan/planList.js"></script>
 </body>
 </html>
