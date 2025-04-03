@@ -1,17 +1,14 @@
 <%@page import="com.tripPocket.www.member.dto.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="contextPath" value="${pageContext.request.contextPath }" />
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Trip Pocket Intro</title>
-<%
-    String contextPath = request.getContextPath();
-	Boolean isLogin = (Boolean) session.getAttribute("isLogin");
-	MemberDTO member = (MemberDTO) session.getAttribute("member");
-%>
+
 </head>
 <body onclick="closeMenu(event)">
     
@@ -22,7 +19,7 @@
         </div>
         <div class="section content">
             <h1>원하는 것만 하는 나만의 특별한 여행, 가능할까요?</h1>
-            <h2><img src="<%= contextPath %>/resources/img/cherryflower.png" alt="계획세우는 이미지"></h2>
+            <h2><img src="${contextPath }s/resources/img/cherryflower.png" alt="계획세우는 이미지"></h2>
             <h1>나만을 위한 맞춤형 여행</h1>
             <p>
                 여행 준비가 번거로우신가요?<br>
@@ -32,7 +29,7 @@
         </div>
         <div class="section content">
             <h1>내가 가려는 그곳, 여행지로서 매력이 있나요?</h1>
-            <h2><img src="<%= contextPath %>/resources/img/cherryflower.png" alt="여행지 보드 이미지"></h2>
+            <h2><img src="${contextPath }/resources/img/cherryflower.png" alt="여행지 보드 이미지"></h2>
             <h1>궁금한 정보를 한눈에</h1>
             <p>
                 다른 사람과 쉽게 공유해 보세요.<br>
@@ -41,7 +38,7 @@
         </div>
         <div class="section content">
             <h1>나의 숙소 결제, 지금 괜찮을까요?</h1>
-            <h2><img src="<%= contextPath %>/resources/img/cherryflower.png" alt="숙소이미지"></h2>
+            <h2><img src="${contextPath }/resources/img/cherryflower.png" alt="숙소이미지"></h2>
             <h1>일정에 맞는 숙소 금액을 한눈에 확인하세요</h1>
             <p>
                 여행 중 가장 중요한 숙소!<br>
@@ -49,9 +46,19 @@
                 합리적인 가격으로 편안한 숙소를 예약해 보세요.
             </p>
         </div>
-        <c:if test="${isLogin == false || member == null }">
+        <div class="section content">
+            <h1>나의 항공권, 적당한 가격일까?</h1>
+            <h2><img src="${contextPath }/resources/img/cherryflower.png" alt="항공권이미지"></h2>
+            <h1>항공권 가격, 지금이 적당해요</h1>
+            <p>
+                항공권 가격이 너무 비싸서 고민이신가요?<br>
+                Trip Pocket으로 최적의 항공권 가격을 확인하고 예약하세요.<br>
+                다양한 항공사와 경로를 비교하여 가장 합리적인 가격을 찾을 수 있습니다.
+            </p>
+        </div>
+        <c:if test="${member == null }">
         	<div class="section content">
-            <h1><a href="<%= contextPath%>/member/loginForm.do">Trip Pocket 시작하기</a></h1>
+            <h1><a href="${contextPath }/member/loginForm.do">Trip Pocket 시작하기</a></h1>
         </div>
         </c:if>
         

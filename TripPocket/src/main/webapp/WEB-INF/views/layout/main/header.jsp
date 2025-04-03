@@ -3,10 +3,7 @@
     pageEncoding="UTF-8" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath }" />
-<%
-   Boolean isLogin = (Boolean) session.getAttribute("isLogin");
-   MemberDTO member = (MemberDTO) session.getAttribute("member");
-%>
+
 <body>
   <header>
         <a href="${contextPath }/main.do" class="logo">Trip Pocket</a> <!-- 메인페이지로 이동 -->
@@ -21,9 +18,15 @@
         <div class="close-btn" onclick="toggleMenu(event)">X</div>
         <ul>
         	<c:choose>
-        		<c:when test="${isLogin == true || member != null }">
-        			<li>${member.memberId }님 환영합니다.</li>
-        		</c:when>
+        		  <c:when test="${isLogin == true && member != null}">
+                <div class="profile-container">
+                    <div>
+                        <p>${member.memberName}</p>
+                        <p>${member.memberEmail}</p>
+                    </div>
+                    <img src="${contextPath}/resources/img/basic.png">
+                </div>
+            </c:when>
         		<c:otherwise>
         		<li><a href="${contextPath}/member/loginForm.do">로그인/회원가입</a></li>
         		</c:otherwise>
@@ -52,7 +55,7 @@
             </li>
         </ul>
         <c:choose>
-        	<c:when test="${isLogin == true || member != null }">
+        	<c:when test="${isLogin == true && member != null }">
         	<a href="${contextPath }/member/logout.do">로그아웃</a>
         	</c:when>
         	<c:otherwise>

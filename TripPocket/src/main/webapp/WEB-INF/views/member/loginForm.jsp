@@ -9,98 +9,119 @@
 <title>로그인창</title>
 <script></script>
 <style>
-div{
-display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-       padding-top: 30px;
-        text-align: center;
-       
-        
-        }
+/* 전체 페이지 스타일 */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: 'Arial', sans-serif;
+}
 
+/* 로그인 폼 */
 .form {
-
   background-color: #fff;
-  display: block;
-  padding: 1rem;
+  padding: 2rem;
   max-width: 350px;
-  border-radius: 0.5rem;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-}
-
-.form-title {
-  font-size: 1.25rem;
-  line-height: 1.75rem;
-  font-weight: 600;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
   text-align: center;
-  color: #000;
+  animation: fadeIn 0.5s ease-in-out;
 }
 
+/* 제목 스타일 */
+.form-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #4F46E5;
+  margin-bottom: 1rem;
+}
+
+/* 입력 필드 스타일 */
 .input-container {
   position: relative;
-}
-
-.input-container input, .form button {
-  outline: none;
-  border: 1px solid #e5e7eb;
-  margin: 8px 0;
+  margin-bottom: 1rem;
 }
 
 .input-container input {
-  background-color: #fff;
-  padding: 1rem;
-  padding-right: 3rem;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-  width: 300px;
-  border-radius: 0.5rem;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-}
-
-.input-container span {
-  display: grid;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  place-content: center;
-}
-
-.input-container span svg {
-  color: #9CA3AF;
-  width: 1rem;
-  height: 1rem;
-}
-
-.submit {
-  display: block;
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
-  background-color: #4F46E5;
-  color: #ffffff;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-  font-weight: 500;
   width: 100%;
-  border-radius: 0.5rem;
-  text-transform: uppercase;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 1rem;
+  transition: all 0.3s ease-in-out;
 }
 
+.input-container input:focus {
+  border-color: #4F46E5;
+  box-shadow: 0 0 8px rgba(79, 70, 229, 0.5);
+  outline: none;
+}
+
+/* placeholder 스타일 */
+.input-container input::placeholder {
+  color: #aaa;
+  font-size: 0.9rem;
+}
+
+/* 아이콘 스타일 */
+.input-container span {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #9CA3AF;
+}
+
+/* 로그인 버튼 스타일 */
+.submit {
+  background: #4F46E5;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.submit:hover {
+  background: #4338CA;
+  box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+}
+
+.submit:active {
+  transform: scale(0.98);
+}
+
+/* 회원가입 링크 */
 .signup-link {
+  margin-top: 1rem;
+  font-size: 0.9rem;
   color: #6B7280;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-  text-align: center;
 }
 
 .signup-link a {
+  color: #4F46E5;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.signup-link a:hover {
   text-decoration: underline;
+}
+
+/* 애니메이션 효과 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 </style>
 </head>
