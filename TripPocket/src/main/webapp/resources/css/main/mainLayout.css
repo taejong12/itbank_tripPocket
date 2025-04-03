@@ -4,6 +4,7 @@
         padding: 0;
         overflow-x: hidden;
         font-family: 'Noto Sans', sans-serif;
+        overflow-y: auto;
     }
 
     header {
@@ -43,6 +44,22 @@
         background: white;
         transition: all 0.3s ease;
     }
+
+    .profile-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+   }
+
+   .profile-container img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-left: auto;
+    
+   }
 
     body::before {
         content: "";
