@@ -8,11 +8,23 @@ public class TripDayDTO {
 	private Integer tripDayDay;
 	private String tripDayAdr;
 	private Date tripDayDate;
+	private String tripDayImage;
 	private Integer tripPlanId;
 	private Date tripPlanAddDate;
 	private Date tripPlanModDate;
 	
-	
+	public String getTripDayImage() {
+		return tripDayImage;
+	}
+	public void setTripDayImage(String tripDayImage) {
+		this.tripDayImage = tripDayImage;
+	}
+	public Integer getTripDayDay() {
+		return tripDayDay;
+	}
+	public String getTripDayAdr() {
+		return tripDayAdr;
+	}
 	public Integer getTripPlanId() {
 		return tripPlanId;
 	}

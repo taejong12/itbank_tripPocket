@@ -32,4 +32,26 @@ public class TripPlanDAOImpl implements TripPlanDAO{
 		return sqlSession.selectList("mapper.trip.plan.selectTripDayListByPlanId", tripPlanId);
 	}
 
+	@Override
+	public TripDayDTO insertTripDay(TripDayDTO tripDayDTO) {
+		sqlSession.insert("mapper.trip.plan.insertTripDay", tripDayDTO);
+		return tripDayDTO;
+	}
+
+	@Override
+	public TripPlanDTO selectTripPlanById(Integer tripPlanId) {
+		return sqlSession.selectOne("mapper.trip.plan.selectTripPlanById", tripPlanId);
+	}
+
+	@Override
+	public int deleteTripDayByTripDayId(Integer tripDayId) {
+		return sqlSession.delete("mapper.trip.plan.deleteTripDayByTripDayId", tripDayId);
+	}
+
+	@Override
+	public int deleteTripPlanByTripPlanId(Integer tripPlanId) {
+		sqlSession.delete("mapper.trip.plan.deleteTripDayByTripPlanId", tripPlanId);
+		return sqlSession.delete("mapper.trip.plan.deleteTripPlanByTripPlanId", tripPlanId);
+	}
+
 }

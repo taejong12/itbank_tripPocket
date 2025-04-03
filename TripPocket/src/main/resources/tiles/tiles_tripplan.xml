@@ -18,12 +18,6 @@
 		<put-attribute name="title" value="플랜 상세보기" />
 		<put-attribute name="body" value="/WEB-INF/views/tripplan/palnDetail.jsp" />
 	</definition>
-	
-	<definition name="tripplan/planSpace" extends="mainLayout">
-		<put-attribute name="title" value="여행 선택하기" />
-		<put-attribute name="body" value="/WEB-INF/views/tripplan/planSpace.jsp" />
-	</definition>
-	
 </tiles-definitions>
 
 

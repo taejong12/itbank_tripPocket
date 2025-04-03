@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>날짜/지역 정하기</title>
+<link rel="stylesheet" href="${contextPath}/resources/css/tripPlan/dateSetting.css">
 </head>
 <body>
 	<form name="planDateSet">
@@ -26,40 +27,9 @@
 		<button onclick="fu_planDateSet(event)">선택완료</button>
 	</form>
 	
-	<script type="text/javascript">
-
-		document.addEventListener("DOMContentLoaded", function () {
-			
-			window.fu_planDateSet = function(event){
-				event.preventDefault();
-				
-				let form = document.planDateSet;
-				
-				let title = form.tripPlanTitle.value;
-				let content = form.tripPlanContent.value;
-				let startDay = form.tripPlanStartDay.value;
-				let arriveDay = form.tripPlanArriveDay.value;
-				
-				if(title == "" || title.length == 0) {
-					alert("제목이 입력되지 않았습니다.");
-					form.tripPlanTitle.focus();
-				} else if (content == "" || content.length == 0) {
-					alert("설명이 입력되지 않았습니다.");
-					form.tripPlanContent.focus();
-				} else if (startDay == "" || startDay.length == 0) {
-					alert("출발일이 입력되지 않았습니다.");
-					form.tripPlanStartDay.focus();
-				} else if (arriveDay == "" || arriveDay.length == 0) {
-					alert("도착일이 입력되지 않았습니다.");
-					form.tripPlanArriveDay.focus();
-				} else {
-					alert("여행 계획 등록 완료");
-					form.method="post";
-					form.action="${contextPath}/trip/insertPlanDateSet.do";
-					form.submit();
-				}
-			}
-		});
+	<script>
+		// JavaScript 변수로 저장
+	    let contextPath = "${contextPath}";
 	</script>
 </body>
 </html>

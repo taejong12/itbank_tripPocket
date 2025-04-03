@@ -40,7 +40,7 @@
                     <li><a href="#">카드등록</a></li> <!-- 카드등록 페이지로 이동 -->
                 </ul>
             </li>
-            <li><a href="#">여행 계획 세우기</a></li> <!-- 여행 계획 세우기로 이동 -->
+            <li><a href="${contextPath}/trip/planList.do">여행 계획 세우기</a></li> <!-- 여행 계획 세우기로 이동 -->
             <li><a href="#" onclick="toggleSubmenu(event, 'share-submenu')">여행 공유하기</a>
                 <ul class="submenu" id="share-submenu">
                     <li><a href="#">나의 여행 글 쓰기</a></li> <!-- 나의 여행 글 쓰기 페이지로 이동 -->

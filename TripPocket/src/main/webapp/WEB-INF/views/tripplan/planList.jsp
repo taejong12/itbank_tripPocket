@@ -8,20 +8,28 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>여행계획세우기</title>
+<link rel="stylesheet" href="${contextPath}/resources/css/tripPlan/planList.css">
 </head>
 <body>
-	<div>여행 계획 리스트</div>
-			<c:forEach var="tripPlan" items="${tripPlanList}">
-			<%-- <a href="${contextPath}/trip/planDetail.do?tripPlanId=${tripPlan.tripPlanId}">	</a> --%>
-				<ul>
-					<li>날짜기간</li>
-					<li>출발: ${tripPlan.tripPlanStartDay}</li>
-					<li>도착: ${tripPlan.tripPlanArriveDay}</li>
-					<li>제목: ${tripPlan.tripPlanTitle}</li>						
-				</ul>
-			</c:forEach>
+	<div class="container">
+		<h2>여행 계획 리스트</h2>
+
+		<c:forEach var="tripPlan" items="${tripPlanList}">
+			<div id="tripPlan_${tripPlan.tripPlanId}" class="plan-box-wrapper">
+		        <a href="${contextPath}/trip/planDetail.do?tripPlanId=${tripPlan.tripPlanId}" class="plan-box">
+		            <div>기간: ${tripPlan.tripPlanStartDay} ~ ${tripPlan.tripPlanArriveDay}</div>
+		            <div>제목: ${tripPlan.tripPlanTitle}</div>
+		        </a>
+		        <button class="delete-btn" onclick="fu_deleteTripPlan('${tripPlan.tripPlanId}')">삭제</button>
+		    </div>
+		</c:forEach>
+
+		<a class="add-plan" href="${contextPath}/trip/planDateSet.do">여행계획추가</a>
+	</div>
 	
-	<a href="${contextPath}/trip/planDateSet.do">여행계획추가</a>
-	
+	<script type="text/javascript">
+		let contextPath = '${contextPath}';
+	</script>
+	<script src="${contextPath}/resources/script/tripPlan/planList.js"></script>
 </body>
 </html>

@@ -8,15 +8,41 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>여행 계획 상세페이지</title>
+<link rel="stylesheet" href="${contextPath}/resources/css/tripPlan/palnDetail.css">
 </head>
-<body>
-	<c:forEach var="tripDay" items="${tripDayList}">
-		<ul>
-			<li>Day: ${tripDay.trip_day_day}</li>
-			<li>장소: ${tripDay.trip_day_adr}</li>
-		</ul>
-	</c:forEach>
+<body id="tripDetailPage">
+
+	<h1>${tripPlanDTO.tripPlanTitle}</h1>
 	
-	<a href="${contextPath}/trip/planList.do">목록</a>
+	<ul id="dayList"></ul>
+	
+	<a class="plan-list" href="${contextPath}/trip/planList.do">목록</a>
+	
+	
+	<script type="text/javascript">
+		let contextPath = '${contextPath}';	
+	
+		document.addEventListener("DOMContentLoaded", function (){
+			
+			let startDate = '${tripPlanDTO.tripPlanStartDay}';
+			let endDate = '${tripPlanDTO.tripPlanArriveDay}';
+			let tripPlanId = '${tripPlanDTO.tripPlanId}';
+			let tripDayList = [];
+			
+			// 장소 리스트
+		    <c:forEach var="tripDay" items="${tripDayList}">
+		        tripDayList.push({
+		        	tripDayId: "${tripDay.tripDayId}",
+		            tripDayDay: "${tripDay.tripDayDay}",
+		            tripDayAdr: "${tripDay.tripDayAdr}",
+		            tripDayImage: "${tripDay.tripDayImage}"
+		        });
+		    </c:forEach>
+			
+		 	// 날짜별 화면 출력
+			fu_tripPeriod(startDate, endDate, tripPlanId, tripDayList);
+		});
+	</script>
+	<script src="${contextPath}/resources/script/tripPlan/palnDetail.js"></script>
 </body>
 </html>
