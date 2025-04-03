@@ -89,17 +89,41 @@ window.fu_insertTripDay = function(keyword, tripDayDay, tripDayDate, tripPlanId)
         img.src = keyword.firstimage2;
         img.classList.add("trip-item-img");
 
-        // 주소 정보 요소 생성
-        let span = document.createElement("span");
-        span.textContent = keyword.title;
-        span.classList.add("trip-item-text");
+		// 텍스트 컨테이너 생성 (제목 + 주소 정보 포함)
+		let textContainer = document.createElement("div");
+		textContainer.classList.add("trip-item-text-container");
+				
+		// 장소 이름
+		let titleSpan = document.createElement("span");
+		titleSpan.textContent = keyword.title;
+		titleSpan.classList.add("trip-item-title");
 
-        // 컨테이너 div 생성
-        let container = document.createElement("div");
-        container.classList.add("trip-item-container");
-        container.appendChild(img);
-        container.appendChild(span);
+		// 주소 정보
+		let addr1Span = document.createElement("span");
+		addr1Span.textContent = keyword.addr1;
+		addr1Span.classList.add("trip-item-addr");
 
+		// 텍스트 컨테이너에 요소 추가
+		textContainer.appendChild(titleSpan);
+		textContainer.appendChild(addr1Span);
+
+        // 컨테이너 div 생성 (이미지 + 텍스트 포함)
+		let container = document.createElement("div");
+		container.classList.add("trip-item-container");
+		container.appendChild(img);
+		container.appendChild(textContainer);
+        
+        // mapx, mapy 값을 히든 인풋으로 추가
+		let hiddenMapX = document.createElement("input");
+		hiddenMapX.type = "hidden";
+		hiddenMapX.name = "mapx";
+		hiddenMapX.value = keyword.mapx;
+		
+		let hiddenMapY = document.createElement("input");
+		hiddenMapY.type = "hidden";
+		hiddenMapY.name = "mapy";
+		hiddenMapY.value = keyword.mapy;
+        
         // 삭제 버튼 생성
         let deleteButton = document.createElement("button");
         deleteButton.textContent = "삭제";
@@ -107,12 +131,16 @@ window.fu_insertTripDay = function(keyword, tripDayDay, tripDayDate, tripPlanId)
         deleteButton.setAttribute("onclick", "fu_deleteTripDay('" + tripDayId + "')");
 
         // 요소 추가
-        listItem.appendChild(container);
-        listItem.appendChild(deleteButton);
+		listItem.appendChild(container);
+		listItem.appendChild(hiddenMapX);
+		listItem.appendChild(hiddenMapY);
+		listItem.appendChild(deleteButton);
 
         if (tripList) {
             tripList.appendChild(listItem);
         }
+        
+        fu_kakao_map(keyword.mapx, keyword.mapy);
         
     })
     .catch(error => {
