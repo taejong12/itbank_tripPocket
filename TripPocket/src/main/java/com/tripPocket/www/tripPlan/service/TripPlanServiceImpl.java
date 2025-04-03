@@ -31,13 +31,23 @@ public class TripPlanServiceImpl implements TripPlanService{
 	}
 
 	@Override
-	public int insertTripDay(TripDayDTO tripDayDTO) {
+	public TripDayDTO insertTripDay(TripDayDTO tripDayDTO) {
 		return tripPlanDAO.insertTripDay(tripDayDTO);
 	}
 
 	@Override
 	public TripPlanDTO selectTripPlanById(Integer tripPlanId) {
 		return tripPlanDAO.selectTripPlanById(tripPlanId);
+	}
+
+	@Override
+	public int deleteTripDayByTripDayId(Integer tripDayId) {
+		return tripPlanDAO.deleteTripDayByTripDayId(tripDayId);
+	}
+
+	@Override
+	public int deleteTripPlanByTripPlanId(Integer tripPlanId) {
+		return tripPlanDAO.deleteTripPlanByTripPlanId(tripPlanId);
 	}
 
 }

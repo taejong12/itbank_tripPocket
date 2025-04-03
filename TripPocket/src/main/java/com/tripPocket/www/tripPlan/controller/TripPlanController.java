@@ -1,6 +1,8 @@
 package com.tripPocket.www.tripPlan.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tripPocket.www.member.dto.MemberDTO;
@@ -90,14 +93,48 @@ public class TripPlanController {
 	}
 	
 	@RequestMapping("/insertTripDay.do")
-    public ResponseEntity<String> insertTripDay(@RequestBody TripDayDTO tripDayDTO) {
-		int result = tripPlanService.insertTripDay(tripDayDTO);
-
-        if (result > 0) {
-            return ResponseEntity.ok("장소 저장 성공");
+    public ResponseEntity<Map<String, Object>> insertTripDay(@RequestBody TripDayDTO tripDayDTO) {
+		
+		tripDayDTO = tripPlanService.insertTripDay(tripDayDTO);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+        if (tripDayDTO.getTripDayId() > 0) {
+        	map.put("tripDayId", tripDayDTO.getTripDayId());
+            return ResponseEntity.ok(map);
         } else {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("저장 실패");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
         }
     }
 	
+	@RequestMapping("/deleteTripDay.do")
+	public ResponseEntity<Map<String, Object>> deleteTripDay(@RequestBody Integer tripDayId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+        int result = tripPlanService.deleteTripDayByTripDayId(tripDayId);
+
+        if (result > 0) {
+        	map.put("result", "여행 장소 삭제 완료");
+        	return ResponseEntity.ok(map);
+        } else {
+        	map.put("result", "여행 장소 삭제 실페");
+        	return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
+        }
+    }
+	
+	@RequestMapping("/deleteTripPlan.do")
+	public ResponseEntity<Map<String, Object>> deleteTripPlan(@RequestBody Integer tripPlanId) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		int result = tripPlanService.deleteTripPlanByTripPlanId(tripPlanId);
+		
+		if (result > 0) {
+			map.put("result", "여행 계획 삭제 완료");
+			return ResponseEntity.ok(map);
+		} else {
+			map.put("result", "여행 계획 삭제 실페");
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
+		}
+	}
 }
