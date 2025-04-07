@@ -82,18 +82,25 @@
 
 			let map = kakao_map_id._map;
 
-			// 마커 초기화
+			// 마커 및 오버레이 초기화
 			if (!tripDayMarkerMap[mapId]) {
 				tripDayMarkerMap[mapId] = [];
 			} else {
-				tripDayMarkerMap[mapId].forEach(m => m.marker.setMap(null));
+				tripDayMarkerMap[mapId].forEach(m => {
+					// 기존 마커 제거
+					m.marker.setMap(null);
+					if (m.overlay) {
+						// 기존 오버레이 제거
+			            m.overlay.setMap(null);
+			        }
+				});
 				tripDayMarkerMap[mapId] = [];
 			}
 			
 			// 지도 영역 자동 조정
 			const bounds = new kakao.maps.LatLngBounds();
 			
-			positions.forEach(pos => {
+			positions.forEach((pos, index) => {
 				// 마커 좌표
 				const latlng = new kakao.maps.LatLng(pos.mapy, pos.mapx);
 				bounds.extend(latlng);
@@ -103,8 +110,37 @@
 				// 지도에 마커 추가
 				marker.setMap(map);
 				
+				// 순서 + 장소명 표시용 커스텀 오버레이 생성
+			    const overlayContent = document.createElement('div');
+			    overlayContent.className = 'custom-overlay';
+			    
+			    overlayContent.style.background = "white";
+			    overlayContent.style.border = "1px solid #666";
+			    overlayContent.style.padding = "5px 8px";
+			    overlayContent.style.fontSize = "13px";
+			    overlayContent.style.color = "#000";
+			    overlayContent.style.borderRadius = "6px";
+			    overlayContent.style.boxShadow = "0 2px 6px rgba(0, 0, 0, 0.3)";
+			    overlayContent.style.whiteSpace = "nowrap";
+			    overlayContent.style.fontWeight = "bold";
+			    overlayContent.style.textAlign = "center";
+			    
+			    overlayContent.innerHTML = index + 1+". "+ pos.tripDayPlace; // placeName은 추가돼야 함
+
+			    // 오버레이 설정
+			    const overlay = new kakao.maps.CustomOverlay({
+			        content: overlayContent,
+			        position: latlng,
+			     	// 마커 위쪽에 뜨게 조정
+			        yAnchor: 2.5
+			    });
+			    
+			    // 지도에 오버레이 추가
+			    overlay.setMap(map);
+				
 				tripDayMarkerMap[mapId].push({
 				    marker: marker,
+				    overlay: overlay,
 				    id: pos.tripDayId
 				});
 			});

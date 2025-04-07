@@ -34,7 +34,8 @@ window.fu_tripPeriod = function(startDate, endDate, tripPlanId, tripDayList) {
                     	tripDayId: tripDayDTO.tripDayId,
                         mapx: tripDayDTO.tripDayMapx,
                         mapy: tripDayDTO.tripDayMapy,
-                        mapId: kakaoMapId
+                        mapId: kakaoMapId,
+                        tripDayPlace: tripDayDTO.tripDayPlace
                     });
                 }
 		        
@@ -65,11 +66,11 @@ window.fu_tripPeriod = function(startDate, endDate, tripPlanId, tripDayList) {
 	window.groupMapId = {}; 
 	
 	// HTML 렌더링 이후에 지도 생성
-	kakaoMapInitList.forEach(({ tripDayId, mapx, mapy, mapId }) => {
+	kakaoMapInitList.forEach(({ tripDayId, mapx, mapy, mapId, tripDayPlace }) => {
 	    if (!groupMapId[mapId]) {
 	        groupMapId[mapId] = [];
 	    }
-	    groupMapId[mapId].push({ tripDayId, mapx, mapy });
+	    groupMapId[mapId].push({ tripDayId, mapx, mapy, tripDayPlace});
 	});
 	
 	// mapId별로 한 번씩 fu_kakao_map 호출
@@ -189,7 +190,7 @@ window.fu_insertTripDay = function(keyword, tripDayDay, tripDayDate, tripPlanId)
 		    groupMapId[kakaoMapId] = [];
 		}
         
-        groupMapId[kakaoMapId].push({ tripDayId:tripDayId, mapx: keyword.mapx, mapy: keyword.mapy });
+        groupMapId[kakaoMapId].push({ tripDayId:tripDayId, mapx: keyword.mapx, mapy: keyword.mapy, tripDayPlace: keyword.title });
         
         // mapId별로 한 번씩 fu_kakao_map 호출
 		Object.entries(groupMapId).forEach(([mapId, positions]) => {
@@ -210,14 +211,19 @@ window.fu_deleteTripDay = function(tripDayId, tripDayDay) {
  	
  	const kakaoMapId = "kakao_map_"+tripDayDay;
  	
- 	// 마커 제거
+ 	// 마커 및 오버레이 제거
     if (tripDayMarkerMap[kakaoMapId]) {
         tripDayMarkerMap[kakaoMapId] = tripDayMarkerMap[kakaoMapId].filter(obj => {
 	        if (String(obj.id) === String(tripDayId)) {
 	        
-	        	// 지도에서 제거
+	        	// 마커 제거
 	            obj.marker.setMap(null);
 	            
+	            // 오버레이 제거
+	            if (obj.overlay) {
+			        obj.overlay.setMap(null);
+			    }
+			    
 	            // 리스트에서도 제거
 	            return false;
 	        }
@@ -253,6 +259,8 @@ window.fu_deleteTripDay = function(tripDayId, tripDayDay) {
  		// 삭제 후 배열이 비었으면 아예 제거
 	    if (groupMapId[kakaoMapId].length === 0) {
 	        delete groupMapId[kakaoMapId];
+	    } else {
+	    	fu_kakao_map(kakaoMapId, groupMapId[kakaoMapId]);
 	    }
  	}
  	
