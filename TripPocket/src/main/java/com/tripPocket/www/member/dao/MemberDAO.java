@@ -10,4 +10,8 @@ public interface MemberDAO {
 	
 	 MemberDTO login(MemberDTO memberDTO);
 
+	void modMember(MemberDTO memberDTO);
+
+	MemberDTO update(MemberDTO memberDTO);
+
 }

@@ -57,5 +57,35 @@
 			AND member_pwd = #{memberPwd}
 		</where>
 	</select>
-
+	<update id="modMember" parameterType="memberDTO">
+		UPDATE member
+        <set>
+             <if test="memberEmail != null and memberEmail != ''">
+            member_email = #{memberEmail},
+        </if>
+        <if test="memberPwd != null and memberPwd != ''">
+            member_pwd = #{memberPwd},
+        </if>
+        <if test="memberTel != null and memberTel != ''">
+            member_tel = #{memberTel},
+        </if>
+        <if test="memberAge != null and memberAge != ''">
+            member_age = #{memberAge},
+        </if>
+        <if test="memberNickname != null and memberNickname != ''">
+            member_nickname = #{memberNickname},
+        </if>
+        <if test="memberName != null and memberName != ''">
+            member_name = #{memberName},
+        </if>
+        <if test="memberGender != null and memberGender != ''">
+            member_gender = #{memberGender}
+        </if>
+        </set>
+        WHERE member_id = #{memberId}
+	</update>
+	<select id="update" parameterType="memberDTO"
+		resultMap="MemberResultMap">
+		select * from member where member_id = #{memberId}
+	</select>
 </mapper>
