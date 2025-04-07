@@ -9,14 +9,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>여행 계획 상세페이지</title>
 <link rel="stylesheet" href="${contextPath}/resources/css/tripPlan/palnDetail.css">
+<link rel="stylesheet" href="${contextPath}/resources/css/kakao_map/kakao_map.css">
 <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=0013492b2b76abad18e946130e719814"></script>
 </head>
 <body id="tripDetailPage">
 
 	<h1>${tripPlanDTO.tripPlanTitle}</h1>
 	
-	
-	<div id="kakao_map" style="width:100%;height:400px;"></div>
+	<div id="kakao_map"></div>
 	
 	<ul id="dayList"></ul>
 	
@@ -53,8 +53,6 @@
 	
 		window.fu_kakao_map = function(mapx, mapy){
 			
-			console.log("mapx: "+mapx);
-			console.log("mapy: "+mapy);
 			 let container = document.getElementById('kakao_map'); 
 		     let options = {
 		    		// 위도(mapy), 경도(mapx) 순서

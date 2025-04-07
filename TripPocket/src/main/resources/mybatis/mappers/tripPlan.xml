@@ -5,7 +5,7 @@
 <mapper namespace="mapper.trip.plan">
 
 
-	<insert id="insertPlanDateSet" parameterType="tripPlanDTO">
+	<insert id="insertPlan" parameterType="tripPlanDTO">
 		insert into trip_plan(
 			trip_plan_title,
 			trip_plan_content,

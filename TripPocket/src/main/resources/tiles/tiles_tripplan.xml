@@ -9,9 +9,9 @@
 		<put-attribute name="body" value="/WEB-INF/views/tripplan/planList.jsp" />
 	</definition>
 	
-	<definition name="tripplan/dateSetting" extends="mainLayout">
+	<definition name="tripplan/planInsert" extends="mainLayout">
 		<put-attribute name="title" value="날짜/제목 정하기" />
-		<put-attribute name="body" value="/WEB-INF/views/tripplan/dateSetting.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/tripplan/planInsert.jsp" />
 	</definition>
 	
 	<definition name="tripplan/planDetail" extends="mainLayout">

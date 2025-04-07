@@ -16,8 +16,8 @@ public class TripPlanServiceImpl implements TripPlanService{
 	private TripPlanDAO tripPlanDAO;
 	
 	@Override
-	public void insertPlanDateSet(TripPlanDTO tripPlanDTO) {
-		tripPlanDAO.insertPlanDateSet(tripPlanDTO);
+	public void insertPlan(TripPlanDTO tripPlanDTO) {
+		tripPlanDAO.insertPlan(tripPlanDTO);
 	}
 
 	@Override

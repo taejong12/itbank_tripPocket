@@ -1,9 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
 			
-	window.fu_planDateSet = function(event){
+	window.fu_planInsert = function(event){
 		event.preventDefault();
 		
-		let form = document.planDateSet;
+		let form = document.planInsert;
 		
 		let title = form.tripPlanTitle.value;
 		let content = form.tripPlanContent.value;
@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		} else {
 			alert("여행 계획 등록 완료");
 			form.method="post";
-			form.action= contextPath+"/trip/insertPlanDateSet.do";
+			form.action= contextPath+"/trip/insertPlan.do";
 			form.submit();
 		}
 	}
