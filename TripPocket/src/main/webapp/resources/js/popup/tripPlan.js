@@ -5,7 +5,9 @@ document.addEventListener("DOMContentLoaded", function () {
 		event.preventDefault();
 		
 		let keyword = document.getElementById("tripSearchKeyword").value.trim();
-	    		
+	    
+	    let areaCode = document.getElementById("tripSearchAreaCode").value.trim();
+	    
 		 if (!keyword) {
 	        alert("검색어를 입력해주세요.");
 	        return;
@@ -32,6 +34,8 @@ document.addEventListener("DOMContentLoaded", function () {
 		    //contentTypeId: 38,
 		    // 요청키워드
 		    keyword: keyword,
+		    // 지역 코드
+		    areaCode: areaCode,
 		    // 응답메세지 형식
 		    _type: "json" 
 		});
