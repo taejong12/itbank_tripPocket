@@ -21,7 +21,10 @@
 	<a class="plan-list" href="${contextPath}/trip/planList.do">목록</a>
 	
 	<script type="text/javascript">
-		let contextPath = '${contextPath}';	
+		let contextPath = '${contextPath}';
+		
+		// 마커 리스트
+		window.tripDayMarkerMap = [];
 	
 		document.addEventListener("DOMContentLoaded", function (){
 			
@@ -51,9 +54,6 @@
 	
 	<!-- 카카오 지도 사용하기 -->
 	<script type="text/javascript">
-		// 마커 리스트
-		window.tripDayMarkerMap = [];
-		
 		// 카카오 지도 함수
 		window.fu_kakao_map = function(mapId, positions){
 			
@@ -86,28 +86,33 @@
 			if (!tripDayMarkerMap[mapId]) {
 				tripDayMarkerMap[mapId] = [];
 			} else {
-				tripDayMarkerMap[mapId].forEach(m => m.setMap(null));
+				tripDayMarkerMap[mapId].forEach(m => m.marker.setMap(null));
 				tripDayMarkerMap[mapId] = [];
 			}
 			
 			// 지도 영역 자동 조정
-			let bounds = new kakao.maps.LatLngBounds();
+			const bounds = new kakao.maps.LatLngBounds();
 			
 			positions.forEach(pos => {
 				// 마커 좌표
-				let latlng = new kakao.maps.LatLng(pos.mapy, pos.mapx);
+				const latlng = new kakao.maps.LatLng(pos.mapy, pos.mapx);
 				bounds.extend(latlng);
 
-				let marker = new kakao.maps.Marker({ position: latlng });
+				const marker = new kakao.maps.Marker({ position: latlng });
 				
 				// 지도에 마커 추가
 				marker.setMap(map);
-
-				tripDayMarkerMap[mapId].push(marker);
+				
+				tripDayMarkerMap[mapId].push({
+				    marker: marker,
+				    id: pos.tripDayId
+				});
 			});
 			
 			// 모든 마커가 보이도록 영역 설정
-			map.setBounds(bounds);
+			if (tripDayMarkerMap[mapId].length > 0) {
+		        map.setBounds(bounds);
+		    }
 			
 			kakao.maps.event.addListener(map, 'click', function(mouseEvent) {        
 				let latlng = mouseEvent.latLng; 

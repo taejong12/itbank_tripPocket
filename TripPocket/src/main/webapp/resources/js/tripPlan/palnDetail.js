@@ -28,12 +28,10 @@ window.fu_tripPeriod = function(startDate, endDate, tripPlanId, tripDayList) {
 		    if (tripDayDTO.tripDayDay == tripDayDay) {
 		        html += "<li id='" + tripDayDTO.tripDayId + "' class='trip-day-id'>";
 		        
-		        console.log("tripDayDTO.tripDayMapx: "+tripDayDTO.tripDayMapx);
-		        console.log("tripDayDTO.tripDayMapy: "+tripDayDTO.tripDayMapy);
-		        
 		        // 지도 위치 정보 저장해두기
                 if (tripDayDTO.tripDayMapx && tripDayDTO.tripDayMapy) {
                     kakaoMapInitList.push({
+                    	tripDayId: tripDayDTO.tripDayId,
                         mapx: tripDayDTO.tripDayMapx,
                         mapy: tripDayDTO.tripDayMapy,
                         mapId: kakaoMapId
@@ -47,7 +45,7 @@ window.fu_tripPeriod = function(startDate, endDate, tripPlanId, tripDayList) {
 		        html += "<span class='trip-day-address'>" + tripDayDTO.tripDayAddress + "</span>";
 		        html += "</div>";
 		        html += "</div>";
-		        html += "<button onclick=\"fu_deleteTripDay('" + tripDayDTO.tripDayId + "')\" class='trip-day-delete-btn'>삭제</button>";
+		        html += "<button onclick=\"fu_deleteTripDay('" + tripDayDTO.tripDayId + "', '" +tripDayDay +"')\" class='trip-day-delete-btn'>삭제</button>";
 		        html += "</li>";
 		    }
 		});
@@ -67,16 +65,19 @@ window.fu_tripPeriod = function(startDate, endDate, tripPlanId, tripDayList) {
 	window.groupMapId = {}; 
 	
 	// HTML 렌더링 이후에 지도 생성
-	kakaoMapInitList.forEach(({ mapx, mapy, mapId }) => {
+	kakaoMapInitList.forEach(({ tripDayId, mapx, mapy, mapId }) => {
 	    if (!groupMapId[mapId]) {
 	        groupMapId[mapId] = [];
 	    }
-	    groupMapId[mapId].push({ mapx, mapy });
+	    groupMapId[mapId].push({ tripDayId, mapx, mapy });
 	});
 	
 	// mapId별로 한 번씩 fu_kakao_map 호출
 	Object.entries(groupMapId).forEach(([mapId, positions]) => {
-	    fu_kakao_map(mapId, positions);
+		// 배열 안에 값이 있는 경우
+		if (positions.length > 0) {
+	    	fu_kakao_map(mapId, positions);
+	    }
 	});
 }
 		
@@ -171,7 +172,8 @@ window.fu_insertTripDay = function(keyword, tripDayDay, tripDayDate, tripPlanId)
         let deleteButton = document.createElement("button");
         deleteButton.textContent = "삭제";
         deleteButton.classList.add("trip-day-delete-btn");
-        deleteButton.setAttribute("onclick", "fu_deleteTripDay('" + tripDayId + "')");
+        deleteButton.setAttribute("onclick", "fu_deleteTripDay('" + tripDayId + "', '" + tripDayDay + "')");
+
 
         // 요소 추가
 		tripDayIdQuery.appendChild(imgPlaceAddrDiv);
@@ -183,14 +185,20 @@ window.fu_insertTripDay = function(keyword, tripDayDay, tripDayDate, tripPlanId)
             tripDayQuery.appendChild(tripDayIdQuery);
         }
         
-        groupMapId[kakaoMapId].push({ mapx: keyword.mapx, mapy: keyword.mapy });
+        if (!groupMapId[kakaoMapId]) {
+		    groupMapId[kakaoMapId] = [];
+		}
+        
+        groupMapId[kakaoMapId].push({ tripDayId:tripDayId, mapx: keyword.mapx, mapy: keyword.mapy });
         
         // mapId별로 한 번씩 fu_kakao_map 호출
 		Object.entries(groupMapId).forEach(([mapId, positions]) => {
-		    fu_kakao_map(mapId, positions);
+		    // 배열 안에 값이 있는 경우
+			if (positions.length > 0) {
+		    	fu_kakao_map(mapId, positions);
+		    }
 		});
        
-        
     })
     .catch(error => {
         console.error("오류 발생:", error);
@@ -198,7 +206,55 @@ window.fu_insertTripDay = function(keyword, tripDayDay, tripDayDate, tripPlanId)
 }
 		
 // 장소 삭제
-window.fu_deleteTripDay = function(tripDayId) {
+window.fu_deleteTripDay = function(tripDayId, tripDayDay) {
+ 	
+ 	const kakaoMapId = "kakao_map_"+tripDayDay;
+ 	
+ 	// 마커 제거
+    if (tripDayMarkerMap[kakaoMapId]) {
+        tripDayMarkerMap[kakaoMapId] = tripDayMarkerMap[kakaoMapId].filter(obj => {
+	        if (String(obj.id) === String(tripDayId)) {
+	        
+	        	// 지도에서 제거
+	            obj.marker.setMap(null);
+	            
+	            // 리스트에서도 제거
+	            return false;
+	        }
+	        return true;
+	    });
+    }
+    
+	// 남아있는 마커 기준으로 bounds 다시 계산 -> 영역 재설정
+    const remainingMarkers = tripDayMarkerMap[kakaoMapId];
+    
+    if (remainingMarkers.length > 0) {
+        const bounds = new kakao.maps.LatLngBounds();
+        remainingMarkers.forEach(obj => bounds.extend(obj.marker.getPosition()));
+        const map = document.getElementById(kakaoMapId)._map;
+        if (map) {
+            map.setBounds(bounds);
+        }
+    } else {
+    
+	    // 마커가 0개면 지도 숨기기
+	    const kakaoMapIdDiv = document.getElementById(kakaoMapId);
+	    
+	    if (kakaoMapIdDiv) {
+	        kakaoMapIdDiv.style.display = "none";
+	    }
+	}
+ 	
+ 	if (groupMapId[kakaoMapId]) {
+ 		groupMapId[kakaoMapId] = groupMapId[kakaoMapId].filter(
+ 			item => String(item.tripDayId) !== String(tripDayId)
+ 		);
+ 		
+ 		// 삭제 후 배열이 비었으면 아예 제거
+	    if (groupMapId[kakaoMapId].length === 0) {
+	        delete groupMapId[kakaoMapId];
+	    }
+ 	}
  	
     fetch(contextPath+"/trip/deleteTripDay.do", {
         method: "POST",
