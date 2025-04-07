@@ -39,16 +39,22 @@
 	<insert id="insertTripDay" parameterType="tripDayDTO" useGeneratedKeys="true" keyProperty="tripDayId" keyColumn="trip_day_id">
 		insert into trip_day(
 			trip_day_day,
-			trip_day_adr,
+			trip_day_place,
+			trip_day_address,
 			trip_day_date,
 			trip_day_image,
-			trip_plan_id
+			trip_plan_id,
+			trip_day_mapx,
+			trip_day_mapy
 		) values (
 			#{tripDayDay},
-			#{tripDayAdr},
+			#{tripDayPlace},
+			#{tripDayAddress},
 			#{tripDayDate},
 			#{tripDayImage},
-			#{tripPlanId}
+			#{tripPlanId},
+			#{tripDayMapx},
+			#{tripDayMapy}
 		)
 	</insert>
 	

@@ -39,6 +39,6 @@
 	
 	<button onclick="fu_closePopup()">닫기</button>
    
-    <script src="${contextPath}/resources/script/popup/tripPlan.js"></script>
+    <script src="${contextPath}/resources/js/popup/tripPlan.js"></script>
 </body>
 </html>

@@ -31,6 +31,6 @@
 		// JavaScript 변수로 저장
 	    let contextPath = "${contextPath}";
 	</script>
-	<script src="${contextPath}/resources/script/tripPlan/planInsert.js"></script>
+	<script src="${contextPath}/resources/js/tripPlan/planInsert.js"></script>
 </body>
 </html>

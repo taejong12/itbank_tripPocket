@@ -4,6 +4,9 @@ window.fu_tripPeriod = function(startDate, endDate, tripPlanId, tripDayList) {
     let end = new Date(endDate);
     let html='';
     let tripDayDay = 1;
+    
+    // 지도 초기화할 정보 저장용
+    let kakaoMapInitList = [];
 		    
     while (start <= end) {
     	let year = start.getFullYear();
@@ -12,6 +15,10 @@ window.fu_tripPeriod = function(startDate, endDate, tripPlanId, tripDayList) {
         let tripDayDate = year + "-" + month + "-" + day;
         let tripDay = "DAY"+tripDayDay+"("+month+"월 "+day+"일)";
         
+		// 고유한 kakao_map id 생성
+        let kakaoMapId = "kakao_map_"+tripDayDay;
+        html += "<div id='"+kakaoMapId+"' class='kakao_map'></div>";
+        
         html += "<li id='day-" + tripDayDay + "'>";
         html += "<strong>" + tripDay + "</strong>";
         html += "<ul class='tripDayList'>";
@@ -19,12 +26,28 @@ window.fu_tripPeriod = function(startDate, endDate, tripPlanId, tripDayList) {
      	// tripDayList에서 해당 tripDayDay에 맞는 데이터 추가
         tripDayList.forEach(tripDayDTO => {
 		    if (tripDayDTO.tripDayDay == tripDayDay) {
-		        html += "<li id='" + tripDayDTO.tripDayId + "' class='trip-item'>";
-		        html += "<div class='trip-item-container'>";
-		        html += "<img src='" + tripDayDTO.tripDayImage + "' class='trip-item-img'>";
-		        html += "<span class='trip-item-text'>" + tripDayDTO.tripDayAdr + "</span>";
+		        html += "<li id='" + tripDayDTO.tripDayId + "' class='trip-day-id'>";
+		        
+		        console.log("tripDayDTO.tripDayMapx: "+tripDayDTO.tripDayMapx);
+		        console.log("tripDayDTO.tripDayMapy: "+tripDayDTO.tripDayMapy);
+		        
+		        // 지도 위치 정보 저장해두기
+                if (tripDayDTO.tripDayMapx && tripDayDTO.tripDayMapy) {
+                    kakaoMapInitList.push({
+                        mapx: tripDayDTO.tripDayMapx,
+                        mapy: tripDayDTO.tripDayMapy,
+                        mapId: kakaoMapId
+                    });
+                }
+		        
+		        html += "<div class='trip-day-div'>";
+		        html += "<img src='" + tripDayDTO.tripDayImage + "' class='trip-day-img'>";
+		        html += "<div class='trip-day-place-address-div'>";
+		        html += "<span class='trip-day-place'>" + tripDayDTO.tripDayPlace + "</span>";
+		        html += "<span class='trip-day-address'>" + tripDayDTO.tripDayAddress + "</span>";
 		        html += "</div>";
-		        html += "<button onclick=\"fu_deleteTripDay('" + tripDayDTO.tripDayId + "')\" class='trip-item-btn'>삭제</button>";
+		        html += "</div>";
+		        html += "<button onclick=\"fu_deleteTripDay('" + tripDayDTO.tripDayId + "')\" class='trip-day-delete-btn'>삭제</button>";
 		        html += "</li>";
 		    }
 		});
@@ -39,6 +62,22 @@ window.fu_tripPeriod = function(startDate, endDate, tripPlanId, tripDayList) {
     }
     
 	document.getElementById("dayList").innerHTML = html;
+	
+	// 지도 Id 별로 좌표 묶기
+	window.groupMapId = {}; 
+	
+	// HTML 렌더링 이후에 지도 생성
+	kakaoMapInitList.forEach(({ mapx, mapy, mapId }) => {
+	    if (!groupMapId[mapId]) {
+	        groupMapId[mapId] = [];
+	    }
+	    groupMapId[mapId].push({ mapx, mapy });
+	});
+	
+	// mapId별로 한 번씩 fu_kakao_map 호출
+	Object.entries(groupMapId).forEach(([mapId, positions]) => {
+	    fu_kakao_map(mapId, positions);
+	});
 }
 		
 // 팝업창 열기
@@ -52,14 +91,18 @@ window.fu_openTripSearchPopup = function(tripDayDay, tripDayDate, tripPlanId) {
 		
 // 부모 창에서 장소 정보를 추가하는 함수(팝업 -> 장소 추가)
 window.fu_insertTripDay = function(keyword, tripDayDay, tripDayDate, tripPlanId) {
-    let tripList = document.querySelector("#day-" + tripDayDay + " .tripDayList");
+    let tripDayQuery = document.querySelector("#day-" + tripDayDay + " .tripDayList");
+    let kakaoMapId = "kakao_map_"+tripDayDay;
     
     let tripDayData = {
     	tripDayDay: tripDayDay,
-        tripDayAdr: keyword.title,
+        tripDayPlace: keyword.title,
+        tripDayAddress: keyword.addr1,
         tripDayDate: tripDayDate,
         tripDayImage: keyword.firstimage2,
-        tripPlanId: tripPlanId
+        tripPlanId: tripPlanId,
+        tripDayMapx: keyword.mapx,
+        tripDayMapy: keyword.mapy
     };
  	
     fetch(contextPath+"/trip/insertTripDay.do", {
@@ -80,38 +123,38 @@ window.fu_insertTripDay = function(keyword, tripDayDay, tripDayDate, tripPlanId)
         // 저장된 tripDayId 가져오기
         let tripDayId = map.tripDayId;
 
-        let listItem = document.createElement("li");
-        listItem.setAttribute("id", tripDayId);
-        listItem.classList.add("trip-item");
+        let tripDayIdQuery = document.createElement("li");
+        tripDayIdQuery.setAttribute("id", tripDayId);
+        tripDayIdQuery.classList.add("trip-day-id");
 
         // 이미지 요소 생성
-        let img = document.createElement("img");
-        img.src = keyword.firstimage2;
-        img.classList.add("trip-item-img");
+        let imgQuery = document.createElement("img");
+        imgQuery.src = keyword.firstimage2;
+        imgQuery.classList.add("trip-day-img");
 
-		// 텍스트 컨테이너 생성 (제목 + 주소 정보 포함)
-		let textContainer = document.createElement("div");
-		textContainer.classList.add("trip-item-text-container");
+		// 장소 + 주소 div 생성 (장소 + 주소 정보 포함)
+		let placeAddressDiv = document.createElement("div");
+		placeAddressDiv.classList.add("trip-day-place-address-div");
 				
 		// 장소 이름
-		let titleSpan = document.createElement("span");
-		titleSpan.textContent = keyword.title;
-		titleSpan.classList.add("trip-item-title");
+		let placeSpan = document.createElement("span");
+		placeSpan.textContent = keyword.title;
+		placeSpan.classList.add("trip-day-place");
 
 		// 주소 정보
-		let addr1Span = document.createElement("span");
-		addr1Span.textContent = keyword.addr1;
-		addr1Span.classList.add("trip-item-addr");
+		let addressSpan = document.createElement("span");
+		addressSpan.textContent = keyword.addr1;
+		addressSpan.classList.add("trip-day-address");
 
-		// 텍스트 컨테이너에 요소 추가
-		textContainer.appendChild(titleSpan);
-		textContainer.appendChild(addr1Span);
+		// 장소 + 주소 -> div
+		placeAddressDiv.appendChild(placeSpan);
+		placeAddressDiv.appendChild(addressSpan);
 
-        // 컨테이너 div 생성 (이미지 + 텍스트 포함)
-		let container = document.createElement("div");
-		container.classList.add("trip-item-container");
-		container.appendChild(img);
-		container.appendChild(textContainer);
+        // (이미지 + (장소+주소)) div 생성 (이미지 + (장소+주소) 포함)
+		let imgPlaceAddrDiv = document.createElement("div");
+		imgPlaceAddrDiv.classList.add("trip-day-div");
+		imgPlaceAddrDiv.appendChild(imgQuery);
+		imgPlaceAddrDiv.appendChild(placeAddressDiv);
         
         // mapx, mapy 값을 히든 인풋으로 추가
 		let hiddenMapX = document.createElement("input");
@@ -127,20 +170,26 @@ window.fu_insertTripDay = function(keyword, tripDayDay, tripDayDate, tripPlanId)
         // 삭제 버튼 생성
         let deleteButton = document.createElement("button");
         deleteButton.textContent = "삭제";
-        deleteButton.classList.add("trip-item-btn");
+        deleteButton.classList.add("trip-day-delete-btn");
         deleteButton.setAttribute("onclick", "fu_deleteTripDay('" + tripDayId + "')");
 
         // 요소 추가
-		listItem.appendChild(container);
-		listItem.appendChild(hiddenMapX);
-		listItem.appendChild(hiddenMapY);
-		listItem.appendChild(deleteButton);
+		tripDayIdQuery.appendChild(imgPlaceAddrDiv);
+		tripDayIdQuery.appendChild(hiddenMapX);
+		tripDayIdQuery.appendChild(hiddenMapY);
+		tripDayIdQuery.appendChild(deleteButton);
 
-        if (tripList) {
-            tripList.appendChild(listItem);
+        if (tripDayQuery) {
+            tripDayQuery.appendChild(tripDayIdQuery);
         }
         
-        fu_kakao_map(keyword.mapx, keyword.mapy);
+        groupMapId[kakaoMapId].push({ mapx: keyword.mapx, mapy: keyword.mapy });
+        
+        // mapId별로 한 번씩 fu_kakao_map 호출
+		Object.entries(groupMapId).forEach(([mapId, positions]) => {
+		    fu_kakao_map(mapId, positions);
+		});
+       
         
     })
     .catch(error => {
@@ -172,7 +221,6 @@ window.fu_deleteTripDay = function(tripDayId) {
     	if (delete_li) {
     		delete_li.remove();
         }
-        
     })
     .catch(error => {
         console.error("여행장소삭제 오류 발생:", error);

@@ -30,6 +30,6 @@
 	<script type="text/javascript">
 		let contextPath = '${contextPath}';
 	</script>
-	<script src="${contextPath}/resources/script/tripPlan/planList.js"></script>
+	<script src="${contextPath}/resources/js/tripPlan/planList.js"></script>
 </body>
 </html>
