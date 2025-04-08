@@ -70,13 +70,6 @@ public class TripShareController {
 
 	        // 가져온 데이터 출력 (디버깅 용도)
 	        for (TripDayDTO dto : tripDays) {
-	            System.out.println(dto.getTripDayAdr());
-	            System.out.println(dto.getTripDayDay());
-	            System.out.println(dto.getTripDayDate());
-	            System.out.println(dto.getTripDayImage());
-	            System.out.println(dto.getTripPlanId());
-	            System.out.println(dto.getTripPlanAddDate());
-	            System.out.println(dto.getTripPlanModDate());
 	        }
 
 	        return tripDays;

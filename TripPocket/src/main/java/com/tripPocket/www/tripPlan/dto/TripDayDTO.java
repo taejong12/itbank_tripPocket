@@ -13,44 +13,13 @@ public class TripDayDTO {
 	private double tripDayMapx;
 	private double tripDayMapy;
 	private Integer tripPlanId;
-<<<<<<< HEAD
 	private Date tripPlanAddDate;
 	private Date tripPlanModDate;
 	private String tripShareContent;
 	private Integer tripShareId;
-=======
-	private Date tripDayAddDate;
-	private Date tripDayModDate;
->>>>>>> refs/heads/master
 	
-<<<<<<< HEAD
-	public Integer getTripShareId() {
-		return tripShareId;
-	}
-	public void setTripShareId(Integer tripShareId) {
-		this.tripShareId = tripShareId;
-	}
-	public String getTripDayImage() {
-		return tripDayImage;
-	}
-	public void setTripDayImage(String tripDayImage) {
-		this.tripDayImage = tripDayImage;
-	}
-	public Integer getTripDayDay() {
-		return tripDayDay;
-	}
-	public String getTripDayAdr() {
-		return tripDayAdr;
-	}
-	public Integer getTripPlanId() {
-		return tripPlanId;
-	}
-	public void setTripPlanId(Integer tripPlanId) {
-		this.tripPlanId = tripPlanId;
-=======
 	public Integer getTripDayId() {
 		return tripDayId;
->>>>>>> refs/heads/master
 	}
 	public void setTripDayId(Integer tripDayId) {
 		this.tripDayId = tripDayId;
@@ -103,22 +72,28 @@ public class TripDayDTO {
 	public void setTripPlanId(Integer tripPlanId) {
 		this.tripPlanId = tripPlanId;
 	}
-	public Date getTripDayAddDate() {
-		return tripDayAddDate;
+	public Date getTripPlanAddDate() {
+		return tripPlanAddDate;
 	}
-	public void setTripDayAddDate(Date tripDayAddDate) {
-		this.tripDayAddDate = tripDayAddDate;
+	public void setTripPlanAddDate(Date tripPlanAddDate) {
+		this.tripPlanAddDate = tripPlanAddDate;
 	}
-	public Date getTripDayModDate() {
-		return tripDayModDate;
+	public Date getTripPlanModDate() {
+		return tripPlanModDate;
 	}
-	public void setTripDayModDate(Date tripDayModDate) {
-		this.tripDayModDate = tripDayModDate;
+	public void setTripPlanModDate(Date tripPlanModDate) {
+		this.tripPlanModDate = tripPlanModDate;
 	}
 	public String getTripShareContent() {
 		return tripShareContent;
 	}
 	public void setTripShareContent(String tripShareContent) {
 		this.tripShareContent = tripShareContent;
+	}
+	public Integer getTripShareId() {
+		return tripShareId;
+	}
+	public void setTripShareId(Integer tripShareId) {
+		this.tripShareId = tripShareId;
 	}
 }
