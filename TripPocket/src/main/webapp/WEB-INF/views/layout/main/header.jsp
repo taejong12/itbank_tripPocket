@@ -41,8 +41,8 @@
            
             <li><a href="#" onclick="toggleSubmenu(event, 'share-submenu')">여행 블로그</a>
                 <ul class="submenu" id="share-submenu">
-                    <li><a href="#">나의 여행 글 쓰기</a></li> <!-- 나의 여행 글 쓰기 페이지로 이동 -->
-                    <li><a href="#">다른 사용자들의 여행 후기</a></li><!-- 다른 사용자들의 여행리스트 페이지로 이동 -->
+                    <li><a href="${contextPath }/share/shareForm.do">나의 여행 글 쓰기</a></li> <!-- 나의 여행 글 쓰기 페이지로 이동 -->
+                    <li><a href="${contextPath }/share/shareList.do">다른 사용자들의 여행 후기</a></li><!-- 다른 사용자들의 여행리스트 페이지로 이동 -->
                 </ul>
             </li>
         </ul>

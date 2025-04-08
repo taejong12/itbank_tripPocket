@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.tripShare">
+	
+<resultMap id="TripShareMap" type="TripShareDTO">
+    <id property="tripShareId" column="trip_share_id"/>
+    <result property="tripShareTitle" column="trip_share_title"/>
+    <result property="tripShareContent" column="trip_share_content"/>
+    <result property="tripPlanId" column="trip_plan_id"/>
+    <result property="tripShareAddDate" column="trip_share_add_date"/>
+    <result property="tripShareModDate" column="trip_share_mod_date"/>
+
+    <collection property="tripDayList" ofType="tripDayDTO">
+        <id property="tripDayId" column="trip_day_id"/>
+        <result property="tripDayDay" column="trip_day_day"/>
+        <result property="tripDayAdr" column="trip_day_adr"/>
+        <result property="tripDayDate" column="trip_day_date"/>
+        <result property="tripDayImage" column="trip_day_image"/>
+        <result property="tripPlanId" column="trip_plan_id"/>
+    </collection>
+</resultMap>
+<resultMap id="tripPlanResultMap" type="tripPlanDTO">
+    <id property="tripPlanId" column="trip_plan_id"/>
+    <result property="tripPlanTitle" column="trip_plan_title"/>
+    <result property="tripPlanContent" column="trip_plan_content"/>
+    <result property="tripPlanStartDay" column="trip_plan_start_day"/>
+    <result property="tripPlanArriveDay" column="trip_plan_arrive_day"/>
+    <result property="memberId" column="member_id"/>
+    <result property="tripPlanAddDate" column="trip_plan_add_date"/>
+    <result property="tripPlanModDate" column="trip_plan_mod_date"/>
+</resultMap>
+<resultMap id="TripDayMap" type="com.tripPocket.www.tripPlan.dto.TripDayDTO">
+        <id property="tripDayId" column="trip_day_id"/>
+        <result property="tripDayDay" column="trip_day_day"/>
+        <result property="tripDayAdr" column="trip_day_adr"/>
+        <result property="tripDayDate" column="trip_day_date"/>
+        <result property="tripDayImage" column="trip_day_image"/>
+        <result property="tripPlanId" column="trip_plan_id"/>
+        <result property="tripPlanAddDate" column="trip_plan_add_date"/>
+        <result property="tripPlanModDate" column="trip_plan_mod_date"/>
+    </resultMap>
+<select id="selectList" parameterType="tripShareDTO" resultMap="TripShareMap">
+    SELECT 
+        ts.trip_share_id,
+        ts.trip_share_title,
+        ts.trip_share_content,
+        ts.trip_plan_id,
+        ts.trip_share_add_date,
+        ts.trip_share_mod_date
+    FROM trip_share ts
+</select>
+
+<select id="selectDayList" parameterType="tripDayDTO" resultMap="TripDayMap">
+    SELECT * 
+    FROM trip_day
+    WHERE trip_plan_id = #{tripPlanId}
+</select>
+
+<insert id="insertTripShare" parameterType="TripShareDTO">
+    INSERT INTO trip_share (
+        trip_share_id,
+        trip_share_title,
+        trip_share_content,
+        trip_plan_id,
+        trip_share_add_date,
+        trip_share_mod_date
+    ) VALUES (
+        #{tripShareId},
+        #{tripShareTitle},
+        #{tripShareContent},
+        #{tripPlanId},
+        SYSDATE,
+        SYSDATE
+    )
+</insert>
+<select id="selectIdList" parameterType="String" resultMap="tripPlanResultMap">
+	select * from trip_plan where member_id = #{memberId} 
+</select>
+	
+</mapper>

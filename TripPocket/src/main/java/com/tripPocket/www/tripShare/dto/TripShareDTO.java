@@ -1,7 +1,12 @@
 package com.tripPocket.www.tripShare.dto;
 
 import java.sql.Date;
+import java.util.List;
 
+import org.springframework.stereotype.Component;
+
+import com.tripPocket.www.tripPlan.dto.TripDayDTO;
+@Component
 public class TripShareDTO {
 	private String tripShareId;
 	private String tripShareTitle;
@@ -9,6 +14,13 @@ public class TripShareDTO {
 	private String tripPlanId;
 	private Date tripShareAddDate;
 	private Date tripShareModDate;
+	public List<TripDayDTO> getTripDayDTO() {
+		return tripDayList;
+	}
+	public void setTripDayDTO(List<TripDayDTO> tripDayDTO) {
+		this.tripDayList = tripDayDTO;
+	}
+	private List<TripDayDTO> tripDayList;
 	
 	public String getTripShareId() {
 		return tripShareId;

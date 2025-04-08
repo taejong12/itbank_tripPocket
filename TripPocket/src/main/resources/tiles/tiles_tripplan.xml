@@ -18,6 +18,14 @@
 		<put-attribute name="title" value="플랜 상세보기" />
 		<put-attribute name="body" value="/WEB-INF/views/tripplan/palnDetail.jsp" />
 	</definition>
+	<definition name="tripShare/shareList" extends="mainLayout">
+		<put-attribute name="title" value="플랜 상세보기" />
+		<put-attribute name="body" value="/WEB-INF/views/tripShare/shareList.jsp" />
+	</definition>
+	<definition name="tripShare/shareForm" extends="common">
+		<put-attribute name="title" value="플랜 상세보기" />
+		<put-attribute name="body" value="/WEB-INF/views/tripShare/shareForm.jsp" />
+	</definition>
 </tiles-definitions>
 
 
