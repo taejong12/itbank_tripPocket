@@ -27,6 +27,18 @@ public class MemberServiceImpl implements MemberService {
 	public boolean isMemberIdDuplicated(String memberId) {
 		return memberDAO.isMemberIdDuplicated(memberId);
 	}
+
+	@Override
+	public void modMember(MemberDTO memberDTO) {
+		memberDAO.modMember(memberDTO);
+		
+	}
+
+	@Override
+	public MemberDTO update(MemberDTO memberDTO) {
+		
+		return memberDAO.update(memberDTO);
+	}
 	
 	
 }

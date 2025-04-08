@@ -1,5 +1,6 @@
 package com.tripPocket.www.member.controller;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
@@ -45,10 +46,10 @@ public class MemberController {
 	   public ModelAndView login(@ModelAttribute() MemberDTO memberDTO, HttpServletRequest request,HttpServletResponse response) throws Exception {
 	      
 	      
-	      PrintWriter out = response.getWriter();
 	      response.setContentType("text/html;charset=utf-8");
 	      MemberDTO member = memberService.login(memberDTO);
 	      HttpSession session = request.getSession();
+	      PrintWriter out = response.getWriter();
 	      if(member != null ) {
 	         session.setAttribute("isLogin",true);
 	         session.setAttribute("member", member);
@@ -87,6 +88,24 @@ public class MemberController {
 	public ModelAndView mypage(@ModelAttribute() MemberDTO memberDTO, HttpServletRequest request,HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView("/member/mypage");
 	return mav;
+		
+	}
+	@RequestMapping(value = "modMember.do", method = RequestMethod.POST)
+	public ModelAndView modMember(@ModelAttribute() MemberDTO memberDTO, HttpServletRequest request,HttpServletResponse response) throws IOException {
+		 response.setContentType("text/html;charset=utf-8");
+	      HttpSession session = request.getSession();
+	      PrintWriter out = response.getWriter();
+	      	 memberService.modMember(memberDTO);
+	      	MemberDTO member = memberService.update(memberDTO);
+	         session.setAttribute("member", member);
+	         out.write("<script>");
+	         out.write("alert('수정이 완료되었습니다');");
+	         out.write("location.href='/www/member/mypage.do';");
+	         out.write("</script>");
+	      
+		
+		
+		return null;
 		
 	}
 	
