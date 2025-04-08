@@ -39,4 +39,15 @@ public class TripShareDAOImpl implements TripShareDAO{
 		
 		return session.selectList("mapper.tripShare.selectIdList",memberId);
 	}
+
+	@Override
+	public TripShareDTO detailList(TripShareDTO tripShareDTO) {
+		 
+		return session.selectOne("mapper.tripShare.selectDetail",tripShareDTO);
+	}
+
+	@Override
+	public void insertContent(TripDayDTO tripDayDTO) {
+	    session.insert("mapper.tripShare.insertShareContent", tripDayDTO);
+	}
 }

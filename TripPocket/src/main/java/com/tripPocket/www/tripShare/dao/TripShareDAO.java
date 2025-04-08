@@ -16,4 +16,8 @@ public interface TripShareDAO {
 
 	List<TripPlanDTO> selectIdList(String memberId);
 
+	TripShareDTO detailList(TripShareDTO tripShareDTO);
+
+	void insertContent(TripDayDTO day);
+
 }

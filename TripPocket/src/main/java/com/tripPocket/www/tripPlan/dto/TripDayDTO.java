@@ -12,7 +12,15 @@ public class TripDayDTO {
 	private Integer tripPlanId;
 	private Date tripPlanAddDate;
 	private Date tripPlanModDate;
+	private String tripShareContent;
+	private Integer tripShareId;
 	
+	public Integer getTripShareId() {
+		return tripShareId;
+	}
+	public void setTripShareId(Integer tripShareId) {
+		this.tripShareId = tripShareId;
+	}
 	public String getTripDayImage() {
 		return tripDayImage;
 	}
@@ -61,5 +69,11 @@ public class TripDayDTO {
 	}
 	public void setTripPlanModDate(Date tripPlanModDate) {
 		this.tripPlanModDate = tripPlanModDate;
+	}
+	public String getTripShareContent() {
+		return tripShareContent;
+	}
+	public void setTripShareContent(String tripShareContent) {
+		this.tripShareContent = tripShareContent;
 	}
 }

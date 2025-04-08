@@ -18,4 +18,12 @@ public interface TripShareService {
 
 	List<TripDayDTO> selectTripDayList(TripDayDTO tripDayDTO);
 
+
+
+	TripShareDTO detailList(TripShareDTO tripShareDTO);
+
+
+
+	
+
 }

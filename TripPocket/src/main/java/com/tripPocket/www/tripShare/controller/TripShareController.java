@@ -1,6 +1,8 @@
 package com.tripPocket.www.tripShare.controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.tripPocket.www.member.dto.MemberDTO;
 import com.tripPocket.www.tripPlan.dto.TripDayDTO;
@@ -86,6 +89,28 @@ public class TripShareController {
 		
 	    
 	    return "redirect:/share/shareList.do"; // Tiles 설정상 이게 view 이름일 것
+	}
+	@RequestMapping("/shareDetail.do")
+	
+	public ModelAndView shareDetail(@ModelAttribute TripShareDTO tripShareDTO, HttpServletRequest request) {
+	    TripShareDTO share = tripShareService.detailList(tripShareDTO);
+	    MemberDTO member = (MemberDTO) request.getSession().getAttribute("member");
+
+	    // 여행 일차 정보 정렬 (tripDayDay 기준으로 정렬)
+	    List<TripDayDTO> sortedList = share.getTripDayList();
+	    Collections.sort(sortedList, new Comparator<TripDayDTO>() {
+	        public int compare(TripDayDTO o1, TripDayDTO o2) {
+	            // tripDayDay 기준으로 정렬 (여행 순서대로)
+	            return Integer.compare(o1.getTripDayDay(), o2.getTripDayDay());
+	        }
+	    });
+
+	    ModelAndView mav = new ModelAndView("tripShare/shareDetail");
+	    mav.addObject("share", share); // 공유 제목 등 전체 정보
+	    mav.addObject("detailList", sortedList); // 정렬된 여행 일차 리스트
+	    mav.addObject("member", member); // 로그인 사용자 정보
+
+	    return mav;
 	}
 	
 	
