@@ -34,16 +34,33 @@
     margin-top: 10px;
 }
 
-/* 여행 일정 아이템 */
+/* 여행 일정 */
 .trip-day-id {
+	position: relative;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 8px 12px;
+    gap: 10px; /* 요소 사이 적당한 간격 */
     background: #f8f9fa;
-    padding: 8px;
     border-radius: 5px;
     margin-top: 5px;
-    box-sizing: border-box;
+}
+
+/* 인덱스 */
+.trip-day-index {
+	align-items: center;
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    line-height: 36px;
+    background-color: #007bff;
+    color: white;
+    text-align: center;
+    font-size: 15px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 /* 아이템 내부 컨테이너 */
@@ -51,6 +68,8 @@
     display: flex;
     align-items: center;
     gap: 10px;
+    flex-grow: 1;
+    min-width: 0; /* 내부 요소가 넘칠 경우 줄어들게 함 */
 }
 
 /* 장소 이미지 */
@@ -135,4 +154,33 @@
 
 .plan-list:hover {
     background-color: #218838;
+}
+
+/* 거리 정보 (화살표 + 거리 텍스트) */
+.distance-info {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 6px;
+    margin: 10px 0 10px 32px;
+    font-size: 13px;
+    color: #333;
+}
+
+/* 화살표 아이콘 */
+.trip-day-arrow {
+    font-size: 16px;
+    color: #007bff;
+    line-height: 1; /* 수직 정렬 깔끔하게 */
+}
+
+/* 거리 텍스트 */
+.distance-text {
+    background-color: #e6f0ff;
+    border: 1px solid #007bff;
+    border-radius: 6px;
+    padding: 4px 8px;
+    font-size: 13px;
+    color: #333;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }

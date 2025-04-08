@@ -1,7 +1,5 @@
 @charset "UTF-8";
 
 .kakao_map {
-  width: 600px;
-  height: 400px;
   display: none;
 }

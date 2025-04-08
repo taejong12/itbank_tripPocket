@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		
 	}
 	
-	// 선택한 장소를 부모 창에 전달하는 함수 (tripPlan -> palnDetail)
+	// 선택한 장소를 부모 창에 전달하는 함수 (tripPlan -> planDetail)
     window.fu_tripSpaceChoice = function(keywordData) {
     
 	    let keyword = JSON.parse(decodeURIComponent(keywordData));
@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", function () {
         let tripDayDate = window.opener.tripDayDate;
         let tripPlanId = window.opener.tripPlanId;
         if (window.opener && typeof window.opener.fu_insertTripDay === "function") {
-        	// palnDetail.jsp -> fu_insertTripDay
+        	// planDetail.jsp -> fu_insertTripDay
             window.opener.fu_insertTripDay(keyword, tripDayDay, tripDayDate, tripPlanId);
         }
         
