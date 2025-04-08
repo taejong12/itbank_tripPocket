@@ -18,8 +18,8 @@ public class TripPlanDAOImpl implements TripPlanDAO{
 	private SqlSession sqlSession;
 	
 	@Override
-	public void insertPlanDateSet(TripPlanDTO tripPlanDTO) {
-		sqlSession.insert("mapper.trip.plan.insertPlanDateSet", tripPlanDTO);
+	public void insertPlan(TripPlanDTO tripPlanDTO) {
+		sqlSession.insert("mapper.trip.plan.insertPlan", tripPlanDTO);
 	}
 
 	@Override

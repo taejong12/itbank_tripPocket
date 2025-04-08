@@ -5,7 +5,9 @@ document.addEventListener("DOMContentLoaded", function () {
 		event.preventDefault();
 		
 		let keyword = document.getElementById("tripSearchKeyword").value.trim();
-	    		
+	    
+	    let areaCode = document.getElementById("tripSearchAreaCode").value.trim();
+	    
 		 if (!keyword) {
 	        alert("검색어를 입력해주세요.");
 	        return;
@@ -32,6 +34,8 @@ document.addEventListener("DOMContentLoaded", function () {
 		    //contentTypeId: 38,
 		    // 요청키워드
 		    keyword: keyword,
+		    // 지역 코드
+		    areaCode: areaCode,
 		    // 응답메세지 형식
 		    _type: "json" 
 		});
@@ -79,20 +83,16 @@ document.addEventListener("DOMContentLoaded", function () {
 				html += '<div class="card" onclick="fu_tripSpaceChoice(\'' + keywordData + '\')">';
                 html += '<img src="'+ imageSrc +'" alt="이미지 없음">';
                 html += '<p class="card-title">'+keyword.title+'</p>';
+                html += '<p class="card-title">주소:'+keyword.addr1+'</p>';
                 html += '</div>';
                 
-    			//html += '<p><strong>주소: </strong>'+keyword.addr1+'</p>';
-    			//html += '<p><strong>상세주소: </strong>'+keyword.addr2+'</p>';
-    			//html += '<p><strong>대표이미지(원본): </strong><img src='+keyword.firstimage+'></p>';
-    			//html += '<p><strong>GPS X좌표: </strong>'+keyword.mapx+'</p>';
-    			//html += '<p><strong>GPS Y좌표: </strong>'+keyword.mapy+'</p>';
 			})
 		}
 		document.getElementById("tripSearchList").innerHTML = html;
 		
 	}
 	
-	// 선택한 장소를 부모 창에 전달하는 함수 (tripPlan -> palnDetail)
+	// 선택한 장소를 부모 창에 전달하는 함수 (tripPlan -> planDetail)
     window.fu_tripSpaceChoice = function(keywordData) {
     
 	    let keyword = JSON.parse(decodeURIComponent(keywordData));
@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", function () {
         let tripDayDate = window.opener.tripDayDate;
         let tripPlanId = window.opener.tripPlanId;
         if (window.opener && typeof window.opener.fu_insertTripDay === "function") {
-        	// palnDetail.jsp -> fu_insertTripDay
+        	// planDetail.jsp -> fu_insertTripDay
             window.opener.fu_insertTripDay(keyword, tripDayDay, tripDayDate, tripPlanId);
         }
         

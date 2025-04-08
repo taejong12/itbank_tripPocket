@@ -7,7 +7,7 @@ import com.tripPocket.www.tripPlan.dto.TripPlanDTO;
 
 public interface TripPlanService {
 
-	void insertPlanDateSet(TripPlanDTO tripPlanDTO);
+	void insertPlan(TripPlanDTO tripPlanDTO);
 
 	List<TripPlanDTO> selectPlanList(String memberId);
 

@@ -25,12 +25,12 @@
 		    </div>
 		</c:forEach>
 
-		<a class="add-plan" href="${contextPath}/trip/planDateSet.do">여행계획추가</a>
+		<a class="add-plan" href="${contextPath}/trip/planInsertForm.do">여행계획추가</a>
 	</div>
 	
 	<script type="text/javascript">
 		let contextPath = '${contextPath}';
 	</script>
-	<script src="${contextPath}/resources/script/tripPlan/planList.js"></script>
+	<script src="${contextPath}/resources/js/tripPlan/planList.js"></script>
 </body>
 </html>

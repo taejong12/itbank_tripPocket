@@ -8,10 +8,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>날짜/지역 정하기</title>
-<link rel="stylesheet" href="${contextPath}/resources/css/tripPlan/dateSetting.css">
+<link rel="stylesheet" href="${contextPath}/resources/css/tripPlan/planInsert.css">
 </head>
 <body>
-	<form name="planDateSet">
+	<form name="planInsert">
 		<div>
 			제목:<input type="text" name="tripPlanTitle">
 		</div>
@@ -24,13 +24,13 @@
 		<div>
 			여행도착일:<input type="date" name="tripPlanArriveDay">
 		</div>
-		<button onclick="fu_planDateSet(event)">선택완료</button>
+		<button onclick="fu_planInsert(event)">선택완료</button>
 	</form>
 	
 	<script>
 		// JavaScript 변수로 저장
 	    let contextPath = "${contextPath}";
 	</script>
-	<script src="${contextPath}/resources/script/tripPlan/dateSetting.js"></script>
+	<script src="${contextPath}/resources/js/tripPlan/planInsert.js"></script>
 </body>
 </html>

@@ -46,8 +46,8 @@ public class TripPlanController {
 		return "tripplan/planList";
 	}
 	
-	@RequestMapping("/planDateSet.do")
-	public String planDateSettingPage(HttpServletRequest request) {
+	@RequestMapping("/planInsertForm.do")
+	public String planInsertForm(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		MemberDTO memberDTO = (MemberDTO) session.getAttribute("member");
 		
@@ -55,11 +55,11 @@ public class TripPlanController {
 	        System.out.println("세션에 회원 정보가 없습니다.");
 	        return "redirect:/member/loginForm.do"; // 로그인 페이지로 이동
 	    }
-		return "tripplan/dateSetting";
+		return "tripplan/planInsert";
 	}
 	
-	@RequestMapping("/insertPlanDateSet.do")
-	public String insertPlanDateSet(@ModelAttribute TripPlanDTO tripPlanDTO, HttpServletRequest request, RedirectAttributes redirectAttributes) {
+	@RequestMapping("/insertPlan.do")
+	public String insertPlan(@ModelAttribute TripPlanDTO tripPlanDTO, HttpServletRequest request, RedirectAttributes redirectAttributes) {
 		HttpSession session = request.getSession();
 		MemberDTO memberDTO = (MemberDTO) session.getAttribute("member");
 		
@@ -70,7 +70,7 @@ public class TripPlanController {
 	    }
 		
 		tripPlanDTO.setMemberId(memberDTO.getMemberId());
-		tripPlanService.insertPlanDateSet(tripPlanDTO);
+		tripPlanService.insertPlan(tripPlanDTO);
 		
 		return "redirect:/trip/planList.do";
 	}

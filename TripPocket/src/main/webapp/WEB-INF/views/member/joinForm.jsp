@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>회원가입</title>
 <link rel="stylesheet" href="${contextPath}/resources/css/member/join.css">
-<script src="${contextPath}/resources/script/member/joinForm.js"></script>
+<script src="${contextPath}/resources/js/member/joinForm.js"></script>
 </head>
 <body>
     <div class="container">
