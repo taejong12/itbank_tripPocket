@@ -38,7 +38,11 @@
                      <li><a href="${contextPath}/trip/planList.do">여행 계획 일정만들기</a></li> <!-- 여행 계획 세우기로 이동 -->
                 </ul>
             </li>
-           
+            
+			<li>
+				<a href="${contextPath}/tripDestination/list.do">관광지</a>
+			</li>
+			
             <li><a href="#" onclick="toggleSubmenu(event, 'share-submenu')">여행 블로그</a>
                 <ul class="submenu" id="share-submenu">
                     <li><a href="#">나의 여행 글 쓰기</a></li> <!-- 나의 여행 글 쓰기 페이지로 이동 -->

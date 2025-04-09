@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+header {
+  background-color: #ffffff;
+  padding: 16px 32px;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+header a {
+  text-decoration: none;
+  color: #007bff;
+  font-size: 24px;
+  font-weight: bold;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: color 0.3s;
+}
+
+header a:hover {
+  color: #0056b3;
+}
