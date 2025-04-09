@@ -43,8 +43,11 @@ window.fu_tripPeriod = function(startDate, endDate, tripPlanId, tripDayList) {
                 });
             }
             
+            // 대체이미지 추가
+            const imageSrc = tripDayDTO.tripDayImage ? tripDayDTO.tripDayImage : contextPath+"/resources/image/logo/alt_image.png";
+            
 	        html += "<div class='trip-day-div'>";
-	        html += "<img src='" + tripDayDTO.tripDayImage + "' class='trip-day-img'>";
+	        html += "<img src='" + imageSrc + "' class='trip-day-img' alt='이미지 없음' onerror='this.onerror=null; this.src=\"" + contextPath + "/resources/image/logo/alt_image.png\";'>";
 	        html += "<div class='trip-day-place-address-div'>";
 	        html += "<span class='trip-day-place'>" + tripDayDTO.tripDayPlace + "</span>";
 	        html += "<span class='trip-day-address'>" + tripDayDTO.tripDayAddress + "</span>";
