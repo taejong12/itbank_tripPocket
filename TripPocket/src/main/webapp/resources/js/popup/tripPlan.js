@@ -112,11 +112,11 @@ document.addEventListener("DOMContentLoaded", function () {
 				// keyword 그냥 넘기면 에러 발생
 				const keywordData = encodeURIComponent(JSON.stringify(keyword));
 
-                html += '<div class="trip-item">';
+                html += '<div class="trip-search-result-div">';
 	            html += '<img src="' + imageSrc + '" alt="이미지 없음" onerror="this.onerror=null; this.src=\'' + contextPath + '/resources/image/logo/alt_image.png\';">';
-	            html += '<div class="trip-info">';
-	            html += '<div class="title">' + keyword.title + '</div>';
-	            html += '<div class="addr">' + keyword.addr1 + '</div>';
+	            html += '<div class="trip-search-result-info">';
+	            html += '<div class="trip-place">' + keyword.title + '</div>';
+	            html += '<div class="trip-address">' + keyword.addr1 + '</div>';
 	            html += '</div>';
 	            html += '<button class="trip-select-btn" onclick="fu_tripSpaceSelect(\'' + keywordData + '\')">선택</button>';
 	            html += '</div>';

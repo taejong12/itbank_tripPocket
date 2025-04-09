@@ -95,14 +95,14 @@
 	background-color: #45a049;
 }
 
-.trip-list {
+#tripSearchList {
     display: flex;
     flex-direction: column;
     gap: 10px;
     margin-top: 20px;
 }
 
-.trip-item {
+.trip-search-result-div {
     display: flex;
     align-items: center;
     border: 1px solid #ddd;
@@ -112,7 +112,7 @@
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
 }
 
-.trip-item img {
+.trip-search-result-div img {
     width: 100px;
     height: 100px;
     object-fit: cover;
@@ -120,16 +120,16 @@
     margin-right: 15px;
 }
 
-.trip-info {
+.trip-search-result-info {
     flex: 1;
 }
 
-.trip-info .title {
+.trip-search-result-info .trip-place {
     font-weight: bold;
     font-size: 16px;
 }
 
-.trip-info .addr {
+.trip-search-result-info .trip-address {
     color: #666;
     margin-top: 5px;
 }
