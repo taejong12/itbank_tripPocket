@@ -278,7 +278,7 @@
                 <form:option value="" label="-- 선택하세요 --" />
                 <c:forEach var="plan" items="${tripPlanList}">
                     <form:option value="${plan.tripPlanId}">
-                        ${plan.tripPlanTitle} (${plan.tripPlanStartDay} ~ ${plan.tripPlanArriveDay})
+                        ${plan.tripPlanTitle}
                     </form:option>
                 </c:forEach>
             </form:select>
