@@ -11,10 +11,148 @@
 <head>
     <title>경험 공유 글쓰기</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/style.css' />">
     <style>
-        .active { background-color: #ccc; }
-    </style>
+        /* General Body Styling */
+        body {
+            margin: 0;
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f9f9f9;
+        }
 
+        /* Container for the Form */
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #2a8fbd;
+            font-size: 28px;
+            margin-bottom: 30px;
+        }
+
+        label {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        select, input[type="text"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        input[type="text"]:focus, select:focus, textarea:focus {
+            border-color: #2a8fbd;
+            outline: none;
+            box-shadow: 0 0 5px rgba(42, 143, 189, 0.5);
+        }
+
+        #dayTabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .day-tab-btn {
+            background: #f1f1f1;
+            color: #333;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .day-tab-btn.active, .day-tab-btn:hover {
+            background: #2a8fbd;
+            color: white;
+            border-color: #2a8fbd;
+        }
+
+        .trip-day-card {
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .trip-day-card h3 {
+            margin: 0 0 10px;
+            font-size: 18px;
+            color: #2a8fbd;
+        }
+
+        .trip-day-card p {
+            font-size: 14px;
+            margin: 5px 0;
+            color: #666;
+        }
+
+        .trip-day-card img {
+            max-width: 100%;
+            border-radius: 6px;
+            margin-top: 10px;
+        }
+
+        input[type="submit"] {
+            display: block;
+            width: 100%;
+            background: #2a8fbd;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 20px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        input[type="submit"]:hover {
+            background: #176c93;
+            transform: translateY(-3px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            h2 {
+                font-size: 24px;
+            }
+
+            .day-tab-btn {
+                padding: 8px 12px;
+            }
+
+            .trip-day-card h3 {
+                font-size: 16px;
+            }
+
+            input[type="submit"] {
+                font-size: 14px;
+            }
+        }
+    </style>
     <script>
         let globalTripDays = [];
         let reviewMap = {};
@@ -60,7 +198,7 @@
                     tabs.append(buttonHtml);
                 });
 
-                $('.day-tab-btn').click(function () {
+                $('.day-tab-btn').off('click').on('click', function () {
                     $('.day-tab-btn').removeClass('active');
                     $(this).addClass('active');
 
@@ -94,7 +232,7 @@
                     let html =
                         '<div class="trip-day-card">' +
                         '<h3>Day ' + day.tripDayDay + ' - ' + day.tripDayDate + '</h3>' +
-                        '<p>📍 ' + day.tripDayAdr + '</p>' +
+                        '<p>📍 ' + day.tripDayAddress + '</p>' +
                         imageTag +
                         '<label>여행 후기</label>' +
                         '<textarea name="tripShareContent" rows="4" data-key="' + key + '" data-day="' + day.tripDayDay + '">' + savedContent + '</textarea>' +
@@ -132,28 +270,27 @@
     </script>
 </head>
 <body>
-<h2>여행 공유 글쓰기</h2>
+    <div class="container">
+        <h2>여행 공유 글쓰기</h2>
+        <form:form modelAttribute="tripShareDTO" method="get" action="${contextPath}/share/write.do">
+            <label>여행 계획 선택</label>
+            <form:select path="tripPlanId">
+                <form:option value="" label="-- 선택하세요 --" />
+                <c:forEach var="plan" items="${tripPlanList}">
+                    <form:option value="${plan.tripPlanId}">
+                        ${plan.tripPlanTitle} (${plan.tripPlanStartDay} ~ ${plan.tripPlanArriveDay})
+                    </form:option>
+                </c:forEach>
+            </form:select>
 
-<form:form modelAttribute="tripShareDTO" method="get" action="${contextPath}/share/write.do">
-    <label>여행 계획 선택</label><br />
-    <form:select path="tripPlanId">
-        <form:option value="" label="-- 선택하세요 --" />
-        <c:forEach var="plan" items="${tripPlanList}">
-            <form:option value="${plan.tripPlanId}">
-                ${plan.tripPlanTitle} (${plan.tripPlanStartDay} ~ ${plan.tripPlanArriveDay})
-            </form:option>
-        </c:forEach>
-    </form:select>
-    <br /><br />
+            <label>제목</label>
+            <form:input path="tripShareTitle" />
 
-    <label>제목</label><br />
-    <form:input path="tripShareTitle" /><br /><br />
+            <div id="dayTabs"></div>
+            <div id="tripDayContainer"></div>
 
-    <div id="dayTabs" style="margin-top: 30px;"></div>
-    <div id="tripDayContainer"></div>
-
-    <br />
-    <input type="submit" value="글쓰기" />
-</form:form>
+            <input type="submit" value="글쓰기" />
+        </form:form>
+    </div>
 </body>
 </html>

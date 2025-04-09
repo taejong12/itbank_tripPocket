@@ -10,59 +10,113 @@
     <title>여행 공유 리스트</title>
     <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/style.css' />">
     <style>
+        /* General Body Styling */
         body {
             font-family: 'Noto Sans KR', sans-serif;
-            background-color: #f4f4f4;
+            background-color: #f9f9f9;
+            margin: 0;
             padding: 20px;
         }
+
+        /* Page Title */
         h1 {
-            color: #2c3e50;
+            color: #2a8fbd;
             text-align: center;
+            margin-bottom: 30px;
+            font-size: 32px;
+            font-weight: bold;
         }
+
+        /* Table Styling */
         table {
-            width: 80%;
+            width: 90%;
             margin: 0 auto;
             border-collapse: collapse;
-            background: #fff;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
         }
+
         th, td {
-            padding: 12px 18px;
-            border: 1px solid #ddd;
+            padding: 15px;
+            border-bottom: 1px solid #e2e2e2;
             text-align: center;
         }
+
         th {
-            background-color: #34495e;
+            background-color: #2a8fbd;
             color: white;
+            font-size: 16px;
         }
+
+        td {
+            font-size: 14px;
+            color: #333;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Links Styling */
         a {
-            color: #2980b9;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        .add-btn {
-            display: block;
-            width: 150px;
-            margin: 30px auto 0;
-            padding: 10px;
-            background-color: #27ae60;
-            color: white;
-            text-align: center;
-            border-radius: 8px;
+            color: #2a8fbd;
             text-decoration: none;
             font-weight: bold;
         }
+
+        a:hover {
+            color: #176c93;
+            text-decoration: underline;
+        }
+
+        /* Floating Add Button */
+        .add-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #2a8fbd;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+            padding: 10px 15px;
+            border-radius: 50px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-decoration: none;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
         .add-btn:hover {
-            background-color: #219150;
+            background-color: #176c93;
+            transform: translateY(-3px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            table {
+                width: 95%;
+            }
+
+            th, td {
+                font-size: 12px;
+                padding: 10px;
+            }
+
+            .add-btn {
+                font-size: 12px;
+                padding: 8px 12px;
+            }
         }
     </style>
 </head>
 <body>
 
+    <!-- Page Title -->
     <h1>여행 공유 리스트</h1>
     
+    <!-- Table Section -->
     <table>
         <thead>
             <tr>
@@ -88,8 +142,8 @@
         </tbody>
     </table>
 
+    <!-- Floating Add Button -->
     <a class="add-btn" href="<c:url value='/share/shareForm.do' />">공유 추가</a>
 
 </body>
 </html>
-	

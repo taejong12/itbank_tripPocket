@@ -24,6 +24,10 @@ public interface TripShareService {
 
 
 
+	List<TripShareDTO> myList(String memberId);
+
+
+
 	
 
 }

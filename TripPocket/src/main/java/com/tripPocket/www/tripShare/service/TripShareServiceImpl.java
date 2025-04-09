@@ -60,4 +60,12 @@ public class TripShareServiceImpl implements TripShareService{
 		// TODO Auto-generated method stub
 		return tripShareDAO.detailList(tripShareDTO);
 	}
+
+
+
+	@Override
+	public List<TripShareDTO> myList(String memberId) {
+		// TODO Auto-generated method stub
+		return tripShareDAO.myShare(memberId);
+	}
 }

@@ -20,4 +20,6 @@ public interface TripShareDAO {
 
 	void insertContent(TripDayDTO day);
 
+	List<TripShareDTO> myShare(String memberId);
+
 }

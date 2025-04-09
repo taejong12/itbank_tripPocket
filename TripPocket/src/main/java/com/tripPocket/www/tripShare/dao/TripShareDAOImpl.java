@@ -50,4 +50,10 @@ public class TripShareDAOImpl implements TripShareDAO{
 	public void insertContent(TripDayDTO tripDayDTO) {
 	    session.insert("mapper.tripShare.insertShareContent", tripDayDTO);
 	}
+
+	@Override
+	public List<TripShareDTO> myShare(String memberId) {
+		// TODO Auto-generated method stub
+		return session.selectList("mapper.tripShare.myShareList",memberId);
+	}
 }

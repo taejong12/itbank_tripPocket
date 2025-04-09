@@ -15,7 +15,7 @@
     <collection property="tripDayList" ofType="tripDayDTO">
         <id property="tripDayId" column="trip_day_id"/>
         <result property="tripDayDay" column="trip_day_day"/>
-        <result property="tripDayAdr" column="trip_day_adr"/>
+        <result property="tripDayAddress" column="trip_day_Address"/>
         <result property="tripDayDate" column="trip_day_date"/>
         <result property="tripDayImage" column="trip_day_image"/>
         <result property="tripPlanId" column="trip_plan_id"/>
@@ -35,7 +35,7 @@
 <resultMap id="TripDayMap" type="com.tripPocket.www.tripPlan.dto.TripDayDTO">
         <id property="tripDayId" column="trip_day_id"/>
         <result property="tripDayDay" column="trip_day_day"/>
-        <result property="tripDayAdr" column="trip_day_adr"/>
+        <result property="tripDayAddress" column="trip_day_Address"/>
         <result property="tripDayDate" column="trip_day_date"/>
         <result property="tripDayImage" column="trip_day_image"/>
         <result property="tripPlanId" column="trip_plan_id"/>
@@ -46,7 +46,7 @@
         <id property="tripDayId" column="trip_day_id"/>
         <result property="tripDayDay" column="trip_day_day"/>
         <result property="tripDayDate" column="trip_day_date"/>
-        <result property="tripDayAdr" column="trip_day_adr"/>
+        <result property="tripDayAddress" column="trip_day_Address"/>
         <result property="tripDayImage" column="trip_day_image"/>
         <result property="tripShareContent" column="trip_share_content"/>
     </resultMap>
@@ -116,6 +116,25 @@
 <select id="selectIdList" parameterType="String" resultMap="tripPlanResultMap">
 	select * from trip_plan where member_id = #{memberId} 
 </select>
+<select id="myShareList" parameterType="String" resultMap="TripShareMap">
+	 SELECT 
+    ts.*, <!-- trip_share 테이블의 모든 데이터 -->
+    tp.trip_plan_id,
+    m.member_id
+FROM 
+    trip_share ts
+INNER JOIN 
+    trip_plan tp
+ON 
+    ts.trip_plan_id = tp.trip_plan_id <!--  trip_share와 trip_plan 연결 -->
+INNER JOIN 
+    member m
+ON 
+    tp.member_id = m.member_id  <!-- trip_plan과 member 연결 -->
+WHERE 
+    m.member_id = #{memberId} <!-- 특정 member_id로 필터링 --> 
+</select>
+
 	<select id="selectDetail" parameterType="tripShareDTO" resultMap="TripShareResultMap">
 	SELECT 
     ts.trip_share_id,
@@ -130,7 +149,7 @@
     td.trip_day_id,
     td.trip_day_day,
     td.trip_day_date,
-    td.trip_day_adr,
+    td.trip_day_Address,
     td.trip_day_image,
 
     tsc.trip_share_content

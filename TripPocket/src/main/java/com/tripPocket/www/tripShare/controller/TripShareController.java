@@ -47,10 +47,25 @@ public class TripShareController {
 	    return "tripShare/shareList"; // 공유 리스트 페이지의 뷰 이름 반환
 	    
 	}
+	@RequestMapping("/myShare.do")
+	public String myShare(@ModelAttribute()TripShareDTO tripShareDTO, Model model, HttpServletRequest request) {
+	    HttpSession session = request.getSession();
+	    MemberDTO memberDTO = (MemberDTO) session.getAttribute("member");
+
+	    if (memberDTO == null) {
+	        System.out.println("세션에 회원 정보가 없습니다.");
+	        return "redirect:/member/loginForm.do"; // 로그인 페이지로 이동
+	    }
+
+	    List<TripShareDTO> myList = tripShareService.myList(memberDTO.getMemberId());
+	    model.addAttribute("myList", myList);
+	    return "tripShare/myShare"; // 공유 리스트 페이지의 뷰 이름 반환
+	    
+	}
 	@RequestMapping(value = "/shareForm.do", method = RequestMethod.GET)
 	public String writeForm(@ModelAttribute()TripShareDTO tripShareDTO, Model model,HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		 MemberDTO member = (MemberDTO) session.getAttribute("member");
+		MemberDTO member = (MemberDTO) request.getSession().getAttribute("member");
 		 List<TripPlanDTO> planList = tripShareService.getTripPlansByMemberId(member.getMemberId());
 		 
 		    model.addAttribute("tripPlanList", planList);
