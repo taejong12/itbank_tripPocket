@@ -18,7 +18,7 @@ window.fu_tripPeriod = function(startDate, endDate, tripPlanId, tripDayList) {
         
 		// 고유한 kakao_map id 생성
         let kakaoMapId = "kakao_map_"+tripDayDay;
-        html += "<li id='"+kakaoMapId+"' class='kakao_map'></li>";
+        html += "<li id='"+kakaoMapId+"' class='kakaoMap'></li>";
         
         html += "<li id='day-" + tripDayDay + "'>";
         html += "<strong>" + tripDay + "</strong>";
@@ -77,7 +77,7 @@ window.fu_tripPeriod = function(startDate, endDate, tripPlanId, tripDayList) {
         tripDayDay++;
     }
     
-	document.getElementById("dayList").innerHTML = html;
+	document.getElementById("trip-day-list").innerHTML = html;
 	
 	// 지도 Id 별로 좌표 묶기
 	window.groupMapId = {}; 
