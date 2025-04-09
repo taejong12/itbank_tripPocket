@@ -132,7 +132,7 @@ INNER JOIN
 ON 
     tp.member_id = m.member_id  <!-- trip_plan과 member 연결 -->
 WHERE 
-    m.member_id = #{memberId};  <!-- 특정 member_id로 필터링 --> 
+    m.member_id = #{memberId}  <!-- 특정 member_id로 필터링 --> 
 </select>
 
 	<select id="selectDetail" parameterType="tripShareDTO" resultMap="TripShareResultMap">
