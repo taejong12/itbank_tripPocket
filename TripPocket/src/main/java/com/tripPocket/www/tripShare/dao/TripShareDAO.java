@@ -22,4 +22,10 @@ public interface TripShareDAO {
 
 	List<TripShareDTO> myShare(String memberId);
 
+	
+
+	void simpleInsertPlanAndDays(Long tripShareId, String memberId);
+
+
+
 }

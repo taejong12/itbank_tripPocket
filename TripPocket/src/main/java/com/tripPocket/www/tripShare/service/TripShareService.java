@@ -28,6 +28,10 @@ public interface TripShareService {
 
 
 
+	void importToMyPlan(Long tripShareId, String memberId);
+
+
+
 	
 
 }

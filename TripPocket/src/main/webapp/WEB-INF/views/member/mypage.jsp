@@ -175,7 +175,7 @@
         </form>
 
         <!-- 회원탈퇴 버튼 -->
-        <form action="${contextPath}/member/deleteMember.do" method="post" onsubmit="return confirm('정말로 회원탈퇴를 진행하시겠습니까?');">
+        <form action="${contextPath}/member/delMember.do" method="post" onsubmit="return confirm('정말로 회원탈퇴를 진행하시겠습니까?');">
             <input type="hidden" name="memberId" value="${member.memberId}" />
             <button type="submit" class="delete-account-btn">회원탈퇴</button>
         </form>

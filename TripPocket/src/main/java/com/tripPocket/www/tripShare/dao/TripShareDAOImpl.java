@@ -1,6 +1,8 @@
 package com.tripPocket.www.tripShare.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,4 +58,27 @@ public class TripShareDAOImpl implements TripShareDAO{
 		// TODO Auto-generated method stub
 		return session.selectList("mapper.tripShare.myShareList",memberId);
 	}
+
+	@Override
+	public void simpleInsertPlanAndDays(Long tripShareId, String memberId) {
+	    // 1. 파라미터를 map으로 준비
+	    Map<String, Object> paramMap = new HashMap<String, Object>();
+	    paramMap.put("tripShareId", tripShareId);
+	    paramMap.put("memberId", memberId);
+
+	    // 2. 공유글 기반으로 내 계획(plan) 복사
+	    // 이 시점에 selectKey로 tripPlanId가 paramMap에 자동으로 들어감
+	    session.insert("mapper.tripShare.insertTripPlanFromShare", paramMap);
+
+	    // 3. 새로 생성된 tripPlanId를 꺼내서 확인
+	    Long newPlanId = (Long) paramMap.get("tripPlanId");
+	    System.out.println("✅ 생성된 내 planId: " + newPlanId);
+
+	    // 4. day 복사 시 사용할 planId를 다시 map에 담아줌
+	    paramMap.put("tripPlanId", newPlanId);
+
+	    // 5. 공유된 day 데이터 → 내 계획에 복사
+	    session.insert("mapper.tripShare.insertTripDaysFromShare", paramMap);
+	}
+
 }

@@ -46,5 +46,11 @@ public class MemberDAOImpl implements MemberDAO{
 	        return count > 0;
 	}
 
+	@Override
+	public void delMember(MemberDTO memberDTO) {
+		sqlSession.delete("mapper.member.delMember",memberDTO);
+		
+	}
+
 	
 }

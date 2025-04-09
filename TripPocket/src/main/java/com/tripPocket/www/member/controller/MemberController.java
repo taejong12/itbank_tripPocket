@@ -119,6 +119,20 @@ public class MemberController {
 		return null;
 		
 	}
-	
+	@RequestMapping(value = "delMember.do", method = RequestMethod.POST)
+	public String delMember(@ModelAttribute() MemberDTO memberDTO, HttpServletRequest request,HttpServletResponse response) throws IOException {
+		response.setContentType("text/html;charset=utf-8");
+		memberService.delMember(memberDTO);
+		HttpSession session = request.getSession();
+		session.invalidate();
+		 PrintWriter out = response.getWriter();
+		 out.write("<script>");
+         out.write("alert('탈퇴 완료되었습니다');");
+         out.write("location.href='/www/main.do';");
+         out.write("</script>");
+		return null;
+		
+		
+	}
 	
 }

@@ -92,4 +92,7 @@
 		resultMap="MemberResultMap">
 		select * from member where member_id = #{memberId}
 	</select>
+	<delete id="delMember" parameterType="memberDTO">
+	  delete from member where member_id = #{memberId}
+	</delete>
 </mapper>

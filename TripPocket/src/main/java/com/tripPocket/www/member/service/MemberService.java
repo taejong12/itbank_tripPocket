@@ -16,4 +16,6 @@ public interface MemberService {
 
 	boolean isMemberEmailDuplicated(String memberEmail);
 
+	void delMember(MemberDTO memberDTO);
+
 }

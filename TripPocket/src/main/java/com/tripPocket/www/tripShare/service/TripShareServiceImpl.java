@@ -68,4 +68,12 @@ public class TripShareServiceImpl implements TripShareService{
 		// TODO Auto-generated method stub
 		return tripShareDAO.myShare(memberId);
 	}
+
+
+
+	@Override
+	public void importToMyPlan(Long tripShareId, String memberId) {
+		tripShareDAO.simpleInsertPlanAndDays(tripShareId,memberId);
+		
+	}
 }
