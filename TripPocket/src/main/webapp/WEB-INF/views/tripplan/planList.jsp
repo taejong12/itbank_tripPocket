@@ -21,7 +21,6 @@
 		            <div>제목: ${tripPlan.tripPlanTitle}</div>
 		        </a>
 		        <button class="delete-btn" onclick="fu_deleteTripPlan('${tripPlan.tripPlanId}')">삭제</button>
-		        <a href="${contextPath }/share/shareForm.do">공유하기</a>
 		    </div>
 		</c:forEach>
 

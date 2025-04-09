@@ -4,17 +4,17 @@
 	"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
 	
 <tiles-definitions>
-	<definition name="tripplan/planList" extends="mainLayout">
+	<definition name="tripplan/planList" extends="common">
 		<put-attribute name="title" value="여행 계획 목록" />
 		<put-attribute name="body" value="/WEB-INF/views/tripplan/planList.jsp" />
 	</definition>
 	
-	<definition name="tripplan/planInsert" extends="mainLayout">
+	<definition name="tripplan/planInsert" extends="common">
 		<put-attribute name="title" value="날짜/제목 정하기" />
 		<put-attribute name="body" value="/WEB-INF/views/tripplan/planInsert.jsp" />
 	</definition>
 	
-	<definition name="tripplan/planDetail" extends="mainLayout">
+	<definition name="tripplan/planDetail" extends="common">
 		<put-attribute name="title" value="플랜 상세보기" />
 		<put-attribute name="body" value="/WEB-INF/views/tripplan/planDetail.jsp" />
 	</definition>

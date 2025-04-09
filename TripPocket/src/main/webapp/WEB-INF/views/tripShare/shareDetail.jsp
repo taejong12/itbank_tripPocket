@@ -119,7 +119,7 @@
         <c:forEach var="day" items="${detailList}">
             <div class="trip-day">
                 <h3>Day ${day.tripDayDay}</h3>
-                <p>📍 ${day.tripDayAddress}</p>
+                <p>${day.tripDayAddress}</p>
 
                 <c:if test="${not empty day.tripDayImage}">
                     <img src="${day.tripDayImage}" alt="여행 이미지" />

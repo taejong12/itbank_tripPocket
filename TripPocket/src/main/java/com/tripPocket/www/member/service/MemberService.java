@@ -14,4 +14,6 @@ public interface MemberService {
 
 	MemberDTO update(MemberDTO memberDTO);
 
+	boolean isMemberEmailDuplicated(String memberEmail);
+
 }

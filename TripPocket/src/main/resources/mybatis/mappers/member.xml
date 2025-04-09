@@ -43,6 +43,10 @@
 		resultType="int">
 		select count(*) from member where member_id = #{member_id}
 	</select>
+	<select id="isMemberEmailDuplicated" parameterType="String"
+		resultType="int">
+		select count(*) from member where member_email = #{member_Email}
+	</select>
 
 	<select id="login" parameterType="memberDTO"
 		resultMap="MemberResultMap">
