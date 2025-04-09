@@ -60,7 +60,7 @@
 		window.fu_kakao_map = function(mapId, positions){
 			
 			if(!(positions)){
-				console.log("좌표가 존재하지 않음");
+				console.error("좌표가 존재하지 않음");
 				return;
 			}
 			

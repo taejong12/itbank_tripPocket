@@ -148,8 +148,16 @@ window.fu_insertTripDay = function(keyword, tripDayDay, tripDayDate, tripPlanId)
 
         // 이미지 요소 생성
         let imgQuery = document.createElement("img");
-        imgQuery.src = keyword.firstimage2;
+        imgQuery.src = keyword.firstimage2 ? keyword.firstimage2 : contextPath+"/resources/image/logo/alt_image.png";
+        imgQuery.alt = "이미지 없음";
         imgQuery.classList.add("trip-day-img");
+
+		// 이미지 로딩 실패 시 대체 이미지로 변경
+		imgQuery.onerror = function () {
+			// 무한루프 방지
+		    this.onerror = null;
+		    this.src = contextPath + "/resources/image/logo/alt_image.png";
+		};
 
 		// 장소 + 주소 div 생성 (장소 + 주소 정보 포함)
 		let placeAddressDiv = document.createElement("div");
@@ -208,18 +216,22 @@ window.fu_insertTripDay = function(keyword, tripDayDay, tripDayDate, tripPlanId)
 		
 		indexSpan.textContent = newIndex;
 
-		// 거리 정보 div 생성 
-		let distanceDiv = document.createElement("div");
-	    distanceDiv.classList.add("distance-info");
-		distanceDiv.id = "distance-info-" + tripDayId;
-		
-		// 화살표 span 생성
-		let arrowSpan = document.createElement("span");
-		arrowSpan.classList.add("trip-day-arrow");
-		arrowSpan.textContent = "⇩";
+		let distanceDiv;
 
-		// span을 div 안에 추가
-		distanceDiv.appendChild(arrowSpan);
+		if(newIndex > 1){
+			// 거리 정보 div 생성 
+			distanceDiv = document.createElement("div");
+		    distanceDiv.classList.add("distance-info");
+			distanceDiv.id = "distance-info-" + tripDayId;
+			
+			// 화살표 span 생성
+			let arrowSpan = document.createElement("span");
+			arrowSpan.classList.add("trip-day-arrow");
+			arrowSpan.textContent = "⇩";
+	
+			// span을 div 안에 추가
+			distanceDiv.appendChild(arrowSpan);
+		}
 
         // 요소 추가
 		tripDayIdQuery.appendChild(indexSpan);
@@ -351,12 +363,22 @@ window.fu_deleteTripDay = function(tripDayId, tripDayDay) {
         const tripDayListQuery = document.querySelector("#day-" + tripDayDay + " .tripDayList");
 	    const tripDayIdList = tripDayListQuery.querySelectorAll(".trip-day-id");
 		
-		
+		// 인덱스 번호 재설정
 	    tripDayIdList.forEach((tripDayIdQuery, index) => {
 	        const tripDayIndex = tripDayIdQuery.querySelector(".trip-day-index");
 	        if (tripDayIndex) {
 	            tripDayIndex.textContent = index + 1;
 	        }
+	        
+	        // 인덱스가 0이라면 (즉, 1번 장소) → 그 위에 있는 거리 div는 없어야 하므로 제거
+		    if (index === 0) {
+		        const tripDayId = tripDayIdQuery.id;
+		        const distanceDiv = document.getElementById("distance-info-" + tripDayId);
+		        if (distanceDiv) {
+		            distanceDiv.remove();
+		        }
+		    }
+	        
 	    });
         
     })

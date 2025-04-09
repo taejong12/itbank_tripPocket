@@ -70,11 +70,6 @@ document.addEventListener("DOMContentLoaded", function () {
 	    	
 	    	totalPages = Math.ceil(totalCount / numOfRows);
 	    	
-	    	console.log("totalPages: "+totalPages);
-	    	console.log("currentPage: "+currentPage);
-	    	console.log("totalCount: "+totalCount);
-	    	console.log("numOfRows: "+numOfRows);
-	    	
 	    	// 더보기 버튼 처리
 			const loadMoreBtn = document.getElementById("loadMoreBtn");
 			
