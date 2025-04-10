@@ -16,8 +16,8 @@ public class TripDestinationController {
 	}
 	
 	@RequestMapping("/detail.do")
-	public String tripDestinationDetailPage(Model model) {
-		model.addAttribute(model);
+	public String tripDestinationDetailPage(@RequestParam(value = "contentId") String contentId, Model model) {
+		model.addAttribute("contentId", contentId);
 		return "tripDestination/detail";
 	}
 	

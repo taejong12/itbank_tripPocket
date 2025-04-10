@@ -111,3 +111,17 @@
   font-weight: bold;
 }
 
+.trip-destination-link{
+	text-decoration: none;
+	color: inherit; 
+}
+
+trip-destination-serach-result-non {
+    font-size: 1.2rem;
+    color: #777;
+    margin: 60px auto;
+    animation: fadeIn 0.5s ease;
+    width: fit-content;
+    text-align: center;
+}
+

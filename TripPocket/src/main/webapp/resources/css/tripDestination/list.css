@@ -111,3 +111,8 @@
   font-weight: bold;
 }
 
+.trip-destination-link{
+	text-decoration: none;
+	color: inherit; 
+}
+

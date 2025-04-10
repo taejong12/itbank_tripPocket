@@ -8,13 +8,11 @@
 <head>
 <meta charset="UTF-8">
 <title><tiles:insertAttribute name="title"/></title>
-	<link rel="stylesheet" href="${contextPath}/resources/css/tripDestination/layout.css">
-	<link rel="stylesheet" href="${contextPath}/resources/css/tripDestination/header.css">
-	<link rel="stylesheet" href="${contextPath}/resources/css/tripDestination/search.css">
-	<link rel="stylesheet" href="${contextPath}/resources/css/tripDestination/nav.css">
-	<link rel="stylesheet" href="${contextPath}/resources/css/tripDestination/list.css">
-	<link rel="stylesheet" href="${contextPath}/resources/css/tripDestination/searchResult.css">
-	<link rel="stylesheet" href="${contextPath}/resources/css/tripDestination/footer.css">
+	<link rel="stylesheet" href="${contextPath}/resources/css/tripDestination/layout/layout.css">
+	<link rel="stylesheet" href="${contextPath}/resources/css/tripDestination/layout/header.css">
+	<link rel="stylesheet" href="${contextPath}/resources/css/tripDestination/layout/search.css">
+	<link rel="stylesheet" href="${contextPath}/resources/css/tripDestination/layout/nav.css">
+	<link rel="stylesheet" href="${contextPath}/resources/css/tripDestination/layout/footer.css">
 </head>
 <body>
 	<div id="container">
