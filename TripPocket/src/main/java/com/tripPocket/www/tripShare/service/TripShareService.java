@@ -1,4 +1,4 @@
-package com.tripPocket.www.tripShare.dao;
+package com.tripPocket.www.tripShare.service;
 
 import java.util.List;
 
@@ -6,26 +6,32 @@ import com.tripPocket.www.tripPlan.dto.TripDayDTO;
 import com.tripPocket.www.tripPlan.dto.TripPlanDTO;
 import com.tripPocket.www.tripShare.dto.TripShareDTO;
 
-public interface TripShareDAO {
+public interface TripShareService {
 
 	List<TripShareDTO> shareList(TripShareDTO tripShareDTO);
 
-	List<TripDayDTO> selectData(TripDayDTO tripDayDTO);
+	
 
 	void write(TripShareDTO tripShareDTO);
 
-	List<TripPlanDTO> selectIdList(String memberId);
+	List<TripPlanDTO> getTripPlansByMemberId(String memberId);
+
+	List<TripDayDTO> selectTripDayList(TripDayDTO tripDayDTO);
+
+
 
 	TripShareDTO detailList(TripShareDTO tripShareDTO);
 
-	void insertContent(TripDayDTO day);
 
-	List<TripShareDTO> myShare(String memberId);
+
+	List<TripShareDTO> myList(String memberId);
+
+
+
+	void importToMyPlan(Long tripShareId, String memberId);
+
+
 
 	
-
-	void simpleInsertPlanAndDays(Long tripShareId, String memberId);
-
-
 
 }

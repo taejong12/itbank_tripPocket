@@ -13,8 +13,10 @@ public class TripDayDTO {
 	private double tripDayMapx;
 	private double tripDayMapy;
 	private Integer tripPlanId;
-	private Date tripDayAddDate;
-	private Date tripDayModDate;
+	private Date tripPlanAddDate;
+	private Date tripPlanModDate;
+	private String tripShareContent;
+	private Integer tripShareId;
 	
 	public Integer getTripDayId() {
 		return tripDayId;
@@ -70,16 +72,28 @@ public class TripDayDTO {
 	public void setTripPlanId(Integer tripPlanId) {
 		this.tripPlanId = tripPlanId;
 	}
-	public Date getTripDayAddDate() {
-		return tripDayAddDate;
+	public Date getTripPlanAddDate() {
+		return tripPlanAddDate;
 	}
-	public void setTripDayAddDate(Date tripDayAddDate) {
-		this.tripDayAddDate = tripDayAddDate;
+	public void setTripPlanAddDate(Date tripPlanAddDate) {
+		this.tripPlanAddDate = tripPlanAddDate;
 	}
-	public Date getTripDayModDate() {
-		return tripDayModDate;
+	public Date getTripPlanModDate() {
+		return tripPlanModDate;
 	}
-	public void setTripDayModDate(Date tripDayModDate) {
-		this.tripDayModDate = tripDayModDate;
+	public void setTripPlanModDate(Date tripPlanModDate) {
+		this.tripPlanModDate = tripPlanModDate;
+	}
+	public String getTripShareContent() {
+		return tripShareContent;
+	}
+	public void setTripShareContent(String tripShareContent) {
+		this.tripShareContent = tripShareContent;
+	}
+	public Integer getTripShareId() {
+		return tripShareId;
+	}
+	public void setTripShareId(Integer tripShareId) {
+		this.tripShareId = tripShareId;
 	}
 }

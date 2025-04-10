@@ -40,5 +40,17 @@ public class MemberDAOImpl implements MemberDAO{
 		return sqlSession.selectOne("mapper.member.update",memberDTO);
 	}
 
+	@Override
+	public boolean isMemberEmailDuplicated(String memberEmail) {
+		 int count = sqlSession.selectOne("mapper.member.isMemberEmailDuplicated", memberEmail);
+	        return count > 0;
+	}
+
+	@Override
+	public void delMember(MemberDTO memberDTO) {
+		sqlSession.delete("mapper.member.delMember",memberDTO);
+		
+	}
+
 	
 }

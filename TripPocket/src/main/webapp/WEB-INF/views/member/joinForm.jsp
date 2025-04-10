@@ -8,6 +8,10 @@
 <meta charset="UTF-8">
 <title>회원가입</title>
 <link rel="stylesheet" href="${contextPath}/resources/css/member/join.css">
+<script>
+        // JavaScript에서 contextPath를 사용할 수 있도록 변수 설정
+        var contextPath = "${contextPath}";
+    </script>
 <script src="${contextPath}/resources/js/member/joinForm.js"></script>
 </head>
 <body>

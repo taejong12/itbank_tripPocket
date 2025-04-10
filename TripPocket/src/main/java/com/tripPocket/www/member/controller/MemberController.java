@@ -84,6 +84,17 @@ public class MemberController {
 			return "OK"; // 존재하지 않는다
 		}
 	}
+	@RequestMapping(value = "memberEmailCheck.do", method = RequestMethod.GET)
+	@ResponseBody // 이 메서드가 반환하는 값을 http body로 직접 반환하게 해주는 어노테이션
+	public String memberEmailCheck(@RequestParam("memberEmail") String memberEmail) {
+		boolean isDuplicated = memberService.isMemberEmailDuplicated(memberEmail); // 아이디 중복값 확인 메서드
+		if (isDuplicated) { // 존재여부
+			return "DUPLICATED"; // 존재한다
+		} else {
+			return "OK"; // 존재하지 않는다
+		}
+	}
+	
 	@RequestMapping(value = "mypage.do", method = RequestMethod.GET)
 	public ModelAndView mypage(@ModelAttribute() MemberDTO memberDTO, HttpServletRequest request,HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView("/member/mypage");
@@ -106,6 +117,21 @@ public class MemberController {
 		
 		
 		return null;
+		
+	}
+	@RequestMapping(value = "delMember.do", method = RequestMethod.POST)
+	public String delMember(@ModelAttribute() MemberDTO memberDTO, HttpServletRequest request,HttpServletResponse response) throws IOException {
+		response.setContentType("text/html;charset=utf-8");
+		memberService.delMember(memberDTO);
+		HttpSession session = request.getSession();
+		session.invalidate();
+		 PrintWriter out = response.getWriter();
+		 out.write("<script>");
+         out.write("alert('탈퇴 완료되었습니다');");
+         out.write("location.href='/www/main.do';");
+         out.write("</script>");
+		return null;
+		
 		
 	}
 	

@@ -39,6 +39,18 @@ public class MemberServiceImpl implements MemberService {
 		
 		return memberDAO.update(memberDTO);
 	}
+
+	@Override
+	public boolean isMemberEmailDuplicated(String memberEmail) {
+		// TODO Auto-generated method stub
+		return memberDAO.isMemberEmailDuplicated(memberEmail);
+	}
+
+	@Override
+	public void delMember(MemberDTO memberDTO) {
+		memberDAO.delMember(memberDTO);
+		
+	}
 	
 	
 }
