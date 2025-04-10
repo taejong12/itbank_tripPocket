@@ -71,6 +71,7 @@ public class MemberController {
 	      ModelAndView mav = new ModelAndView("redirect:/");
 	      HttpSession session = request.getSession();
 	      session.invalidate();
+	      System.out.println("로그아웃");
 	      return mav;
 	   }
 	
