@@ -231,6 +231,16 @@ footer {
     color: #343a40;
 }
 
+#container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#content{
+	flex: 1;
+}
+
 .dark-overlay {
     position: fixed;
     top: 0;
@@ -260,4 +270,4 @@ footer {
 @keyframes zoomIn {
     from { transform: scale(0.8); opacity: 0; }
     to { transform: scale(1); opacity: 1; }
-}
+}

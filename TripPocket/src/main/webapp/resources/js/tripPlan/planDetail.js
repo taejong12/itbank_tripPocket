@@ -118,7 +118,7 @@ window.fu_insertTripDay = function(keyword, tripDayDay, tripDayDate, tripPlanId)
         tripDayPlace: keyword.title,
         tripDayAddress: keyword.addr1,
         tripDayDate: tripDayDate,
-        tripDayImage: keyword.firstimage2,
+        tripDayImage: keyword.firstimage,
         tripPlanId: tripPlanId,
         tripDayMapx: keyword.mapx,
         tripDayMapy: keyword.mapy
@@ -148,7 +148,7 @@ window.fu_insertTripDay = function(keyword, tripDayDay, tripDayDate, tripPlanId)
 
         // 이미지 요소 생성
         let imgQuery = document.createElement("img");
-        imgQuery.src = keyword.firstimage2 ? keyword.firstimage2 : contextPath+"/resources/img/logo/alt_image.png";
+        imgQuery.src = keyword.firstimage ? keyword.firstimage : contextPath+"/resources/img/logo/alt_image.png";
         imgQuery.alt = "이미지 없음";
         imgQuery.classList.add("trip-day-img");
 

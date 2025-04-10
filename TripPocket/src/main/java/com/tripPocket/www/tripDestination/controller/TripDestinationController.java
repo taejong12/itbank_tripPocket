@@ -14,4 +14,16 @@ public class TripDestinationController {
 		model.addAttribute("areaCode", areaCode);
 		return "tripDestination/list";
 	}
+	
+	@RequestMapping("/detail.do")
+	public String tripDestinationDetailPage(@RequestParam(value = "contentId") String contentId, Model model) {
+		model.addAttribute("contentId", contentId);
+		return "tripDestination/detail";
+	}
+	
+	@RequestMapping("/searchResult.do")
+	public String tripDestinationSearchResultPage(@RequestParam(value = "keyword") String keyword, Model model) {
+		model.addAttribute("keyword", keyword);
+		return "tripDestination/searchResult";
+	}
 }

@@ -107,7 +107,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			keyworList.forEach(function(keyword, index){
 
 				// 이미지 처리
-				const imageSrc = keyword.firstimage2 ? keyword.firstimage2 : contextPath+"/resources/img/logo/alt_image.png";
+				const imageSrc = keyword.firstimage ? keyword.firstimage : contextPath+"/resources/img/logo/alt_image.png";
 				
 				// keyword 그냥 넘기면 에러 발생
 				const keywordData = encodeURIComponent(JSON.stringify(keyword));
