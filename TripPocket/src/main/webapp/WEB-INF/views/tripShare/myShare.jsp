@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <title>여행 공유 리스트</title>
-    <link rel="stylesheet" href="${contextPath}/resources/css/tripShare/myPage.css">
+    <link rel="stylesheet" href="${contextPath}/resources/css/tripShare/myShare.css">
 </head>
 <body>
 

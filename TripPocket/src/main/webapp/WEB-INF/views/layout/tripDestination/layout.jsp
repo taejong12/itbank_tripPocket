@@ -33,4 +33,5 @@
 		</div>
 	</div>
 </body>
+<script src="${contextPath}/resources/js/layout/layout.js"></script>
 </html>
