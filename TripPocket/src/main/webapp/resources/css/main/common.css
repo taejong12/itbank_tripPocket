@@ -1,22 +1,25 @@
 html {
     height: 100%;
-    overflow-y: auto; /* 세로 스크롤 허용 */
-    overflow: hidden;
+    overflow-x: hidden;      /* 가로 스크롤 방지 */
+    overflow-y: auto;        /* 세로 스크롤 허용 */
 }
 
 body {
-	overflow-x: hidden; /* 가로 스크롤 방지 */
+    overflow-x: hidden;      /* 가로 스크롤 방지 */
+    overflow-y: auto;        /* 세로 스크롤 허용 */
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    height: 100%;
+    height: auto;
+    min-height: 100vh;
     margin: 0;
     background-color: #f0f2f5;
     font-family: 'Noto Sans', sans-serif;
+    /* 헤더 높이만큼 공간 확보 */
 }
 
 header {
-    width: 99.2%;
+    width: 100%;
     height: 80px;
     color: black;
     display: flex;
@@ -27,26 +30,18 @@ header {
     left: 0;
     z-index: 2;
     padding: 0 20px;
-    box-sizing: border-box;
     animation: slideDown 2.5s ease-out;
-}
-
-#container {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-#content{
-	flex: 1;
+    box-sizing: border-box;
+    
+    
 }
 
 header .logo {
     font-size: 24px;
     font-weight: bold;
-    cursor: pointer;
     color: black;
     text-decoration: none;
+    cursor: pointer;
 }
 
 header .burger {
@@ -64,11 +59,11 @@ header .burger span {
 }
 
 .profile-container {
-	display: flex;
-	align-items: center;
-	gap: 10px;
-	padding: 10px;
-	 border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 .profile-container img {
@@ -76,7 +71,6 @@ header .burger span {
     height: 40px;
     border-radius: 50%;
     margin-left: auto;
-    
 }
 
 body::before {
@@ -100,25 +94,22 @@ body::before {
     background-color: rgba(255, 255, 255, 0.3);
 }
 
-
 .main {
     padding: 20px;
     box-sizing: border-box;
     color: white;
 }
 
-.main p {
-    font-size: 28px;
-}
-
 .main h1 {
     font-size: 48px;
 }
 
-
+.main p {
+    font-size: 28px;
+}
 
 .section {
-    padding: 80px;
+    padding: 80px 20px;
     box-sizing: border-box;
     color: white;
     display: flex;
@@ -127,7 +118,7 @@ body::before {
     justify-content: center;
     min-height: 100vh;
     animation: fadeInUp 1s ease-out;
-	flex: 1;
+    flex: 1;
 }
 
 .section h1 {
@@ -161,21 +152,20 @@ body::before {
     font-size: 48px;
 }
 
- footer {
+footer {
     width: 100%;
     color: black;
     text-align: center;
     padding: 10px;
     position: relative;
-} 
-	
+}
 
 .side-menu {
     width: 300px;
     height: 100%;
     background-color: #f8f9fa;
     color: black;
-    position: absolute;
+    position: fixed;
     top: 0;
     right: -300px;
     z-index: 3;
@@ -185,7 +175,7 @@ body::before {
     padding: 20px;
     box-sizing: border-box;
     box-shadow: -5px 0 5px -5px #333;
-    overflow-y: auto; /* 내부 스크롤 허용 */
+    overflow-y: auto;
 }
 
 .side-menu.show {
@@ -200,7 +190,6 @@ body::before {
 
 .side-menu li {
     margin: 20px 0;
-    position: relative;
 }
 
 .side-menu a {
@@ -242,6 +231,16 @@ body::before {
     color: #343a40;
 }
 
+#container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#content{
+	flex: 1;
+}
+
 .dark-overlay {
     position: fixed;
     top: 0;
@@ -257,19 +256,10 @@ body::before {
     display: block;
 }
 
+/* 애니메이션 */
 @keyframes slideDown {
     from { top: -80px; }
     to { top: 0; }
-}
-
-@keyframes slideUp {
-    from { bottom: -80px; }
-    to { bottom: 0; }
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
 }
 
 @keyframes fadeInUp {
@@ -281,5 +271,3 @@ body::before {
     from { transform: scale(0.8); opacity: 0; }
     to { transform: scale(1); opacity: 1; }
 }
-
-    

@@ -162,7 +162,7 @@
 	    tsc.trip_share_content
 	
 		FROM trip_share ts
-		OIN trip_plan tp 
+		JOIN trip_plan tp 
 	    ON ts.trip_plan_id = tp.trip_plan_id
 		LEFT JOIN trip_day td 
 	    ON tp.trip_plan_id = td.trip_plan_id
