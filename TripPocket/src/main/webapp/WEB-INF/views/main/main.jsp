@@ -1,4 +1,3 @@
-<%@page import="com.tripPocket.www.member.dto.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath }" />
@@ -19,7 +18,7 @@
         </div>
         <div class="section content">
             <h1>원하는 것만 하는 나만의 특별한 여행, 가능할까요?</h1>
-            <h2><img src="${contextPath }s/resources/img/cherryflower.png" alt="계획세우는 이미지"></h2>
+            <h2><img src="${contextPath }/resources/img/cherryflower.png" alt="계획세우는 이미지"></h2>
             <h1>나만을 위한 맞춤형 여행</h1>
             <p>
                 여행 준비가 번거로우신가요?<br>

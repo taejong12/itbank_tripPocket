@@ -95,7 +95,7 @@
 				tripDestinationList.forEach(function(destination, index){
 					
 					// 대체 이미지 경로
-					const altImageSrc = contextPath+"/resources/image/logo/alt_image.png";
+					const altImageSrc = contextPath+"/resources/img/logo/alt_image.png";
 					// 이미지 처리
 					const imageSrc = destination.firstimage2 ? destination.firstimage2 : altImageSrc;
 					// 그냥 넘기면 에러 발생

@@ -81,4 +81,10 @@ public class TripShareDAOImpl implements TripShareDAO{
 	    session.insert("mapper.tripShare.insertTripDaysFromShare", paramMap);
 	}
 
+	@Override
+	public void shareDelete(int tripShareId) {
+		session.delete("mapper.tripShare.shareDelete", tripShareId);
+		
+	}
+
 }

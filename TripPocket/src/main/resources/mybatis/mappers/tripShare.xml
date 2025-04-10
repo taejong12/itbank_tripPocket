@@ -208,5 +208,9 @@ ORDER BY td.trip_day_day ASC
     SELECT trip_plan_id FROM trip_share WHERE trip_share_id = #{tripShareId}
   )
 </insert>
+
+<delete id="shareDelete" parameterType="int">
+    DELETE FROM trip_share WHERE trip_share_id = #{tripShareId}
+</delete>
 	
 </mapper>

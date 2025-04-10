@@ -10,15 +10,13 @@
     <title>여행 공유 리스트</title>
     <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/style.css' />">
     <style>
-        /* Body and General Styling */
         body {
             margin: 0;
             font-family: 'Noto Sans KR', sans-serif;
             background-color: #f9f9f9;
-            padding-top: 80px; /* 헤더 높이에 맞게 조정 */
+            padding-top: 80px;
         }
 
-        /* Card Section */
         .container {
             max-width: 1200px;
             margin: 40px auto;
@@ -63,7 +61,41 @@
             margin-top: 10px;
         }
 
-        /* Add Button */
+        .card-actions {
+            margin-top: 10px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .edit-btn, .delete-btn {
+            display: inline-block;
+            padding: 6px 12px;
+            font-size: 13px;
+            border-radius: 20px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .edit-btn {
+            background-color: #e3f2fd;
+            color: #1976d2;
+            border: 1px solid #90caf9;
+        }
+
+        .edit-btn:hover {
+            background-color: #bbdefb;
+        }
+
+        .delete-btn {
+            background-color: #ffebee;
+            color: #d32f2f;
+            border: 1px solid #ef9a9a;
+        }
+
+        .delete-btn:hover {
+            background-color: #ffcdd2;
+        }
+
         .add-btn {
             display: block;
             width: 200px;
@@ -85,7 +117,6 @@
             transform: translateY(-3px);
         }
 
-        /* Responsive Design */
         @media (max-width: 768px) {
             .card {
                 padding: 15px;
@@ -108,25 +139,28 @@
 </head>
 <body>
 
-    <!-- Card Section -->
-    <div class="container">
-        <c:forEach var="share" items="${myList}">
-            <div class="card">
-                <h2 class="card-title">
-                    <a href="${contextPath}/share/shareDetail.do?tripShareId=${share.tripShareId}">
-                        ${share.tripShareTitle}
-                    </a>
-                </h2>
-                <div class="card-meta">
-                    추가 날짜: <fmt:formatDate value="${share.tripShareAddDate}" pattern="yyyy-MM-dd" /> | 
-                    수정 날짜: <fmt:formatDate value="${share.tripShareModDate}" pattern="yyyy-MM-dd" />
-                </div>
+<div class="container">
+    <c:forEach var="share" items="${myList}">
+        <div class="card">
+            <h2 class="card-title">
+                <a href="${contextPath}/share/editForm.do?tripShareId=${share.tripShareId}">
+                    ${share.tripShareTitle}
+                </a>
+            </h2>
+            <div class="card-meta">
+                추가 날짜: <fmt:formatDate value="${share.tripShareAddDate}" pattern="yyyy-MM-dd" /> | 
+                수정 날짜: <fmt:formatDate value="${share.tripShareModDate}" pattern="yyyy-MM-dd" />
             </div>
-        </c:forEach>
-    </div>
+            <div class="card-actions">
+                <a href="${contextPath}/share/editForm.do?tripShareId=${share.tripShareId}" class="edit-btn">✏️ 수정</a>
+                <a href="${contextPath}/share/shareDelete.do?tripShareId=${share.tripShareId}" class="delete-btn"
+                   onclick="return confirm('정말 삭제하시겠습니까?');">🗑️ 삭제</a>
+            </div>
+        </div>
+    </c:forEach>
+</div>
 
-    <!-- Add Button -->
-    <a class="add-btn" href="<c:url value='/share/shareForm.do' />">공유 추가</a>
+<a class="add-btn" href="<c:url value='/share/shareForm.do' />">+ 공유 추가</a>
 
 </body>
 </html>

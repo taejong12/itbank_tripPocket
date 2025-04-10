@@ -44,10 +44,10 @@ window.fu_tripPeriod = function(startDate, endDate, tripPlanId, tripDayList) {
             }
             
             // 대체이미지 추가
-            const imageSrc = tripDayDTO.tripDayImage ? tripDayDTO.tripDayImage : contextPath+"/resources/image/logo/alt_image.png";
+            const imageSrc = tripDayDTO.tripDayImage ? tripDayDTO.tripDayImage : contextPath+"/resources/img/logo/alt_image.png";
             
 	        html += "<div class='trip-day-div'>";
-	        html += "<img src='" + imageSrc + "' class='trip-day-img' alt='이미지 없음' onerror='this.onerror=null; this.src=\"" + contextPath + "/resources/image/logo/alt_image.png\";'>";
+	        html += "<img src='" + imageSrc + "' class='trip-day-img' alt='이미지 없음' onerror='this.onerror=null; this.src=\"" + contextPath + "/resources/img/logo/alt_image.png\";'>";
 	        html += "<div class='trip-day-place-address-div'>";
 	        html += "<span class='trip-day-place'>" + tripDayDTO.tripDayPlace + "</span>";
 	        html += "<span class='trip-day-address'>" + tripDayDTO.tripDayAddress + "</span>";
@@ -148,7 +148,7 @@ window.fu_insertTripDay = function(keyword, tripDayDay, tripDayDate, tripPlanId)
 
         // 이미지 요소 생성
         let imgQuery = document.createElement("img");
-        imgQuery.src = keyword.firstimage2 ? keyword.firstimage2 : contextPath+"/resources/image/logo/alt_image.png";
+        imgQuery.src = keyword.firstimage2 ? keyword.firstimage2 : contextPath+"/resources/img/logo/alt_image.png";
         imgQuery.alt = "이미지 없음";
         imgQuery.classList.add("trip-day-img");
 
@@ -156,7 +156,7 @@ window.fu_insertTripDay = function(keyword, tripDayDay, tripDayDate, tripPlanId)
 		imgQuery.onerror = function () {
 			// 무한루프 방지
 		    this.onerror = null;
-		    this.src = contextPath + "/resources/image/logo/alt_image.png";
+		    this.src = contextPath + "/resources/img/logo/alt_image.png";
 		};
 
 		// 장소 + 주소 div 생성 (장소 + 주소 정보 포함)

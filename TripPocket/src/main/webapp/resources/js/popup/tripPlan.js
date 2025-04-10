@@ -107,13 +107,13 @@ document.addEventListener("DOMContentLoaded", function () {
 			keyworList.forEach(function(keyword, index){
 
 				// 이미지 처리
-				const imageSrc = keyword.firstimage2 ? keyword.firstimage2 : contextPath+"/resources/image/logo/alt_image.png";
+				const imageSrc = keyword.firstimage2 ? keyword.firstimage2 : contextPath+"/resources/img/logo/alt_image.png";
 				
 				// keyword 그냥 넘기면 에러 발생
 				const keywordData = encodeURIComponent(JSON.stringify(keyword));
 
                 html += '<div class="trip-search-result-div">';
-	            html += '<img src="' + imageSrc + '" alt="이미지 없음" onerror="this.onerror=null; this.src=\'' + contextPath + '/resources/image/logo/alt_image.png\';">';
+	            html += '<img src="' + imageSrc + '" alt="이미지 없음" onerror="this.onerror=null; this.src=\'' + contextPath + '/resources/img/logo/alt_image.png\';">';
 	            html += '<div class="trip-search-result-info">';
 	            html += '<div class="trip-place">' + keyword.title + '</div>';
 	            html += '<div class="trip-address">' + keyword.addr1 + '</div>';

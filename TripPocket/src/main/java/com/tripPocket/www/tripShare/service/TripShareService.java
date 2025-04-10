@@ -32,6 +32,10 @@ public interface TripShareService {
 
 
 
+	void shareDelete(int tripShareId);
+
+
+
 	
 
 }

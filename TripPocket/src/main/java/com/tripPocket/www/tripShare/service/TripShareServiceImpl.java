@@ -76,4 +76,12 @@ public class TripShareServiceImpl implements TripShareService{
 		tripShareDAO.simpleInsertPlanAndDays(tripShareId,memberId);
 		
 	}
+
+
+
+	@Override
+	public void shareDelete(int tripShareId) {
+		tripShareDAO.shareDelete(tripShareId);
+		
+	}
 }

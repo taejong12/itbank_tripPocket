@@ -8,34 +8,12 @@
     <meta charset="UTF-8">
     <title>마이페이지</title>
     <link rel="stylesheet" href="${contextPath}/resources/css/member/mypage.css">
-
-    <script src="${contextPath }/resources/script/member/mypage.js"></script>
-    <style>
-        /* 회원탈퇴 버튼 스타일 */
-        .delete-account-btn {
-            display: block;
-            margin: 20px auto 0; /* 중앙 정렬 및 위쪽 여백 */
-            padding: 10px 20px;
-            background-color: #ff4d4d; /* 빨간색 배경 */
-            color: white;
-            font-size: 14px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s ease;
-            text-align: center;
-        }
-
-        .delete-account-btn:hover {
-            background-color: #e60000; /* 버튼 호버 시 더 진한 빨간색 */
-        }
-    </style>
+    <script src="${contextPath }/resources/js/member/mypage.js"></script>
 </head>
 <body>
     <div class="mypage-container">
         <div class="profile-section">
-            <img src="${contextPath}/resources/img/basic.png" alt="프로필 사진" class="profile-img">
+            <img src="${contextPath}/resources/img/profile/basic.png" alt="프로필 사진" class="profile-img">
             <h2>${member.memberName}</h2>
         </div>
 

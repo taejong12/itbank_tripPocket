@@ -96,7 +96,7 @@ public class TripShareController {
 	   
 		
 	    
-	    return "redirect:/share/shareList.do"; // Tiles 설정상 이게 view 이름일 것
+	    return "redirect:/share/myShare.do"; // Tiles 설정상 이게 view 이름일 것
 	}
 	@RequestMapping("/shareDetail.do")
 	
@@ -134,5 +134,10 @@ public class TripShareController {
 	    return "redirect:/trip/planList.do";
 	}
 	
+	@RequestMapping("/shareDelete.do")
+	public String deleteShare(@RequestParam("tripShareId") int tripShareId) {
+	    tripShareService.shareDelete(tripShareId);  // 서비스에서 삭제 실행
+	    return "redirect:/share/myShare.do"; // 삭제 후 myShare.jsp로 리다이렉트
+	}
 	
 }
