@@ -113,9 +113,6 @@ public class MemberController {
 	         out.write("alert('수정이 완료되었습니다');");
 	         out.write("location.href='/www/member/mypage.do';");
 	         out.write("</script>");
-	      
-		
-		
 		return null;
 		
 	}
@@ -131,8 +128,6 @@ public class MemberController {
          out.write("location.href='/www/main.do';");
          out.write("</script>");
 		return null;
-		
-		
 	}
 	
 }
