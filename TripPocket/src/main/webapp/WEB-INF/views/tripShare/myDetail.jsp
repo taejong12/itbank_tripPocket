@@ -38,7 +38,7 @@
         </div>
     </c:forEach>
 
-    <a class="back-link" href="${contextPath}/share/myList.do">← 나의 여행 공유 목록으로</a>
+    <a class="back-link" href="${contextPath}/share/myShare.do">← 나의 여행 공유 목록으로</a>
 </div>
 
 </body>

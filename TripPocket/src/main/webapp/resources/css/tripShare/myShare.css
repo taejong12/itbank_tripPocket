@@ -76,9 +76,16 @@
     border: 1px solid #ef9a9a;
 }
 
+.add-btn-container {
+    text-align: center; /* 가운데 정렬 */
+    margin-top: 30px;
+}
+
 .delete-btn:hover {
     background-color: #ffcdd2;
 }
+
+
 
 .add-btn {
     display: inline-block; /* 변경: block → inline-block */

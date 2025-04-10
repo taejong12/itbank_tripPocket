@@ -46,7 +46,7 @@
 		<div class="fetch-button-container">
 			<button class="fetch-button"
 				onclick="handleFetchClick(${share.tripShareId}, ${share.tripPlanId})">
-				가져오기</button>
+				➕ 내 여행에 추가하기</button>
 		</div>
 	</div>
 </body>

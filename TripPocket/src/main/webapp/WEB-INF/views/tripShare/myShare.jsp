@@ -40,7 +40,9 @@
             </div>
         </div>
         </c:forEach>
-        <a class="add-btn" href="<c:url value='/share/shareForm.do' />">✍️ 새로운 여행 이야기 공유하기</a>
+        <div class="add-btn-container">
+    		<a class="add-btn" href="<c:url value='/share/shareForm.do' />">✍️ 새로운 여행 이야기 공유하기</a>
+		</div>
 	 </c:otherwise>
     </c:choose>
 </div>

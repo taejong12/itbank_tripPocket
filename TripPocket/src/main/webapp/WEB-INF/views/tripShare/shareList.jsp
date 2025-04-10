@@ -43,7 +43,7 @@
     </table>
 
     <!-- Floating Add Button -->
-    <a class="add-btn" href="<c:url value='/share/shareForm.do' />">공유 추가</a>
+    <a class="add-btn" href="<c:url value='/share/shareForm.do' />">✍️ 새로운 여행 이야기 공유하기</a>
 
 </body>
 </html>
