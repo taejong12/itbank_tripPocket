@@ -20,32 +20,32 @@ public class TripShareDAOImpl implements TripShareDAO{
 	@Override
 	public List<TripShareDTO> shareList(TripShareDTO tripShareDTO) {
 		
-		return session.selectList("mapper.tripShare.selectList",tripShareDTO);
+		return session.selectList("mapper.trip.share.selectList",tripShareDTO);
 	}
 
 	@Override
 	public List<TripDayDTO> selectData(TripDayDTO tripDayDTO) {
-		List<TripDayDTO> tripDayList = session.selectList("mapper.tripShare.selectDayList", tripDayDTO);
+		List<TripDayDTO> tripDayList = session.selectList("mapper.trip.share.selectDayList", tripDayDTO);
 		return tripDayList;
 		
 	}
 
 	@Override
 	public void write(TripShareDTO tripShareDTO) {
-		session.insert("mapper.tripShare.insertTripShare",tripShareDTO);
+		session.insert("mapper.trip.share.insertTripShare",tripShareDTO);
 		
 	}
 
 	@Override
 	public List<TripPlanDTO> selectIdList(String memberId) {
 		
-		return session.selectList("mapper.tripShare.selectIdList",memberId);
+		return session.selectList("mapper.trip.share.selectIdList",memberId);
 	}
 
 	@Override
 	public TripShareDTO detailList(TripShareDTO tripShareDTO) {
 		 
-		return session.selectOne("mapper.tripShare.selectDetail",tripShareDTO);
+		return session.selectOne("mapper.trip.share.selectDetail",tripShareDTO);
 	}
 
 	@Override
@@ -56,7 +56,7 @@ public class TripShareDAOImpl implements TripShareDAO{
 	@Override
 	public List<TripShareDTO> myShare(String memberId) {
 		// TODO Auto-generated method stub
-		return session.selectList("mapper.tripShare.myShareList",memberId);
+		return session.selectList("mapper.trip.share.myShareList",memberId);
 	}
 
 	@Override
@@ -68,7 +68,7 @@ public class TripShareDAOImpl implements TripShareDAO{
 
 	    // 2. 공유글 기반으로 내 계획(plan) 복사
 	    // 이 시점에 selectKey로 tripPlanId가 paramMap에 자동으로 들어감
-	    session.insert("mapper.tripShare.insertTripPlanFromShare", paramMap);
+	    session.insert("mapper.trip.share.insertTripPlanFromShare", paramMap);
 
 	    // 3. 새로 생성된 tripPlanId를 꺼내서 확인
 	    Long newPlanId = (Long) paramMap.get("tripPlanId");
@@ -78,12 +78,12 @@ public class TripShareDAOImpl implements TripShareDAO{
 	    paramMap.put("tripPlanId", newPlanId);
 
 	    // 5. 공유된 day 데이터 → 내 계획에 복사
-	    session.insert("mapper.tripShare.insertTripDaysFromShare", paramMap);
+	    session.insert("mapper.trip.share.insertTripDaysFromShare", paramMap);
 	}
 
 	@Override
 	public void shareDelete(int tripShareId) {
-		session.delete("mapper.tripShare.shareDelete", tripShareId);
+		session.delete("mapper.trip.share.shareDelete", tripShareId);
 		
 	}
 

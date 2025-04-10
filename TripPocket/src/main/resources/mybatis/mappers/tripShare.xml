@@ -2,37 +2,39 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="mapper.tripShare">
+<mapper namespace="mapper.trip.share">
 	
-<resultMap id="TripShareMap" type="tripShareDTO">
-    <id property="tripShareId" column="trip_share_id"/>
-    <result property="tripShareTitle" column="trip_share_title"/>
-    <result property="tripShareContent" column="trip_share_content"/>
-    <result property="tripPlanId" column="trip_plan_id"/>
-    <result property="tripShareAddDate" column="trip_share_add_date"/>
-    <result property="tripShareModDate" column="trip_share_mod_date"/>
+	<resultMap id="TripShareMap" type="tripShareDTO">
+	    <id property="tripShareId" column="trip_share_id"/>
+	    <result property="tripShareTitle" column="trip_share_title"/>
+	    <result property="tripShareContent" column="trip_share_content"/>
+	    <result property="tripPlanId" column="trip_plan_id"/>
+	    <result property="tripShareAddDate" column="trip_share_add_date"/>
+	    <result property="tripShareModDate" column="trip_share_mod_date"/>
+	
+	    <collection property="tripDayList" ofType="tripDayDTO">
+	        <id property="tripDayId" column="trip_day_id"/>
+	        <result property="tripDayDay" column="trip_day_day"/>
+	        <result property="tripDayAddress" column="trip_day_Address"/>
+	        <result property="tripDayDate" column="trip_day_date"/>
+	        <result property="tripDayImage" column="trip_day_image"/>
+	        <result property="tripPlanId" column="trip_plan_id"/>
+	        
+	    </collection>
+	</resultMap>
 
-    <collection property="tripDayList" ofType="tripDayDTO">
-        <id property="tripDayId" column="trip_day_id"/>
-        <result property="tripDayDay" column="trip_day_day"/>
-        <result property="tripDayAddress" column="trip_day_Address"/>
-        <result property="tripDayDate" column="trip_day_date"/>
-        <result property="tripDayImage" column="trip_day_image"/>
-        <result property="tripPlanId" column="trip_plan_id"/>
-        
-    </collection>
-</resultMap>
-<resultMap id="tripPlanResultMap" type="tripPlanDTO">
-    <id property="tripPlanId" column="trip_plan_id"/>
-    <result property="tripPlanTitle" column="trip_plan_title"/>
-    <result property="tripPlanContent" column="trip_plan_content"/>
-    <result property="tripPlanStartDay" column="trip_plan_start_day"/>
-    <result property="tripPlanArriveDay" column="trip_plan_arrive_day"/>
-    <result property="memberId" column="member_id"/>
-    <result property="tripPlanAddDate" column="trip_plan_add_date"/>
-    <result property="tripPlanModDate" column="trip_plan_mod_date"/>
-</resultMap>
-<resultMap id="TripDayMap" type="com.tripPocket.www.tripPlan.dto.TripDayDTO">
+	<resultMap id="tripPlanResultMap" type="tripPlanDTO">
+	    <id property="tripPlanId" column="trip_plan_id"/>
+	    <result property="tripPlanTitle" column="trip_plan_title"/>
+	    <result property="tripPlanContent" column="trip_plan_content"/>
+	    <result property="tripPlanStartDay" column="trip_plan_start_day"/>
+	    <result property="tripPlanArriveDay" column="trip_plan_arrive_day"/>
+	    <result property="memberId" column="member_id"/>
+	    <result property="tripPlanAddDate" column="trip_plan_add_date"/>
+	    <result property="tripPlanModDate" column="trip_plan_mod_date"/>
+	</resultMap>
+
+	<resultMap id="TripDayMap" type="com.tripPocket.www.tripPlan.dto.TripDayDTO">
         <id property="tripDayId" column="trip_day_id"/>
         <result property="tripDayDay" column="trip_day_day"/>
         <result property="tripDayAddress" column="trip_day_Address"/>
@@ -42,6 +44,7 @@
         <result property="tripPlanAddDate" column="trip_plan_add_date"/>
         <result property="tripPlanModDate" column="trip_plan_mod_date"/>
     </resultMap>
+    
     <resultMap id="tripDayMap" type="com.tripPocket.www.tripPlan.dto.TripDayDTO">
         <id property="tripDayId" column="trip_day_id"/>
         <result property="tripDayDay" column="trip_day_day"/>
@@ -64,153 +67,158 @@
         <!-- 1:N 관계 매핑 -->
         <collection property="tripDayList" ofType="com.tripPocket.www.tripPlan.dto.TripDayDTO" resultMap="tripDayMap"/>
     </resultMap>
-<select id="selectList" parameterType="tripShareDTO" resultMap="TripShareMap">
-    SELECT 
+    
+	<select id="selectList" parameterType="tripShareDTO" resultMap="TripShareMap">
+	    SELECT 
         ts.trip_share_id,
         ts.trip_share_title,
         ts.trip_share_content,
         ts.trip_plan_id,
         ts.trip_share_add_date,
         ts.trip_share_mod_date
-    FROM trip_share ts
-</select>
+	    FROM trip_share ts
+	</select>
+	
+	<select id="selectDayList" parameterType="tripDayDTO" resultMap="TripDayMap">
+	    SELECT * 
+	    FROM trip_day
+	    WHERE trip_plan_id = #{tripPlanId}
+	</select>
 
-<select id="selectDayList" parameterType="tripDayDTO" resultMap="TripDayMap">
-    SELECT * 
-    FROM trip_day
-    WHERE trip_plan_id = #{tripPlanId}
-</select>
+	<insert id="insertTripShare" parameterType="tripShareDTO">
+	    <selectKey keyProperty="tripShareId" order="BEFORE" resultType="int">
+	        SELECT trip_share_id_seq.NEXTVAL FROM dual
+	    </selectKey>
+	    
+	    	INSERT INTO trip_share (
+	        trip_share_id,
+	        trip_share_title,
+	        trip_plan_id,
+	        trip_share_add_date,
+	        trip_share_mod_date
+	    	) VALUES (
+	        #{tripShareId},
+	        #{tripShareTitle},
+	        #{tripPlanId},
+	        SYSDATE,
+	        SYSDATE
+	    	)
+    </insert>
 
-<insert id="insertTripShare" parameterType="tripShareDTO">
-    <selectKey keyProperty="tripShareId" order="BEFORE" resultType="int">
-        SELECT trip_share_id_seq.NEXTVAL FROM dual
-    </selectKey>
-    
-    INSERT INTO trip_share (
-        trip_share_id,
-        trip_share_title,
-        trip_plan_id,
-        trip_share_add_date,
-        trip_share_mod_date
-    ) VALUES (
-        #{tripShareId},
-        #{tripShareTitle},
-        #{tripPlanId},
-        SYSDATE,
-        SYSDATE
-    )
-</insert>
-<insert id="insertShareContent" parameterType="tripDayDTO">
-    INSERT INTO trip_share_content (
-        trip_share_id,
-        trip_day_id,
-        trip_day_day,
-        trip_share_content
-    ) VALUES (
-        #{tripShareId}, 
-        #{tripDayId},
-        #{tripDayDay,jdbcType=INTEGER}, 
-        #{tripShareContent}
-    )
-</insert>
-<select id="selectIdList" parameterType="String" resultMap="tripPlanResultMap">
-	select * from trip_plan where member_id = #{memberId} 
-</select>
-<select id="myShareList" parameterType="String" resultMap="TripShareMap">
-	 SELECT 
-    ts.*, <!-- trip_share 테이블의 모든 데이터 -->
-    tp.trip_plan_id,
-    m.member_id
-FROM 
-    trip_share ts
-INNER JOIN 
-    trip_plan tp
-ON 
-    ts.trip_plan_id = tp.trip_plan_id <!--  trip_share와 trip_plan 연결 -->
-INNER JOIN 
-    member m
-ON 
-    tp.member_id = m.member_id  <!-- trip_plan과 member 연결 -->
-WHERE 
-    m.member_id = #{memberId}  <!-- 특정 member_id로 필터링 --> 
-</select>
+	<insert id="insertShareContent" parameterType="tripDayDTO">
+	    INSERT INTO trip_share_content (
+	        trip_share_id,
+	        trip_day_id,
+	        trip_day_day,
+	        trip_share_content
+	    ) VALUES (
+	        #{tripShareId}, 
+	        #{tripDayId},
+	        #{tripDayDay,jdbcType=INTEGER}, 
+	        #{tripShareContent}
+	    )
+	</insert>
+
+	<select id="selectIdList" parameterType="String" resultMap="tripPlanResultMap">
+		select * from trip_plan where member_id = #{memberId} 
+	</select>
+
+	<select id="myShareList" parameterType="String" resultMap="TripShareMap">
+		SELECT 
+	    ts.*, <!-- trip_share 테이블의 모든 데이터 -->
+	    tp.trip_plan_id,
+	    m.member_id
+		FROM 
+	    trip_share ts
+		INNER JOIN 
+	    trip_plan tp
+		ON 
+	    ts.trip_plan_id = tp.trip_plan_id <!--  trip_share와 trip_plan 연결 -->
+		INNER JOIN 
+	    member m
+		ON 
+	    tp.member_id = m.member_id  <!-- trip_plan과 member 연결 -->
+		WHERE 
+	    m.member_id = #{memberId}  <!-- 특정 member_id로 필터링 --> 
+	</select>
 
 	<select id="selectDetail" parameterType="tripShareDTO" resultMap="TripShareResultMap">
-	SELECT 
-    ts.trip_share_id,
-    ts.trip_share_title,
-    ts.trip_plan_id,
-    ts.trip_share_add_date,
-    ts.trip_share_mod_date,
-
-    tp.trip_plan_start_day,
-    tp.trip_plan_arrive_day,
-
-    td.trip_day_id,
-    td.trip_day_day,
-    td.trip_day_date,
-    td.trip_day_Address,
-    td.trip_day_image,
-
-    tsc.trip_share_content
-
-FROM trip_share ts
-JOIN trip_plan tp 
-    ON ts.trip_plan_id = tp.trip_plan_id
-LEFT JOIN trip_day td 
-    ON tp.trip_plan_id = td.trip_plan_id
-LEFT JOIN trip_share_content tsc 
-    ON td.trip_day_id = tsc.trip_day_id 
-    AND ts.trip_share_id = tsc.trip_share_id
-
-WHERE ts.trip_share_id = #{tripShareId}
-
-ORDER BY td.trip_day_day ASC
+		SELECT 
+	    ts.trip_share_id,
+	    ts.trip_share_title,
+	    ts.trip_plan_id,
+	    ts.trip_share_add_date,
+	    ts.trip_share_mod_date,
+	
+	    tp.trip_plan_start_day,
+	    tp.trip_plan_arrive_day,
+	
+	    td.trip_day_id,
+	    td.trip_day_day,
+	    td.trip_day_date,
+	    td.trip_day_Address,
+	    td.trip_day_image,
+	
+	    tsc.trip_share_content
+	
+		FROM trip_share ts
+		OIN trip_plan tp 
+	    ON ts.trip_plan_id = tp.trip_plan_id
+		LEFT JOIN trip_day td 
+	    ON tp.trip_plan_id = td.trip_plan_id
+		LEFT JOIN trip_share_content tsc 
+	    ON td.trip_day_id = tsc.trip_day_id 
+	    AND ts.trip_share_id = tsc.trip_share_id
+	
+		WHERE ts.trip_share_id = #{tripShareId}
+	
+		ORDER BY td.trip_day_day ASC
 	</select>
-		<insert id="insertTripPlanFromShare" parameterType="map">
-  <selectKey keyProperty="tripPlanId" resultType="long" order="BEFORE">
-    SELECT trip_plan_seq.NEXTVAL FROM dual
-  </selectKey>
-  INSERT INTO trip_plan (
-    trip_plan_id,
-    member_id,
-    trip_plan_title,
-    trip_plan_start_day,
-    trip_plan_arrive_day
-  )
-  SELECT
-    #{tripPlanId},
-    #{memberId},
-    ts.trip_share_title,
-    tp.trip_plan_start_day,
-    tp.trip_plan_arrive_day
-  FROM trip_share ts
-  JOIN trip_plan tp ON ts.trip_plan_id = tp.trip_plan_id
-  WHERE ts.trip_share_id = #{tripShareId}
-</insert>
+	
+	<insert id="insertTripPlanFromShare" parameterType="map">
+	  <selectKey keyProperty="tripPlanId" resultType="long" order="BEFORE">
+		SELECT trip_plan_seq.NEXTVAL FROM dual
+	  </selectKey>
+		  INSERT INTO trip_plan (
+		    trip_plan_id,
+		    member_id,
+		    trip_plan_title,
+		    trip_plan_start_day,
+		    trip_plan_arrive_day
+		  )
+		  SELECT
+		    #{tripPlanId},
+		    #{memberId},
+		    ts.trip_share_title,
+		    tp.trip_plan_start_day,
+		    tp.trip_plan_arrive_day
+		  FROM trip_share ts
+		  JOIN trip_plan tp ON ts.trip_plan_id = tp.trip_plan_id
+		  WHERE ts.trip_share_id = #{tripShareId}
+	</insert>
 	
 	<insert id="insertTripDaysFromShare" parameterType="map">
-  INSERT INTO trip_day (
-    trip_plan_id,
-    trip_day_day,
-    trip_day_address,
-    trip_day_image,
-    trip_day_date
-  )
-  SELECT
-    #{tripPlanId},
-    td.trip_day_day,
-    td.trip_day_address,
-    td.trip_day_image,
-    td.trip_day_date
-  FROM trip_day td
-  WHERE td.trip_plan_id = (
-    SELECT trip_plan_id FROM trip_share WHERE trip_share_id = #{tripShareId}
-  )
-</insert>
+		INSERT INTO trip_day (
+		  trip_plan_id,
+		  trip_day_day,
+		  trip_day_address,
+		  trip_day_image,
+		  trip_day_date
+		)
+		SELECT
+		  #{tripPlanId},
+		  td.trip_day_day,
+		  td.trip_day_address,
+		  td.trip_day_image,
+		  td.trip_day_date
+		FROM trip_day td
+		WHERE td.trip_plan_id = (
+		  SELECT trip_plan_id FROM trip_share WHERE trip_share_id = #{tripShareId}
+		)
+	</insert>
 
-<delete id="shareDelete" parameterType="int">
-    DELETE FROM trip_share WHERE trip_share_id = #{tripShareId}
-</delete>
+	<delete id="shareDelete" parameterType="int">
+	    DELETE FROM trip_share WHERE trip_share_id = #{tripShareId}
+	</delete>
 	
 </mapper>
