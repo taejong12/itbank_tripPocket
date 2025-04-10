@@ -8,15 +8,24 @@
 <head>
     <meta charset="UTF-8">
     <title>여행 공유 리스트</title>
-    <link rel="stylesheet" href="${contextPath}/resources/css/tripShare/myPage.css">
+    <link rel="stylesheet" href="${contextPath}/resources/css/tripShare/myShare.css">
 </head>
 <body>
 
 <div class="container">
-    <c:forEach var="share" items="${myList}">
+<c:choose>
+    <c:when test="${empty myList}">
+     <div class="empty-box">
+    <p class="empty-title">아직 공유된 여행이 없어요</p>
+    <p class="empty-sub">나만 알고 있기엔 아까운 당신의 여행 이야기,<br>지금 바로 세상과 나눠보세요 ✨</p>
+    <a class="add-btn" href="<c:url value='/share/shareForm.do' />">✍️ 나의 첫 여행 블로그 공유하기</a>
+</div>
+        </c:when>
+         <c:otherwise>
+            <c:forEach var="share" items="${myList}">
         <div class="card">
             <h2 class="card-title">
-                <a href="${contextPath}/share/editForm.do?tripShareId=${share.tripShareId}">
+                <a href="${contextPath}/share/myDetail.do?tripShareId=${share.tripShareId}">
                     ${share.tripShareTitle}
                 </a>
             </h2>
@@ -30,10 +39,13 @@
                    onclick="return confirm('정말 삭제하시겠습니까?');">🗑️ 삭제</a>
             </div>
         </div>
-    </c:forEach>
+        </c:forEach>
+        <a class="add-btn" href="<c:url value='/share/shareForm.do' />">✍️ 새로운 여행 이야기 공유하기</a>
+	 </c:otherwise>
+    </c:choose>
 </div>
 
-<a class="add-btn" href="<c:url value='/share/shareForm.do' />">+ 공유 추가</a>
+
 
 </body>
 </html>

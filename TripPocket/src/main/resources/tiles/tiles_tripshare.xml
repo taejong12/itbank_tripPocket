@@ -20,6 +20,10 @@
 		<put-attribute name="title" value="플랜 상세보기" />
 		<put-attribute name="body" value="/WEB-INF/views/tripShare/myShare.jsp" />
 	</definition>
+	<definition name="tripShare/myDetail" extends="common">
+		<put-attribute name="title" value="플랜 상세보기" />
+		<put-attribute name="body" value="/WEB-INF/views/tripShare/myDetail.jsp" />
+	</definition>
 </tiles-definitions>
 
 

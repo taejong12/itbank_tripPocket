@@ -1,0 +1,144 @@
+@charset "UTF-8";
+.container {
+	margin-top:150px;
+    width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+    margin-top:100px;
+}
+
+.card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.card-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #2a8fbd;
+    margin: 0 0 10px;
+}
+
+.card-title a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.card-title a:hover {
+    text-decoration: underline;
+}
+
+.card-meta {
+    font-size: 14px;
+    color: #666;
+    margin-top: 10px;
+}
+
+.card-actions {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+.edit-btn, .delete-btn {
+    display: inline-block;
+    padding: 6px 12px;
+    font-size: 13px;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.edit-btn {
+    background-color: #e3f2fd;
+    color: #1976d2;
+    border: 1px solid #90caf9;
+}
+
+.edit-btn:hover {
+    background-color: #bbdefb;
+}
+
+.delete-btn {
+    background-color: #ffebee;
+    color: #d32f2f;
+    border: 1px solid #ef9a9a;
+}
+
+.delete-btn:hover {
+    background-color: #ffcdd2;
+}
+
+.add-btn {
+    display: inline-block; /* 변경: block → inline-block */
+    padding: 12px 20px;
+    background-color: #2a8fbd;
+    color: white;
+    text-align: center;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, transform 0.2s;
+    width: auto; /* 너비 제한 해제 */
+    margin: 0 auto;
+}
+
+.add-btn:hover {
+    background-color: #176c93;
+    transform: translateY(-3px);
+}
+
+@media (max-width: 768px) {
+	.card {
+	    padding: 15px;
+	}
+	
+	.card-title {
+	    font-size: 18px;
+	}
+	
+	.card-meta {
+	    font-size: 12px;
+	}
+	
+	.add-btn {
+	    width: 80%;
+	    font-size: 14px;
+	}
+}
+
+.empty-box {
+    text-align: center;
+    padding: 60px 20px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+     margin-top: 180px;
+}
+
+.empty-title {
+    font-size: 22px;
+    font-weight: bold;
+    color: #2a8fbd;
+    margin-bottom: 10px;
+}
+
+.empty-sub {
+    font-size: 15px;
+    color: #777;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}

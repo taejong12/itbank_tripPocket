@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.tripPocket.www.member.dto.MemberDTO;
 import com.tripPocket.www.tripPlan.dto.TripDayDTO;
 import com.tripPocket.www.tripPlan.dto.TripPlanDTO;
 import com.tripPocket.www.tripShare.dto.TripShareDTO;
@@ -50,7 +51,7 @@ public class TripShareDAOImpl implements TripShareDAO{
 
 	@Override
 	public void insertContent(TripDayDTO tripDayDTO) {
-	    session.insert("mapper.tripShare.insertShareContent", tripDayDTO);
+	    session.insert("mapper.trip.share.insertShareContent", tripDayDTO);
 	}
 
 	@Override
@@ -84,7 +85,21 @@ public class TripShareDAOImpl implements TripShareDAO{
 	@Override
 	public void shareDelete(int tripShareId) {
 		session.delete("mapper.trip.share.shareDelete", tripShareId);
-		
+	}
+
+	@Override
+	public TripShareDTO getShareDetail(int tripShareId) {
+		return session.selectOne("mapper.trip.share.getShareDetail",tripShareId);
+	}
+
+	@Override
+	public List<TripDayDTO> getTripDayDetailList(int tripShareId) {
+		return session.selectList("mapper.trip.share.getTripDayDetailList", tripShareId);
+	}
+
+	@Override
+	public MemberDTO getWriterByShareId(int tripShareId) {
+		return session.selectOne("mapper.trip.share.getWriterByShareId", tripShareId);
 	}
 
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.tripPocket.www.member.dto.MemberDTO;
 import com.tripPocket.www.tripPlan.dto.TripDayDTO;
 import com.tripPocket.www.tripPlan.dto.TripPlanDTO;
 import com.tripPocket.www.tripShare.dao.TripShareDAO;
@@ -83,5 +84,26 @@ public class TripShareServiceImpl implements TripShareService{
 	public void shareDelete(int tripShareId) {
 		tripShareDAO.shareDelete(tripShareId);
 		
+	}
+
+
+
+	@Override
+	public TripShareDTO getShareDetail(int tripShareId) {
+		return tripShareDAO.getShareDetail(tripShareId);
+	}
+
+
+
+	@Override
+	public List<TripDayDTO> getTripDayDetailList(int tripShareId) {
+		return tripShareDAO.getTripDayDetailList(tripShareId);
+	}
+
+
+
+	@Override
+	public MemberDTO getWriterByShareId(int tripShareId) {
+		return tripShareDAO.getWriterByShareId(tripShareId);
 	}
 }

@@ -2,6 +2,7 @@ package com.tripPocket.www.tripShare.service;
 
 import java.util.List;
 
+import com.tripPocket.www.member.dto.MemberDTO;
 import com.tripPocket.www.tripPlan.dto.TripDayDTO;
 import com.tripPocket.www.tripPlan.dto.TripPlanDTO;
 import com.tripPocket.www.tripShare.dto.TripShareDTO;
@@ -33,6 +34,18 @@ public interface TripShareService {
 
 
 	void shareDelete(int tripShareId);
+
+
+
+	TripShareDTO getShareDetail(int tripShareId);
+
+
+
+	List<TripDayDTO> getTripDayDetailList(int tripShareId);
+
+
+
+	MemberDTO getWriterByShareId(int tripShareId);
 
 
 

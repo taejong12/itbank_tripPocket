@@ -45,6 +45,7 @@ public class TripShareController {
 	    return "tripShare/shareList"; // 공유 리스트 페이지의 뷰 이름 반환
 	    
 	}
+	
 	@RequestMapping("/myShare.do")
 	public String myShare(@ModelAttribute()TripShareDTO tripShareDTO, Model model, HttpServletRequest request) {
 	    HttpSession session = request.getSession();
@@ -60,44 +61,36 @@ public class TripShareController {
 	    return "tripShare/myShare"; // 공유 리스트 페이지의 뷰 이름 반환
 	    
 	}
+	
 	@RequestMapping(value = "/shareForm.do", method = RequestMethod.GET)
 	public String writeForm(@ModelAttribute()TripShareDTO tripShareDTO, Model model,HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		MemberDTO member = (MemberDTO) request.getSession().getAttribute("member");
 		 List<TripPlanDTO> planList = tripShareService.getTripPlansByMemberId(member.getMemberId());
 		 
-		    model.addAttribute("tripPlanList", planList);
+		 model.addAttribute("tripPlanList", planList);
 	   
-		
-	    
-	    return "tripShare/shareForm"; // Tiles 설정상 이게 view 이름일 것
+		 return "tripShare/shareForm"; // Tiles 설정상 이게 view 이름일 것
 	}
+	
 	 @RequestMapping("/getTripDays.do")
 	 @ResponseBody
-	    public List<TripDayDTO> getTripDays(@ModelAttribute()TripDayDTO tripDayDTO) {
-	        // tripPlanId 출력
-	        
+	 public List<TripDayDTO> getTripDays(@ModelAttribute()TripDayDTO tripDayDTO) {
+		// 서비스 계층에서 데이터 가져오기
+        List<TripDayDTO> tripDays = tripShareService.selectTripDayList(tripDayDTO);
 
-	        // 서비스 계층에서 데이터 가져오기
-	        List<TripDayDTO> tripDays = tripShareService.selectTripDayList(tripDayDTO);
-
-	        // 가져온 데이터 출력 (디버깅 용도)
-	        for (TripDayDTO dto : tripDays) {
-	        }
-
-	        return tripDays;
-	    }
+        return tripDays;
+    }
+	 
 	@RequestMapping(value = "/write.do", method = RequestMethod.GET)
 	public String write(@ModelAttribute()TripShareDTO tripShareDTO, Model model) {
 	   
-		 tripShareService.write(tripShareDTO);
+		tripShareService.write(tripShareDTO);
 	   
-		
-	    
 	    return "redirect:/share/myShare.do"; // Tiles 설정상 이게 view 이름일 것
 	}
-	@RequestMapping("/shareDetail.do")
 	
+	@RequestMapping("/shareDetail.do")
 	public ModelAndView shareDetail(@ModelAttribute TripShareDTO tripShareDTO, HttpServletRequest request) {
 	    TripShareDTO share = tripShareService.detailList(tripShareDTO);
 	    MemberDTO member = (MemberDTO) request.getSession().getAttribute("member");
@@ -118,6 +111,7 @@ public class TripShareController {
 
 	    return mav;
 	}
+	
 	@RequestMapping("/shareImport.do")
 	public String importShared(@RequestParam("tripShareId") Long tripShareId,
 	                           @RequestParam("tripPlanId") Long tripPlanId,   // ✅ tripPlanId 추가
@@ -136,6 +130,19 @@ public class TripShareController {
 	public String deleteShare(@RequestParam("tripShareId") int tripShareId) {
 	    tripShareService.shareDelete(tripShareId);  // 서비스에서 삭제 실행
 	    return "redirect:/share/myShare.do"; // 삭제 후 myShare.jsp로 리다이렉트
+	}
+	
+	@RequestMapping("/myDetail.do")
+	public String myDetail(@RequestParam("tripShareId") int tripShareId, Model model) {
+	    TripShareDTO share = tripShareService.getShareDetail(tripShareId);
+	    List<TripDayDTO> detailList = tripShareService.getTripDayDetailList(tripShareId);
+	    MemberDTO member = tripShareService.getWriterByShareId(tripShareId);
+
+	    model.addAttribute("share", share);
+	    model.addAttribute("detailList", detailList);
+	    model.addAttribute("member", member);
+
+	    return "tripShare/myDetail"; // → myDetail.jsp로 포워딩
 	}
 	
 }
