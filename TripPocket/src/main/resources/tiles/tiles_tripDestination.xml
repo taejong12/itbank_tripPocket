@@ -7,13 +7,24 @@
 	<definition name="tripDestinationLayout" template="/WEB-INF/views/layout/tripDestination/layout.jsp">
 		<put-attribute name="title" value="" />
 		<put-attribute name="header" value="/WEB-INF/views/layout/tripDestination/header.jsp" />
+		<put-attribute name="search" value="/WEB-INF/views/layout/tripDestination/search.jsp" />
 		<put-attribute name="nav" value="/WEB-INF/views/layout/tripDestination/nav.jsp" />
 		<put-attribute name="body" value="" />
 		<put-attribute name="footer" value="/WEB-INF/views/layout/tripDestination/footer.jsp" />
 	</definition>
 	
 	<definition name="tripDestination/list" extends="tripDestinationLayout">
-		<put-attribute name="title" value="관광지 목록" />
+		<put-attribute name="title" value="관광지 목록 페이지" />
 		<put-attribute name="body" value="/WEB-INF/views/tripDestination/list.jsp" />
+	</definition>
+	
+	<definition name="tripDestination/detail" extends="tripDestinationLayout">
+		<put-attribute name="title" value="관광지 상세페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/tripDestination/detail.jsp" />
+	</definition>
+	
+	<definition name="tripDestination/searchResult" extends="tripDestinationLayout">
+		<put-attribute name="title" value="관광지 검색 결과 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/tripDestination/searchResult.jsp" />
 	</definition>
 </tiles-definitions>

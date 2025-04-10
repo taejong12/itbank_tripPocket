@@ -1,0 +1,111 @@
+@charset "UTF-8";
+
+#trip-destination-detail {
+  max-width: 800px;
+  width: 100%;
+  margin: 2rem auto;
+  padding: 2rem; 
+  box-sizing: border-box; 
+  overflow: hidden;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  background-color: #fafafa;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.trip-destination-title {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 2rem;
+  color: #3498db;
+  text-align: center;
+  text-shadow: 1px 1px 2px rgba(52, 152, 219, 0.2);
+  letter-spacing: 1px;
+  position: relative;
+}
+
+.trip-destination-title::after {
+  content: "";
+  display: block;
+  width: auto;
+  height: 4px;
+  background-color: #85c1e9;
+  margin: 10px auto 0;
+  border-radius: 2px;
+}
+
+#trip-destination-detail img {
+  max-width: 100%;
+  height: auto;
+  display: block;        
+  margin: 0 auto;        
+  border-radius: 8px;
+  object-fit: cover;
+  margin-bottom: 1.5rem;
+}
+
+.trip-info-table {
+  display: table;
+  width: 100%;
+  margin-bottom: 2rem;
+  border-collapse: collapse;
+  background-color: #fefefe;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.trip-row {
+  display: table-row;
+  background-color: #fcfcfc;
+}
+
+.trip-row:nth-child(odd) {
+  background-color: #f9f9ff;
+}
+
+.trip-label {
+  display: table-cell;
+  font-weight: bold;
+  padding: 0.75rem 1rem;
+  width: 130px;
+  color: #3498db; /* 하늘색 계열 포인트 */
+  vertical-align: top;
+  background-color: #eef6fb;
+  border-right: 1px solid #e0e0e0;
+}
+
+.trip-value {
+  display: table-cell;
+  padding: 0.75rem 1rem;
+  color: #333;
+  vertical-align: top;
+  word-break: break-word;
+}
+
+.trip-overview-block {
+  margin-top: 2.5rem;
+  padding: 1.25rem 1.5rem;
+  background: linear-gradient(145deg, #f0faff, #ffffff);
+  border-left: 6px solid #5dade2;
+  border-radius: 10px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+}
+
+.overview-title {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 0.75rem;
+  border-bottom: 2px solid #5dade2;
+  display: inline-block;
+  padding-bottom: 0.25rem;
+}
+
+.overview-content {
+  font-size: 1rem;
+  color: #333;
+  white-space: pre-wrap;
+  line-height: 1.6;
+}
