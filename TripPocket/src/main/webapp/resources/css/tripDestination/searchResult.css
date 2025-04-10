@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-.trip-destination-region {
+.trip-destination-serach-result {
     font-size: 1.4rem;
     font-weight: bold;
     color: #007BFF;
@@ -17,7 +17,7 @@
     box-shadow: 0 4px 10px rgba(0, 123, 255, 0.1);
 }
 
-.trip-destination-region-non {
+.trip-destination-serach-result-non {
     font-size: 1.2rem;
     color: #777;
     margin: 60px auto;
