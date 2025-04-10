@@ -8,16 +8,12 @@
 <head>
     <meta charset="UTF-8">
     <title>여행 공유 리스트</title>
-    <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/style.css' />">
+    
     <style>
         /* General Body Styling */
-        body {
-            font-family: 'Noto Sans KR', sans-serif;
-            background-color: #f9f9f9;
-            margin: 0;
-            padding: 20px;
-        }
-
+		.ListContainer{
+			margin-top:100px;
+		}
         /* Page Title */
         h1 {
             color: #2a8fbd;
@@ -29,7 +25,7 @@
 
         /* Table Styling */
         table {
-            width: 90%;
+            width: 1000px;
             margin: 0 auto;
             border-collapse: collapse;
             background: #ffffff;
@@ -60,13 +56,13 @@
         }
 
         /* Links Styling */
-        a {
+        .a {
             color: #2a8fbd;
             text-decoration: none;
             font-weight: bold;
         }
 
-        a:hover {
+        .a:hover {
             color: #176c93;
             text-decoration: underline;
         }
@@ -111,7 +107,7 @@
         }
     </style>
 </head>
-<body>
+<body class="ListContainer">
 
     <!-- Page Title -->
     <h1>여행 공유 리스트</h1>
@@ -131,7 +127,7 @@
                 <tr>
                     <td>${share.tripShareId}</td>
                     <td>
-                        <a href="${contextPath}/share/shareDetail.do?tripShareId=${share.tripShareId}">
+                        <a href="${contextPath}/share/shareDetail.do?tripShareId=${share.tripShareId}" class="a">
                             ${share.tripShareTitle}
                         </a>
                     </td>

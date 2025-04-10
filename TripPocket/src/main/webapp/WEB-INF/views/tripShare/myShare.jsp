@@ -10,17 +10,14 @@
     <title>여행 공유 리스트</title>
     <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/style.css' />">
     <style>
-        body {
-            margin: 0;
-            font-family: 'Noto Sans KR', sans-serif;
-            background-color: #f9f9f9;
-            padding-top: 80px;
-        }
+        
 
         .container {
-            max-width: 1200px;
+        	margin-top:150px;
+            width: 1200px;
             margin: 40px auto;
             padding: 0 20px;
+            margin-top:100px;
         }
 
         .card {

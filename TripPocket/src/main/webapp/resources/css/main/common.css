@@ -1,15 +1,17 @@
 html {
     height: 100%;
     overflow-y: auto; /* 세로 스크롤 허용 */
-    
     overflow: hidden;
 }
 
 body {
+	overflow-x: hidden; /* 가로 스크롤 방지 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 100%;
     margin: 0;
-    padding: 0;
-   overflow-x: hidden; /* 가로 스크롤 방지 */
+    background-color: #f0f2f5;
     font-family: 'Noto Sans', sans-serif;
 }
 
@@ -27,6 +29,16 @@ header {
     padding: 0 20px;
     box-sizing: border-box;
     animation: slideDown 2.5s ease-out;
+}
+
+#container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#content{
+	flex: 1;
 }
 
 header .logo {
@@ -88,17 +100,6 @@ body::before {
     background-color: rgba(255, 255, 255, 0.3);
 }
 
-.content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    text-align: center;
-    padding-bottom: 100px;
-    padding-top: 80px;
-    animation: fadeIn 2s ease-in;
-}
 
 .main {
     padding: 20px;
@@ -114,6 +115,8 @@ body::before {
     font-size: 48px;
 }
 
+
+
 .section {
     padding: 80px;
     box-sizing: border-box;
@@ -124,6 +127,7 @@ body::before {
     justify-content: center;
     min-height: 100vh;
     animation: fadeInUp 1s ease-out;
+	flex: 1;
 }
 
 .section h1 {
@@ -157,17 +161,14 @@ body::before {
     font-size: 48px;
 }
 
-footer {
+ footer {
     width: 100%;
     color: black;
     text-align: center;
-    top : 55px;
     padding: 10px;
     position: relative;
-    bottom: 0;
-    left: 0;
-    
-}
+} 
+	
 
 .side-menu {
     width: 300px;

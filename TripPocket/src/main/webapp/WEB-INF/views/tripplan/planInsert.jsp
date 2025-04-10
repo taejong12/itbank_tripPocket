@@ -12,16 +12,16 @@
 </head>
 <body>
 	<form name="planInsert">
-		<div>
+		<div class="div">
 			제목:<input type="text" name="tripPlanTitle">
-		</div>
-		<div>		
+		</div >
+		<div class="div">		
 			설명:<input type="text" name="tripPlanContent">
 		</div>
-		<div>
+		<div class="div"> 
 			여행출발일:<input type="date" name="tripPlanStartDay">
 		</div>
-		<div>
+		<div class="div">
 			여행도착일:<input type="date" name="tripPlanArriveDay">
 		</div>
 		<button onclick="fu_planInsert(event)">선택완료</button>

@@ -1,13 +1,5 @@
-c
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
-    background-color: #f0f2f5;
-    font-family: 'Noto Sans', sans-serif;
-}
+
+
 
 .container {
     display: flex;

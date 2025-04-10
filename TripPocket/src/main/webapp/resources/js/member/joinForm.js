@@ -84,10 +84,11 @@ function fn_joinForm(event) {
    }
 
     // 비밀번호
-    if (form.memberPwd.value.trim() === "") {
-        alert("비밀번호를 입력해 주세요.");
+     if (form.memberPwd.value.trim() === "" || form.memberPwd.value.trim().length < 7) {
+        alert("비밀번호는 최소 8자 이상 입력해 주세요.");
         form.memberPwd.focus();
         return false;
+    
     }
 
     // 이름

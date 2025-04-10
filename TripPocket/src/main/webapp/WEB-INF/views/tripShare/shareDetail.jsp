@@ -8,21 +8,17 @@
 <title>${share.tripShareTitle}- 여행 공유</title>
 <style>
 /* General Body Styling */
-body {
-	font-family: 'Roboto', sans-serif;
-	background-color: #f9f9f9;
-	margin: 0;
-	padding: 0;
-	color: #333;
-}
+
 
 .container {
-	max-width: 800px;
+	
+	width: 800px;
 	margin: 30px auto;
 	background: #fff;
 	padding: 30px;
 	border-radius: 12px;
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+	margin-top:100px;
 }
 
 h2 {
