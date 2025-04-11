@@ -39,7 +39,7 @@
                        onclick="showEditField('password')">수정</a>
                 </div>
                 <div class="edit-field" id="password-edit">
-                    <input type="password" name="memberPassword" id="password-input" placeholder="새 비밀번호">
+                    <input type="password" name="memberPwd" id="password-input" placeholder="새 비밀번호">
                     <div class="button-container">
                         <button type="submit">저장</button>
                         <button class="cancel-btn" type="button" onclick="hideEditField('password')">취소</button>

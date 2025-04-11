@@ -103,17 +103,17 @@ public class MemberController {
 	}
 	@RequestMapping(value = "modMember.do", method = RequestMethod.POST)
 	public ModelAndView modMember(@ModelAttribute() MemberDTO memberDTO, HttpServletRequest request,HttpServletResponse response) throws IOException {
-		 response.setContentType("text/html;charset=utf-8");
-	      HttpSession session = request.getSession();
-	      PrintWriter out = response.getWriter();
-	      	 memberService.modMember(memberDTO);
-	      	MemberDTO member = memberService.update(memberDTO);
-	         session.setAttribute("member", member);
-	         out.write("<script>");
-	         out.write("alert('수정이 완료되었습니다');");
-	         out.write("location.href='/www/member/mypage.do';");
-	         out.write("</script>");
-		return null;
+		response.setContentType("text/html;charset=utf-8");
+		HttpSession session = request.getSession();
+		PrintWriter out = response.getWriter();
+		memberService.modMember(memberDTO);
+		MemberDTO member = memberService.update(memberDTO);
+		session.setAttribute("member", member);
+		out.write("<script>");
+		out.write("alert('수정이 완료되었습니다');");
+		out.write("location.href='/www/member/mypage.do';");
+		out.write("</script>");
+					return null;
 		
 	}
 	@RequestMapping(value = "delMember.do", method = RequestMethod.POST)
