@@ -2,6 +2,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 
 <html>
 <head>
@@ -25,7 +27,7 @@
 		<h2>${share.tripShareTitle}</h2>
 		<div class="share-meta">
 			<strong>작성자:</strong> ${member.memberNickname} | <strong>여행
-				기간:</strong> ${share.tripPlanStartDay} ~ ${share.tripPlanArriveDay}
+				기간:</strong> <fmt:formatDate value="${share.tripPlanStartDay}" pattern="yyyy-MM-dd" />~<fmt:formatDate value="${share.tripPlanArriveDay}" pattern="yyyy-MM-dd" />
 		</div>
 
 		<!-- 여행 일차를 tripDayDay 기준으로 정렬 -->

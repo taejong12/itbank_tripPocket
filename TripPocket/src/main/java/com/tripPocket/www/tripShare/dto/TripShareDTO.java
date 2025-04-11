@@ -14,20 +14,20 @@ public class TripShareDTO {
 	private String tripPlanId;
 	private Date tripShareAddDate;
 	private Date tripShareModDate;
-	private String tripPlanStartDay;
-	private String tripPlanArriveDay;
+	private Date tripPlanStartDay;
+	private Date tripPlanArriveDay;
 	private List<TripDayDTO> tripDayList; 
 	
-	public String getTripPlanStartDay() {
+	public Date getTripPlanStartDay() {
 		return tripPlanStartDay;
 	}
-	public void setTripPlanStartDay(String tripPlanStartDay) {
+	public void setTripPlanStartDay(Date tripPlanStartDay) {
 		this.tripPlanStartDay = tripPlanStartDay;
 	}
-	public String getTripPlanArriveDay() {
+	public Date getTripPlanArriveDay() {
 		return tripPlanArriveDay;
 	}
-	public void setTripPlanArriveDay(String tripPlanArriveDay) {
+	public void setTripPlanArriveDay(Date tripPlanArriveDay) {
 		this.tripPlanArriveDay = tripPlanArriveDay;
 	}
 	public List<TripDayDTO> getTripDayList() {
