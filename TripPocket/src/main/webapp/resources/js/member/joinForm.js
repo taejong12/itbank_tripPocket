@@ -174,7 +174,7 @@ function fn_joinForm(event) {
         return false;
     }
    
-   alert("회원가입이 완료되었습니다!\n로그인 후 서비스를 이용해 주세요.");
+   alert("회원가입이 완료되었습니다!\n로그인 후 Trip Pocket을 이용해 주세요.");
    
     // 제출
     form.submit();
