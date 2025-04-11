@@ -96,8 +96,41 @@
 		select * from member where member_id = #{memberId}
 	</select>
 	
-	<delete id="delMember" parameterType="memberDTO">
-	  delete from member where member_id = #{memberId}
+	<!-- 1. trip_share_content 삭제 -->
+	<delete id="deleteTripShareContentByMemberId" parameterType="String">
+	    DELETE FROM trip_share_content
+	    WHERE trip_share_id IN (
+	        SELECT trip_share_id FROM trip_share
+	        WHERE trip_plan_id IN (
+	            SELECT trip_plan_id FROM trip_plan WHERE member_id = #{memberId}
+	        )
+	    )
+	</delete>
+	
+	<!-- 2. trip_share 삭제 -->
+	<delete id="deleteTripShareByMemberId" parameterType="String">
+	    DELETE FROM trip_share
+	    WHERE trip_plan_id IN (
+	        SELECT trip_plan_id FROM trip_plan WHERE member_id = #{memberId}
+	    )
+	</delete>
+	
+	<!-- 3. trip_day 삭제 -->
+	<delete id="deleteTripDayByMemberId" parameterType="String">
+	    DELETE FROM trip_day
+	    WHERE trip_plan_id IN (
+	        SELECT trip_plan_id FROM trip_plan WHERE member_id = #{memberId}
+	    )
+	</delete>
+	
+	<!-- 4. trip_plan 삭제 -->
+	<delete id="deleteTripPlanByMemberId" parameterType="String">
+	    DELETE FROM trip_plan WHERE member_id = #{memberId}
+	</delete>
+	
+	<!-- 5. member 삭제 (기존 delMember 와 동일하지만 String 파라미터 버전도 하나 만들면 깔끔해요) -->
+	<delete id="delMemberById" parameterType="String">
+	    DELETE FROM member WHERE member_id = #{memberId}
 	</delete>
 	
 </mapper>

@@ -20,33 +20,28 @@ public class TripShareDAOImpl implements TripShareDAO{
 
 	@Override
 	public List<TripShareDTO> shareList(TripShareDTO tripShareDTO) {
-		
-		return session.selectList("mapper.trip.share.selectList",tripShareDTO);
+		return session.selectList("mapper.trip.share.selectList", tripShareDTO);
 	}
 
 	@Override
 	public List<TripDayDTO> selectData(TripDayDTO tripDayDTO) {
 		List<TripDayDTO> tripDayList = session.selectList("mapper.trip.share.selectDayList", tripDayDTO);
 		return tripDayList;
-		
 	}
 
 	@Override
 	public void write(TripShareDTO tripShareDTO) {
-		session.insert("mapper.trip.share.insertTripShare",tripShareDTO);
-		
+		session.insert("mapper.trip.share.insertTripShare", tripShareDTO);
 	}
 
 	@Override
 	public List<TripPlanDTO> selectIdList(String memberId) {
-		
-		return session.selectList("mapper.trip.share.selectIdList",memberId);
+		return session.selectList("mapper.trip.share.selectIdList", memberId);
 	}
 
 	@Override
 	public TripShareDTO detailList(TripShareDTO tripShareDTO) {
-		 
-		return session.selectOne("mapper.trip.share.selectDetail",tripShareDTO);
+		return session.selectOne("mapper.trip.share.selectDetail", tripShareDTO);
 	}
 
 	@Override
@@ -56,8 +51,7 @@ public class TripShareDAOImpl implements TripShareDAO{
 
 	@Override
 	public List<TripShareDTO> myShare(String memberId) {
-		// TODO Auto-generated method stub
-		return session.selectList("mapper.trip.share.myShareList",memberId);
+		return session.selectList("mapper.trip.share.myShareList", memberId);
 	}
 
 	@Override
@@ -89,7 +83,7 @@ public class TripShareDAOImpl implements TripShareDAO{
 
 	@Override
 	public TripShareDTO getShareDetail(int tripShareId) {
-		return session.selectOne("mapper.trip.share.getShareDetail",tripShareId);
+		return session.selectOne("mapper.trip.share.getShareDetail", tripShareId);
 	}
 
 	@Override

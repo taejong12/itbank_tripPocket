@@ -16,6 +16,15 @@ public interface MemberDAO {
 
 	boolean isMemberEmailDuplicated(String memberEmail);
 
-	void delMember(MemberDTO memberDTO);
+	void deleteTripShareContentByMemberId(String memberId);
+
+	void deleteTripShareByMemberId(String memberId);
+
+	void deleteTripDayByMemberId(String memberId);
+
+	void deleteTripPlanByMemberId(String memberId);
+
+	void delMemberById(String memberId);
+
 
 }

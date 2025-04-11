@@ -11,44 +11,25 @@ public interface TripShareService {
 
 	List<TripShareDTO> shareList(TripShareDTO tripShareDTO);
 
-	
-
 	void write(TripShareDTO tripShareDTO);
 
 	List<TripPlanDTO> getTripPlansByMemberId(String memberId);
 
 	List<TripDayDTO> selectTripDayList(TripDayDTO tripDayDTO);
 
-
-
 	TripShareDTO detailList(TripShareDTO tripShareDTO);
-
-
 
 	List<TripShareDTO> myList(String memberId);
 
-
-
 	void importToMyPlan(Long tripShareId, String memberId);
-
-
 
 	void shareDelete(int tripShareId);
 
-
-
 	TripShareDTO getShareDetail(int tripShareId);
-
-
 
 	List<TripDayDTO> getTripDayDetailList(int tripShareId);
 
-
-
 	MemberDTO getWriterByShareId(int tripShareId);
 
-
-
-	
 
 }

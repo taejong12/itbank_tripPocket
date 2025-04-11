@@ -91,23 +91,29 @@ public class TripShareController {
 	}
 	
 	@RequestMapping("/shareDetail.do")
-	public ModelAndView shareDetail(@ModelAttribute TripShareDTO tripShareDTO, HttpServletRequest request) {
+	public ModelAndView shareDetail(@ModelAttribute TripShareDTO tripShareDTO) {
+	    // 공유 정보 (작성자 포함)
 	    TripShareDTO share = tripShareService.detailList(tripShareDTO);
-	    MemberDTO member = (MemberDTO) request.getSession().getAttribute("member");
 
-	    // 여행 일차 정보 정렬 (tripDayDay 기준으로 정렬)
+	    // 여행 일차 정렬 (tripDayDay 기준)
 	    List<TripDayDTO> sortedList = share.getTripDayList();
 	    Collections.sort(sortedList, new Comparator<TripDayDTO>() {
+	        @Override
 	        public int compare(TripDayDTO o1, TripDayDTO o2) {
-	            // tripDayDay 기준으로 정렬 (여행 순서대로)
-	            return Integer.compare(o1.getTripDayDay(), o2.getTripDayDay());
+	            Integer d1 = o1.getTripDayDay();
+	            Integer d2 = o2.getTripDayDay();
+
+	            if (d1 == null && d2 == null) return 0;
+	            if (d1 == null) return 1; // null은 뒤로
+	            if (d2 == null) return -1;
+
+	            return d1.compareTo(d2);
 	        }
 	    });
 
 	    ModelAndView mav = new ModelAndView("tripShare/shareDetail");
-	    mav.addObject("share", share); // 공유 제목 등 전체 정보
-	    mav.addObject("detailList", sortedList); // 정렬된 여행 일차 리스트
-	    mav.addObject("member", member); // 로그인 사용자 정보
+	    mav.addObject("share", share);            // 전체 공유 정보
+	    mav.addObject("detailList", sortedList);  // 정렬된 일차 리스트
 
 	    return mav;
 	}

@@ -66,13 +66,13 @@ public class MemberController {
 	      return null;
 	   }
 
-	   @RequestMapping(value = "logout.do", method = RequestMethod.GET)
-	   public ModelAndView logout(@ModelAttribute() MemberDTO memberDTO, HttpServletRequest request,HttpServletResponse response) {
-	      ModelAndView mav = new ModelAndView("redirect:/");
-	      HttpSession session = request.getSession();
-	      session.invalidate();
-	      return mav;
-	   }
+	@RequestMapping(value = "logout.do", method = RequestMethod.GET)
+	public ModelAndView logout(@ModelAttribute() MemberDTO memberDTO, HttpServletRequest request,HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView("redirect:/");
+		HttpSession session = request.getSession();
+		session.invalidate();
+		return mav;
+	}
 	
 	@RequestMapping(value = "memberIdCheck.do", method = RequestMethod.GET)
 	@ResponseBody // 이 메서드가 반환하는 값을 http body로 직접 반환하게 해주는 어노테이션
@@ -84,6 +84,7 @@ public class MemberController {
 			return "OK"; // 존재하지 않는다
 		}
 	}
+	
 	@RequestMapping(value = "memberEmailCheck.do", method = RequestMethod.GET)
 	@ResponseBody // 이 메서드가 반환하는 값을 http body로 직접 반환하게 해주는 어노테이션
 	public String memberEmailCheck(@RequestParam("memberEmail") String memberEmail) {
@@ -98,9 +99,9 @@ public class MemberController {
 	@RequestMapping(value = "mypage.do", method = RequestMethod.GET)
 	public ModelAndView mypage(@ModelAttribute() MemberDTO memberDTO, HttpServletRequest request,HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView("/member/mypage");
-	return mav;
-		
+		return mav;
 	}
+	
 	@RequestMapping(value = "modMember.do", method = RequestMethod.POST)
 	public ModelAndView modMember(@ModelAttribute() MemberDTO memberDTO, HttpServletRequest request,HttpServletResponse response) throws IOException {
 		response.setContentType("text/html;charset=utf-8");
@@ -113,21 +114,19 @@ public class MemberController {
 		out.write("alert('수정이 완료되었습니다');");
 		out.write("location.href='/www/member/mypage.do';");
 		out.write("</script>");
-					return null;
-		
-	}
-	@RequestMapping(value = "delMember.do", method = RequestMethod.POST)
-	public String delMember(@ModelAttribute() MemberDTO memberDTO, HttpServletRequest request,HttpServletResponse response) throws IOException {
-		response.setContentType("text/html;charset=utf-8");
-		memberService.delMember(memberDTO);
-		HttpSession session = request.getSession();
-		session.invalidate();
-		 PrintWriter out = response.getWriter();
-		 out.write("<script>");
-         out.write("alert('탈퇴 완료되었습니다');");
-         out.write("location.href='/www/main.do';");
-         out.write("</script>");
 		return null;
 	}
 	
+	@RequestMapping(value = "delMember.do", method = RequestMethod.POST)
+	public String delMember(@RequestParam("memberId") String memberId, HttpServletRequest request, HttpServletResponse response) throws IOException {
+	    response.setContentType("text/html;charset=utf-8");
+	    memberService.delMemberWithDependencies(memberId); // 연관 삭제 포함
+	    request.getSession().invalidate();
+	    PrintWriter out = response.getWriter();
+	    out.write("<script>");
+	    out.write("alert('탈퇴 완료되었습니다');");
+	    out.write("location.href='/www/main.do';");
+	    out.write("</script>");
+	    return null;
+	}
 }

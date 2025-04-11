@@ -63,7 +63,7 @@
         <result property="tripShareModDate" column="trip_share_mod_date"/>
         <result property="tripPlanStartDay" column="trip_plan_start_day"/>
         <result property="tripPlanArriveDay" column="trip_plan_arrive_day"/>
-        
+        <result property="memberNickname" column="member_nickname"/>
         <!-- 1:N 관계 매핑 -->
         <collection property="tripDayList" ofType="com.tripPocket.www.tripPlan.dto.TripDayDTO" resultMap="tripDayMap"/>
     </resultMap>
@@ -144,36 +144,41 @@
 
 	<select id="selectDetail" parameterType="tripShareDTO" resultMap="TripShareResultMap">
 		SELECT 
-	    ts.trip_share_id,
-	    ts.trip_share_title,
-	    ts.trip_plan_id,
-	    ts.trip_share_add_date,
-	    ts.trip_share_mod_date,
+		    ts.trip_share_id,
+		    ts.trip_share_title,
+		    ts.trip_plan_id,
+		    ts.trip_share_add_date,
+		    ts.trip_share_mod_date,
 	
-	    tp.trip_plan_start_day,
-	    tp.trip_plan_arrive_day,
+		    tp.trip_plan_start_day,
+		    tp.trip_plan_arrive_day,
 	
-	    td.trip_day_id,
-	    td.trip_day_day,
-	    td.trip_day_date,
-	    td.trip_day_Address,
-	    td.trip_day_image,
+		    td.trip_day_id,
+		    td.trip_day_day,
+		    td.trip_day_date,
+		    td.trip_day_address,
+		    td.trip_day_image,
 	
-	    tsc.trip_share_content
+		    tsc.trip_share_content,
+	
+		    m.member_nickname  <!-- ✅ 작성자 닉네임 추가 -->
 	
 		FROM trip_share ts
 		JOIN trip_plan tp 
-	    ON ts.trip_plan_id = tp.trip_plan_id
+		    ON ts.trip_plan_id = tp.trip_plan_id
+		JOIN member m
+		    ON tp.member_id = m.member_id   <!-- ✅ 작성자 조인 추가 -->
 		LEFT JOIN trip_day td 
-	    ON tp.trip_plan_id = td.trip_plan_id
+		    ON tp.trip_plan_id = td.trip_plan_id
 		LEFT JOIN trip_share_content tsc 
-	    ON td.trip_day_id = tsc.trip_day_id 
-	    AND ts.trip_share_id = tsc.trip_share_id
+		    ON td.trip_day_id = tsc.trip_day_id 
+		    AND ts.trip_share_id = tsc.trip_share_id
 	
 		WHERE ts.trip_share_id = #{tripShareId}
 	
 		ORDER BY td.trip_day_day ASC
 	</select>
+
 	
 	<insert id="insertTripPlanFromShare" parameterType="map">
 	  <selectKey keyProperty="tripPlanId" resultType="long" order="BEFORE">

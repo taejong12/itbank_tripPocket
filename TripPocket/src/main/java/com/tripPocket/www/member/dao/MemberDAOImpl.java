@@ -47,9 +47,28 @@ public class MemberDAOImpl implements MemberDAO{
 	}
 
 	@Override
-	public void delMember(MemberDTO memberDTO) {
-		sqlSession.delete("mapper.member.delMember",memberDTO);
-		
+	public void deleteTripShareContentByMemberId(String memberId) {
+	    sqlSession.delete("mapper.member.deleteTripShareContentByMemberId", memberId);
+	}
+
+	@Override
+	public void deleteTripShareByMemberId(String memberId) {
+	    sqlSession.delete("mapper.member.deleteTripShareByMemberId", memberId);
+	}
+
+	@Override
+	public void deleteTripDayByMemberId(String memberId) {
+	    sqlSession.delete("mapper.member.deleteTripDayByMemberId", memberId);
+	}
+
+	@Override
+	public void deleteTripPlanByMemberId(String memberId) {
+	    sqlSession.delete("mapper.member.deleteTripPlanByMemberId", memberId);
+	}
+
+	@Override
+	public void delMemberById(String memberId) {
+	    sqlSession.delete("mapper.member.delMemberById", memberId);
 	}
 
 	

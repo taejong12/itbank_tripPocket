@@ -20,7 +20,7 @@
 				<c:when test="${isLogin == true && member != null}">
 					<div class="profile-container">
 						<div>
-	                        <p>${member.memberName}</p>
+	                        <p>${member.memberNickname}님</p>
 	                        <p>${member.memberEmail}</p>
 	                    </div>
 	                    <img src="${contextPath}/resources/img/profile/basic.png">

@@ -14,7 +14,7 @@
     <div class="mypage-container">
         <div class="profile-section">
             <img src="${contextPath}/resources/img/profile/basic.png" alt="프로필 사진" class="profile-img">
-            <h2>${member.memberName}님</h2>
+            <h2>${member.memberNickname}님</h2>
         </div>
 
         <!-- 수정 form 시작 -->
