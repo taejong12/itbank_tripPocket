@@ -99,7 +99,7 @@
 	    	) VALUES (
 	        #{tripShareId},
 	        #{tripShareTitle},
-	        #{tripPlanId},
+	        #{tripPlanId, jdbcType=INTEGER},
 	        SYSDATE,
 	        SYSDATE
 	    	)

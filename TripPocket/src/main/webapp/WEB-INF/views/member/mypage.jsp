@@ -14,14 +14,14 @@
     <div class="mypage-container">
         <div class="profile-section">
             <img src="${contextPath}/resources/img/profile/basic.png" alt="프로필 사진" class="profile-img">
-            <h2>${member.memberName}</h2>
+            <h2>${member.memberName}님</h2>
         </div>
 
-        <!-- 모든 수정 항목을 포함하는 form -->
+        <!-- 수정 form 시작 -->
         <form action="${contextPath}/member/modMember.do" method="post" onsubmit="return mypageForm(event)">
             <input type="hidden" name="memberId" value="${member.memberId}" />
 
-            <!-- 아이디 (수정 불가) -->
+            <!-- 아이디 -->
             <div class="info-item">
                 <span class="label">아이디</span>
                 <div class="info-value-row" id="id-display">
@@ -30,6 +30,7 @@
             </div>
 
             <!-- 비밀번호 -->
+            <hr class="divider">
             <div class="info-item">
                 <span class="label">비밀번호</span>
                 <div class="info-value-row" id="password-display">
@@ -47,6 +48,7 @@
             </div>
 
             <!-- 이메일 -->
+            <hr class="divider">
             <div class="info-item">
                 <span class="label">이메일</span>
                 <div class="info-value-row" id="email-display">
@@ -64,6 +66,7 @@
             </div>
 
             <!-- 전화번호 -->
+            <hr class="divider">
             <div class="info-item">
                 <span class="label">전화번호</span>
                 <div class="info-value-row" id="tel-display">
@@ -81,23 +84,16 @@
             </div>
 
             <!-- 나이 -->
+            <hr class="divider">
             <div class="info-item">
                 <span class="label">나이</span>
                 <div class="info-value-row" id="age-display">
                     <span class="info-value age-value">${member.memberAge}</span>
-                    <a href="javascript:void(0);" class="edit-link" id="age-button"
-                       onclick="showEditField('age')">수정</a>
-                </div>
-                <div class="edit-field" id="age-edit">
-                    <input type="number" name="memberAge" id="age-input" value="${member.memberAge}">
-                    <div class="button-container">
-                        <button type="submit">저장</button>
-                        <button type="button" class="cancel-btn" onclick="hideEditField('age')">취소</button>
-                    </div>
                 </div>
             </div>
 
             <!-- 닉네임 -->
+            <hr class="divider">
             <div class="info-item">
                 <span class="label">닉네임</span>
                 <div class="info-value-row" id="nickname-display">
@@ -115,44 +111,28 @@
             </div>
 
             <!-- 이름 -->
+            <hr class="divider">
             <div class="info-item">
                 <span class="label">이름</span>
                 <div class="info-value-row" id="name-display">
                     <span class="info-value name-value">${member.memberName}</span>
-                    <a href="javascript:void(0);" class="edit-link" id="name-button"
-                       onclick="showEditField('name')">수정</a>
-                </div>
-                <div class="edit-field" id="name-edit">
-                    <input type="text" name="memberName" id="name-input" value="${member.memberName}">
-                    <div class="button-container">
-                        <button type="submit">저장</button>
-                        <button type="button" class="cancel-btn" onclick="hideEditField('name')">취소</button>
-                    </div>
                 </div>
             </div>
 
             <!-- 성별 -->
+            <hr class="divider">
             <div class="info-item">
                 <span class="label">성별</span>
                 <div class="info-value-row" id="gender-display">
                     <span class="info-value gender-value">${member.memberGender}</span>
-                    <a href="javascript:void(0);" class="edit-link" id="gender-button"
-                       onclick="showEditField('gender')">수정</a>
-                </div>
-                <div class="edit-field" id="gender-edit">
-                    <select name="memberGender" id="gender-input">
-                        <option value="남자" <c:if test="${member.memberGender == '남자'}">selected</c:if>>남자</option>
-                        <option value="여자" <c:if test="${member.memberGender == '여자'}">selected</c:if>>여자</option>
-                    </select>
-                    <div class="button-container">
-                        <button type="submit">저장</button>
-                        <button type="button" class="cancel-btn" onclick="hideEditField('gender')">취소</button>
-                    </div>
                 </div>
             </div>
         </form>
 
-        <!-- 회원탈퇴 버튼 -->
+        <!-- 회원탈퇴 버튼 전 구분선 -->
+        <hr class="divider">
+
+        <!-- 회원탈퇴 -->
         <form action="${contextPath}/member/delMember.do" method="post" onsubmit="return confirm('정말로 회원탈퇴를 진행하시겠습니까?');">
             <input type="hidden" name="memberId" value="${member.memberId}" />
             <button type="submit" class="delete-account-btn">회원탈퇴</button>

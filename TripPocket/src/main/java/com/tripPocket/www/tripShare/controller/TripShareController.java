@@ -82,7 +82,7 @@ public class TripShareController {
         return tripDays;
     }
 	 
-	@RequestMapping(value = "/write.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/write.do", method = RequestMethod.POST)
 	public String write(@ModelAttribute()TripShareDTO tripShareDTO, Model model) {
 	   
 		tripShareService.write(tripShareDTO);

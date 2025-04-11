@@ -92,11 +92,18 @@ function fn_joinForm(event) {
     }
 
     // 이름
-    if (form.memberName.value.trim() === "") {
-        alert("이름을 입력해 주세요.");
-        form.memberName.focus();
-        return false;
-    }
+    var name = form.memberName.value.trim();
+	if (name === "") {
+	    alert("이름을 입력해 주세요.");
+	    form.memberName.focus();
+	    return false;
+	}
+	var namePattern = /^[가-힣a-zA-Z\s]+$/;
+	if (!namePattern.test(name)) {
+	    alert("이름은 한글 또는 영어만 입력해 주세요.");
+	    form.memberName.focus();
+	    return false;
+	}
 
     // 이메일
     if (form.memberEmail.value.trim() === "") {
@@ -114,26 +121,52 @@ function fn_joinForm(event) {
 
     // 나이
     var age = parseInt(form.memberAge.value.trim(), 10);
-    if (isNaN(age) || age <= 0 || age >= 100) {
-        alert("유효한 나이를 입력해 주세요.");
-        form.memberAge.focus();
-        return false;
-    }
+
+	if (!form.memberAge.value.trim()) {
+	    alert("나이를 입력해 주세요.");
+	    form.memberAge.focus();
+	    return false;
+	}
+	
+	if (isNaN(age) || age < 19 || age > 65) {
+	    alert("가입은 19세 이상 65세 이하만 가능합니다.");
+	    form.memberAge.focus();
+	    return false;
+	}
 
     // 닉네임
-    if (form.memberNickname.value.trim() === "") {
-        alert("닉네임을 입력해 주세요.");
-        form.memberNickname.focus();
-        return false;
-    }
+	var nickname = form.memberNickname.value.trim();
+	if (nickname === "") {
+	    alert("닉네임을 입력해 주세요.");
+	    form.memberNickname.focus();
+	    return false;
+	}
+	
+	// 1단계: 전체 허용 문자 체크 (한글, 영어, 숫자, 공백만)
+	var nicknamePattern = /^[가-힣a-zA-Z0-9 ]+$/;
+	if (!nicknamePattern.test(nickname)) {
+	    alert("닉네임은 한글, 영어, 숫자 사용할 수 있어요. (특수문자 불가)");
+	    form.memberNickname.focus();
+	    return false;
+	}
+	
+	// 2단계: 의미 있는 글자 존재 체크 (한글, 영어, 숫자 중 하나 이상)
+	var meaningfulPattern = /[가-힣a-zA-Z0-9]/;
+	if (!meaningfulPattern.test(nickname)) {
+	    alert("닉네임에는 (공백포함) 한글, 영어, 숫자 중 하나 이상이 포함되어야 해요.");
+	    form.memberNickname.focus();
+	    return false;
+	}
 
     // 전화번호
     var tel = form.memberTel.value.trim();
-    if (!/^\d{10,11}$/.test(tel)) {
-        alert("전화번호는 숫자만 10~11자리 입력해 주세요.");
-        form.memberTel.focus();
-        return false;
-    }
+	var telPattern = /^010-\d{4}-\d{4}$/;
+	
+	if (!telPattern.test(tel)) {
+	    alert("전화번호는 010-0000-0000 형식으로 입력해 주세요.");
+	    form.memberTel.focus();
+	    return false;
+	}
 
     // 성별
     if (!form.memberGender.value) {

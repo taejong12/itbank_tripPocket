@@ -2,7 +2,7 @@
  * 
  */
  function showEditField(label) {
-	        const fields = ['name', 'password', 'tel', 'age', 'nickname', 'gender', 'email'];
+	        const fields = ['password', 'tel', 'nickname', 'email'];
 	        fields.forEach(function (key) {
 	            if (key !== label) {
 	                hideEditField(key);
@@ -23,10 +23,7 @@ function mypageForm(event) {
     const password = document.getElementById('password-input').value.trim();
     const email = document.getElementById('email-input').value.trim();
     const tel = document.getElementById('tel-input').value.trim();
-    const age = document.getElementById('age-input').value.trim();
     const nickname = document.getElementById('nickname-input').value.trim();
-    const name = document.getElementById('name-input').value.trim();
-    const gender = document.getElementById('gender-input').value;
 
     // 비밀번호 (선택사항: 입력했다면 최소 4자 이상)
     if (password && password.length < 7) {
@@ -61,37 +58,10 @@ function mypageForm(event) {
         return false;
     }
 
-    // 나이
-    if (!age) {
-        alert("나이를 입력해 주세요.");
-        document.getElementById('age-input').focus();
-        return false;
-    }
-    const ageNum = parseInt(age);
-    if (isNaN(ageNum) || ageNum < 1 || ageNum > 100) {
-        alert("유효한 나이(1~100세)를 입력해 주세요.");
-        document.getElementById('age-input').focus();
-        return false;
-    }
-
     // 닉네임
     if (!nickname) {
         alert("닉네임을 입력해 주세요.");
         document.getElementById('nickname-input').focus();
-        return false;
-    }
-
-    // 이름
-    if (!name) {
-        alert("이름을 입력해 주세요.");
-        document.getElementById('name-input').focus();
-        return false;
-    }
-
-    // 성별
-    if (!gender) {
-        alert("성별을 선택해 주세요.");
-        document.getElementById('gender-input').focus();
         return false;
     }
 

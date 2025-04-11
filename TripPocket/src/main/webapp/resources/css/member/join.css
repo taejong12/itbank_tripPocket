@@ -28,6 +28,41 @@
     align-items: center;
 }
 
+.input-container input::placeholder {
+    font-size: 0.9rem;
+    color: #999;
+}
+
+.input-container input {
+    padding: 12px 14px; /* 기존보다 padding 줄임 */
+    font-size: 1rem; /* 약간 축소 (1.1 → 1.0rem) */
+}
+
+.input-container.column {
+	flex-direction: column;
+	align-items: flex-start; /* 왼쪽 정렬 */
+	text-align: left;
+	margin-bottom: 1px;
+}
+
+.input-btn-wrap {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 10px; /* 간격 조정 */
+}
+
+.input-btn-wrap input {
+    flex: 1;
+}
+
+.input-container p {
+    margin-bottom: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333;
+}
+
 .input-container input {
     width: 100%; /* 입력 칸의 너비를 100%로 설정 */
     padding: 15px; /* 입력칸을 더 넓혔습니다 */
@@ -79,8 +114,8 @@
     display: flex;
     justify-content: center;
     gap: 20px;
-    margin-top: 10px;
-    margin-bottom: 20px; /* 성별 선택 칸과 회원가입 버튼 사이의 간격 */
+    margin-top: 20px;
+    margin-bottom: 10px; /* 성별 선택 칸과 회원가입 버튼 사이의 간격 */
 }
 
 .gender-container label {
