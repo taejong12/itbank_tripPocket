@@ -148,7 +148,7 @@
             <div id="dayTabs"></div>
             <div id="tripDayContainer"></div>
 
-            <input type="submit" value="글쓰기" />
+            <input type="submit" value="✈️ 나의 여행 블로그 등록하기" />
         </form:form>
     </div>
 </body>
