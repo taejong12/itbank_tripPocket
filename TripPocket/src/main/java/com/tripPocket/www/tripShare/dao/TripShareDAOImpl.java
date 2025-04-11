@@ -102,4 +102,6 @@ public class TripShareDAOImpl implements TripShareDAO{
 		return session.selectOne("mapper.trip.share.getWriterByShareId", tripShareId);
 	}
 
+	
+
 }

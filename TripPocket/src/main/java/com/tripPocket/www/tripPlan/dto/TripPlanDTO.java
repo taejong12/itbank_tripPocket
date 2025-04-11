@@ -1,6 +1,7 @@
 package com.tripPocket.www.tripPlan.dto;
 
 import java.sql.Date;
+import java.util.List;
 
 public class TripPlanDTO {
 
@@ -12,6 +13,7 @@ public class TripPlanDTO {
 	private String memberId;
 	private Date tripPlanAddDate;
 	private Date tripPlanModDate;
+	private List<TripDayDTO> tripDayList;
 	
 	public Integer getTripPlanId() {
 		return tripPlanId;
@@ -60,6 +62,12 @@ public class TripPlanDTO {
 	}
 	public void setTripPlanModDate(Date tripPlanModDate) {
 		this.tripPlanModDate = tripPlanModDate;
+	}
+	public List<TripDayDTO> getTripDayList() {
+		return tripDayList;
+	}
+	public void setTripDayList(List<TripDayDTO> tripDayList) {
+		this.tripDayList = tripDayList;
 	}
 	
 }

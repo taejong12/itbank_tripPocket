@@ -11,7 +11,17 @@
 <head>
     <title>경험 공유 글쓰기</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-     <link rel="stylesheet" href="${contextPath}/resources/css/tripShare/shareForm.css">
+    <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=0013492b2b76abad18e946130e719814&libraries=services"></script>
+    <link rel="stylesheet" href="${contextPath}/resources/css/tripShare/shareForm.css">
+    <style>
+        #map {
+            width: 100%;
+            height: 400px;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+    </style>
+
     <script>
         let globalTripDays = [];
         let reviewMap = {};
@@ -104,6 +114,78 @@
                     let key = $(this).data('key');
                     reviewMap[key] = $(this).val();
                 });
+
+                renderMap(selectedDays);
+            }
+
+            function renderMap(dayPlaces) {
+                $('#map').remove(); // 기존 지도 제거
+                $('#tripDayContainer').before('<div id="map"></div>'); // 🟢 지도 위치를 위로 이동
+
+                let mapContainer = document.getElementById('map');
+                let mapOption = {
+                    center: new kakao.maps.LatLng(36.5, 127.5),
+                    level: 8
+                };
+                let map = new kakao.maps.Map(mapContainer, mapOption);
+                let bounds = new kakao.maps.LatLngBounds();
+                let linePath = [];
+
+                let geocoder = new kakao.maps.services.Geocoder();
+
+                dayPlaces.forEach(function (place, index) {
+                    if (place.tripDayMapx && place.tripDayMapy) {
+                        let latlng = new kakao.maps.LatLng(place.tripDayMapy, place.tripDayMapx);
+                        bounds.extend(latlng);
+                        linePath.push(latlng);
+
+                        let marker = new kakao.maps.Marker({ map: map, position: latlng });
+                        let infowindow = new kakao.maps.InfoWindow({
+                            content: '<div style="padding:5px;font-size:14px;">' + (index + 1) + '. ' + place.tripDayAddress + '</div>'
+                        });
+                        infowindow.open(map, marker);
+
+                        if (linePath.length === dayPlaces.length) {
+                            let polyline = new kakao.maps.Polyline({
+                                map: map,
+                                path: linePath,
+                                strokeWeight: 3,
+                                strokeColor: '#007BFF',
+                                strokeOpacity: 0.8,
+                                strokeStyle: 'solid'
+                            });
+                            map.setBounds(bounds);
+                        }
+                    } else {
+                        geocoder.addressSearch(place.tripDayAddress, function (result, status) {
+                            if (status === kakao.maps.services.Status.OK) {
+                                let latlng = new kakao.maps.LatLng(result[0].y, result[0].x);
+                                bounds.extend(latlng);
+                                linePath.push(latlng);
+
+                                let marker = new kakao.maps.Marker({ map: map, position: latlng });
+                                let infowindow = new kakao.maps.InfoWindow({
+                                    content: '<div style="padding:5px;font-size:14px;">' + (index + 1) + '. ' + place.tripDayAddress + '</div>'
+                                });
+                                infowindow.open(map, marker);
+
+                                if (linePath.length === dayPlaces.length) {
+                                    let polyline = new kakao.maps.Polyline({
+                                        map: map,
+                                        path: linePath,
+                                        strokeWeight: 3,
+                                        strokeColor: '#007BFF',
+                                        strokeOpacity: 0.8,
+                                        strokeStyle: 'solid'
+                                    });
+                                    map.setBounds(bounds);
+                                }
+                            } else {
+                                console.warn("❌ 주소 검색 실패:", place.tripDayAddress);
+                            }
+                        });
+                    }
+                });
             }
 
             $('form').submit(function (e) {
@@ -129,27 +211,25 @@
     </script>
 </head>
 <body>
-    <div class="container">
-        <h2>여행 공유 글쓰기</h2>
-        <form:form modelAttribute="tripShareDTO" method="get" action="${contextPath}/share/write.do">
-            <label>여행 계획 선택</label>
-            <form:select path="tripPlanId">
-                <form:option value="" label="-- 선택하세요 --" />
-                <c:forEach var="plan" items="${tripPlanList}">
-                    <form:option value="${plan.tripPlanId}">
-                        ${plan.tripPlanTitle}
-                    </form:option>
-                </c:forEach>
-            </form:select>
+<div class="container">
+    <h2>여행 공유 글쓰기</h2>
+    <form:form modelAttribute="tripShareDTO" method="get" action="${contextPath}/share/write.do">
+        <label>여행 계획 선택</label>
+        <form:select path="tripPlanId">
+            <form:option value="" label="-- 선택하세요 --" />
+            <c:forEach var="plan" items="${tripPlanList}">
+                <form:option value="${plan.tripPlanId}">${plan.tripPlanTitle}</form:option>
+            </c:forEach>
+        </form:select>
 
-            <label>제목</label>
-            <form:input path="tripShareTitle" />
+        <label>제목</label>
+        <form:input path="tripShareTitle" />
 
-            <div id="dayTabs"></div>
-            <div id="tripDayContainer"></div>
+        <div id="dayTabs"></div>
+        <div id="tripDayContainer"></div>
 
-            <input type="submit" value="✈️ 나의 여행 블로그 등록하기" />
-        </form:form>
-    </div>
+        <input type="submit" value="✈️ 나의 여행 블로그 등록하기" />
+    </form:form>
+</div>
 </body>
 </html>

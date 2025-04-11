@@ -68,6 +68,7 @@ public class TripShareController {
 		MemberDTO member = (MemberDTO) request.getSession().getAttribute("member");
 		 List<TripPlanDTO> planList = tripShareService.getTripPlansByMemberId(member.getMemberId());
 		 
+		 
 		 model.addAttribute("tripPlanList", planList);
 	   
 		 return "tripShare/shareForm"; // Tiles 설정상 이게 view 이름일 것
