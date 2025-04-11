@@ -111,7 +111,7 @@ public class MemberController {
 		MemberDTO member = memberService.update(memberDTO);
 		session.setAttribute("member", member);
 		out.write("<script>");
-		out.write("alert('수정이 완료되었습니다');");
+		out.write("alert('변경이 완료되었습니다');");
 		out.write("location.href='/www/member/mypage.do';");
 		out.write("</script>");
 		return null;

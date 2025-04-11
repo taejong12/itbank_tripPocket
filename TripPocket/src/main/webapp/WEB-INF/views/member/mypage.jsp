@@ -34,12 +34,12 @@
             <div class="info-item">
                 <span class="label">비밀번호</span>
                 <div class="info-value-row" id="password-display">
-                    <span class="info-value password-value">********</span>
+                    <span class="info-value password-value">${member.memberPwd}</span>
                     <a href="javascript:void(0);" class="edit-link" id="password-button"
-                       onclick="showEditField('password')">수정</a>
+                       onclick="showEditField('password')">변경</a>
                 </div>
                 <div class="edit-field" id="password-edit">
-                    <input type="password" name="memberPwd" id="password-input" placeholder="새 비밀번호">
+                    <input type="password" name="memberPwd" id="password-input" placeholder="변경하실 비밀번호를 입력하세요">
                     <div class="button-container">
                         <button type="submit">저장</button>
                         <button class="cancel-btn" type="button" onclick="hideEditField('password')">취소</button>
@@ -54,10 +54,10 @@
                 <div class="info-value-row" id="email-display">
                     <span class="info-value email-value">${member.memberEmail}</span>
                     <a href="javascript:void(0);" class="edit-link" id="email-button"
-                       onclick="showEditField('email')">수정</a>
+                       onclick="showEditField('email')">변경</a>
                 </div>
                 <div class="edit-field" id="email-edit">
-                    <input type="email" name="memberEmail" id="email-input" value="${member.memberEmail}" />
+                    <input type="email" name="memberEmail" id="email-input" value="${member.memberEmail}" placeholder="변경하실 이메일을 입력하세요">
                     <div class="button-container">
                         <button type="submit">저장</button>
                         <button type="button" class="cancel-btn" onclick="hideEditField('email')">취소</button>
@@ -68,14 +68,14 @@
             <!-- 전화번호 -->
             <hr class="divider">
             <div class="info-item">
-                <span class="label">전화번호</span>
+                <span class="label">휴대전화번호</span>
                 <div class="info-value-row" id="tel-display">
                     <span class="info-value tel-value">${member.memberTel}</span>
                     <a href="javascript:void(0);" class="edit-link" id="tel-button"
-                       onclick="showEditField('tel')">수정</a>
+                       onclick="showEditField('tel')">변경</a>
                 </div>
                 <div class="edit-field" id="tel-edit">
-                    <input type="tel" name="memberTel" id="tel-input" value="${member.memberTel}">
+                    <input type="tel" name="memberTel" id="tel-input" value="${member.memberTel}" placeholder="변경하실 휴대전화번호를 입력하세요">
                     <div class="button-container">
                         <button type="submit">저장</button>
                         <button type="button" class="cancel-btn" onclick="hideEditField('tel')">취소</button>
@@ -99,10 +99,10 @@
                 <div class="info-value-row" id="nickname-display">
                     <span class="info-value nickname-value">${member.memberNickname}</span>
                     <a href="javascript:void(0);" class="edit-link" id="nickname-button"
-                       onclick="showEditField('nickname')">수정</a>
+                       onclick="showEditField('nickname')">변경</a>
                 </div>
                 <div class="edit-field" id="nickname-edit">
-                    <input type="text" name="memberNickname" id="nickname-input" value="${member.memberNickname}">
+                    <input type="text" name="memberNickname" id="nickname-input" value="${member.memberNickname}" placeholder="변경하실 닉네임을 입력하세요">
                     <div class="button-container">
                         <button type="submit">저장</button>
                         <button type="button" class="cancel-btn" onclick="hideEditField('nickname')">취소</button>

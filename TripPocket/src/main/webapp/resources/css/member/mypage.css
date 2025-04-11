@@ -41,7 +41,7 @@ body {
 
 /* 정보 항목 */
 .info-item {
-    padding: 12px 0;
+    padding: 16px 0;
 }
 
 .label {
@@ -64,7 +64,7 @@ body {
 }
 
 .edit-link {
-    font-size: 12px;
+    font-size: 14px;
     color: #009688;
     text-decoration: none;
     font-weight: 500;
@@ -103,7 +103,7 @@ body {
     border: none;
     height: 1px;
     background-color: #e0e0e0;
-    margin: 6px 0 0 0;
+    margin: 0 0 0 0 ;
 }
 
 /* 버튼 영역 */
@@ -141,7 +141,7 @@ button:hover {
 /* 회원탈퇴 버튼 */
 .delete-account-btn {
     display: block;
-    margin: 28px auto 0;
+    margin: 20px auto 0;
     padding: 9px 16px;
     background-color: #ff5252;
     color: #fff;

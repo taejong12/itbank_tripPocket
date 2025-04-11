@@ -8,6 +8,12 @@ function showEditField(label) {
     document.getElementById(label + '-display').style.display = 'none';
     document.getElementById(label + '-edit').style.display = 'flex';
     document.getElementById(label + '-button').style.display = 'none';
+    
+    // input 값 비우기
+    const input = document.getElementById(label + '-input');
+    if (input) {
+        input.value = '';  // 이 줄이 핵심!
+    }
 }
 
 function hideEditField(label) {
@@ -42,6 +48,12 @@ function mypageForm(event) {
                 document.getElementById('password-input').focus();
                 return false;
             }
+            const specialCharPattern = /[!@#$%^&*(),.?":{}|<>]/;
+			if (!specialCharPattern.test(password)) {
+			    alert("비밀번호에 최소 하나 이상의 특수문자를 포함해 주세요.\n예) !, @, #, $ 등");
+			    document.getElementById('password-input').focus();
+			    return false;
+			}
             break;
 
         case 'email':
@@ -68,7 +80,7 @@ function mypageForm(event) {
 			}
 			const telPattern = /^010-\d{4}-\d{4}$/;
 			if (!telPattern.test(tel)) {
-			    alert("전화번호는 010-0000-0000 형식으로 입력해 주세요.");
+			    alert("전화번호를 010-1234-5678 형식으로 입력해 주세요.");
 			    document.getElementById('tel-input').focus();
 			    return false;
 			}
@@ -86,3 +98,31 @@ function mypageForm(event) {
 
     return true;
 }
+
+// 휴대전화번호 자동 하이픈 포맷터 + 최대 13자리 제한 (010-0000-0000)
+function formatPhoneNumber(value) {
+    value = value.replace(/\D/g, ''); // 숫자 외 제거
+
+    if (value.length > 11) {
+        value = value.slice(0, 11); // 11자리까지만 허용
+    }
+
+    if (value.length <= 3) {
+        return value;
+    } else if (value.length <= 7) {
+        return value.slice(0, 3) + '-' + value.slice(3);
+    } else {
+        return value.slice(0, 3) + '-' + value.slice(3, 7) + '-' + value.slice(7);
+    }
+}
+
+// 이벤트 연결
+document.addEventListener('DOMContentLoaded', function () {
+    const telInput = document.getElementById('tel-input');
+    if (telInput) {
+        telInput.addEventListener('input', function () {
+            const numericOnly = telInput.value.replace(/\D/g, '').slice(0, 11); // 최대 11자리
+            telInput.value = formatPhoneNumber(numericOnly);
+        });
+    }
+});

@@ -88,8 +88,13 @@ function fn_joinForm(event) {
         alert("비밀번호는 최소 8자 이상 입력해 주세요.");
         form.memberPwd.focus();
         return false;
-    
     }
+    const specialCharPattern = /[!@#$%^&*(),.?":{}|<>]/;
+	if (!specialCharPattern.test(password)) {
+	    alert("비밀번호에 최소 하나 이상의 특수문자를 포함해 주세요.\n예) !, @, #, $ 등");
+	    form.memberPwd.focus();
+	    return false;
+	}
 
     // 이름
     var name = form.memberName.value.trim();
@@ -163,7 +168,7 @@ function fn_joinForm(event) {
 	var telPattern = /^010-\d{4}-\d{4}$/;
 	
 	if (!telPattern.test(tel)) {
-	    alert("전화번호는 010-0000-0000 형식으로 입력해 주세요.");
+	    alert("전화번호 형식을 확인해 주세요. (예: 010-1234-5678)");
 	    form.memberTel.focus();
 	    return false;
 	}
@@ -179,3 +184,23 @@ function fn_joinForm(event) {
     // 제출
     form.submit();
 }
+
+// 휴대전화번호 자동 하이픈 삽입 + 최대 11자리 숫자 제한
+document.addEventListener("DOMContentLoaded", function () {
+    const telInput = document.querySelector("input[name='memberTel']");
+
+    if (telInput) {
+        telInput.addEventListener("input", function () {
+            let value = this.value.replace(/\D/g, ""); // 숫자만 추출
+            if (value.length > 11) value = value.slice(0, 11); // 11자리 초과 방지
+
+            if (value.length <= 3) {
+                this.value = value;
+            } else if (value.length <= 7) {
+                this.value = value.replace(/(\d{3})(\d+)/, "$1-$2");
+            } else {
+                this.value = value.replace(/(\d{3})(\d{4})(\d{0,4})/, "$1-$2-$3");
+            }
+        });
+    }
+});
