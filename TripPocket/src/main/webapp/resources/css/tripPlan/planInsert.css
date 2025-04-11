@@ -1,43 +1,202 @@
-@charset "UTF-8";
-
-
-
-form {
-    background: #ffffff;
-    padding: 20px;
-    margin-top:80px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 300px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+.plan-row-box {
+	width: 100%;
+    max-width: 1000px; 
+    min-width: 500px; 
+    padding: 30px;
+    margin: 0 auto;
+    background-color: #fefcf6;
+    border: 1px solid #e0ddd3;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    box-sizing: border-box;
 }
 
-.div {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
+.plan-row {
+	display: flex;
+	align-items: flex-start;
+	margin-bottom: 18px;
 }
 
-input {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 14px;
+.plan-label {
+	width: 80px;
+	font-weight: 600;
+	color: #3a3a3a;
+	font-size: 15px;
+	margin-right: 10px;
+	padding-top: 8px;
 }
 
-button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    margin-top: 10px;
+.plan-title input,
+.plan-content textarea {
+	width: 100%;
+	min-width: 300px;
+	padding: 12px 16px;
+	border: 1px solid #ccc;
+	border-radius: 8px;
+	font-size: 15px;
+	background-color: #fff;
+	box-sizing: border-box;
+	box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
+	resize: vertical;
 }
 
-button:hover {
-    background-color: #0056b3;
+.plan-title input:focus,
+.plan-content textarea:focus {
+	border-color: #5cbf77;
+	box-shadow: 0 0 5px rgba(92, 191, 119, 0.3);
+	outline: none;
+}
+
+.plan-submit-btn {
+  display: block;
+  margin: 30px auto 0;
+  padding: 12px 30px;
+  background-color: #4caf50;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s;
+}
+
+.plan-submit-btn:hover {
+  background-color: #45a049;
+  transform: translateY(-2px);
+}
+
+.plan-calendar {
+  width: 100%;
+  margin-top: 30px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  font-family: sans-serif;
+  background-color: #fff;
+}
+
+.plan-calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #4caf50;
+  color: white;
+  padding: 10px;
+}
+
+.plan-calendar-body {
+  padding: 10px;
+}
+
+.plan-day-names,
+.plan-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+}
+
+.plan-day-names div {
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.plan-days div {
+  padding: 10px;
+  text-align: center;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.plan-days div:hover {
+  background-color: #e0f7e9;
+  cursor: pointer;
+}
+
+.plan-insert-form {
+  border: 2px solid #87ceeb;
+  border-radius: 12px;
+  padding: 30px;
+  background-color: #ffffff;
+  max-width: 960px;
+  margin: 40px auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* 출발일 */
+.plan-days .select-start {
+  background-color: #4da3ff;
+  color: white;
+  font-weight: bold;
+}
+
+/* 도착일 */
+.plan-days .select-end {
+  background-color: #4da3ff;
+  color: white;
+  font-weight: bold;
+}
+
+/* 출발일과 도착일 사이 날짜 */
+.plan-days .select-between {
+  background-color: #cce7ff;
+  color: #333;
+}
+
+/* Hover 효과 */
+.plan-days div:hover {
+  background-color: #e6f4ff;
+}
+
+.plan-date-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.plan-date-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.plan-date {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.plan-date-label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.plan-date input {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 130px;
+  text-align: center;
+  font-size: 14px;
+  background-color: #f9f9f9;
+  cursor: pointer;
+}
+
+.plan-date-form .wave {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0 10px;
+  line-height: 2.2;
+  color: #4da3ff;
+}
+
+.plan-days div.today {
+	background-color: #cceeff;
+	border-radius: 50%;
+	font-weight: bold;
+	color: #007acc;
 }
