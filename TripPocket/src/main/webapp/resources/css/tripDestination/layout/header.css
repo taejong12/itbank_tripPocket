@@ -131,3 +131,18 @@ header .burger span {
     from { top: -80px; }
     to { top: 0; }
 }
+
+.profile-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.profile-container img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-left: auto;
+}
