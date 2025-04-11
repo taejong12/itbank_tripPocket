@@ -5,17 +5,23 @@
 
 <link rel="stylesheet" href="${contextPath}/resources/css/tripPlan/planList.css">
 
-<div class="container">
+<div class="plan-list-container">
 	<h2>여행 계획 리스트</h2>
 
 	<c:forEach var="tripPlan" items="${tripPlanList}">
-		<div id="tripPlan_${tripPlan.tripPlanId}" class="plan-box-wrapper">
-	        <a href="${contextPath}/trip/planDetail.do?tripPlanId=${tripPlan.tripPlanId}" class="plan-box">
-	            <div>기간: ${tripPlan.tripPlanStartDay} ~ ${tripPlan.tripPlanArriveDay}</div>
-	            <div>제목: ${tripPlan.tripPlanTitle}</div>
-	        </a>
-	        <button class="delete-btn" onclick="fu_deleteTripPlan('${tripPlan.tripPlanId}')">삭제</button>
-	    </div>
+	    <div id="tripPlan_${tripPlan.tripPlanId}" class="plan-box-wrapper">
+		    <a href="${contextPath}/trip/planDetail.do?tripPlanId=${tripPlan.tripPlanId}" class="plan-box">
+		        <div class="plan-row">
+		            <span class="plan-label">기간</span>
+		            <span class="plan-period">${tripPlan.tripPlanStartDay} ~ ${tripPlan.tripPlanArriveDay}</span>
+		        </div>
+		        <div class="plan-row">
+		            <span class="plan-label">제목</span>
+		            <span class="plan-title">${tripPlan.tripPlanTitle}</span>
+		        </div>
+		    </a>
+		    <button class="delete-btn" onclick="fu_deleteTripPlan('${tripPlan.tripPlanId}')">삭제</button>
+		</div>
 	</c:forEach>
 
 	<a class="add-plan" href="${contextPath}/trip/planInsertForm.do">여행계획추가</a>
