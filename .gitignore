@@ -1,10 +1,10 @@
 TripPocket/Users/
 TripPocket/target/
+TripPocket/.settings
+TripPocket/.classpath
+TripPocket/.project
+TripPocket/.springBeans
 
 .git
 
 Servers
-
-.classpath
-
-TripPocket/.settings
