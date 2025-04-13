@@ -86,10 +86,16 @@ document.addEventListener("DOMContentLoaded", function () {
 			html += '<div class="trip-destination-list-grid">';
 			tripDestinationList.forEach(function(destination, index){
 				
+				//http 에러 -> https 수정
+				let imageUrl = destination.firstimage;
+				if (imageUrl && imageUrl.startsWith("http://")) {
+				    imageUrl = imageUrl.replace("http://", "https://");
+				}
+				
 				// 대체 이미지 경로
 				const altImageSrc = contextPath+"/resources/img/logo/alt_image.png";
 				// 이미지 처리
-				const imageSrc = destination.firstimage ? destination.firstimage : altImageSrc;
+				const imageSrc = imageUrl ? imageUrl : altImageSrc;
 				
 				const contentIdUrl = contextPath+"/tripDestination/detail.do?contentId="+destination.contentid;
 				

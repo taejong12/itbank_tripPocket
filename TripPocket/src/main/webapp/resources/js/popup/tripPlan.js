@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	
 	// TourAPI4.0 호출
 	window.fu_fetchKeywordData = function(currentPage, isFirstLoad){
-		const baseUrl = "http://apis.data.go.kr/B551011/KorService1/searchKeyword1";
+		const baseUrl = "https://apis.data.go.kr/B551011/KorService1/searchKeyword1";
 		
 		const queryParams = new URLSearchParams({
 		    // 인증키
@@ -106,9 +106,14 @@ document.addEventListener("DOMContentLoaded", function () {
 		} else {
 			keyworList.forEach(function(keyword, index){
 
-				// 이미지 처리
-				const imageSrc = keyword.firstimage ? keyword.firstimage : contextPath+"/resources/img/logo/alt_image.png";
+				//http 에러 -> https 수정
+				let imageUrl = keyword.firstimage;
+				if (imageUrl && imageUrl.startsWith("http://")) {
+				    imageUrl = imageUrl.replace("http://", "https://");
+				}
 				
+				// 이미지 처리
+				const imageSrc = imageUrl ? imageUrl : contextPath+"/resources/img/logo/alt_image.png";
 				// keyword 그냥 넘기면 에러 발생
 				const keywordData = encodeURIComponent(JSON.stringify(keyword));
 

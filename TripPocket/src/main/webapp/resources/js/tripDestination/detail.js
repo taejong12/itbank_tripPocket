@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	//TourAPI4.0 호출
 	window.fu_tripDestinationDetail = function(){
 		
-		const baseUrl = "http://apis.data.go.kr/B551011/KorService1/detailCommon1";
+		const baseUrl = "https://apis.data.go.kr/B551011/KorService1/detailCommon1";
 		
 		const queryParams = new URLSearchParams({
 		    // 인증키
@@ -58,10 +58,16 @@ document.addEventListener("DOMContentLoaded", function () {
 	// 관광지 상세페이지 출력
 	window.fu_tripDestinationDetailHtml = function(content){
 
+		//http 에러 -> https 수정
+		let imageUrl = content.firstimage;
+		if (imageUrl && imageUrl.startsWith("http://")) {
+		    imageUrl = imageUrl.replace("http://", "https://");
+		}
+
 		// 대체 이미지 경로
 		const altImageSrc = contextPath+"/resources/img/logo/alt_image.png";
 		// 이미지 처리
-		const imageSrc = content.firstimage ? content.firstimage : altImageSrc;
+		const imageSrc = imageUrl ? imageUrl : altImageSrc;
 		
 		let html='';
 	    

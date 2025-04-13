@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		
 		currentPage = pageNo;
 		
-		const baseUrl = "http://apis.data.go.kr/B551011/KorService1/searchKeyword1";
+		const baseUrl = "https://apis.data.go.kr/B551011/KorService1/searchKeyword1";
 		
 		const queryParams = new URLSearchParams({
 		    // 인증키
@@ -78,10 +78,16 @@ document.addEventListener("DOMContentLoaded", function () {
 			html += '<div class="trip-destination-list-grid">';
 			tripDestinationList.forEach(function(keyword, index){
 				
+				//http 에러 -> https 수정
+				let imageUrl = keyword.firstimage;
+				if (imageUrl && imageUrl.startsWith("http://")) {
+				    imageUrl = imageUrl.replace("http://", "https://");
+				}
+				
 				// 대체 이미지 경로
 				const altImageSrc = contextPath+"/resources/img/logo/alt_image.png";
 				// 이미지 처리
-				const imageSrc = keyword.firstimage ? keyword.firstimage : altImageSrc;
+				const imageSrc = imageUrl ? imageUrl : altImageSrc;
 
 				const contentIdUrl = contextPath+"/tripDestination/detail.do?contentId="+keyword.contentid;
 				

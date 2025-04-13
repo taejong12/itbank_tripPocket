@@ -45,7 +45,8 @@
 	</filter-mapping>
 	
 	<!-- 사용자가 http://로 접속하면 → 톰캣이 자동으로 https://로 리디렉트 해줌 (80 → 443) -->
-	<security-constraint>
+	<!-- 로컬에서는 https 사용 불가하므로 주석처리 -->
+	<!-- <security-constraint>
 	    <web-resource-collection>
 	        <web-resource-name>SecureArea</web-resource-name>
 	        <url-pattern>/*</url-pattern>
@@ -53,5 +54,5 @@
 	    <user-data-constraint>
 	        <transport-guarantee>CONFIDENTIAL</transport-guarantee>
 	    </user-data-constraint>
-	</security-constraint>
+	</security-constraint> -->
 </web-app>

@@ -113,12 +113,18 @@ window.fu_insertTripDay = function(keyword, tripDayDay, tripDayDate, tripPlanId)
     let tripDayQuery = document.querySelector("#day-" + tripDayDay + " .tripDayList");
     let kakaoMapId = "kakao_map_"+tripDayDay;
     
+    //http 에러 -> https 수정
+	let imageUrl = keyword.firstimage;
+	if (imageUrl && imageUrl.startsWith("http://")) {
+	    imageUrl = imageUrl.replace("http://", "https://");
+	}
+    
     let tripDayData = {
     	tripDayDay: tripDayDay,
         tripDayPlace: keyword.title,
         tripDayAddress: keyword.addr1,
         tripDayDate: tripDayDate,
-        tripDayImage: keyword.firstimage,
+        tripDayImage: imageUrl,
         tripPlanId: tripPlanId,
         tripDayMapx: keyword.mapx,
         tripDayMapy: keyword.mapy
@@ -146,9 +152,15 @@ window.fu_insertTripDay = function(keyword, tripDayDay, tripDayDate, tripPlanId)
         tripDayIdQuery.setAttribute("id", tripDayId);
         tripDayIdQuery.classList.add("trip-day-id");
 
+		//http 에러 -> https 수정
+		let imageUrl = keyword.firstimage;
+		if (imageUrl && imageUrl.startsWith("http://")) {
+		    imageUrl = imageUrl.replace("http://", "https://");
+		}
+
         // 이미지 요소 생성
         let imgQuery = document.createElement("img");
-        imgQuery.src = keyword.firstimage ? keyword.firstimage : contextPath+"/resources/img/logo/alt_image.png";
+        imgQuery.src = imageUrl ? imageUrl : contextPath+"/resources/img/logo/alt_image.png";
         imgQuery.alt = "이미지 없음";
         imgQuery.classList.add("trip-day-img");
 
@@ -385,4 +397,33 @@ window.fu_deleteTripDay = function(tripDayId, tripDayDay) {
     .catch(error => {
         console.error("여행장소삭제 오류 발생:", error);
     });
+}
+
+// 거리 계산 함수
+window.getDistanceFromLatLon = function(lat1, lon1, lat2, lon2) {
+    const R = 6371000; // 지구 반지름 (미터 단위)
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+
+    const a = 
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c;
+}
+
+// 분(minute)을 받아서 "X시간 Y분" 형식의 문자열로 리턴
+window.formatMinutesToTime = function(minutes) {
+    const hours = Math.floor(minutes / 60);
+    const remainMinutes = minutes % 60;
+
+    let timeText = "";
+    if (hours > 0) {
+        timeText += hours + "시간 ";
+    }
+    timeText += remainMinutes + "분";
+
+    return timeText;
 }
