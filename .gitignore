@@ -4,3 +4,7 @@ TripPocket/target/
 .git
 
 Servers
+
+.classpath
+
+TripPocket/.settings
