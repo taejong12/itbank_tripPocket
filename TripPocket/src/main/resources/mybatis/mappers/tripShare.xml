@@ -71,7 +71,7 @@
         <result property="tripPlanArriveDay" column="trip_plan_arrive_day"/>
         <result property="memberNickname" column="member_nickname"/>
         <!-- 1:N 관계 매핑 -->
-        <collection property="tripDayList" ofType="com.tripPocket.www.tripPlan.dto.TripDayDTO" resultMap="TripDayMap"/>
+        <collection property="tripDayList" ofType="com.tripPocket.www.tripPlan.dto.TripDayDTO" resultMap="tripDayMap"/>
     </resultMap>
     
 	<select id="selectList" parameterType="tripShareDTO" resultMap="TripShareMap">
