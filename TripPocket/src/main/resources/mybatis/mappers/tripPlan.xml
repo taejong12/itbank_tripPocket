@@ -4,8 +4,7 @@
 
 <mapper namespace="mapper.trip.plan">
 
-
-	<insert id="insertPlan" parameterType="tripPlanDTO">
+	<insert id="insertPlan" parameterType="tripPlanDTO" useGeneratedKeys="true" keyProperty="tripPlanId" keyColumn="trip_plan_id">
 		insert into trip_plan(
 			trip_plan_title,
 			trip_plan_content,
@@ -43,6 +42,7 @@
 			trip_day_address,
 			trip_day_date,
 			trip_day_image,
+			trip_day_content_id,
 			trip_plan_id,
 			trip_day_mapx,
 			trip_day_mapy
@@ -52,6 +52,7 @@
 			#{tripDayAddress},
 			#{tripDayDate},
 			#{tripDayImage},
+			#{tripDayContentId},
 			#{tripPlanId},
 			#{tripDayMapx},
 			#{tripDayMapy}

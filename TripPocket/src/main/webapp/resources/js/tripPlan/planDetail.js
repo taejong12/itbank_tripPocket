@@ -30,7 +30,7 @@ window.fu_tripPeriod = function(startDate, endDate, tripPlanId, tripDayList) {
         tripDayFilterList.forEach((tripDayDTO, i) => {
         	
         	html += "<li id='" + tripDayDTO.tripDayId + "' class='trip-day-id'>";
-			html += "<span class='trip-day-index'>" + index + "</span>";
+			
         
 	        // 지도 위치 정보 저장해두기
             if (tripDayDTO.tripDayMapx && tripDayDTO.tripDayMapy) {
@@ -43,16 +43,30 @@ window.fu_tripPeriod = function(startDate, endDate, tripPlanId, tripDayList) {
                 });
             }
             
-            // 대체이미지 추가
-            const imageSrc = tripDayDTO.tripDayImage ? tripDayDTO.tripDayImage : contextPath+"/resources/img/logo/alt_image.png";
+            //http 에러 -> https 수정
+			let imageUrl = tripDayDTO.tripDayImage;
+			if (imageUrl && imageUrl.startsWith("http://")) {
+			    imageUrl = imageUrl.replace("http://", "https://");
+			}
             
+            // 대체 이미지 경로
+			const altImageSrc = contextPath+"/resources/img/logo/alt_image.png";
+            // 이미지 처리
+            const imageSrc = imageUrl ? imageUrl : altImageSrc;
+            const contentIdUrl = contextPath+"/tripDestination/detail.do?contentId="+tripDayDTO.tripDayContentId;
+            
+            console.log("contentIdUrl: "+contentIdUrl);
+            
+	        html += '<a target="_blank" class="trip-destination-link" href="'+contentIdUrl+'">';
+            html += "<span class='trip-day-index'>" + index + "</span>";
 	        html += "<div class='trip-day-div'>";
-	        html += "<img src='" + imageSrc + "' class='trip-day-img' alt='이미지 없음' onerror='this.onerror=null; this.src=\"" + contextPath + "/resources/img/logo/alt_image.png\";'>";
+	        html += "<img src='" + imageSrc + "' class='trip-day-img' alt='이미지 없음' onerror='this.onerror=null; this.src=\"" + altImageSrc+ "\";'>";
 	        html += "<div class='trip-day-place-address-div'>";
 	        html += "<span class='trip-day-place'>" + tripDayDTO.tripDayPlace + "</span>";
 	        html += "<span class='trip-day-address'>" + tripDayDTO.tripDayAddress + "</span>";
 	        html += "</div>";
 	        html += "</div>";
+	        html += '</a>';
 	        html += "<button onclick=\"fu_deleteTripDay('" + tripDayDTO.tripDayId + "', '" +tripDayDay +"')\" class='trip-day-delete-btn'>삭제</button>";
 	        html += "</li>";
 	        
@@ -69,7 +83,7 @@ window.fu_tripPeriod = function(startDate, endDate, tripPlanId, tripDayList) {
 		});
 		
         html += "</ul>";
-        html += "<button onclick=\"fu_openTripSearchPopup(" + tripDayDay + ", '" + tripDayDate + "', " + tripPlanId + ")\">장소추가(팝업)</button>";
+        html += "<button class='plan-search-popup-btn' onclick=\"fu_openTripSearchPopup(" + tripDayDay + ", '" + tripDayDate + "', " + tripPlanId + ")\">장소추가(팝업)</button>";
         html += "</li>";
 
         // 날짜 +1일 증가
@@ -125,6 +139,7 @@ window.fu_insertTripDay = function(keyword, tripDayDay, tripDayDate, tripPlanId)
         tripDayAddress: keyword.addr1,
         tripDayDate: tripDayDate,
         tripDayImage: imageUrl,
+        tripDayContentId: keyword.contentid,
         tripPlanId: tripPlanId,
         tripDayMapx: keyword.mapx,
         tripDayMapy: keyword.mapy
@@ -194,7 +209,7 @@ window.fu_insertTripDay = function(keyword, tripDayDay, tripDayDate, tripPlanId)
 		imgPlaceAddrDiv.classList.add("trip-day-div");
 		imgPlaceAddrDiv.appendChild(imgQuery);
 		imgPlaceAddrDiv.appendChild(placeAddressDiv);
-        
+		
         // mapx, mapy 값을 히든 인풋으로 추가
 		let hiddenMapX = document.createElement("input");
 		hiddenMapX.type = "hidden";
@@ -245,9 +260,19 @@ window.fu_insertTripDay = function(keyword, tripDayDay, tripDayDate, tripPlanId)
 			distanceDiv.appendChild(arrowSpan);
 		}
 
+		const contentIdUrl = contextPath+"/tripDestination/detail.do?contentId="+keyword.contentid;
+
+		// 관광지 링크 태그
+		let tripDestinationLink = document.createElement("a");
+		tripDestinationLink.classList.add("trip-destination-link");
+        tripDestinationLink.href = contentIdUrl;
+        tripDestinationLink.target= "_blank";
+        
+        tripDestinationLink.appendChild(indexSpan);
+        tripDestinationLink.appendChild(imgPlaceAddrDiv);
+		
         // 요소 추가
-		tripDayIdQuery.appendChild(indexSpan);
-		tripDayIdQuery.appendChild(imgPlaceAddrDiv);
+		tripDayIdQuery.appendChild(tripDestinationLink);
 		tripDayIdQuery.appendChild(hiddenMapX);
 		tripDayIdQuery.appendChild(hiddenMapY);
 		tripDayIdQuery.appendChild(deleteButton);
@@ -390,9 +415,7 @@ window.fu_deleteTripDay = function(tripDayId, tripDayDay) {
 		            distanceDiv.remove();
 		        }
 		    }
-	        
 	    });
-        
     })
     .catch(error => {
         console.error("여행장소삭제 오류 발생:", error);

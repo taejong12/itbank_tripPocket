@@ -12,6 +12,7 @@ public class TripDayDTO {
 	private String tripDayImage;
 	private double tripDayMapx;
 	private double tripDayMapy;
+	private String tripDayContentId;
 	private Integer tripPlanId;
 	private Date tripPlanAddDate;
 	private Date tripPlanModDate;
@@ -65,6 +66,12 @@ public class TripDayDTO {
 	}
 	public void setTripDayMapy(double tripDayMapy) {
 		this.tripDayMapy = tripDayMapy;
+	}
+	public String getTripDayContentId() {
+		return tripDayContentId;
+	}
+	public void setTripDayContentId(String tripDayContentId) {
+		this.tripDayContentId = tripDayContentId;
 	}
 	public Integer getTripPlanId() {
 		return tripPlanId;

@@ -1,16 +1,6 @@
 @charset "UTF-8";
 
-/* 전체 페이지 스타일 */
-#tripDetailPage {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f9;
-    margin: 0;
-    padding: 20px;
-    
-}
-
-/* 여행 일정 리스트 */
-#tripDetailPage #trip-day-list {
+#trip-day-list {
     list-style: none;
     padding: 0;
     max-width: 600px;
@@ -18,7 +8,7 @@
 }
 
 /* 개별 DAY 박스 */
-#tripDetailPage #trip-day-list li {
+#trip-day-list li {
     background: white;
     border-radius: 10px;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
@@ -31,14 +21,16 @@
 .trip-plan-title {
   font-size: 2.2rem;
   font-weight: 700;
-  color: #ffffff; /* 흰색 글씨 */
+  color: #2b6cb0; /* 여행 느낌 나는 파란색 (하늘색 계열) */
   text-align: center;
   margin: 30px auto 20px;
   padding-bottom: 10px;
-  border-bottom: 3px solid rgba(255, 255, 255, 0.5); /* 연한 흰색 경계선 */
+  border-bottom: 3px solid #90cdf4; /* 연한 하늘색 경계선 */
   width: fit-content;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* 살짝 그림자 줘서 더 잘 보이게 */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* 약한 그림자 */
+  font-family: 'Segoe UI', 'Noto Sans KR', sans-serif;
 }
+
 
 /* 여행 일정 리스트 (내부) */
 .tripDayList {
@@ -136,7 +128,7 @@
 }
 
 /* 장소 추가 버튼 */
-#tripDetailPage button {
+.plan-search-popup-btn {
     background: #007bff;
     color: white;
     border: none;
@@ -147,7 +139,7 @@
     margin-top: 10px;
 }
 
-#tripDetailPage button:hover {
+.plan-search-popup-btn button:hover {
     background: #0056b3;
 }
 
@@ -196,4 +188,9 @@
     font-size: 13px;
     color: #333;
     box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.trip-destination-link{
+	text-decoration: none;
+	color: inherit; 
 }

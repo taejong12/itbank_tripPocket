@@ -70,9 +70,9 @@ public class TripPlanController {
 	    }
 		
 		tripPlanDTO.setMemberId(memberDTO.getMemberId());
-		tripPlanService.insertPlan(tripPlanDTO);
+		int tripPlanId = tripPlanService.insertPlan(tripPlanDTO);
 		
-		return "redirect:/trip/planList.do";
+		return "redirect:/trip/planDetail.do?tripPlanId="+tripPlanId;
 	}
 	
 	@RequestMapping("/planDetail.do")
