@@ -69,13 +69,12 @@ public class TripShareController {
 	
 	@RequestMapping(value = "/shareForm.do", method = RequestMethod.GET)
 	public String writeForm(@ModelAttribute()TripShareDTO tripShareDTO, Model model,HttpServletRequest request) {
-		HttpSession session = request.getSession();
 		MemberDTO member = (MemberDTO) request.getSession().getAttribute("member");
-		 List<TripPlanDTO> planList = tripShareService.getTripPlansByMemberId(member.getMemberId());
+		List<TripPlanDTO> planList = tripShareService.getTripPlansByMemberId(member.getMemberId());
 		 
-		 model.addAttribute("tripPlanList", planList);
+		model.addAttribute("tripPlanList", planList);
 	   
-		 return "tripShare/shareForm"; // Tiles 설정상 이게 view 이름일 것
+		return "tripShare/shareForm"; // Tiles 설정상 이게 view 이름일 것
 	}
 	
 	 @RequestMapping("/getTripDays.do")
@@ -88,8 +87,9 @@ public class TripShareController {
     }
 	 
 	@RequestMapping(value = "/write.do", method = RequestMethod.GET)
-	public String write(@ModelAttribute()TripShareDTO tripShareDTO, Model model) {
-	   
+	public String write(@ModelAttribute()TripShareDTO tripShareDTO, HttpServletRequest request, Model model) {
+		MemberDTO member = (MemberDTO) request.getSession().getAttribute("member");
+		tripShareDTO.setMemberId(member.getMemberId());
 		tripShareService.write(tripShareDTO);
 	   
 	    return "redirect:/share/myShare.do"; // Tiles 설정상 이게 view 이름일 것

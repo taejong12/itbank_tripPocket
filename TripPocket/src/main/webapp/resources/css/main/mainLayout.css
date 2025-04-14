@@ -72,7 +72,7 @@ body {
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background-image: url('/www/resources/img/back/back_sky.png');
+	background-image: url('../../img/back/back_sky.png');
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;

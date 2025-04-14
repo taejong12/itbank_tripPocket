@@ -55,8 +55,6 @@ window.fu_tripPeriod = function(startDate, endDate, tripPlanId, tripDayList) {
             const imageSrc = imageUrl ? imageUrl : altImageSrc;
             const contentIdUrl = contextPath+"/tripDestination/detail.do?contentId="+tripDayDTO.tripDayContentId;
             
-            console.log("contentIdUrl: "+contentIdUrl);
-            
 	        html += '<a target="_blank" class="trip-destination-link" href="'+contentIdUrl+'">';
             html += "<span class='trip-day-index'>" + index + "</span>";
 	        html += "<div class='trip-day-div'>";

@@ -103,8 +103,7 @@
                         '<h3>Day ' + day.tripDayDay + ' - ' + day.tripDayDate + '</h3>' +
                         '<p>📍 ' + day.tripDayAddress + '</p>' +
                         imageTag +
-                        '<label>여행 후기</label>' +
-                        '<textarea name="tripShareContent" rows="4" data-key="' + key + '" data-day="' + day.tripDayDay + '">' + savedContent + '</textarea>' +
+                        '<textarea name="tripShareContent" rows="4" data-key="' + key + '" data-day="' + day.tripDayDay + '"placeholder="추억을 여기에 남겨보세요! 다른 사람에게도 큰 도움이 될 거예요 ☺️">' + savedContent + '</textarea>' +
                         '</div>';
 
                     container.append(html);
@@ -212,11 +211,11 @@
 </head>
 <body>
 <div class="container">
-    <h2>여행 공유 글쓰기</h2>
+    <h2>나의 여행 글 쓰기</h2>
     <form:form modelAttribute="tripShareDTO" method="get" action="${contextPath}/share/write.do">
-        <label>여행 계획 선택</label>
+        <label>✈️ 공유하고 싶은 나의 여행을 골라주세요</label>
         <form:select path="tripPlanId">
-            <form:option value="" label="-- 선택하세요 --" />
+            <form:option value="" label="📌 기억에 남는 여행을 선택해주세요" />
             <c:forEach var="plan" items="${tripPlanList}">
                 <form:option value="${plan.tripPlanId}">${plan.tripPlanTitle}</form:option>
             </c:forEach>

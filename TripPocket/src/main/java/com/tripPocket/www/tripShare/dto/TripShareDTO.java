@@ -17,13 +17,14 @@ public class TripShareDTO {
 	private Date tripPlanStartDay;
 	private Date tripPlanArriveDay;
 	private List<TripDayDTO> tripDayList; 
-	private String memberNickname;
+	private String memberId;
 	
-	public String getMemberNickname() {
-		return memberNickname;
+	
+	public String getMemberId() {
+		return memberId;
 	}
-	public void setMemberNickname(String memberNickname) {
-		this.memberNickname = memberNickname;
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
 	}
 	public Date getTripPlanStartDay() {
 		return tripPlanStartDay;

@@ -69,7 +69,7 @@
         <result property="tripShareModDate" column="trip_share_mod_date"/>
         <result property="tripPlanStartDay" column="trip_plan_start_day"/>
         <result property="tripPlanArriveDay" column="trip_plan_arrive_day"/>
-        <result property="memberNickname" column="member_nickname"/>
+        <result property="memberId" column="member_id"/>
         <!-- 1:N 관계 매핑 -->
         <collection property="tripDayList" ofType="com.tripPocket.www.tripPlan.dto.TripDayDTO" resultMap="tripDayMap"/>
     </resultMap>
@@ -101,13 +101,15 @@
 	        trip_share_title,
 	        trip_plan_id,
 	        trip_share_add_date,
-	        trip_share_mod_date
+	        trip_share_mod_date,
+	        member_id
 	    	) VALUES (
 	        #{tripShareId},
 	        #{tripShareTitle},
 	        #{tripPlanId, jdbcType=INTEGER},
 	        SYSDATE,
-	        SYSDATE
+	        SYSDATE,
+	        #{memberId}
 	    	)
     </insert>
 
@@ -169,8 +171,7 @@
 	        td.trip_day_mapy,  
 	
 		    tsc.trip_share_content,
-	
-		    m.member_nickname  <!-- ✅ 작성자 닉네임 추가 -->
+			ts.member_id
 	
 		FROM trip_share ts
 		JOIN trip_plan tp 
@@ -217,7 +218,8 @@
 		  trip_day_date,
 		  trip_day_place,
 		  trip_day_mapy,
-		  trip_day_mapx
+		  trip_day_mapx,
+		  trip_day_content_id
 		)
 		SELECT
 		  #{tripPlanId},
@@ -227,7 +229,8 @@
 		  td.trip_day_date,
 		  td.trip_day_place,
 		  td.trip_day_mapy,
-		  td.trip_day_mapx
+		  td.trip_day_mapx,
+		  td.trip_day_content_id
 		FROM trip_day td
 		WHERE td.trip_plan_id = (
 		  SELECT trip_plan_id FROM trip_share WHERE trip_share_id = #{tripShareId}
