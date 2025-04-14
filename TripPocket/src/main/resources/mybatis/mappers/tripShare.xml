@@ -217,7 +217,8 @@
 		  trip_day_date,
 		  trip_day_place,
 		  trip_day_mapy,
-		  trip_day_mapx
+		  trip_day_mapx,
+		  trip_day_content_id
 		)
 		SELECT
 		  #{tripPlanId},
@@ -227,7 +228,8 @@
 		  td.trip_day_date,
 		  td.trip_day_place,
 		  td.trip_day_mapy,
-		  td.trip_day_mapx
+		  td.trip_day_mapx,
+		  td.trip_day_content_id
 		FROM trip_day td
 		WHERE td.trip_plan_id = (
 		  SELECT trip_plan_id FROM trip_share WHERE trip_share_id = #{tripShareId}
