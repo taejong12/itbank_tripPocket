@@ -50,7 +50,7 @@
 <div class="container">
     <h1>${share.tripShareTitle}</h1>
     <div class="meta">
-        <strong>작성자:</strong> ${member.memberNickname} <br>
+        <strong>작성자:</strong> ${share.memberId} <br>
         <strong>여행 기간:</strong>
         <fmt:formatDate value="${share.tripPlanStartDay}" pattern="yyyy-MM-dd" /> ~
         <fmt:formatDate value="${share.tripPlanArriveDay}" pattern="yyyy-MM-dd" />
