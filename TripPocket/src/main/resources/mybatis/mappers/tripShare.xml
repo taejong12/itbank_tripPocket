@@ -185,26 +185,23 @@
 	</select>
 	
 	<insert id="insertTripPlanFromShare" parameterType="map">
-	  <selectKey keyProperty="tripPlanId" resultType="long" order="BEFORE">
-		SELECT trip_plan_seq.NEXTVAL FROM dual
-	  </selectKey>
-		  INSERT INTO trip_plan (
-		    trip_plan_id,
-		    member_id,
-		    trip_plan_title,
-		    trip_plan_start_day,
-		    trip_plan_arrive_day
-		  )
-		  SELECT
-		    #{tripPlanId},
-		    #{memberId},
-		    ts.trip_share_title,
-		    tp.trip_plan_start_day,
-		    tp.trip_plan_arrive_day
-		  FROM trip_share ts
-		  JOIN trip_plan tp ON ts.trip_plan_id = tp.trip_plan_id
-		  WHERE ts.trip_share_id = #{tripShareId}
-	</insert>
+    INSERT INTO trip_plan (
+        
+        member_id,
+        trip_plan_title,
+        trip_plan_start_day,
+        trip_plan_arrive_day
+    )
+    SELECT 
+        
+        #{memberId},
+        ts.trip_share_title,
+        tp.trip_plan_start_day,
+        tp.trip_plan_arrive_day
+    FROM trip_share ts
+    JOIN trip_plan tp ON ts.trip_plan_id = tp.trip_plan_id
+    WHERE ts.trip_share_id = #{tripShareId}
+</insert>
 	
 	<insert id="insertTripDaysFromShare" parameterType="map">
 		INSERT INTO trip_day (
@@ -212,14 +209,20 @@
 		  trip_day_day,
 		  trip_day_address,
 		  trip_day_image,
-		  trip_day_date
+		  trip_day_date,
+		  trip_day_place,
+		  trip_day_mapy,
+		  trip_day_mapx
 		)
 		SELECT
 		  #{tripPlanId},
 		  td.trip_day_day,
 		  td.trip_day_address,
 		  td.trip_day_image,
-		  td.trip_day_date
+		  td.trip_day_date,
+		  td.trip_day_place,
+		  td.trip_day_mapy,
+		  td.trip_day_mapx
 		FROM trip_day td
 		WHERE td.trip_plan_id = (
 		  SELECT trip_plan_id FROM trip_share WHERE trip_share_id = #{tripShareId}
@@ -249,12 +252,10 @@
     </select>
 
     <!-- 작성자 정보 조회 -->
-    <select id="getWriterByShareId" parameterType="int" resultMap="TripDayMap">
-        SELECT m.*
-        FROM member m
-        JOIN trip_plan tp ON m.member_id = tp.member_id
-        JOIN trip_share ts ON tp.trip_plan_id = ts.trip_plan_id
-        WHERE ts.trip_share_id = #{tripShareId}
-    </select>
+    <select id="selectLatestTripPlanId" parameterType="string" resultType="long">
+    SELECT MAX(trip_plan_id)
+    FROM trip_plan
+    WHERE member_id = #{memberId}
+</select>
 	
 </mapper>

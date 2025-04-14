@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
@@ -91,9 +91,9 @@
         </c:if>
     </c:forEach>
 
-    <a class="back-link" href="${contextPath}/share/list.do">← 전체 여행 목록으로</a>
+    <a class="back-link" href="${contextPath}/share/shareList.do">← 전체 여행 목록으로</a>
 </div>
-
+	 <a class="" href="${contextPath}/share/shareImport.do?tripShareId=${share.tripShareId}&tripPlanId=${share.tripPlanId}">불러오기</a>
 <script>
     const groupedDays = {};
     const tempList = [];

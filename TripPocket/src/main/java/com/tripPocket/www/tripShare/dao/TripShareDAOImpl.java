@@ -62,23 +62,15 @@ public class TripShareDAOImpl implements TripShareDAO{
 
 	@Override
 	public void simpleInsertPlanAndDays(Long tripShareId, String memberId) {
-	    // 1. 파라미터를 map으로 준비
+	    // 1. 파라미터 맵 준비
 	    Map<String, Object> paramMap = new HashMap<String, Object>();
 	    paramMap.put("tripShareId", tripShareId);
 	    paramMap.put("memberId", memberId);
 
-	    // 2. 공유글 기반으로 내 계획(plan) 복사
-	    // 이 시점에 selectKey로 tripPlanId가 paramMap에 자동으로 들어감
+	    // 2. trip_plan 삽입
 	    session.insert("mapper.trip.share.insertTripPlanFromShare", paramMap);
-
-	    // 3. 새로 생성된 tripPlanId를 꺼내서 확인
-	    Long newPlanId = (Long) paramMap.get("tripPlanId");
-	    System.out.println("✅ 생성된 내 planId: " + newPlanId);
-
-	    // 4. day 복사 시 사용할 planId를 다시 map에 담아줌
-	    paramMap.put("tripPlanId", newPlanId);
-
-	    // 5. 공유된 day 데이터 → 내 계획에 복사
+	    Long newTripPlanId = session.selectOne("mapper.trip.share.selectLatestTripPlanId", memberId);
+	    paramMap.put("tripPlanId", newTripPlanId);
 	    session.insert("mapper.trip.share.insertTripDaysFromShare", paramMap);
 	}
 
@@ -101,6 +93,9 @@ public class TripShareDAOImpl implements TripShareDAO{
 	public MemberDTO getWriterByShareId(int tripShareId) {
 		return session.selectOne("mapper.trip.share.getWriterByShareId", tripShareId);
 	}
+	
+	
+	
 
 	
 
