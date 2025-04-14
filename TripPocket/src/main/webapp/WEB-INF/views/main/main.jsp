@@ -6,6 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Trip Pocket">
+<meta property="og:description" content="나만의 여행 계획">
+<meta property="og:image" content="https://trippocket.duckdns.org/resources/img/logo/alt_image.png">
+<meta property="og:url" content="https://trippocket.duckdns.org/">
 <title>Trip Pocket Intro</title>
 
 </head>
