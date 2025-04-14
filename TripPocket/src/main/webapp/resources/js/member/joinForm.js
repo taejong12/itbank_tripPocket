@@ -144,7 +144,7 @@ function fn_joinForm(event) {
 	// 1단계: 전체 허용 문자 체크 (한글, 영어, 숫자, 공백만)
 	var nicknamePattern = /^[가-힣a-zA-Z0-9 ]+$/;
 	if (!nicknamePattern.test(nickname)) {
-	    alert("닉네임은 한글, 영어, 숫자 사용할 수 있어요. (특수문자 불가)");
+	    alert("닉네임은 한글, 영어, 숫자만 사용 가능합니다. (특수문자 불가)");
 	    form.memberNickname.focus();
 	    return false;
 	}
@@ -152,17 +152,17 @@ function fn_joinForm(event) {
 	// 2단계: 의미 있는 글자 존재 체크 (한글, 영어, 숫자 중 하나 이상)
 	var meaningfulPattern = /[가-힣a-zA-Z0-9]/;
 	if (!meaningfulPattern.test(nickname)) {
-	    alert("닉네임에는 (공백포함) 한글, 영어, 숫자 중 하나 이상이 포함되어야 해요.");
+	    alert("닉네임에는 (공백 포함) 한글, 영어, 숫자 중 하나 이상이 포함되어야 합니다.");
 	    form.memberNickname.focus();
 	    return false;
 	}
 
     // 전화번호
     var tel = form.memberTel.value.trim();
-	var telPattern = /^010-\d{4}-\d{4}$/;
+	var telPattern = /^(010\d{4}\d{4}|\d{11})$/;
 	
 	if (!telPattern.test(tel)) {
-	    alert("전화번호 형식을 확인해 주세요.\n(예: 010-1234-5678)");
+	    alert("전화번호 형식을 확인해 주세요.\n(예: 01012345678)");
 	    form.memberTel.focus();
 	    return false;
 	}
@@ -180,21 +180,27 @@ function fn_joinForm(event) {
     form.submit();
 }
 
-// 휴대전화번호 자동 하이픈 삽입 + 최대 11자리 숫자 제한
+// 휴대전화번호 입력 제한 + 최대 11자리 숫자 제한
 document.addEventListener("DOMContentLoaded", function () {
     const telInput = document.querySelector("input[name='memberTel']");
 
     if (telInput) {
-        telInput.addEventListener("input", function () {
+        telInput.addEventListener("input", function (e) {
             let value = this.value.replace(/\D/g, ""); // 숫자만 추출
             if (value.length > 11) value = value.slice(0, 11); // 11자리 초과 방지
 
-            if (value.length <= 3) {
-                this.value = value;
-            } else if (value.length <= 7) {
-                this.value = value.replace(/(\d{3})(\d+)/, "$1-$2");
+            const startPos = this.selectionStart; // 커서의 시작 위치
+            const endPos = this.selectionEnd; // 커서의 끝 위치
+
+            this.value = value; // 하이픈 없이 숫자만 입력
+
+            // 커서 위치 재조정
+            if (startPos === endPos) {
+                // 커서가 위치한 곳에 맞춰 커서를 이동
+                this.setSelectionRange(startPos, startPos);
             } else {
-                this.value = value.replace(/(\d{3})(\d{4})(\d{0,4})/, "$1-$2-$3");
+                // 커서가 선택된 상태일 경우, 끝으로 이동
+                this.setSelectionRange(this.value.length, this.value.length);
             }
         });
     }

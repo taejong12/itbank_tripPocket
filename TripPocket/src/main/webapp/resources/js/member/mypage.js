@@ -74,9 +74,9 @@ function mypageForm(event) {
 			    document.getElementById('tel-input').focus();
 			    return false;
 			}
-			const telPattern = /^010-\d{4}-\d{4}$/;
+			const telPattern = /^(010\d{4}\d{4}|\d{11})$/;
 			if (!telPattern.test(tel)) {
-			    alert("전화번호를 010-1234-5678 형식으로 입력해 주세요.");
+			    alert("전화번호를 01012345678 형식으로 입력해 주세요.");
 			    document.getElementById('tel-input').focus();
 			    return false;
 			}
@@ -95,30 +95,26 @@ function mypageForm(event) {
     return true;
 }
 
-// 휴대전화번호 자동 하이픈 포맷터 + 최대 13자리 제한 (010-0000-0000)
-function formatPhoneNumber(value) {
-    value = value.replace(/\D/g, ''); // 숫자 외 제거
-
-    if (value.length > 11) {
-        value = value.slice(0, 11); // 11자리까지만 허용
-    }
-
-    if (value.length <= 3) {
-        return value;
-    } else if (value.length <= 7) {
-        return value.slice(0, 3) + '-' + value.slice(3);
-    } else {
-        return value.slice(0, 3) + '-' + value.slice(3, 7) + '-' + value.slice(7);
-    }
-}
-
-// 이벤트 연결
+// 전화번호 입력 제한 + 최대 11자리 숫자 제한
 document.addEventListener('DOMContentLoaded', function () {
     const telInput = document.getElementById('tel-input');
     if (telInput) {
-        telInput.addEventListener('input', function () {
-            const numericOnly = telInput.value.replace(/\D/g, '').slice(0, 11); // 최대 11자리
-            telInput.value = formatPhoneNumber(numericOnly);
+        telInput.addEventListener('input', function (e) {
+            const start = telInput.selectionStart; // 커서 위치 기록
+            let value = telInput.value.replace(/\D/g, '').slice(0, 11); // 최대 11자리
+
+            // 전화번호 형식은 하이픈 없이 숫자만 입력하도록
+            telInput.value = value; // 변경된 값을 input에 적용
+
+            // 커서 위치 복원
+            const end = telInput.selectionEnd;
+            if (start === end) {
+                // 커서가 선택된 상태가 아니라면, 커서를 이동시킨 위치 그대로 유지
+                telInput.setSelectionRange(start, start);
+            } else {
+                // 커서가 선택된 상태일 때 끝으로 이동
+                telInput.setSelectionRange(value.length, value.length);
+            }
         });
     }
 });
