@@ -71,7 +71,7 @@
         <result property="tripPlanArriveDay" column="trip_plan_arrive_day"/>
         <result property="memberNickname" column="member_nickname"/>
         <!-- 1:N 관계 매핑 -->
-        <collection property="tripDayList" ofType="com.tripPocket.www.tripPlan.dto.TripDayDTO" resultMap="tripDayMap"/>
+        <collection property="tripDayList" ofType="com.tripPocket.www.tripPlan.dto.TripDayDTO" resultMap="TripDayMap"/>
     </resultMap>
     
 	<select id="selectList" parameterType="tripShareDTO" resultMap="TripShareMap">
@@ -246,7 +246,7 @@
     </select>
 
    <!-- 여행 일차별 상세 목록 조회 (trip_share_id로) -->
-    <select id="getTripDayDetailList" parameterType="int" resultType="TripDayMap">
+    <select id="getTripDayDetailList" parameterType="int" resultMap="TripDayMap">
         SELECT td.*, tsc.trip_share_content
         FROM trip_day td
         JOIN trip_plan tp ON td.trip_plan_id = tp.trip_plan_id
