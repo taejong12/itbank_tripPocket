@@ -34,25 +34,31 @@
 	    <result property="tripPlanModDate" column="trip_plan_mod_date"/>
 	</resultMap>
 
-	<resultMap id="TripDayMap" type="com.tripPocket.www.tripPlan.dto.TripDayDTO">
+	<resultMap id="TripDayMap" type="tripDayDTO">
         <id property="tripDayId" column="trip_day_id"/>
         <result property="tripDayDay" column="trip_day_day"/>
         <result property="tripDayAddress" column="trip_day_Address"/>
         <result property="tripDayDate" column="trip_day_date"/>
         <result property="tripDayImage" column="trip_day_image"/>
+        <result property="tripDayPlace" column="trip_day_place" />
         <result property="tripPlanId" column="trip_plan_id"/>
+        <result property="tripDayMapx" column="trip_day_mapx"/>
+    	<result property="tripDayMapy" column="trip_day_mapy"/>
         <result property="tripPlanAddDate" column="trip_plan_add_date"/>
         <result property="tripPlanModDate" column="trip_plan_mod_date"/>
     </resultMap>
     
     <resultMap id="tripDayMap" type="com.tripPocket.www.tripPlan.dto.TripDayDTO">
         <id property="tripDayId" column="trip_day_id"/>
-        <result property="tripDayDay" column="trip_day_day"/>
-        <result property="tripDayDate" column="trip_day_date"/>
-        <result property="tripDayAddress" column="trip_day_Address"/>
-        <result property="tripDayImage" column="trip_day_image"/>
-        <result property="tripShareContent" column="trip_share_content"/>
-    </resultMap>
+	    <result property="tripDayDay" column="trip_day_day"/>
+	    <result property="tripDayDate" column="trip_day_date"/>
+	    <result property="tripDayAddress" column="trip_day_Address"/>
+	    <result property="tripDayPlace" column="trip_day_place" />
+	    <result property="tripDayImage" column="trip_day_image"/>
+	    <result property="tripDayMapx" column="trip_day_mapx"/>
+	    <result property="tripDayMapy" column="trip_day_mapy"/>
+	    <result property="tripShareContent" column="trip_share_content"/>
+	</resultMap>
 
     <!-- TripShareDTO 매핑 -->
     <resultMap id="TripShareResultMap" type="com.tripPocket.www.tripShare.dto.TripShareDTO">
@@ -157,7 +163,10 @@
 		    td.trip_day_day,
 		    td.trip_day_date,
 		    td.trip_day_address,
+		    td.trip_day_place,
 		    td.trip_day_image,
+		    td.trip_day_mapx,           <!-- 추가 -->
+	        td.trip_day_mapy,  
 	
 		    tsc.trip_share_content,
 	
@@ -181,25 +190,22 @@
 
 	
 	<insert id="insertTripPlanFromShare" parameterType="map">
-	  <selectKey keyProperty="tripPlanId" resultType="long" order="BEFORE">
-		SELECT trip_plan_seq.NEXTVAL FROM dual
-	  </selectKey>
 		  INSERT INTO trip_plan (
-		    trip_plan_id,
-		    member_id,
-		    trip_plan_title,
-		    trip_plan_start_day,
-		    trip_plan_arrive_day
-		  )
-		  SELECT
-		    #{tripPlanId},
-		    #{memberId},
-		    ts.trip_share_title,
-		    tp.trip_plan_start_day,
-		    tp.trip_plan_arrive_day
-		  FROM trip_share ts
-		  JOIN trip_plan tp ON ts.trip_plan_id = tp.trip_plan_id
-		  WHERE ts.trip_share_id = #{tripShareId}
+	        
+	        member_id,
+	        trip_plan_title,
+	        trip_plan_start_day,
+	        trip_plan_arrive_day
+	    )
+	    SELECT 
+	        
+	        #{memberId},
+	        ts.trip_share_title,
+	        tp.trip_plan_start_day,
+	        tp.trip_plan_arrive_day
+	    FROM trip_share ts
+	    JOIN trip_plan tp ON ts.trip_plan_id = tp.trip_plan_id
+	    WHERE ts.trip_share_id = #{tripShareId}
 	</insert>
 	
 	<insert id="insertTripDaysFromShare" parameterType="map">
@@ -208,14 +214,20 @@
 		  trip_day_day,
 		  trip_day_address,
 		  trip_day_image,
-		  trip_day_date
+		  trip_day_date,
+		  trip_day_place,
+		  trip_day_mapy,
+		  trip_day_mapx
 		)
 		SELECT
 		  #{tripPlanId},
 		  td.trip_day_day,
 		  td.trip_day_address,
 		  td.trip_day_image,
-		  td.trip_day_date
+		  td.trip_day_date,
+		  td.trip_day_place,
+		  td.trip_day_mapy,
+		  td.trip_day_mapx
 		FROM trip_day td
 		WHERE td.trip_plan_id = (
 		  SELECT trip_plan_id FROM trip_share WHERE trip_share_id = #{tripShareId}
@@ -234,7 +246,7 @@
     </select>
 
    <!-- 여행 일차별 상세 목록 조회 (trip_share_id로) -->
-    <select id="getTripDayDetailList" parameterType="int" resultType="tripDayDTO">
+    <select id="getTripDayDetailList" parameterType="int" resultType="TripDayMap">
         SELECT td.*, tsc.trip_share_content
         FROM trip_day td
         JOIN trip_plan tp ON td.trip_plan_id = tp.trip_plan_id
@@ -245,12 +257,10 @@
     </select>
 
     <!-- 작성자 정보 조회 -->
-    <select id="getWriterByShareId" parameterType="int" resultType="memberDTO">
-        SELECT m.*
-        FROM member m
-        JOIN trip_plan tp ON m.member_id = tp.member_id
-        JOIN trip_share ts ON tp.trip_plan_id = ts.trip_plan_id
-        WHERE ts.trip_share_id = #{tripShareId}
-    </select>
+    <select id="selectLatestTripPlanId" parameterType="string" resultType="long">
+	    SELECT MAX(trip_plan_id)
+	    FROM trip_plan
+	    WHERE member_id = #{memberId}
+	</select>
 	
 </mapper>
