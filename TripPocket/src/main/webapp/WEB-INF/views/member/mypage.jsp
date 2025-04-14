@@ -34,7 +34,7 @@
             <div class="info-item">
                 <span class="label">비밀번호</span>
                 <div class="info-value-row" id="password-display">
-                    <span class="info-value password-value">${member.memberPwd}</span>
+                    <span class="info-value password-value">********</span>
                     <a href="javascript:void(0);" class="edit-link" id="password-button"
                        onclick="showEditField('password')">변경</a>
                 </div>

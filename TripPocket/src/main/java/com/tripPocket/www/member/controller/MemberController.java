@@ -39,6 +39,7 @@ public class MemberController {
 	@RequestMapping(value = "join.do", method = RequestMethod.POST)
 	public String join(@ModelAttribute MemberDTO memberDTO) {
 		memberService.insertMember(memberDTO);
+		System.out.println("test1");
 		return "redirect:/main.do";
 	}
 	

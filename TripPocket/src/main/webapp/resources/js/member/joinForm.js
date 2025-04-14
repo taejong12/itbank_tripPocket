@@ -68,6 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // 최종 제출 처리
 function fn_joinForm(event) {
+console.log("fn_joinForm메서드 실행");
     event.preventDefault();
     var form = document.joinForm;
 
@@ -89,6 +90,7 @@ function fn_joinForm(event) {
         form.memberPwd.focus();
         return false;
     }
+    const password = form.memberPwd.value.trim();
     const specialCharPattern = /[!@#$%^&*(),.?":{}|<>]/;
 	if (!specialCharPattern.test(password)) {
 	    alert("비밀번호에 최소 하나 이상의 특수문자를 포함해 주세요.\n예) !, @, #, $ 등");
@@ -182,6 +184,7 @@ function fn_joinForm(event) {
    alert("회원가입이 완료되었습니다!\n로그인 후 Trip Pocket을 이용해 주세요.");
    
     // 제출
+	form.action = "join.do";
     form.submit();
 }
 
