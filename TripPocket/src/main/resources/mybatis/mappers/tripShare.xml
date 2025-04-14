@@ -257,6 +257,14 @@
     </select>
 
     <!-- 작성자 정보 조회 -->
+     <select id="getWriterByShareId" parameterType="int" resultMap="TripDayMap">
+         SELECT m.*
+         FROM member m
+         JOIN trip_plan tp ON m.member_id = tp.member_id
+         JOIN trip_share ts ON tp.trip_plan_id = ts.trip_plan_id
+         WHERE ts.trip_share_id = #{tripShareId}
+     </select>
+    
     <select id="selectLatestTripPlanId" parameterType="string" resultType="long">
 	    SELECT MAX(trip_plan_id)
 	    FROM trip_plan
