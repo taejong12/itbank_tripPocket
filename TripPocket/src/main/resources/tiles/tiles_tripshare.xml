@@ -24,6 +24,10 @@
 		<put-attribute name="title" value="내 플랜 상세보기" />
 		<put-attribute name="body" value="/WEB-INF/views/tripShare/myDetail.jsp" />
 	</definition>
+	<definition name="tripShare/modForm" extends="common">
+		<put-attribute name="title" value="내 플랜 상세보기" />
+		<put-attribute name="body" value="/WEB-INF/views/tripShare/modForm.jsp" />
+	</definition>
 </tiles-definitions>
 
 

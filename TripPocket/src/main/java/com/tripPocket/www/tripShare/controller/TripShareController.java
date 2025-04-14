@@ -1,8 +1,11 @@
 package com.tripPocket.www.tripShare.controller;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -16,10 +19,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tripPocket.www.member.dto.MemberDTO;
 import com.tripPocket.www.tripPlan.dto.TripDayDTO;
 import com.tripPocket.www.tripPlan.dto.TripPlanDTO;
+import com.tripPocket.www.tripShare.dto.TripShareContentDTO;
 import com.tripPocket.www.tripShare.dto.TripShareDTO;
 import com.tripPocket.www.tripShare.service.TripShareService;
 
@@ -151,4 +156,39 @@ public class TripShareController {
 	    return "tripShare/myDetail"; // → myDetail.jsp로 포워딩
 	}
 	
-}
+	@RequestMapping("/modForm.do")
+	public String modForm(@RequestParam("tripShareId") int tripShareId, Model model) {
+	    TripShareDTO share = tripShareService.getShareDetail(tripShareId);
+	    List<TripDayDTO> detailList = tripShareService.getTripDayDetailList(tripShareId);
+	    MemberDTO member = tripShareService.getWriterByShareId(tripShareId);
+
+	    model.addAttribute("share", share);
+	    model.addAttribute("detailList", detailList);
+	    model.addAttribute("member", member);
+
+	    return "tripShare/modForm"; // → myDetail.jsp로 포워딩
+	}
+	
+	 @RequestMapping("/updateContents.do")
+	    public String updateTripShareContents(@RequestParam("tripShareId") Long tripShareId,
+	                                          @RequestParam("dayContents") List<String> dayContents,
+	                                          @RequestParam("dayIds") List<Long> dayIds,
+	                                          RedirectAttributes redirectAttributes) {
+
+		 List<Map<String, Object>> contentList = new ArrayList<>();
+
+		    for (int i = 0; i < dayIds.size(); i++) {
+		        Map<String, Object> content = new HashMap<>();
+		        content.put("tripShareId", tripShareId);
+		        content.put("tripDayId", dayIds.get(i));
+		        content.put("tripShareContent", dayContents.get(i));
+		        contentList.add(content);
+		    }
+
+		    tripShareService.updateTripShareContents(contentList);
+
+		    redirectAttributes.addFlashAttribute("message", "후기 수정 완료");
+		    return "redirect:/share/myDetail.do?tripShareId=" + tripShareId;
+		}
+	}
+	

@@ -1,6 +1,7 @@
 package com.tripPocket.www.tripShare.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,7 @@ import com.tripPocket.www.member.dto.MemberDTO;
 import com.tripPocket.www.tripPlan.dto.TripDayDTO;
 import com.tripPocket.www.tripPlan.dto.TripPlanDTO;
 import com.tripPocket.www.tripShare.dao.TripShareDAO;
+import com.tripPocket.www.tripShare.dto.TripShareContentDTO;
 import com.tripPocket.www.tripShare.dto.TripShareDTO;
 
 @Service
@@ -105,5 +107,13 @@ public class TripShareServiceImpl implements TripShareService{
 	@Override
 	public MemberDTO getWriterByShareId(int tripShareId) {
 		return tripShareDAO.getWriterByShareId(tripShareId);
+	}
+
+
+
+	@Override
+	public void updateTripShareContents(List<Map<String, Object>> contentList) {
+		tripShareDAO.updateTripShareContents(contentList);
+		
 	}
 }

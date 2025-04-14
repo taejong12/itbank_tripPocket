@@ -238,22 +238,21 @@
 	    DELETE FROM trip_share WHERE trip_share_id = #{tripShareId}
 	</delete>
 	
-	 <!-- 여행 공유 상세 조회 -->
-    <select id="getShareDetail" parameterType="int" resultType="tripShareDTO">
-        SELECT *
-        FROM trip_share
-        WHERE trip_share_id = #{tripShareId}
-    </select>
 
    <!-- 여행 일차별 상세 목록 조회 (trip_share_id로) -->
     <select id="getTripDayDetailList" parameterType="int" resultMap="TripDayMap">
-        SELECT td.*, tsc.trip_share_content
-        FROM trip_day td
-        JOIN trip_plan tp ON td.trip_plan_id = tp.trip_plan_id
-        JOIN trip_share ts ON tp.trip_plan_id = ts.trip_plan_id
-        LEFT JOIN trip_share_content tsc ON td.trip_day_id = tsc.trip_day_id AND ts.trip_share_id = tsc.trip_share_id
-        WHERE ts.trip_share_id = #{tripShareId}
-        ORDER BY td.trip_day_day ASC
+        SELECT td.*, 
+       tsc.trip_share_content, 
+       tp.trip_plan_start_day, 
+       tp.trip_plan_arrive_day
+		FROM trip_day td
+		JOIN trip_plan tp ON td.trip_plan_id = tp.trip_plan_id
+		JOIN trip_share ts ON tp.trip_plan_id = ts.trip_plan_id
+		LEFT JOIN trip_share_content tsc 
+        ON td.trip_day_id = tsc.trip_day_id 
+        AND ts.trip_share_id = tsc.trip_share_id
+		WHERE ts.trip_share_id = #{tripShareId}
+		ORDER BY td.trip_day_day ASC
     </select>
 
     <!-- 작성자 정보 조회 -->
@@ -271,4 +270,11 @@
 	    WHERE member_id = #{memberId}
 	</select>
 	
+	<update id="updateTripShareContent">
+  UPDATE trip_share_content
+  SET trip_share_content = #{tripShareContent}
+  WHERE trip_share_id = #{tripShareId}
+    AND trip_day_id = #{tripDayId}
+</update>
+
 </mapper>

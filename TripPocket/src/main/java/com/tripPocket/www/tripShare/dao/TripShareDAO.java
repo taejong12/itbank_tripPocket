@@ -1,10 +1,14 @@
 package com.tripPocket.www.tripShare.dao;
 
 import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.annotations.Param;
 
 import com.tripPocket.www.member.dto.MemberDTO;
 import com.tripPocket.www.tripPlan.dto.TripDayDTO;
 import com.tripPocket.www.tripPlan.dto.TripPlanDTO;
+import com.tripPocket.www.tripShare.dto.TripShareContentDTO;
 import com.tripPocket.www.tripShare.dto.TripShareDTO;
 
 public interface TripShareDAO {
@@ -32,6 +36,8 @@ public interface TripShareDAO {
 	List<TripDayDTO> getTripDayDetailList(int tripShareId);
 
 	MemberDTO getWriterByShareId(int tripShareId);
+	
+	void updateTripShareContents(@Param("contentList") List<Map<String, Object>> contentList);
 
 
 
