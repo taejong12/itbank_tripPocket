@@ -147,3 +147,8 @@
 .trip-select-btn:hover {
     background-color: #1c86ee;
 }
+
+.trip-destination-link{
+	text-decoration: none;
+	color: inherit; 
+}
