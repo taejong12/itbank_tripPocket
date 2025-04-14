@@ -1,6 +1,3 @@
-var isMemberIdValid = false;
-var isEmailValid = false;
-
 // 아이디 중복 체크
 function fn_memberIdCheck() {
     var memberId = document.joinForm.memberId.value.trim();
@@ -68,7 +65,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // 최종 제출 처리
 function fn_joinForm(event) {
-console.log("fn_joinForm메서드 실행");
     event.preventDefault();
     var form = document.joinForm;
 
@@ -85,15 +81,11 @@ console.log("fn_joinForm메서드 실행");
    }
 
     // 비밀번호
-     if (form.memberPwd.value.trim() === "" || form.memberPwd.value.trim().length < 7) {
-        alert("비밀번호는 최소 8자 이상 입력해 주세요.");
-        form.memberPwd.focus();
-        return false;
-    }
     const password = form.memberPwd.value.trim();
-    const specialCharPattern = /[!@#$%^&*(),.?":{}|<>]/;
-	if (!specialCharPattern.test(password)) {
-	    alert("비밀번호에 최소 하나 이상의 특수문자를 포함해 주세요.\n예) !, @, #, $ 등");
+	const specialCharPattern = /[!@#$%^&*(),.?":{}|<>]/;
+	
+	if (password === "" || password.length < 8 || !specialCharPattern.test(password)) {
+	    alert("비밀번호는 최소 8자 이상, 특수문자(예: !, @, #, $ 등)를 포함해 주세요.");
 	    form.memberPwd.focus();
 	    return false;
 	}
@@ -170,7 +162,7 @@ console.log("fn_joinForm메서드 실행");
 	var telPattern = /^010-\d{4}-\d{4}$/;
 	
 	if (!telPattern.test(tel)) {
-	    alert("전화번호 형식을 확인해 주세요. (예: 010-1234-5678)");
+	    alert("전화번호 형식을 확인해 주세요.\n(예: 010-1234-5678)");
 	    form.memberTel.focus();
 	    return false;
 	}

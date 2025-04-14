@@ -43,17 +43,13 @@ function mypageForm(event) {
     switch (target) {
         case 'password':
             const password = document.getElementById('password-input').value.trim();
-            if (password.length < 8) {
-                alert("비밀번호는 최소 8자 이상 입력해 주세요.");
+            const specialCharPattern = /[!@#$%^&*(),.?":{}|<>]/;
+            // 비밀번호 길이 + 특수문자 검사 합치기
+            if (password.length < 8 || !specialCharPattern.test(password)) {
+                alert("비밀번호는 최소 8자 이상, 특수문자(예: !, @, #, $ 등)를 포함해 주세요.");
                 document.getElementById('password-input').focus();
                 return false;
             }
-            const specialCharPattern = /[!@#$%^&*(),.?":{}|<>]/;
-			if (!specialCharPattern.test(password)) {
-			    alert("비밀번호에 최소 하나 이상의 특수문자를 포함해 주세요.\n예) !, @, #, $ 등");
-			    document.getElementById('password-input').focus();
-			    return false;
-			}
             break;
 
         case 'email':
