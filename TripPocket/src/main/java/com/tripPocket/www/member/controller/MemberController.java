@@ -39,14 +39,11 @@ public class MemberController {
 	@RequestMapping(value = "join.do", method = RequestMethod.POST)
 	public String join(@ModelAttribute MemberDTO memberDTO) {
 		memberService.insertMember(memberDTO);
-		System.out.println("test1");
 		return "redirect:/main.do";
 	}
 	
 	@RequestMapping(value = "login.do", method = RequestMethod.POST)
 	   public ModelAndView login(@ModelAttribute() MemberDTO memberDTO, HttpServletRequest request,HttpServletResponse response) throws Exception {
-	      
-	      
 	      response.setContentType("text/html;charset=utf-8");
 	      MemberDTO member = memberService.login(memberDTO);
 	      HttpSession session = request.getSession();
