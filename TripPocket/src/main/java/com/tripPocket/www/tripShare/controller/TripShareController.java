@@ -123,9 +123,10 @@ public class TripShareController {
 	}
 	
 	@RequestMapping("/shareImport.do")
-	public String importShared(@RequestParam("tripShareId") Long tripShareId,
-	                           @RequestParam("tripPlanId") Long tripPlanId,   // ✅ tripPlanId 추가
-	                           HttpServletRequest request) {
+	public String importShared(
+			@RequestParam("tripShareId") Long tripShareId,
+			@RequestParam("tripPlanId") Long tripPlanId,   // ✅ tripPlanId 추가
+			HttpServletRequest request) {
 		
 	    MemberDTO member = (MemberDTO) request.getSession().getAttribute("member");
 	    if (member == null) return "redirect:/member/loginForm.do";

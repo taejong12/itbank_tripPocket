@@ -90,7 +90,7 @@
             </div>
         </c:if>
     </c:forEach>
-    <a class="back-link" href="${contextPath}/share/myShare.do">← 나의 여행 공유 목록으로</a>
+    <a class="back-link" href="${contextPath}/share/myShare.do">← 나의 여행 글쓰기로</a>
 </div>
 <script>
     const groupedDays = {};
