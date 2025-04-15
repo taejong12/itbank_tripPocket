@@ -14,22 +14,30 @@
 <body class="ListContainer">
 
     <!-- Page Title -->
-    <h1>여행 공유 리스트</h1>
+    <h1>Trip Blog</h1>
     
     <!-- Table Section -->
     <table>
         <thead>
             <tr>
-                <th>번호</th>
+                <th>작성자</th>
                 <th>제목</th>
                 <th>추가 날짜</th>
                 <th>수정 날짜</th>
             </tr>
         </thead>
         <tbody>
+        	 <c:if test="${empty tripShareList}">
+       			<tr>
+		            <td colspan="4" style="text-align: center; padding: 20px; color: #777;">
+		               🗺️ 아직 공유된 여행이 없습니다.<br>
+            			<span style="font-size: 14px;">당신의 첫 여행 이야기를 들려주세요!</span>
+		            </td>
+        		</tr>
+    		</c:if>
             <c:forEach var="share" items="${tripShareList}">
                 <tr>
-                    <td>${share.tripShareId}</td>
+                    <td>${share.memberId}님</td>
                     <td>
                         <a href="${contextPath}/share/shareDetail.do?tripShareId=${share.tripShareId}" class="a">
                             ${share.tripShareTitle}

@@ -1,6 +1,5 @@
 package com.tripPocket.www.tripShare.dao;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Repository;
 import com.tripPocket.www.member.dto.MemberDTO;
 import com.tripPocket.www.tripPlan.dto.TripDayDTO;
 import com.tripPocket.www.tripPlan.dto.TripPlanDTO;
-import com.tripPocket.www.tripShare.dto.TripShareContentDTO;
 import com.tripPocket.www.tripShare.dto.TripShareDTO;
 
 @Repository

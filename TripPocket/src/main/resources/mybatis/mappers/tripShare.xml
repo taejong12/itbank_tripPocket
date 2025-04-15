@@ -11,6 +11,7 @@
 	    <result property="tripPlanId" column="trip_plan_id"/>
 	    <result property="tripShareAddDate" column="trip_share_add_date"/>
 	    <result property="tripShareModDate" column="trip_share_mod_date"/>
+	    <result property="memberId" column="member_id"/>
 	
 	    <collection property="tripDayList" ofType="tripDayDTO">
 	        <id property="tripDayId" column="trip_day_id"/>
@@ -81,8 +82,10 @@
         ts.trip_share_content,
         ts.trip_plan_id,
         ts.trip_share_add_date,
-        ts.trip_share_mod_date
+        ts.trip_share_mod_date,
+		ts.member_id
 	    FROM trip_share ts
+	    ORDER BY ts.trip_share_add_date DESC 
 	</select>
 	
 	<select id="selectDayList" parameterType="tripDayDTO" resultMap="TripDayMap">
@@ -274,10 +277,10 @@
 	</select>
 	
 	<update id="updateTripShareContent">
-  UPDATE trip_share_content
-  SET trip_share_content = #{tripShareContent}
-  WHERE trip_share_id = #{tripShareId}
-    AND trip_day_id = #{tripDayId}
-</update>
+		UPDATE trip_share_content
+		SET trip_share_content = #{tripShareContent}
+		WHERE trip_share_id = #{tripShareId}
+		AND trip_day_id = #{tripDayId}
+	</update>
 
 </mapper>
