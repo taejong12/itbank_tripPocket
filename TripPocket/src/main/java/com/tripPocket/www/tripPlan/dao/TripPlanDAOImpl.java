@@ -56,4 +56,10 @@ public class TripPlanDAOImpl implements TripPlanDAO{
 		return sqlSession.delete("mapper.trip.plan.deleteTripPlanByTripPlanId", tripPlanId);
 	}
 
+	@Override
+	public void deleteTripShare(Integer tripPlanId) {
+		sqlSession.delete("mapper.trip.share.deleteByTripPlanId",tripPlanId);
+		
+	}
+
 }
