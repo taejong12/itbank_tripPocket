@@ -139,4 +139,16 @@ public class TripPlanController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
 		}
 	}
+	
+	@RequestMapping("/selectTripDay.do")
+	public ResponseEntity<Map<String, Object>> selectTripDay(@RequestBody TripDayDTO tripDayDTO) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		List<TripDayDTO> tripDayList = tripPlanService.selectTripDay(tripDayDTO);
+		
+		map.put("tripDayList", tripDayList);
+		
+		return ResponseEntity.ok(map);
+	}
 }
