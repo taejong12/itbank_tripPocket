@@ -41,13 +41,15 @@
 			<li>
 				<a href="${contextPath}/tripDestination/list.do">관광지</a>
 			</li>
-			
             <li><a href="#" onclick="toggleSubmenu(event, 'share-submenu')">여행 블로그</a>
                 <ul class="submenu" id="share-submenu">
                     <li><a href="${contextPath }/share/myShare.do">나의 여행 글 쓰기</a></li> <!-- 나의 여행 글 쓰기 페이지로 이동 -->
                     <li><a href="${contextPath }/share/shareList.do">다른 사용자들의 여행 후기</a></li><!-- 다른 사용자들의 여행리스트 페이지로 이동 -->
                 </ul>
             </li>
+            <li>
+				<a href="${contextPath}/event/random.do">랜덤으로 만나는 특별한 여행지</a>
+			</li>
             <c:if test="${isLogin == true && member != null }">
         		 <li><a href="${contextPath }/member/logout.do">로그아웃</a></li>
         	</c:if>
