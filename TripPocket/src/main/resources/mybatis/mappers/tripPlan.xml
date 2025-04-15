@@ -79,4 +79,11 @@
 		DELETE FROM trip_plan
 		WHERE trip_plan_id = #{tripPlanId}
 	</delete>
+	<select id="selectTripDay" resultType="tripDayDTO" parameterType="tripDayDTO">
+		select *
+		from trip_day
+		where trip_plan_id = #{tripPlanId}
+			and trip_day_day = #{tripDayDay}
+		order by trip_day_id
+	</select>
 </mapper>

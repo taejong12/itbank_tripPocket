@@ -2,8 +2,6 @@ package com.tripPocket.www.tripPlan.dao;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -20,7 +18,6 @@ public class TripPlanDAOImpl implements TripPlanDAO{
 	@Override
 	public int insertPlan(TripPlanDTO tripPlanDTO) {
 		sqlSession.insert("mapper.trip.plan.insertPlan", tripPlanDTO);
-		System.out.println("tripPlanDTO.getTripPlanId(): "+tripPlanDTO.getTripPlanId());
 		return tripPlanDTO.getTripPlanId();
 	}
 
@@ -59,7 +56,10 @@ public class TripPlanDAOImpl implements TripPlanDAO{
 	@Override
 	public void deleteTripShare(Integer tripPlanId) {
 		sqlSession.delete("mapper.trip.share.deleteByTripPlanId",tripPlanId);
-		
+	}
+	
+	public List<TripDayDTO> selectTripDay(TripDayDTO tripDayDTO) {
+		return sqlSession.selectList("mapper.trip.plan.selectTripDay", tripDayDTO);
 	}
 
 }
