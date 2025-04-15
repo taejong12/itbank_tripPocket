@@ -24,7 +24,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.tripPocket.www.member.dto.MemberDTO;
 import com.tripPocket.www.tripPlan.dto.TripDayDTO;
 import com.tripPocket.www.tripPlan.dto.TripPlanDTO;
-import com.tripPocket.www.tripShare.dto.TripShareContentDTO;
 import com.tripPocket.www.tripShare.dto.TripShareDTO;
 import com.tripPocket.www.tripShare.service.TripShareService;
 
@@ -170,10 +169,11 @@ public class TripShareController {
 	}
 	
 	 @RequestMapping("/updateContents.do")
-	    public String updateTripShareContents(@RequestParam("tripShareId") Long tripShareId,
-	                                          @RequestParam("dayContents") List<String> dayContents,
-	                                          @RequestParam("dayIds") List<Long> dayIds,
-	                                          RedirectAttributes redirectAttributes) {
+	    public String updateTripShareContents(
+	    		@RequestParam("tripShareId") Long tripShareId,
+	    		@RequestParam("dayContents") List<String> dayContents,
+	    		@RequestParam("dayIds") List<Long> dayIds,
+	    		RedirectAttributes redirectAttributes) {
 
 		 List<Map<String, Object>> contentList = new ArrayList<>();
 
