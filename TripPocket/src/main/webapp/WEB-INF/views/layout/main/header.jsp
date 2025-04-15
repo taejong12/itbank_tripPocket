@@ -14,24 +14,49 @@
     </header>
     <div class="dark-overlay" id="darkOverlay" onclick="closeMenu(event)"></div>
     <div class="side-menu" id="sideMenu" onclick="stopPropagation(event)">
-        <div class="close-btn" onclick="toggleMenu(event)">X</div>
+        <div class="close-btn" onclick="toggleMenu(event)">x</div>
         <ul>
 			<c:choose>
 				<c:when test="${isLogin == true && member != null}">
-					<div class="profile-container">
+					<div class="side-header">
 						<div>
-	                        <p>${member.memberNickname}님</p>
-	                        <p>${member.memberEmail}</p>
-	                    </div>
-	                    <img src="${contextPath}/resources/img/profile/basic.png">
-	                </div>
-					<li>
-						<a href="#" onclick="toggleSubmenu(event, 'mypage-submenu')">마이페이지</a>
-		                <ul class="submenu" id="mypage-submenu">
-		                    <li><a href="${contextPath }/member/mypage.do">내 정보</a></li> <!-- 내 정보 페이지로 이동 -->
-		                     <li><a href="${contextPath}/trip/planList.do">여행 계획 일정만들기</a></li> <!-- 여행 계획 세우기로 이동 -->
-		                </ul>
-	            	</li>
+						<div class="profile-container">
+							<div>
+		                        <div style="width: 150px; display:flex; height: 45px; align-items:center; larger; margin-bottom: 5px;">${member.memberNickname}</div>
+								<div>
+			                        <a style="color: gray; font-size: small; padding: 0px;" href="${contextPath }/member/mypage.do">프로필 편집 ></a>
+			                    </div>
+							</div>
+							<div>
+			                    <img src="${contextPath}/resources/img/profile/basic.png">
+							</div>
+		                </div>
+						</div>
+		                <div class="profile-submenu">
+		                	<div>
+		                		<a href="${contextPath}/trip/planList.do">
+		                			<div>
+				                		<img style="width: 50px;" src="${contextPath}/resources/img/profile/MyTripIcon.png" alt="내 여행 이미지">
+		                			</div>
+		                			<div>
+										내 여행
+		                			</div>
+								</a>
+		                	</div>
+							<div>
+								<a href="#">
+									<div>
+										<img style="width: 50px;" src="${contextPath}/resources/img/profile/MyTripStoryIcon.png" alt="내 여행기 이미지">
+									</div>
+									<div>
+										<!-- 내 블로그 목록 -->
+										내 여행기
+									</div>
+								</a>
+							</div>
+		                </div>
+					</div>
+					<div class="gray-gap"></div>
             	</c:when>
         		<c:otherwise>
         			<li><a href="${contextPath}/member/loginForm.do">로그인/회원가입</a></li>
