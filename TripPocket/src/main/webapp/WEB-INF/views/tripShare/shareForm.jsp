@@ -23,6 +23,40 @@
     </style>
 
     <script>
+	    document.addEventListener("DOMContentLoaded", function () {
+		    const form = document.querySelector("form");
+		    const planSelect = document.querySelector("select[name='tripPlanId']");
+		    const titleInput = document.querySelector("input[name='tripShareTitle']");
+		
+		    form.addEventListener("submit", function (e) {
+		        // 여행 계획 선택 안 했을 경우
+		        if (!planSelect.value || planSelect.value.trim() === "") {
+		            alert("여행 계획을 선택해 주세요.");
+		            planSelect.focus();
+		            e.preventDefault(); // 제출 막기
+		            return false;
+		        }
+		
+		        // 제목 입력 안 했을 경우
+		        if (!titleInput.value || titleInput.value.trim() === "") {
+		            alert("제목을 입력해 주세요.");
+		            titleInput.focus();
+		            e.preventDefault(); // 제출 막기
+		            return false;
+		        }
+		
+		        // textarea에 아무 내용도 없을 경우 (추가로 검증하고 싶다면)
+		        const hasContent = Object.values(reviewMap).some(v => v.trim() !== "");
+		        if (!hasContent) {
+		            alert("하루 이상 여행 이야기를 작성해 주세요.");
+		            e.preventDefault();
+		            return false;
+		        }
+		
+		        // → 기존 동적 input 생성은 유지되도록 아래 줄 남겨둬도 OK (submit 이벤트 내 마지막에 실행)
+		    });
+		});
+    
         let globalTripDays = [];
         let reviewMap = {};
 
@@ -221,13 +255,13 @@
             </c:forEach>
         </form:select>
 
-        <label>제목</label>
+        <label>📝 여행 이야기에 어울리는 제목을 적어주세요</label>
         <form:input path="tripShareTitle" />
 
         <div id="dayTabs"></div>
         <div id="tripDayContainer"></div>
 
-        <input type="submit" value="✈️ 나의 여행 블로그 등록하기" />
+        <input type="submit" value="✈️ 나의 여행 글 등록하기" />
     </form:form>
 </div>
 </body>
