@@ -240,6 +240,10 @@
 	<delete id="shareDelete" parameterType="int">
 	    DELETE FROM trip_share WHERE trip_share_id = #{tripShareId}
 	</delete>
+	<!-- plan에서 삭제할때 같이 공유까지 삭제하는 매퍼 -->
+	<delete id="deleteByTripPlanId">
+    DELETE FROM trip_share WHERE trip_plan_id = #{tripPlanId}
+	</delete>
 	
 
    <!-- 여행 일차별 상세 목록 조회 (trip_share_id로) -->

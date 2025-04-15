@@ -50,4 +50,10 @@ public class TripPlanServiceImpl implements TripPlanService{
 		return tripPlanDAO.deleteTripPlanByTripPlanId(tripPlanId);
 	}
 
+	@Override
+	public void deleteTripShare(Integer tripPlanId) {
+		tripPlanDAO.deleteTripShare(tripPlanId);
+		
+	}
+
 }
