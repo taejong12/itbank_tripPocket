@@ -102,7 +102,8 @@
 		    ts.trip_share_content,
 		    ts.trip_plan_id,
 		    ts.trip_share_add_date,
-		    ts.trip_share_mod_date
+		    ts.trip_share_mod_date,
+		    ts.member_id
 		FROM trip_share ts
 		ORDER BY ts.trip_share_add_date DESC
 	</select>
@@ -197,27 +198,28 @@ ORDER BY
     ts.trip_share_add_date,
     ts.trip_share_mod_date,
 
-    tsd.trip_day_id,
-    tsd.trip_share_day_day,
-    tsd.trip_share_day_date,
-    tsd.trip_share_day_address,
-    tsd.trip_share_day_place,
-    tsd.trip_share_day_image,
-    tsd.trip_share_day_mapx,
-    tsd.trip_share_day_mapy,
-    tsd.trip_share_content,
-    tsd.trip_plan_start_day,
-    tsd.trip_plan_arrive_day,
+    tsc.trip_day_id,
+    tsc.trip_share_day_day,
+    tsc.trip_share_day_date,
+    tsc.trip_share_day_address,
+    tsc.trip_share_day_place,
+    tsc.trip_share_day_image,
+    tsc.trip_share_day_mapx,
+    tsc.trip_share_day_mapy,
+    tsc.trip_share_content,
+    tsc.trip_plan_start_day,
+    tsc.trip_plan_arrive_day,
 
     ts.member_id
 
 FROM trip_share ts
 JOIN member m
     ON ts.member_id = m.member_id
-LEFT JOIN trip_share_day tsd
-    ON ts.trip_share_id = tsd.trip_share_id
+LEFT JOIN trip_share_content tsc
+    ON ts.trip_share_id = tsc.trip_share_id
 WHERE ts.trip_share_id = #{tripShareId}
-ORDER BY tsd.trip_share_day_day ASC
+ORDER BY tsc.trip_share_day_day ASC
+
 	</select>
 
 	
@@ -234,14 +236,14 @@ ORDER BY tsd.trip_share_day_day ASC
     SELECT 
         ts.trip_share_title,
         '', -- 복사용이므로 내용 비워둠
-        tsd.trip_plan_start_day,
-        tsd.trip_plan_arrive_day,
+        tsc.trip_plan_start_day,
+        tsc.trip_plan_arrive_day,
         #{memberId},
         SYSDATE,
         SYSDATE
     FROM trip_share ts
-    JOIN trip_share_day tsd 
-        ON ts.trip_share_id = tsd.trip_share_id
+    JOIN trip_share_content tsc 
+        ON ts.trip_share_id = tsc.trip_share_id
     WHERE ts.trip_share_id = #{tripShareId}
     AND ROWNUM = 1
 	</insert>
@@ -260,17 +262,17 @@ ORDER BY tsd.trip_share_day_day ASC
 	)
 	SELECT
 	  #{tripPlanId},
-	  tsd.trip_share_day_day,
-	  tsd.trip_share_day_address,
-	  tsd.trip_share_day_image,
-	  tsd.trip_share_day_date,
-	  tsd.trip_share_day_place,
-	  tsd.trip_share_day_mapy,
-	  tsd.trip_share_day_mapx,
-	  tsd.trip_share_content_id
-	FROM trip_share_day tsd
-	WHERE tsd.trip_share_id = #{tripShareId}
-	ORDER BY tsd.trip_share_day_day ASC
+	  tsc.trip_share_day_day,
+	  tsc.trip_share_day_address,
+	  tsc.trip_share_day_image,
+	  tsc.trip_share_day_date,
+	  tsc.trip_share_day_place,
+	  tsc.trip_share_day_mapy,
+	  tsc.trip_share_day_mapx,
+	  tsc.trip_share_content_id
+	FROM trip_share_content tsc
+	WHERE tsc.trip_share_id = #{tripShareId}
+	ORDER BY tsc.trip_share_day_day ASC
 	</insert>
 
 	<delete id="shareDelete" parameterType="int">
@@ -286,27 +288,27 @@ ORDER BY tsd.trip_share_day_day ASC
         ts.trip_share_add_date,
         ts.trip_share_mod_date,
 
-        tsd.trip_day_id,
-        tsd.trip_share_day_day,
-        tsd.trip_share_day_date,
-        tsd.trip_share_day_address,
-        tsd.trip_share_day_place,
-        tsd.trip_share_day_image,
-        tsd.trip_share_day_mapx,
-        tsd.trip_share_day_mapy,
-        tsd.trip_share_content,
-        tsd.trip_plan_start_day,
-        tsd.trip_plan_arrive_day,
+        tsc.trip_day_id,
+        tsc.trip_share_day_day,
+        tsc.trip_share_day_date,
+        tsc.trip_share_day_address,
+        tsc.trip_share_day_place,
+        tsc.trip_share_day_image,
+        tsc.trip_share_day_mapx,
+        tsc.trip_share_day_mapy,
+        tsc.trip_share_content,
+        tsc.trip_plan_start_day,
+        tsc.trip_plan_arrive_day,
 
         ts.member_id
 
     FROM trip_share ts
     JOIN member m
         ON ts.member_id = m.member_id
-    LEFT JOIN trip_share_day tsd
-        ON ts.trip_share_id = tsd.trip_share_id
+    LEFT JOIN trip_share_content tsc
+        ON ts.trip_share_id = tsc.trip_share_id
     WHERE ts.trip_share_id = #{tripShareId}
-    ORDER BY tsd.trip_share_day_day ASC
+    ORDER BY tsc.trip_share_day_day ASC
     </select>
 
     <!-- 작성자 정보 조회 -->
@@ -325,7 +327,7 @@ ORDER BY tsd.trip_share_day_day ASC
 	</select>
 	
 	<update id="updateTripShareContent">
-	  UPDATE trip_share_day
+	  UPDATE trip_share_content
 	  SET trip_share_content = #{tripShareContent}
 	  WHERE trip_share_id = #{tripShareId}
 	    AND trip_day_id = #{tripDayId}
