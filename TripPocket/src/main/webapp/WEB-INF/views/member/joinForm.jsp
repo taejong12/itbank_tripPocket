@@ -4,6 +4,11 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath }" />
 <link rel="stylesheet" href="${contextPath}/resources/css/member/join.css">
 
+<!-- Firebase App (Core SDK) -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<!-- Firebase Auth -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+
     <div class="container">
         <p class="form-title">Sign up</p>
         <form name="joinForm" method="post" action="${contextPath}/member/join.do" onsubmit="fn_joinForm(event);">
@@ -51,6 +56,65 @@
         </form>
     </div>
     
+<!-- recaptcha 영역 -->
+<div id="recaptcha-container"></div>
+
+<script>
+  // Firebase 설정
+  const firebaseConfig = {
+    apiKey: "AIzaSyCnFapPUvfjLNot2A0LIg3nY5HK1abF4Wg",
+    authDomain: "trippocket-21bfa.firebaseapp.com",
+    projectId: "trippocket-21bfa",
+    storageBucket: "trippocket-21bfa.appspot.com",
+    messagingSenderId: "1041108579388",
+    appId: "1:1041108579388:web:28d3ea8f80b4097843ff39",
+    measurementId: "G-747WZ4ZMQJ"
+  };
+
+  // Firebase 초기화
+  firebase.initializeApp(firebaseConfig);
+</script>
+
+<script>
+  let confirmationResult = null;
+
+  function sendVerificationCode() {
+    const phoneNumber = document.getElementById("phoneNumber").value;
+    const appVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
+      size: 'invisible',
+      callback: function(response) {
+        console.log("reCAPTCHA 성공");
+      }
+    });
+
+    firebase.auth().signInWithPhoneNumber(phoneNumber, appVerifier)
+      .then(result => {
+        confirmationResult = result;
+        alert("인증번호 전송 완료!");
+      })
+      .catch(error => {
+        console.error("인증번호 전송 에러:", error.message);
+      });
+  }
+
+  function confirmCode() {
+    const code = document.getElementById("verificationCode").value;
+
+    if (confirmationResult) {
+      confirmationResult.confirm(code)
+        .then(result => {
+          alert("인증 성공!");
+          console.log("사용자 정보:", result.user);
+        })
+        .catch(error => {
+          alert("인증 실패. 다시 시도해주세요.");
+        });
+    } else {
+      alert("인증번호를 먼저 요청해주세요.");
+    }
+  }
+</script>
+
 <script type="text/javascript">
 	let contextPath = "${contextPath}";
 	
@@ -162,3 +226,7 @@
 	}
 </script>
 <script src="${contextPath}/resources/js/member/joinForm.js"></script>
+
+
+
+

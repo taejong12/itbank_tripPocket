@@ -145,7 +145,7 @@ public class MemberController {
 		session.setAttribute("code", map.get("code"));
 		session.setAttribute("codeTime", System.currentTimeMillis());
 		
-		return ResponseEntity.ok(map.get("response"));
+		return ResponseEntity.ok(true);
 	}
 	
 	@RequestMapping("/codeDiff.do")
