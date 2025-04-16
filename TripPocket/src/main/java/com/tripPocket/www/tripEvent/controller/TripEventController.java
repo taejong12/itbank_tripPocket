@@ -6,49 +6,67 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.tripPocket.www.tripEvent.dto.RegionDTO;
+
 @Controller
 @RequestMapping("/event")
 public class TripEventController {
 
-    // 1. JSP 전체 페이지 반환용
-    @RequestMapping("/random.do")
-    public String randomRegion(Model model) {
-        String fullRegion = getRandomRegion();
-        model.addAttribute("region", fullRegion);
-        return "tripEvent/randomResult";
-    }
+	@RequestMapping("/random.do")
+	public String randomRegion(Model model) {
+	    List<RegionDTO> regionList = getTopRegionList();
+	    model.addAttribute("regionList", regionList);
 
-    // 2. AJAX 요청 처리용 (텍스트 응답)
-    @RequestMapping(value = "/randomRegion", produces = "text/plain;charset=UTF-8")
-    @ResponseBody
-    public String getRandomRegionText() {
-        return getRandomRegion();
-    }
+	    RegionDTO randomRegion = getRandomRegion(regionList);
+	    model.addAttribute("region", randomRegion);
 
-    // 공통 랜덤 지역 선택 메서드
-    private String getRandomRegion() {
-        Map<String, List<String>> regionMap = new HashMap<>();
-        
-        regionMap.put("서울", Arrays.asList(""));
-        regionMap.put("제주", Arrays.asList(""));
-        regionMap.put("인천", Arrays.asList(""));
-        
-        regionMap.put("강원도", Arrays.asList("강릉", "속초", "춘천", "원주", "태백", "양양", "고성"));
-        regionMap.put("전라남도", Arrays.asList("여수", "순천", "목포", "광양", "담양", "완도", "고흥"));
-        regionMap.put("전라북도", Arrays.asList("전주", "익산", "군산", "정읍", "남원"));
-        regionMap.put("경상남도", Arrays.asList("부산", "창원", "진주", "김해", "밀양"));
-        regionMap.put("경상북도", Arrays.asList("경주", "포항", "대구", "울산", "상주", "구미"));
-        regionMap.put("충청남도", Arrays.asList("대전", "천안", "논산", "아산", "공주", "계룡", "보령"));
-        regionMap.put("충청북도", Arrays.asList("청주", "충주", "음성", "진천", "옥천", "단양"));
+	    return "tripEvent/randomResult";
+	}
 
-        List<String> topRegions = new ArrayList<>(regionMap.keySet());
-        Collections.shuffle(topRegions);
-        String selectedTopRegion = topRegions.get(0);
+	@RequestMapping(value = "/randomRegion", produces = "text/plain;charset=UTF-8")
+	@ResponseBody
+	public String getRandomRegionText() {
+	    List<RegionDTO> regionList = getTopRegionList();
+	    RegionDTO randomRegion = getRandomRegion(regionList);
+	    return randomRegion.getName();
+	}
 
-        List<String> subRegions = regionMap.get(selectedTopRegion);
-        Collections.shuffle(subRegions);
-        String selectedSubRegion = subRegions.get(0);
+	// 지역명 + 코드 매핑
+	private List<RegionDTO> getTopRegionList() {
+	    List<RegionDTO> list = new ArrayList<>();
+	    list.add(new RegionDTO("서울", 1));
+	    list.add(new RegionDTO("인천", 2));
+	    list.add(new RegionDTO("대전", 3));
+	    list.add(new RegionDTO("대구", 4));
+	    list.add(new RegionDTO("광주", 5));
+	    list.add(new RegionDTO("부산", 6));
+	    list.add(new RegionDTO("울산", 7));
+	    list.add(new RegionDTO("세종", 8));
+	    list.add(new RegionDTO("경기", 31));
+	    list.add(new RegionDTO("강원", 32));
+	    list.add(new RegionDTO("충북", 33));
+	    list.add(new RegionDTO("충남", 34));
+	    list.add(new RegionDTO("경북", 35));
+	    list.add(new RegionDTO("경남", 36));
+	    list.add(new RegionDTO("전북", 37));
+	    list.add(new RegionDTO("전남", 38));
+	    list.add(new RegionDTO("제주", 39));
+	    return list;
+	}
 
-        return selectedTopRegion + (selectedSubRegion.isEmpty() ? "" : " " + selectedSubRegion);
-    }
+	private RegionDTO getRandomRegion(List<RegionDTO> regionList) {
+	    Collections.shuffle(regionList);
+	    return regionList.get(0);
+	}
+	
+	@RequestMapping(value = "/randomRegion", produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public Map<String, Object> getRandomRegionJson() {
+		List<RegionDTO> regionList = getTopRegionList();
+	    RegionDTO randomRegion = getRandomRegion(regionList); // 지역명, 코드 포함된 객체
+	    Map<String, Object> result = new HashMap<>();
+	    result.put("name", randomRegion.getName());
+	    result.put("code", randomRegion.getCode());
+	    return result;
+	}
 }
