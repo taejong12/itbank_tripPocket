@@ -37,6 +37,15 @@ public interface TripShareDAO {
 
 	MemberDTO getWriterByShareId(int tripShareId);
 	
-	void updateTripShareContents(@Param("contentList") List<Map<String, Object>> contentList);
+	void updateTripShareContents(List<Map<String, Object>> contentList);
+
+	void increaseViewCount(TripShareDTO tripShareDTO);
+
+	boolean existsTripShareViewLog(Integer tripShareId, String memberId);
+
+	void insertTripShareViewLog(Integer tripShareId, String memberId);
+
+	int getTripShareViewCount(Integer tripShareId);
+
 
 }

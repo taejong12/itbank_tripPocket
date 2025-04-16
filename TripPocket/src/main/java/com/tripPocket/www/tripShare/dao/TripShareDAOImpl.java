@@ -89,11 +89,46 @@ public class TripShareDAOImpl implements TripShareDAO{
 	public MemberDTO getWriterByShareId(int tripShareId) {
 		return session.selectOne("mapper.trip.share.getWriterByShareId", tripShareId);
 	}
-
+	
 	@Override
 	public void updateTripShareContents(List<Map<String, Object>> contentList) {
 		 for (Map<String, Object> map : contentList) {
 		        session.update("mapper.trip.share.updateTripShareContent", map);
 		    }
 	}
+
+
+	@Override
+	public void increaseViewCount(TripShareDTO tripShareDTO) {
+		session.update("mapper.trip.share.updateTripShareViewCount",tripShareDTO);
+		
+	}
+
+	@Override
+	public boolean existsTripShareViewLog(Integer tripShareId, String memberId) {
+		System.out.println("tripShareId = " + tripShareId);
+		System.out.println("memberId = " + memberId);
+		Map<String, Object> params = new HashMap<>();
+		params.put("tripShareId", tripShareId);
+		params.put("memberId", memberId);
+		System.out.println("Params: " + params);
+		return session.selectOne("mapper.trip.share.existsTripShareViewLog",params);
+	}
+
+	@Override
+	public void insertTripShareViewLog(Integer tripShareId, String memberId) {
+		
+		Map<String, Object> params = new HashMap<>();
+		params.put("tripShareId", tripShareId);
+		params.put("memberId", memberId);
+		session.insert("mapper.trip.share.insertTripShareViewLog",params);
+	}
+
+	@Override
+	public int getTripShareViewCount(Integer tripShareId) {
+		// TODO Auto-generated method stub
+		
+		return session.selectOne("mapper.trip.share.getTripShareViewCount",tripShareId);
+	}
+
 } 

@@ -111,11 +111,43 @@ public class TripShareServiceImpl implements TripShareService{
 		return tripShareDAO.getWriterByShareId(tripShareId);
 	}
 
-
-
 	@Override
 	public void updateTripShareContents(List<Map<String, Object>> contentList) {
 		tripShareDAO.updateTripShareContents(contentList);
 		
 	}
+
+
+	@Override
+	public void increaseViewCount(TripShareDTO tripShareDTO) {
+		tripShareDAO.increaseViewCount(tripShareDTO);
+		
+	}
+
+
+	//중복확인 메서드
+	@Override
+	public boolean existsTripShareViewLog(Integer tripShareId, String memberId) {
+		// TODO Auto-generated method stub
+		return tripShareDAO.existsTripShareViewLog(tripShareId,memberId);
+	}
+
+
+	// log에 인서트
+	@Override
+	public void insertTripShareViewLog(Integer tripShareId, String memberId) {
+		tripShareDAO.insertTripShareViewLog(tripShareId,memberId);
+		
+	}
+
+
+	// shareDTO에 카운트값 넘기기
+	@Override
+	public int getTripShareViewCount(Integer tripShareId) {
+		// TODO Auto-generated method stub
+		return tripShareDAO.getTripShareViewCount(tripShareId);
+	}
+
+
+
 }

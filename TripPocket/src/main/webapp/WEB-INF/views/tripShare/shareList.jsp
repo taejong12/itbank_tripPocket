@@ -35,7 +35,7 @@
 		                    </a>
 		                </td>
 		                <td><fmt:formatDate value="${share.tripShareAddDate}" pattern="yyyy-MM-dd" /></td>
-		                <td><fmt:formatDate value="${share.tripShareModDate}" pattern="yyyy-MM-dd" /></td>
+		                <td><fmt:formatDate value="${share.tripShareModDate}" pattern="yyyy-MM-dd" /><span>조회수: ${share.tripShareViewCount}</span></td>
 		            </tr>
 		        </c:forEach>
 		    </tbody>

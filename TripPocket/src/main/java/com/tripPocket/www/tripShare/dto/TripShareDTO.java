@@ -19,8 +19,15 @@ public class TripShareDTO {
 	private List<TripDayDTO> tripDayList; 
 	private String memberId;
 	private List<TripShareContentDTO> tripShareContentList;
+	private int tripShareViewCount;
 	
 	
+	public int getTripShareViewCount() {
+		return tripShareViewCount;
+	}
+	public void setTripShareViewCount(int tripShareViewCount) {
+		this.tripShareViewCount = tripShareViewCount;
+	}
 	public List<TripShareContentDTO> getTripShareContentList() {
 		return tripShareContentList;
 	}

@@ -46,6 +46,11 @@ public class TripShareController {
 	    }
 
 	    List<TripShareDTO> tripShareList = tripShareService.shareList(tripShareDTO);
+	    	for (TripShareDTO share : tripShareList) {
+	        int viewCount = tripShareService.getTripShareViewCount(share.getTripShareId());
+	        share.setTripShareViewCount(viewCount); // 조회수를 TripShareDTO에 설정
+	    }
+	    	
 	    model.addAttribute("tripShareList", tripShareList);
 	    return "tripShare/shareList"; // 공유 리스트 페이지의 뷰 이름 반환
 	    
@@ -114,10 +119,22 @@ public class TripShareController {
 	 }
 	
 	@RequestMapping("/shareDetail.do")
-	public ModelAndView shareDetail(@ModelAttribute TripShareDTO tripShareDTO) {
-	    // 공유 정보 (작성자 포함)
-	    TripShareDTO share = tripShareService.detailList(tripShareDTO);
+	public ModelAndView shareDetail(@ModelAttribute TripShareDTO tripShareDTO, HttpSession session) {
+		MemberDTO member = (MemberDTO) session.getAttribute("member"); // 로그인된 사용자 ID
+		TripShareDTO share = tripShareService.detailList(tripShareDTO);
+		 
 
+	    // 중복 조회 방지
+	    boolean alreadyViewed = tripShareService.existsTripShareViewLog(tripShareDTO.getTripShareId(), member.getMemberId());
+	    if (!alreadyViewed) {
+	        tripShareService.insertTripShareViewLog(tripShareDTO.getTripShareId(), member.getMemberId());
+	       
+	    }
+	    
+	 // 조회수 count 가져와서 DTO에 세팅
+	    int viewCount = tripShareService.getTripShareViewCount(tripShareDTO.getTripShareId());
+	    share.setTripShareViewCount(viewCount); // DTO에 넣기 (JSP에서 사용 가능)
+	    
 	    // 여행 일차 정렬 (tripDayDay 기준)
 	    List<TripShareContentDTO> sortedList = share.getTripShareContentList();
 	    Collections.sort(sortedList, new Comparator<TripShareContentDTO>() {
@@ -213,3 +230,4 @@ public class TripShareController {
 	}
 
 	
+
