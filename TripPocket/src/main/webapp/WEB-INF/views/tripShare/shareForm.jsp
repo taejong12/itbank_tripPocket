@@ -223,32 +223,26 @@
 
             $('form').submit(function (e) {
                 $('.generated-hidden').remove(); // 기존 input 제거
-
                 let form = $(this);
                 let index = 0;
 
-                for (let key in reviewMap) {
-                    let content = reviewMap[key];
-                    if (content.trim() !== '') {
-                        // tripDayId 비교 시 타입 맞춰줌
-                        let matchedDay = globalTripDays.find(day => String(day.tripDayId) === key);
-                        if (!matchedDay) continue;
+                globalTripDays.forEach(function (day) {
+                    let content = reviewMap[day.tripDayId] || ""; // 작성 안 했으면 빈 문자열
 
-                        // Hidden input 생성
-                        form.append('<input type="hidden" class="generated-hidden" name="tripDayList[' + index + '].tripDayId" value="' + matchedDay.tripDayId + '">');
-                        form.append('<input type="hidden" class="generated-hidden" name="tripDayList[' + index + '].tripDayDay" value="' + matchedDay.tripDayDay + '">');
-                        form.append('<input type="hidden" class="generated-hidden" name="tripDayList[' + index + '].tripDayDate" value="' + matchedDay.tripDayDate + '">');
-                        form.append('<input type="hidden" class="generated-hidden" name="tripDayList[' + index + '].tripDayAddress" value="' + matchedDay.tripDayAddress + '">');
-                        form.append('<input type="hidden" class="generated-hidden" name="tripDayList[' + index + '].tripDayPlace" value="' + matchedDay.tripDayPlace + '">');
-                        form.append('<input type="hidden" class="generated-hidden" name="tripDayList[' + index + '].tripDayImage" value="' + matchedDay.tripDayImage + '">');
-                        form.append('<input type="hidden" class="generated-hidden" name="tripDayList[' + index + '].tripDayMapx" value="' + matchedDay.tripDayMapx + '">');
-                        form.append('<input type="hidden" class="generated-hidden" name="tripDayList[' + index + '].tripDayMapy" value="' + matchedDay.tripDayMapy + '">');
-                        form.append('<input type="hidden" class="generated-hidden" name="tripDayList[' + index + '].tripShareContent" value="' + $('<div>').text(content).html() + '">');
-                        form.append('<input type="hidden" class="generated-hidden" name="tripDayList[' + index + '].tripPlanStartDay" value="' + matchedDay.tripPlanStartDay + '">');
-                        form.append('<input type="hidden" class="generated-hidden" name="tripDayList[' + index + '].tripPlanArriveDay" value="' + matchedDay.tripPlanArriveDay + '">');
-                        index++;
-                    }
-                }
+                    form.append('<input type="hidden" class="generated-hidden" name="tripDayList[' + index + '].tripDayId" value="' + day.tripDayId + '">');
+                    form.append('<input type="hidden" class="generated-hidden" name="tripDayList[' + index + '].tripDayDay" value="' + day.tripDayDay + '">');
+                    form.append('<input type="hidden" class="generated-hidden" name="tripDayList[' + index + '].tripDayDate" value="' + day.tripDayDate + '">');
+                    form.append('<input type="hidden" class="generated-hidden" name="tripDayList[' + index + '].tripDayAddress" value="' + day.tripDayAddress + '">');
+                    form.append('<input type="hidden" class="generated-hidden" name="tripDayList[' + index + '].tripDayPlace" value="' + day.tripDayPlace + '">');
+                    form.append('<input type="hidden" class="generated-hidden" name="tripDayList[' + index + '].tripDayImage" value="' + day.tripDayImage + '">');
+                    form.append('<input type="hidden" class="generated-hidden" name="tripDayList[' + index + '].tripDayMapx" value="' + day.tripDayMapx + '">');
+                    form.append('<input type="hidden" class="generated-hidden" name="tripDayList[' + index + '].tripDayMapy" value="' + day.tripDayMapy + '">');
+                    form.append('<input type="hidden" class="generated-hidden" name="tripDayList[' + index + '].tripShareContent" value="' + $('<div>').text(content).html() + '">');
+                    form.append('<input type="hidden" class="generated-hidden" name="tripDayList[' + index + '].tripPlanStartDay" value="' + day.tripPlanStartDay + '">');
+                    form.append('<input type="hidden" class="generated-hidden" name="tripDayList[' + index + '].tripPlanArriveDay" value="' + day.tripPlanArriveDay + '">');
+
+                    index++;
+                });
             });
         });
     </script>

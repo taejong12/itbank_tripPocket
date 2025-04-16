@@ -145,7 +145,7 @@ WHERE
 
 	
 	   <insert id="insertTripShareDay" parameterType="tripDayDTO">
-    INSERT INTO trip_share_day (
+    INSERT INTO trip_share_content (
         TRIP_SHARE_ID, 
         TRIP_DAY_ID, 
         TRIP_SHARE_DAY_DAY, 
