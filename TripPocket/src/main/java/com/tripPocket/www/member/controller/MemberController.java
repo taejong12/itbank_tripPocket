@@ -2,12 +2,16 @@ package com.tripPocket.www.member.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.tripPocket.www.member.dto.MemberDTO;
 import com.tripPocket.www.member.service.MemberService;
+
 
 @Controller
 @RequestMapping("member")
@@ -129,5 +134,41 @@ public class MemberController {
 	    out.write("location.href='" + contextPath + "/main.do';");
 	    out.write("</script>");
 	    return null;
+	}
+	
+	@RequestMapping("/sendSms.do")
+	public ResponseEntity<?> sendSms(@RequestParam String tel, HttpSession session){
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map = memberService.sendSms(tel);
+		
+		session.setAttribute("code", map.get("code"));
+		session.setAttribute("codeTime", System.currentTimeMillis());
+		
+		return ResponseEntity.ok(map.get("response"));
+	}
+	
+	@RequestMapping("/codeDiff.do")
+	public ResponseEntity<?> codeDiff(@RequestParam String memberCode, HttpSession session){
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		String saveCode = (String) session.getAttribute("code");
+		
+		Long time = (Long) session.getAttribute("codeTime");
+		
+		// 3분 타이머
+		if(System.currentTimeMillis() - time > 180_000) {
+			map.put("result", "인증번호 만료");
+			return ResponseEntity.status(HttpStatus.GONE).body(map);
+		}
+		
+		if(saveCode != null && saveCode.equals(memberCode)) {
+			session.removeAttribute("code");
+			map.put("result", true);
+			return ResponseEntity.ok(map);
+		} else {
+			map.put("result", false);
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(map);
+		}
 	}
 }

@@ -159,14 +159,21 @@ function fn_joinForm(event) {
 
     // 전화번호
     var tel = form.memberTel.value.trim();
-	var telPattern = /^(010\d{4}\d{4}|\d{11})$/;
+	const telPattern = /^010\d{8}$/;
 	
 	if (!telPattern.test(tel)) {
 	    alert("전화번호 형식을 확인해 주세요.\n(예: 01012345678)");
 	    form.memberTel.focus();
 	    return false;
 	}
-
+	
+	// 문자인증
+	if (!form.isPhoneVerified || form.isPhoneVerified.value !== "true") {
+		alert("문자 인증해주세요.");
+	    form.isPhoneVerified.focus();
+	    return false;
+	}
+	
     // 성별
     if (!form.memberGender.value) {
         alert("성별을 선택해 주세요.");

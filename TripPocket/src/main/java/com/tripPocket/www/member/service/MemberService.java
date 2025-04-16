@@ -1,5 +1,7 @@
 package com.tripPocket.www.member.service;
 
+import java.util.Map;
+
 import com.tripPocket.www.member.dto.MemberDTO;
 
 public interface MemberService {
@@ -18,5 +20,6 @@ public interface MemberService {
 
 	void delMemberWithDependencies(String memberId);
 
+	Map<String, Object> sendSms(String tel);
 
 }

@@ -182,7 +182,14 @@
 			<artifactId>jackson-databind</artifactId>
 			<version>2.5.4</version>
 		</dependency>
-	
+
+		<!-- SMS 인증 -->
+		<dependency>
+            <groupId>net.nurigo</groupId>
+            <artifactId>sdk</artifactId>
+            <version>4.3.2</version>
+        </dependency>
+
 		<!-- Test -->
 		<dependency>
 			<groupId>junit</groupId>

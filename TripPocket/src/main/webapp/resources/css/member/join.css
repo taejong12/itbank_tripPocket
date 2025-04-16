@@ -72,7 +72,7 @@
     box-sizing: border-box;
 }
 
-#checkBtn, #emailCheckBtn {
+.memberJoinCheckBtn {
     padding: 10px;
     font-size: 0.875rem;
     color: #fff;
@@ -83,10 +83,6 @@
     transition: background-color 0.3s ease;
     margin-left: 10px; /* 중복 확인 버튼과 입력 칸 사이의 간격 */
     flex-shrink: 0;
-}
-
-#checkBtn:hover, #emailCheckBtn:hover {
-    background-color: #3b3a99;
 }
 
 .button-container {
