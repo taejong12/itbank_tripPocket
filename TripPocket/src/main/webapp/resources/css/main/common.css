@@ -1,51 +1,54 @@
 html {
-    height: 100%;
-    overflow-x: hidden;      /* 가로 스크롤 방지 */
-    overflow-y: auto;        /* 세로 스크롤 허용 */
+	height: 100%;
+	overflow-y: auto; /* 세로 스크롤 허용 */
+	overflow: hidden;
 	margin: 0;
     padding: 0;
 }
 
 body {
 	height: 100%;
-    overflow-x: hidden;      /* 가로 스크롤 방지 */
-    overflow-y: auto;        /* 세로 스크롤 허용 */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: auto;
-    min-height: 100vh;
-   	margin: 0;
-    padding: 0;
-    background-color: #f0f2f5;
-    font-family: 'Noto Sans', sans-serif;
-    /* 헤더 높이만큼 공간 확보 */
+	margin: 0;
+	padding: 0;
+	overflow-x: hidden; /* 가로 스크롤 방지 */
+	font-family: 'Noto Sans', sans-serif;
 }
 
 header {
-    width: 100%;
-    height: 80px;
-    color: black;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 2;
-    padding: 0 20px;
-    animation: slideDown 1.5s ease-out;
-    box-sizing: border-box;
-    
-    
+	width: 99.2%;
+	height: 80px;
+	color: white;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	top: 0;
+	left: 0;
+	z-index: 2;
+	padding: 0 20px;
+	box-sizing: border-box;
+	animation: slideDown 1.5s ease-out;
 }
 
 header .logo {
-    font-size: 24px;
-    font-weight: bold;
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
+	font-size: 24px;
+	font-weight: bold;
+	cursor: pointer;
+	color: black;
+	text-decoration: none;
+}
+
+header .burger {
+	display: inline-block;
+	cursor: pointer;
+}
+
+header .burger span {
+	display: block;
+	width: 25px;
+	height: 3px;
+	margin: 5px;
+	background: white;
+	transition: all 0.3s ease;
 }
 
 header .burger {
@@ -64,17 +67,17 @@ header .burger span {
 
 .profile-container {
     display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+	align-items: center;
+	gap: 10px;
+	padding: 15px;
+	justify-content: space-between;
+	align-items: center; 
 }
 
 .profile-container img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-left: auto;
+    height: 80px;
+	border-radius: 50%;
+	margin-left: auto;
 }
 
 body::before {
@@ -166,20 +169,19 @@ footer {
 
 .side-menu {
     width: 300px;
-    height: 100%;
-    background-color: #f8f9fa;
-    color: black;
-    position: fixed;
-    top: 0;
-    right: -300px;
-    z-index: 3;
-    transition: right 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    box-sizing: border-box;
-    box-shadow: -5px 0 5px -5px #333;
-    overflow-y: auto;
+	height: 100%;
+	background-color: #f8f9fa;
+	color: black;
+	position: absolute;
+	top: 0;
+	right: -300px;
+	z-index: 3;
+	transition: right 0.3s ease;
+	display: flex;
+	flex-direction: column;
+	box-sizing: border-box;
+	box-shadow: -5px 0 5px -5px #333;
+	overflow-y: auto;
 }
 
 .side-menu.show {
@@ -200,7 +202,7 @@ footer {
     color: #343a40;
     text-decoration: none;
     font-size: 18px;
-    padding: 10px 0;
+    padding: 10px 15px;
     display: block;
     transition: color 0.3s ease;
 }
@@ -231,7 +233,7 @@ footer {
     align-self: flex-start;
     cursor: pointer;
     font-size: 24px;
-    margin: 10px 0 20px 0;
+    margin: 10px 15px;
     color: #343a40;
 }
 
@@ -243,7 +245,6 @@ footer {
 
 #content{
 	flex: 1;
-	padding-top: 80px;
 }
 
 .dark-overlay {
@@ -276,3 +277,40 @@ footer {
     from { transform: scale(0.8); opacity: 0; }
     to { transform: scale(1); opacity: 1; }
 }
+.profile-submenu {
+	display: flex;
+	justify-content: center;
+	text-align: center;
+}
+
+.profile-submenu a{
+	padding: 10px;
+}
+
+.profile-submenu img{
+	width: 50px;
+}
+
+.gray-gap {
+    height: 10px;
+    background-color: #f0f0f0;
+}
+
+.profile-container a {
+	color: gray; 
+	font-size: small; 
+	padding: 0px;
+}
+
+.profile-nickname{
+	width: 150px; 
+	display:flex; 
+	height: 45px; 
+	align-items:center; 
+	larger; 
+	margin-bottom: 5px;
+}
+
+#header {
+	height: 80px;
+}

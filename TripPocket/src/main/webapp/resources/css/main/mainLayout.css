@@ -2,6 +2,8 @@ html {
 	height: 100%;
 	overflow-y: auto; /* 세로 스크롤 허용 */
 	overflow: hidden;
+	margin: 0;
+    padding: 0;
 }
 
 body {
@@ -182,7 +184,7 @@ body {
 	flex-direction: column;
 	box-sizing: border-box;
 	box-shadow: -5px 0 5px -5px #333;
-	overflow-y: auto; /* 내부 스크롤 허용 */
+	overflow-y: auto;
 }
 
 .side-menu.show {
@@ -326,10 +328,26 @@ body {
 	padding: 10px;
 }
 
-.side-header{
+.profile-submenu img{
+	width: 50px;
 }
 
 .gray-gap {
-    height: 10px; /* 원하는 만큼 여백 높이 */
-    background-color: #f0f0f0; /* 연한 회색 */
+    height: 10px;
+    background-color: #f0f0f0;
+}
+
+.profile-container a {
+	color: gray; 
+	font-size: small; 
+	padding: 0px;
+}
+
+.profile-nickname{
+	width: 150px; 
+	display:flex; 
+	height: 45px; 
+	align-items:center; 
+	larger; 
+	margin-bottom: 5px;
 }
