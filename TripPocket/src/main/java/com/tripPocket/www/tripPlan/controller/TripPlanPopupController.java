@@ -10,6 +10,6 @@ public class TripPlanPopupController {
 	@RequestMapping("/tripSearch.do")
 	public String tripPlanPopupPage() {
 		
-		return "popup/tripPlan";
+		return "popup/tripSearch";
 	}
 }

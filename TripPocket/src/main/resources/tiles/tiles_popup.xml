@@ -9,8 +9,8 @@
 		<put-attribute name="body" value="" />
 	</definition>
 	
-	<definition name="popup/tripPlan" extends="popupLayout">
+	<definition name="popup/tripSearch" extends="popupLayout">
 		<put-attribute name="title" value="여행 선택(팝업)" />
-		<put-attribute name="body" value="/WEB-INF/views/popup/tripPlan.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/popup/tripSearch.jsp" />
 	</definition>
 </tiles-definitions>
