@@ -1,164 +1,214 @@
-@charset "UTF-8";
-
-#trip-day-list {
-    list-style: none;
-    padding: 0;
-    max-width: 600px;
-    margin: 0 auto;
+#trip-day-btn-list button {
+    background-color: #ffcd4a; /* 따뜻한 노란색으로 여행 느낌 */
+    color: #333;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    margin: 8px 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    white-space: nowrap; /* 날짜 길어도 한 줄로 표시 */
+    max-width: 100%;
 }
 
-/* 개별 DAY 박스 */
-#trip-day-list li {
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-    margin: 10px 0;
-    padding: 15px;
-    text-align: left;
+#trip-day-btn-list button:hover {
+    background-color: #ffc107;
+    transform: translateY(-2px);
 }
 
-/* 제목 */
-.trip-plan-title {
-  font-size: 2.2rem;
-  font-weight: 700;
-  color: #2b6cb0; /* 여행 느낌 나는 파란색 (하늘색 계열) */
-  text-align: center;
-  margin: 30px auto 20px;
-  padding-bottom: 10px;
-  border-bottom: 3px solid #90cdf4; /* 연한 하늘색 경계선 */
-  width: fit-content;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* 약한 그림자 */
-  font-family: 'Segoe UI', 'Noto Sans KR', sans-serif;
-}
-
-
-/* 여행 일정 리스트 (내부) */
-.tripDayList {
-    list-style: none;
-    padding: 0;
-    margin-top: 10px;
-}
-
-/* 여행 일정 */
-.trip-day-id {
-	position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 8px 12px;
-    gap: 10px; /* 요소 사이 적당한 간격 */
-    background: #f8f9fa;
-    border-radius: 5px;
-    margin-top: 5px;
-}
-
-/* 인덱스 */
-.trip-day-index {
-	align-items: center;
-    display: inline-block;
-    width: 32px;
-    height: 32px;
-    line-height: 36px;
-    background-color: #007bff;
+#trip-day-btn-list button.active {
+    background-color: #ff9800; /* 더 진한 오렌지색으로 강조 */
     color: white;
-    text-align: center;
-    font-size: 15px;
-    border-radius: 50%;
-    flex-shrink: 0;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
 }
 
-/* 아이템 내부 컨테이너 */
-.trip-day-div {
+.trip-detail-non {
+    text-align: center;
+    margin: 40px auto;
+    font-size: 18px;
+    color: #555;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px dashed #ccc;
+    border-radius: 10px;
+    max-width: 400px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.trip-day-form {
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 30px;
+    margin: 40px auto;
+    min-width: 800px;
+    background-color: #fafafa;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.trip-plan-title {
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.plan-list-btn-wrapper {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.plan-list-btn {
+    display: inline-block;
+    padding: 12px 30px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #009688;
+    border: none;
+    border-radius: 30px;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.plan-list-btn:hover {
+    background-color: #00796b;
+    transform: scale(1.05);
+}
+
+.trip-day-id {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff8e1;
+    border: 1px solid #ffe0b2;
+    border-radius: 12px;
+    padding: 12px 16px;
+    margin: 12px 0;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* 왼쪽 전체 묶음 */
+.trip-day-left {
     display: flex;
     align-items: center;
-    gap: 10px;
-    flex-grow: 1;
-    min-width: 0; /* 내부 요소가 넘칠 경우 줄어들게 함 */
 }
 
-/* 장소 이미지 */
+
+
 .trip-day-img {
-    flex-shrink: 0;
-    width: 50px;
-    height: 50px;
-    border-radius: 5px;
+    width: 80px;
+    height: 80px;
     object-fit: cover;
+    border-radius: 10px;
+    margin-right: 16px;
+    border: 1px solid #ddd;
+    background-color: #f0f0f0;
 }
 
-/* (장소명 + 주소) div */
 .trip-day-place-address-div {
     display: flex;
     flex-direction: column;
-    max-width: 200px;
-    overflow: hidden;
+    justify-content: center;
+    word-break: break-word;   /* 긴 단어 줄바꿈 */
+    max-width: 600px;         /* 👉 이미지 옆에 들어갈 수 있는 너비 제한 */
 }
 
-/* 장소명 */
 .trip-day-place {
-    font-size: 14px;
+    font-size: 18px;
     font-weight: bold;
-    white-space: normal;
-    overflow: visible;
-    text-overflow: unset;
+    color: #333;
+    margin-bottom: 4px;
 }
 
-/* 주소 정보 */
 .trip-day-address {
-    font-size: 12px;
-    color: gray;
-    white-space: normal; /* 줄바꿈 허용 */
-    overflow: visible;
-    text-overflow: unset;
+    font-size: 14px;
+    color: #777;
 }
 
-/* 삭제 버튼 */
+.trip-day-index {
+    font-size: 18px;
+    font-weight: bold;
+    color: #ff9800;
+    margin-right: 10px;
+}
+
 .trip-day-delete-btn {
-    flex-shrink: 0;
-    padding: 5px 10px;
-    background: #dc3545;
+    background-color: #ff6b6b;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 10px;
+    padding: 10px 16px;
+    font-size: 15px;
+    font-weight: bold;
     cursor: pointer;
+    margin-left: 10px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    width: 100%; /* 부모 div 기준 너비로 맞춤 */
+    box-sizing: border-box;
 }
 
 .trip-day-delete-btn:hover {
-    background: #c82333;
+    background-color: #e53935;
 }
 
-/* 장소 추가 버튼 */
+
 .plan-search-popup-btn {
-    background: #007bff;
+    display: block;
+    width: 100%;
+    background-color: #4db6ac;
     color: white;
     border: none;
-    padding: 10px 15px;
-    font-size: 14px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 10px;
-}
-
-.plan-search-popup-btn button:hover {
-    background: #0056b3;
-}
-
-/* 목록으로 돌아가기 버튼 */
-.plan-list {
-    display: block;
-    width: 200px;
-    margin: 20px auto;
-    padding: 10px;
-    text-align: center;
-    background-color: #28a745;
-    color: white;
-    border-radius: 5px;
-    text-decoration: none;
+    border-radius: 10px;
+    padding: 14px;
+    font-size: 16px;
     font-weight: bold;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-.plan-list:hover {
-    background-color: #218838;
+.plan-search-popup-btn:hover {
+    background-color: #00897b;
+}
+
+.trip-destination-link {
+    background-color: #4fc3f7;  /* 여행 느낌 나는 하늘색 */
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 16px;
+    font-size: 15px;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    margin-left: 10px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+    width: 100%; /* 부모 div 기준 너비로 맞춤 */
+    box-sizing: border-box;
+    align-items: center;
+}
+
+.trip-destination-link:hover {
+    background-color: #0288d1;
+}
+
+.trip-day-btn-group {
+    display: flex;
+    flex-direction: column; /* 세로 정렬 */
+    align-items: flex-start; /* 왼쪽 정렬 (원하면 center로 변경 가능) */
+    gap: 8px; /* 버튼 간 간격 */
+    margin-top: 10px;
+    width: 110px; /* 원하는 고정 너비 */
 }
 
 /* 거리 정보 (화살표 + 거리 텍스트) */
@@ -190,7 +240,3 @@
     box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
-.trip-destination-link{
-	text-decoration: none;
-	color: inherit; 
-}

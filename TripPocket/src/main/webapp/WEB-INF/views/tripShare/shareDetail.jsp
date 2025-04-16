@@ -44,11 +44,12 @@
     <h1>${share.tripShareTitle}</h1>
     <div class="meta">
         <strong>작성자:</strong> ${share.memberId} <br>
-        <strong>여행 기간:</strong>
-        <fmt:formatDate value="${share.tripPlanStartDay}" pattern="yyyy-MM-dd" /> ~
+        <strong>여행 기간:</strong> 
+        <fmt:formatDate value="${share.tripPlanStartDay}" pattern="yyyy-MM-dd" /> ~ 
         <fmt:formatDate value="${share.tripPlanArriveDay}" pattern="yyyy-MM-dd" />
     </div>
 
+    <!-- Day 버튼 -->
     <div class="day-tab" id="dayTabs">
         <c:set var="days" value=""/>
         <c:forEach var="day" items="${share.tripShareContentList}">
@@ -59,6 +60,7 @@
         </c:forEach>
     </div>
 
+    <!-- Day별 일정 및 지도 -->
     <c:forEach var="i" begin="1" end="10">
         <c:set var="hasContent" value="false" />
         <c:forEach var="day" items="${share.tripShareContentList}">
@@ -83,11 +85,17 @@
             </div>
         </c:if>
     </c:forEach>
+	<div class="button-container">
+    <a class="back-link" href="${contextPath}/share/myShare.do">← 나의 여행 글쓰기로</a>
 
-    <a class="back-link" href="${contextPath}/share/shareList.do">← 전체 여행 목록으로</a>
+    <c:if test="${share.memberId ne member.memberId}">
+        <a class="fetch-button" href="${contextPath}/share/shareImport.do?tripShareId=${share.tripShareId}&tripPlanId=${share.tripPlanId}">
+            <span class="plus-button">+</span> 내 여행 계획에 추가하기
+        </a>
+    </c:if>
 </div>
 <a href="${contextPath}/share/shareImport.do?tripShareId=${share.tripShareId}&tripPlanId=${share.tripPlanId}">불러오기</a>
-
+</div>
 <script>
     const groupedDays = {};
     const tempList = [];
@@ -99,6 +107,7 @@
             place: "${fn:escapeXml(day.tripShareDayPlace)}"
         });
     </c:forEach>
+
     tempList.forEach(d => {
         if (!groupedDays[d.d]) groupedDays[d.d] = [];
         groupedDays[d.d].push({ x: d.x, y: d.y, place: d.place });
@@ -165,5 +174,4 @@
         if (firstBtn) firstBtn.click();
     };
 </script>
-</body>
-</html>
+

@@ -39,6 +39,4 @@ public interface TripShareDAO {
 	
 	void updateTripShareContents(@Param("contentList") List<Map<String, Object>> contentList);
 
-
-
 }

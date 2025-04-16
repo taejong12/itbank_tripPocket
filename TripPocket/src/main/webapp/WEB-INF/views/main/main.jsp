@@ -46,6 +46,17 @@
 		        다양한 명소들을 한눈에 비교하고, 나만의 여행 루트를 만들어보세요 🌍
 		    </p>
 		</div>
+		<div class="section content">
+		    <h1>어디로 갈지 망설여진다면?</h1>
+		    <h2><img src="${contextPath }/resources/img/cherryflower.png" alt="랜덤 여행지 이미지"></h2>
+		    <h1>가볍게 하나 뽑아볼까요?</h1>
+		    <p>
+		        "이번엔 어디로 떠나볼까?"<br>
+		        고민이 될 땐, 살짝 뽑아보세요 🍀<br>
+		        Trip Pocket이 추천하는 여행지로<br>
+		        뜻밖의 설렘을 만나보세요 ✨
+		    </p>
+		</div>
         <c:if test="${member == null }">
         	<div class="section content">
             	<h1>

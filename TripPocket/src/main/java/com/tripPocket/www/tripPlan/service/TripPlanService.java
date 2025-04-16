@@ -21,5 +21,6 @@ public interface TripPlanService {
 
 	int deleteTripPlanByTripPlanId(Integer tripPlanId);
 
+	List<TripDayDTO> selectTripDay(TripDayDTO tripDayDTO);
 
 }

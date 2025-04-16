@@ -50,5 +50,8 @@ public class TripPlanServiceImpl implements TripPlanService{
 		return tripPlanDAO.deleteTripPlanByTripPlanId(tripPlanId);
 	}
 
+	public List<TripDayDTO> selectTripDay(TripDayDTO tripDayDTO) {
+		return tripPlanDAO.selectTripDay(tripDayDTO);
+	}
 
 }

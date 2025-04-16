@@ -11,6 +11,7 @@
 	    <result property="tripPlanId" column="trip_plan_id"/>
 	    <result property="tripShareAddDate" column="trip_share_add_date"/>
 	    <result property="tripShareModDate" column="trip_share_mod_date"/>
+	    <result property="memberId" column="member_id"/>
 	
 	    <collection property="tripDayList" ofType="tripDayDTO">
 	        <id property="tripDayId" column="trip_day_id"/>
@@ -125,19 +126,19 @@ WHERE
 	    </selectKey>
 	    
 	    	INSERT INTO trip_share (
-	        trip_share_id,
-	        trip_share_title,
-	        trip_plan_id,
-	        trip_share_add_date,
-	        trip_share_mod_date,
-	        member_id
+		        trip_share_id,
+		        trip_share_title,
+		        trip_plan_id,
+		        trip_share_add_date,
+		        trip_share_mod_date,
+		        member_id
 	    	) VALUES (
-	        #{tripShareId},
-	        #{tripShareTitle},
-	        #{tripPlanId, jdbcType=INTEGER},
-	        SYSDATE,
-	        SYSDATE,
-	        #{memberId}
+		        #{tripShareId},
+		        #{tripShareTitle},
+		        #{tripPlanId, jdbcType=INTEGER},
+		        SYSDATE,
+		        SYSDATE,
+		        #{memberId}
 	    	)
     </insert>
 
@@ -324,10 +325,10 @@ ORDER BY tsd.trip_share_day_day ASC
 	</select>
 	
 	<update id="updateTripShareContent">
-  UPDATE trip_share_day
-  SET trip_share_content = #{tripShareContent}
-  WHERE trip_share_id = #{tripShareId}
-    AND trip_day_id = #{tripDayId}
-</update>
+	  UPDATE trip_share_day
+	  SET trip_share_content = #{tripShareContent}
+	  WHERE trip_share_id = #{tripShareId}
+	    AND trip_day_id = #{tripDayId}
+	</update>
 
 </mapper>

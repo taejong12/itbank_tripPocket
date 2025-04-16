@@ -1,6 +1,5 @@
 package com.tripPocket.www.tripShare.dao;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -96,7 +95,5 @@ public class TripShareDAOImpl implements TripShareDAO{
 		 for (Map<String, Object> map : contentList) {
 		        session.update("mapper.trip.share.updateTripShareContent", map);
 		    }
-		
 	}
- 
 } 
