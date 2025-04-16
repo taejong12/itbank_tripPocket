@@ -33,12 +33,10 @@ public interface TripShareDAO {
 
 	TripShareDTO getShareDetail(int tripShareId);
 
-	List<TripDayDTO> getTripDayDetailList(int tripShareId);
+	List<TripShareContentDTO> getTripDayDetailList(int tripShareId);
 
 	MemberDTO getWriterByShareId(int tripShareId);
 	
 	void updateTripShareContents(@Param("contentList") List<Map<String, Object>> contentList);
-
-
 
 }

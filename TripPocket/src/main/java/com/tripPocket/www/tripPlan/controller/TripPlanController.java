@@ -129,7 +129,6 @@ public class TripPlanController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		int result = tripPlanService.deleteTripPlanByTripPlanId(tripPlanId);
-		tripPlanService.deleteTripShare(tripPlanId);
 		if (result > 0) {
 			map.put("result", "여행 계획 삭제 완료");
 			

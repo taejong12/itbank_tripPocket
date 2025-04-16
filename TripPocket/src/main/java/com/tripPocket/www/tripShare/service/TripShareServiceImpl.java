@@ -27,22 +27,24 @@ public class TripShareServiceImpl implements TripShareService{
 
 	
 
-	@Override
-	@Transactional
-	public void write(TripShareDTO tripShareDTO) {
-		tripShareDAO.write(tripShareDTO);
-		// 저장된 공유 ID 가져오기 (selectKey로 세팅되었다고 가정)
-		Integer tripShareId = tripShareDTO.getTripShareId();
-
-	    // 일자별 콘텐츠 저장
-	    List<TripDayDTO> dayList = tripShareDTO.getTripDayList();
-	    if (dayList != null) {
-	        for (TripDayDTO day : dayList) {
-	            day.setTripShareId(tripShareId);
-	            tripShareDAO.insertContent(day);
-	        }
-	    }
-	}
+		@Override
+		@Transactional
+		public void write(TripShareDTO tripShareDTO) {
+			tripShareDAO.write(tripShareDTO);
+			// 저장된 공유 ID 가져오기 (selectKey로 세팅되었다고 가정)
+			Integer tripShareId = tripShareDTO.getTripShareId();
+	
+		    // 일자별 콘텐츠 저장
+		    List<TripDayDTO> dayList = tripShareDTO.getTripDayList();
+		    
+		    if (dayList != null) {
+		        for (TripDayDTO day : dayList) {
+		            day.setTripShareId(tripShareId);
+		            tripShareDAO.insertContent(day);
+		           
+		        }
+		    }
+		}
 
 	@Override
 	public List<TripPlanDTO> getTripPlansByMemberId(String memberId) {
@@ -98,7 +100,7 @@ public class TripShareServiceImpl implements TripShareService{
 
 
 	@Override
-	public List<TripDayDTO> getTripDayDetailList(int tripShareId) {
+	public List<TripShareContentDTO> getTripDayDetailList(int tripShareId) {
 		return tripShareDAO.getTripDayDetailList(tripShareId);
 	}
 

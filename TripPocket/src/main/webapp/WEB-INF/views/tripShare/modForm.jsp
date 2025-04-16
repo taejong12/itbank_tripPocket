@@ -67,9 +67,9 @@
     <div class="day-tab" id="dayTabs">
         <c:set var="prevDay" value="0" />
         <c:forEach var="day" items="${detailList}">
-            <c:if test="${day.tripDayDay != prevDay}">
-                <button class="day-tab-btn" onclick="showDay(${day.tripDayDay}, this)">Day ${day.tripDayDay}</button>
-                <c:set var="prevDay" value="${day.tripDayDay}" />
+            <c:if test="${day.tripShareDayDay != prevDay}">
+                <button class="day-tab-btn" onclick="showDay(${day.tripShareDayDay}, this)">Day ${day.tripShareDayDay}</button>
+                <c:set var="prevDay" value="${day.tripShareDayDay}" />
             </c:if>
         </c:forEach>
     </div>
@@ -79,7 +79,7 @@
         <c:forEach var="i" begin="1" end="10">
             <c:set var="hasContent" value="false" />
             <c:forEach var="day" items="${detailList}">
-                <c:if test="${day.tripDayDay == i}">
+                <c:if test="${day.tripShareDayDay == i}">
                     <c:set var="hasContent" value="true" />
                 </c:if>
             </c:forEach>
@@ -88,16 +88,17 @@
                 <div class="trip-day" id="trip-day-${i}">
                     <div id="map-${i}" class="map"></div>
                     <c:forEach var="day" items="${detailList}">
-                        <c:if test="${day.tripDayDay == i}">
-                            <h3>Day ${day.tripDayDay} - ${day.tripDayPlace}</h3>
-                            <p>${day.tripDayAddress}</p>
-                            <c:if test="${not empty day.tripDayImage}">
-                                <img src="${day.tripDayImage}" alt="여행 이미지" />
+                        <c:if test="${day.tripShareDayDay == i}">
+                            <h3>Day ${day.tripShareDayDay} - ${day.tripShareDayPlace}</h3>
+                            <p>${day.tripShareDayAddress}</p>
+                            <c:if test="${not empty day.tripShareDayImage}">
+                                <img src="${day.tripShareDayImage}" alt="여행 이미지" />
                             </c:if>
 
-                            <!-- hidden input으로 tripDayId 전달 -->
+                            <!-- hidden input으로 tripShareDayId 전달 -->
                             <input type="hidden" name="dayIds" value="${day.tripDayId}" />
                             <input type="hidden" name="tripShareId" value="${share.tripShareId}" />
+                            
 
                             <!-- 후기 입력 textarea -->
                             <label for="review-${day.tripDayId}">후기:</label><br>
@@ -121,10 +122,10 @@
     const tempList = [];
     <c:forEach var="day" items="${detailList}">
     tempList.push({
-        d: ${day.tripDayDay},
-        x: "${day.tripDayMapx}",
-        y: "${day.tripDayMapy}",
-        place: "${fn:escapeXml(day.tripDayPlace)}"
+        d: ${day.tripShareDayDay},
+        x: "${day.tripShareDayMapx}",
+        y: "${day.tripShareDayMapy}",
+        place: "${fn:escapeXml(day.tripShareDayPlace)}"
     });
     </c:forEach>
 

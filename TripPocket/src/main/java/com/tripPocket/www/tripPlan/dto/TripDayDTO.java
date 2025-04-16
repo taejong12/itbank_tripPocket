@@ -18,7 +18,21 @@ public class TripDayDTO {
 	private Date tripPlanModDate;
 	private String tripShareContent;
 	private Integer tripShareId;
+	private java.sql.Date tripPlanStartDay;
+    private java.sql.Date tripPlanArriveDay;
 	
+	public java.sql.Date getTripPlanStartDay() {
+		return tripPlanStartDay;
+	}
+	public void setTripPlanStartDay(java.sql.Date tripPlanStartDay) {
+		this.tripPlanStartDay = tripPlanStartDay;
+	}
+	public java.sql.Date getTripPlanArriveDay() {
+		return tripPlanArriveDay;
+	}
+	public void setTripPlanArriveDay(java.sql.Date tripPlanArriveDay) {
+		this.tripPlanArriveDay = tripPlanArriveDay;
+	}
 	public Integer getTripDayId() {
 		return tripDayId;
 	}

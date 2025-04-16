@@ -15,6 +15,7 @@ public class TripPlanDTO {
 	private Date tripPlanModDate;
 	private List<TripDayDTO> tripDayList;
 	
+	
 	public Integer getTripPlanId() {
 		return tripPlanId;
 	}

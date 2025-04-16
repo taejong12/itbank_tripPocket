@@ -13,5 +13,6 @@
 		<typeAlias type="com.tripPocket.www.tripPlan.dto.TripDayDTO" alias="tripDayDTO"/>
 		<typeAlias type="com.tripPocket.www.tripPlan.dto.TripPlanDTO" alias="tripPlanDTO"/>
 		<typeAlias type="com.tripPocket.www.tripShare.dto.TripShareDTO" alias="tripShareDTO"/>
+		<typeAlias type="com.tripPocket.www.tripShare.dto.TripShareContentDTO" alias="tripShareContentDTO"/>
 	</typeAliases>
 </configuration>
