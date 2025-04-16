@@ -81,5 +81,4 @@ public class MemberDTO {
 	public void setMemberIdOrEmail(String memberIdOrEmail) {
 		this.memberIdOrEmail = memberIdOrEmail;
 	}
-    
 }

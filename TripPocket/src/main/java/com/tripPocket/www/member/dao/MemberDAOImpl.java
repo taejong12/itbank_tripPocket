@@ -17,10 +17,10 @@ public class MemberDAOImpl implements MemberDAO{
 	 sqlSession.insert("mapper.member.insertMember", memberDTO);
 	}
 
-	 public boolean isMemberIdDuplicated(String memberId) {
-        int count = sqlSession.selectOne("mapper.member.isMemberIdDuplicated", memberId);
-        return count > 0;
-	 }
+	public boolean isMemberIdDuplicated(String memberId) {
+		int count = sqlSession.selectOne("mapper.member.isMemberIdDuplicated", memberId);
+		return count > 0;
+	}
 	 
 	 
 	 @Override

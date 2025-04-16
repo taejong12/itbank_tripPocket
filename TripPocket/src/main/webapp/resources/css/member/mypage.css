@@ -23,9 +23,15 @@ body {
     margin-bottom: 28px;
     padding-bottom: 16px;
     border-bottom: none;
+    position: relative;
 }
 
-.profile-img {
+.profile-img-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+#profile-img {
     width: 100px;
     height: 100px;
     border-radius: 50%;
@@ -33,10 +39,34 @@ body {
     border: 3px solid #eee;
 }
 
+#image-preview {
+    width: 100px;  /* 프로필 이미지 크기와 일치 */
+    height: 100px; /* 프로필 이미지 크기와 일치 */
+    object-fit: cover;  /* 이미지를 비율에 맞게 자르거나 채워줌 */
+    border-radius: 50%;  /* 원형으로 보이게 */
+}
+
 .profile-section h2 {
     margin-top: 12px;
     font-size: 18px;
     color: #333;
+}
+
+/* 프로필 이미지 위 버튼 */
+.profile-img-wrapper button {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    font-size: 12px;
+    background-color: #ffffff;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    line-height: 24px;
+    text-align: center;
+    padding: 0;
+    cursor: pointer;
 }
 
 /* 정보 항목 */
@@ -103,7 +133,7 @@ body {
     border: none;
     height: 1px;
     background-color: #e0e0e0;
-    margin: 0 0 0 0 ;
+    margin: 0;
 }
 
 /* 버튼 영역 */
@@ -122,11 +152,6 @@ button {
     color: #fff;
     font-weight: 500;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-button:hover {
-    background-color: #00796b;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .cancel-btn {

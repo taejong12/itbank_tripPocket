@@ -74,7 +74,7 @@ function mypageForm(event) {
 			    document.getElementById('tel-input').focus();
 			    return false;
 			}
-			const telPattern = /^(010\d{4}\d{4}|\d{11})$/;
+			const telPattern = /^010\d{8}$/;
 			if (!telPattern.test(tel)) {
 			    alert("전화번호를 01012345678 형식으로 입력해 주세요.");
 			    document.getElementById('tel-input').focus();
@@ -98,23 +98,26 @@ function mypageForm(event) {
 // 전화번호 입력 제한 + 최대 11자리 숫자 제한
 document.addEventListener('DOMContentLoaded', function () {
     const telInput = document.getElementById('tel-input');
+
     if (telInput) {
-        telInput.addEventListener('input', function (e) {
-            const start = telInput.selectionStart; // 커서 위치 기록
-            let value = telInput.value.replace(/\D/g, '').slice(0, 11); // 최대 11자리
-
-            // 전화번호 형식은 하이픈 없이 숫자만 입력하도록
-            telInput.value = value; // 변경된 값을 input에 적용
-
-            // 커서 위치 복원
-            const end = telInput.selectionEnd;
-            if (start === end) {
-                // 커서가 선택된 상태가 아니라면, 커서를 이동시킨 위치 그대로 유지
-                telInput.setSelectionRange(start, start);
-            } else {
-                // 커서가 선택된 상태일 때 끝으로 이동
-                telInput.setSelectionRange(value.length, value.length);
-            }
+        telInput.addEventListener('input', function () {
+            let value = telInput.value.replace(/\D/g, ''); // 숫자만 남기기
+            value = value.slice(0, 11); // 최대 8자리 제한
+            telInput.value = value;
         });
     }
 });
+
+ function triggerFileInput() {
+	document.getElementById('profile-img-input').click();
+}
+
+// 이미지 미리보기 함수
+function previewImage(event) {
+    var reader = new FileReader();
+    reader.onload = function() {
+        var output = document.getElementById('profile-img');
+        output.src = reader.result;  // 미리보기 이미지로 설정
+    };
+    reader.readAsDataURL(event.target.files[0]);
+}

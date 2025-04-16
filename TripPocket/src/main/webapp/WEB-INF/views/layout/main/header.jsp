@@ -24,7 +24,7 @@
 					<div>
 						<div class="profile-container">
 							<div>
-								<div class="profile-nickname">${member.memberNickname}</div>
+								<div class="profile-nickname">${member.memberNickname}님</div>
 								<div>
 									<a href="${contextPath }/member/mypage.do">프로필 편집 ></a>
 								</div>

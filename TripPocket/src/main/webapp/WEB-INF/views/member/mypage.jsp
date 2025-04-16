@@ -8,15 +8,21 @@
     <meta charset="UTF-8">
     <title>마이페이지</title>
     <link rel="stylesheet" href="${contextPath}/resources/css/member/mypage.css">
-    <script src="${contextPath }/resources/js/member/mypage.js"></script>
+    <script src="${contextPath}/resources/js/member/mypage.js"></script>
 </head>
 <body>
     <div class="mypage-container">
         <div class="profile-section">
-            <img src="${contextPath}/resources/img/profile/basic.png" alt="프로필 사진" class="profile-img">
+            <div class="profile-img-wrapper">
+                <img src="${contextPath}/resources/img/profile/basic.png" alt="프로필 사진" id="profile-img">
+                <!-- 파일 입력을 트리거하는 버튼 -->
+                <button type="button" onclick="triggerFileInput()">➕</button>
+                <!-- 숨겨진 파일 입력 필드 -->
+                <input type="file" id="profile-img-input" style="display:none" accept="image/*" onchange="previewImage(event)">
+            </div>
             <h2>${member.memberNickname}님</h2>
         </div>
-
+        
         <!-- 수정 form 시작 -->
         <form action="${contextPath}/member/modMember.do" method="post" onsubmit="return mypageForm(event)">
             <input type="hidden" name="memberId" value="${member.memberId}" />
