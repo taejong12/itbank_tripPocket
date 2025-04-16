@@ -1,0 +1,97 @@
+@charset "UTF-8";
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7fb;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 800px;
+    height: 600px;
+    margin: 80px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+h1 {
+    font-size: 24px;
+    color: #2a8fbd;
+    margin-bottom: 20px;
+    letter-spacing: 1.5px;
+}
+
+#region-link {
+    font-size: 36px;
+    font-weight: bold;
+    color: #ff7043;
+    margin: 20px 0;
+    letter-spacing: 2px;
+    text-decoration: none;
+    display: none; /* 처음엔 숨김 */
+    transition: color 0.3s, transform 0.2s ease; /* transform과 color를 동시에 부드럽게 변화 */
+}
+
+#region-link:hover {
+    color: #ff5722;
+    transform: scale(1.4); /* 1.1배 크기로 부드럽게 확대 */
+    text-decoration: none;
+}
+
+.btn {
+    display: block;
+    width: 140px;
+    margin: 30px auto 0;
+    padding: 10px;
+    background-color: #2a8fbd;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    letter-spacing: 1px;
+}
+
+.btn:hover {
+    background-color: #1c6a8b;
+}
+
+.loading, .initial-message, .extra-info {
+    font-size: 28px;
+    color: #ff7043;
+    font-weight: bold;
+    display: none;
+    margin-top: 20px;
+}
+
+.initial-message {
+    margin-top: 10px;
+    font-style: italic;
+}
+
+.extra-info {
+    font-size: 16px;
+    color: #666;
+    margin-top: 40px;
+    line-height: 1.8;
+    display: none;
+}
+
+.emoji {
+    font-size: 48px; /* 이모지 크기 키우기 */
+    margin-bottom: 25px; /* 이모지와 타이틀 간격을 줄였습니다 */
+}
+#initial-message {
+    display: block;
+}
