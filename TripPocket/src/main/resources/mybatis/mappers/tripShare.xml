@@ -96,13 +96,14 @@
     
 	<select id="selectList" parameterType="tripShareDTO" resultMap="TripShareMap">
 	    SELECT 
-        ts.trip_share_id,
-        ts.trip_share_title,
-        ts.trip_share_content,
-        ts.trip_plan_id,
-        ts.trip_share_add_date,
-        ts.trip_share_mod_date
-	    FROM trip_share ts
+		    ts.trip_share_id,
+		    ts.trip_share_title,
+		    ts.trip_share_content,
+		    ts.trip_plan_id,
+		    ts.trip_share_add_date,
+		    ts.trip_share_mod_date
+		FROM trip_share ts
+		ORDER BY ts.trip_share_add_date DESC
 	</select>
 	
 	<select id="selectDayList" parameterType="tripDayDTO" resultType="tripDayDTO">
@@ -245,30 +246,30 @@ ORDER BY tsd.trip_share_day_day ASC
 	</insert>
 	
 	<insert id="insertTripDaysFromShare" parameterType="map">
-		INSERT INTO trip_day (
-  trip_plan_id,
-  trip_day_day,
-  trip_day_address,
-  trip_day_image,
-  trip_day_date,
-  trip_day_place,
-  trip_day_mapy,
-  trip_day_mapx,
-  trip_day_content_id
-)
-SELECT
-  #{tripPlanId},
-  tsd.trip_share_day_day,
-  tsd.trip_share_day_address,
-  tsd.trip_share_day_image,
-  tsd.trip_share_day_date,
-  tsd.trip_share_day_place,
-  tsd.trip_share_day_mapy,
-  tsd.trip_share_day_mapx,
-  tsd.trip_share_content_id
-FROM trip_share_day tsd
-WHERE tsd.trip_share_id = #{tripShareId}
-ORDER BY tsd.trip_share_day_day ASC
+	  INSERT INTO trip_day (
+	  trip_plan_id,
+	  trip_day_day,
+	  trip_day_address,
+	  trip_day_image,
+	  trip_day_date,
+	  trip_day_place,
+	  trip_day_mapy,
+	  trip_day_mapx,
+	  trip_day_content_id
+	)
+	SELECT
+	  #{tripPlanId},
+	  tsd.trip_share_day_day,
+	  tsd.trip_share_day_address,
+	  tsd.trip_share_day_image,
+	  tsd.trip_share_day_date,
+	  tsd.trip_share_day_place,
+	  tsd.trip_share_day_mapy,
+	  tsd.trip_share_day_mapx,
+	  tsd.trip_share_content_id
+	FROM trip_share_day tsd
+	WHERE tsd.trip_share_id = #{tripShareId}
+	ORDER BY tsd.trip_share_day_day ASC
 	</insert>
 
 	<delete id="shareDelete" parameterType="int">
@@ -323,7 +324,7 @@ ORDER BY tsd.trip_share_day_day ASC
 	</select>
 	
 	<update id="updateTripShareContent">
-  UPDATE trip_share_content
+  UPDATE trip_share_day
   SET trip_share_content = #{tripShareContent}
   WHERE trip_share_id = #{tripShareId}
     AND trip_day_id = #{tripDayId}

@@ -209,4 +209,5 @@ public class TripShareController {
 		    return "redirect:/share/myDetail.do?tripShareId=" + tripShareId;
 		}
 	}
+
 	

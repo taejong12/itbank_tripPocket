@@ -1,7 +1,7 @@
 package com.tripPocket.www.tripShare.dto;
 
 public class TripShareContentDTO {
-	 private Long tripShareDayId;
+		private Long tripShareDayId;
 	    private Integer tripShareId;
 	    private Integer tripDayId;
 
