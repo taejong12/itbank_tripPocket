@@ -1,8 +1,44 @@
-	<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-	<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-	<c:set var="contextPath" value="${pageContext.request.contextPath}" />
-	<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<meta charset="UTF-8">
+<title>${share.tripShareTitle} - 여행 상세</title>
+<link rel="stylesheet" href="${contextPath}/resources/css/tripShare/shareDetail.css">
+
+<style>
+    .map {
+        width: 100%;
+        height: 350px;
+        margin: 20px 0;
+        border-radius: 10px;
+        background-color: #eee;
+    }
+    .day-tab {
+        margin: 10px 0;
+    }
+    .day-tab button {
+        padding: 8px 16px;
+        margin-right: 5px;
+        border: none;
+        border-radius: 5px;
+        background-color: #ddd;
+        cursor: pointer;
+    }
+    .day-tab button.active {
+        background-color: #4CAF50;
+        color: white;
+    }
+    .trip-day {
+        display: none;
+    }
+    .trip-day.active {
+        display: block;
+    }
+</style>
+
+<script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=0013492b2b76abad18e946130e719814&libraries=services"></script>
 
 <div class="container">
     <h1>${share.tripShareTitle}</h1>
@@ -15,18 +51,18 @@
 
     <div class="day-tab" id="dayTabs">
         <c:set var="days" value=""/>
-        <c:forEach var="day" items="${detailList}">
-            <c:if test="${not fn:contains(days, day.tripDayDay)}">
-                <button class="day-tab-btn" onclick="showDay(${day.tripDayDay}, this)">Day ${day.tripDayDay}</button>
-                <c:set var="days" value="${days}${day.tripDayDay},"/>
+        <c:forEach var="day" items="${share.tripShareContentList}">
+            <c:if test="${not fn:contains(days, day.tripShareDayDay)}">
+                <button class="day-tab-btn" onclick="showDay(${day.tripShareDayDay}, this)">Day ${day.tripShareDayDay}</button>
+                <c:set var="days" value="${days}${day.tripShareDayDay},"/>
             </c:if>
         </c:forEach>
     </div>
 
     <c:forEach var="i" begin="1" end="10">
         <c:set var="hasContent" value="false" />
-        <c:forEach var="day" items="${detailList}">
-            <c:if test="${day.tripDayDay == i}">
+        <c:forEach var="day" items="${share.tripShareContentList}">
+            <c:if test="${day.tripShareDayDay == i}">
                 <c:set var="hasContent" value="true" />
             </c:if>
         </c:forEach>
@@ -34,12 +70,12 @@
         <c:if test="${hasContent}">
             <div class="trip-day" id="trip-day-${i}">
                 <div id="map-${i}" class="map"></div>
-                <c:forEach var="day" items="${detailList}">
-                    <c:if test="${day.tripDayDay == i}">
-                        <h3>Day ${day.tripDayDay} - ${day.tripDayPlace}</h3>
-                        <p>${day.tripDayAddress}</p>
-                        <c:if test="${not empty day.tripDayImage}">
-                            <img src="${day.tripDayImage}" alt="여행 이미지" />
+                <c:forEach var="day" items="${share.tripShareContentList}">
+                    <c:if test="${day.tripShareDayDay == i}">
+                        <h3>Day ${day.tripShareDayDay} - ${day.tripShareDayPlace}</h3>
+                        <p>${day.tripShareDayAddress}</p>
+                        <c:if test="${not empty day.tripShareDayImage}">
+                            <img src="${day.tripShareDayImage}" alt="여행 이미지" />
                         </c:if>
                         <div class="review-content">${day.tripShareContent}</div>
                     </c:if>
@@ -50,17 +86,18 @@
 
     <a class="back-link" href="${contextPath}/share/shareList.do">← 전체 여행 목록으로</a>
 </div>
-	<a class="" href="${contextPath}/share/shareImport.do?tripShareId=${share.tripShareId}&tripPlanId=${share.tripPlanId}">불러오기</a>
+<a href="${contextPath}/share/shareImport.do?tripShareId=${share.tripShareId}&tripPlanId=${share.tripPlanId}">불러오기</a>
+
 <script>
     const groupedDays = {};
     const tempList = [];
-    <c:forEach var="day" items="${detailList}" varStatus="status">
-    tempList.push({
-        d: ${day.tripDayDay},
-        x: "${day.tripDayMapx}",
-        y: "${day.tripDayMapy}",
-        place: "${fn:escapeXml(day.tripDayPlace)}"
-    });
+    <c:forEach var="day" items="${share.tripShareContentList}">
+        tempList.push({
+            d: ${day.tripShareDayDay},
+            x: "${day.tripShareDayMapx}",
+            y: "${day.tripShareDayMapy}",
+            place: "${fn:escapeXml(day.tripShareDayPlace)}"
+        });
     </c:forEach>
     tempList.forEach(d => {
         if (!groupedDays[d.d]) groupedDays[d.d] = [];

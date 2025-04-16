@@ -82,18 +82,36 @@ public class TripShareController {
 	 public List<TripDayDTO> getTripDays(@ModelAttribute()TripDayDTO tripDayDTO) {
 		// 서비스 계층에서 데이터 가져오기
         List<TripDayDTO> tripDays = tripShareService.selectTripDayList(tripDayDTO);
+        if (tripDays == null) {
+            System.out.println("tripDays is null");
+        } else if (tripDays.isEmpty()) {
+            System.out.println("tripDays is empty");
+        } else {
+            System.out.println("tripDays size: " + tripDays.size());
+        }
 
+        // tripDays가 null이거나 비어있는 경우 빈 리스트로 반환
+        if (tripDays == null) {
+            tripDays = new ArrayList<>();
+        }
+        
+       
         return tripDays;
     }
 	 
-	@RequestMapping(value = "/write.do", method = RequestMethod.GET)
-	public String write(@ModelAttribute()TripShareDTO tripShareDTO, HttpServletRequest request, Model model) {
-		MemberDTO member = (MemberDTO) request.getSession().getAttribute("member");
-		tripShareDTO.setMemberId(member.getMemberId());
-		tripShareService.write(tripShareDTO);
+	 @RequestMapping(value = "/write.do", method = RequestMethod.POST)
+	 public String write(@ModelAttribute() TripShareDTO tripShareDTO, 
+	                     HttpServletRequest request, 
+	                     Model model) {
+	     MemberDTO member = (MemberDTO) request.getSession().getAttribute("member");
+	     tripShareDTO.setMemberId(member.getMemberId());
+	     
 	   
-	    return "redirect:/share/myShare.do"; // Tiles 설정상 이게 view 이름일 것
-	}
+	     
+	     tripShareService.write(tripShareDTO);
+	     
+	     return "redirect:/share/myShare.do"; 
+	 }
 	
 	@RequestMapping("/shareDetail.do")
 	public ModelAndView shareDetail(@ModelAttribute TripShareDTO tripShareDTO) {
@@ -101,12 +119,12 @@ public class TripShareController {
 	    TripShareDTO share = tripShareService.detailList(tripShareDTO);
 
 	    // 여행 일차 정렬 (tripDayDay 기준)
-	    List<TripDayDTO> sortedList = share.getTripDayList();
-	    Collections.sort(sortedList, new Comparator<TripDayDTO>() {
+	    List<TripShareContentDTO> sortedList = share.getTripShareContentList();
+	    Collections.sort(sortedList, new Comparator<TripShareContentDTO>() {
 	        @Override
-	        public int compare(TripDayDTO o1, TripDayDTO o2) {
-	            Integer d1 = o1.getTripDayDay();
-	            Integer d2 = o2.getTripDayDay();
+	        public int compare(TripShareContentDTO o1, TripShareContentDTO o2) {
+	            Integer d1 = o1.getTripShareDayDay();
+	            Integer d2 = o2.getTripShareDayDay();
 
 	            if (d1 == null && d2 == null) return 0;
 	            if (d1 == null) return 1; // null은 뒤로
@@ -117,8 +135,8 @@ public class TripShareController {
 	    });
 
 	    ModelAndView mav = new ModelAndView("tripShare/shareDetail");
-	    mav.addObject("share", share);            // 전체 공유 정보
-	    mav.addObject("detailList", sortedList);  // 정렬된 일차 리스트
+	    mav.addObject("share", share); // 전체 공유 정보 (제목, 작성자 등)
+	    mav.addObject("detailList", sortedList); // 정렬된 Day별 내용 리스트
 
 	    return mav;
 	}
@@ -146,7 +164,7 @@ public class TripShareController {
 	@RequestMapping("/myDetail.do")
 	public String myDetail(@RequestParam("tripShareId") int tripShareId, Model model) {
 	    TripShareDTO share = tripShareService.getShareDetail(tripShareId);
-	    List<TripDayDTO> detailList = tripShareService.getTripDayDetailList(tripShareId);
+	    List<TripShareContentDTO> detailList = tripShareService.getTripDayDetailList(tripShareId);
 	    MemberDTO member = tripShareService.getWriterByShareId(tripShareId);
 
 	    model.addAttribute("share", share);
@@ -159,7 +177,7 @@ public class TripShareController {
 	@RequestMapping("/modForm.do")
 	public String modForm(@RequestParam("tripShareId") int tripShareId, Model model) {
 	    TripShareDTO share = tripShareService.getShareDetail(tripShareId);
-	    List<TripDayDTO> detailList = tripShareService.getTripDayDetailList(tripShareId);
+	    List<TripShareContentDTO> detailList = tripShareService.getTripDayDetailList(tripShareId);
 	    MemberDTO member = tripShareService.getWriterByShareId(tripShareId);
 
 	    model.addAttribute("share", share);

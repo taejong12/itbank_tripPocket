@@ -29,7 +29,7 @@ public interface TripShareService {
 
 	TripShareDTO getShareDetail(int tripShareId);
 
-	List<TripDayDTO> getTripDayDetailList(int tripShareId);
+	List<TripShareContentDTO> getTripDayDetailList(int tripShareId);
 
 	MemberDTO getWriterByShareId(int tripShareId);
 

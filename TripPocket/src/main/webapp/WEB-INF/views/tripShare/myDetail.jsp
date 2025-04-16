@@ -10,7 +10,7 @@
     <meta charset="UTF-8">
     <title>${share.tripShareTitle} - 여행 상세</title>
     <link rel="stylesheet" href="${contextPath}/resources/css/tripShare/myDetail.css">
-   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=0013492b2b76abad18e946130e719814&libraries=services"></script>
 
     <style>
@@ -55,34 +55,34 @@
         <fmt:formatDate value="${share.tripPlanArriveDay}" pattern="yyyy-MM-dd" />
     </div>
 
-     <!-- Day 버튼 -->
+    <!-- Day 버튼 -->
     <div class="day-tab" id="dayTabs">
         <c:set var="prevDay" value="0" />
         <c:forEach var="day" items="${detailList}">
-            <c:if test="${day.tripDayDay != prevDay}">
-                <button class="day-tab-btn" onclick="showDay(${day.tripDayDay}, this)">Day ${day.tripDayDay}</button>
-                <c:set var="prevDay" value="${day.tripDayDay}" />
+            <c:if test="${day.tripShareDayDay != prevDay}">
+                <button class="day-tab-btn" onclick="showDay(${day.tripShareDayDay}, this)">Day ${day.tripShareDayDay}</button>
+                <c:set var="prevDay" value="${day.tripShareDayDay}" />
             </c:if>
         </c:forEach>
     </div>
 
-            <!-- Day별 일정 -->
+    <!-- Day별 일정 -->
     <c:forEach var="i" begin="1" end="10">
         <c:set var="hasContent" value="false" />
         <c:forEach var="day" items="${detailList}">
-            <c:if test="${day.tripDayDay == i}">
+            <c:if test="${day.tripShareDayDay == i}">
                 <c:set var="hasContent" value="true" />
             </c:if>
-	</c:forEach>
-            <c:if test="${hasContent}">
+        </c:forEach>
+        <c:if test="${hasContent}">
             <div class="trip-day" id="trip-day-${i}">
                 <div id="map-${i}" class="map"></div>
                 <c:forEach var="day" items="${detailList}">
-                    <c:if test="${day.tripDayDay == i}">
-                        <h3>Day ${day.tripDayDay} - ${day.tripDayPlace}</h3>
-                        <p>${day.tripDayAddress}</p>
-                        <c:if test="${not empty day.tripDayImage}">
-                            <img src="${day.tripDayImage}" alt="여행 이미지" />
+                    <c:if test="${day.tripShareDayDay == i}">
+                        <h3>Day ${day.tripShareDayDay} - ${day.tripShareDayPlace}</h3>
+                        <p>${day.tripShareDayAddress}</p>
+                        <c:if test="${not empty day.tripShareDayImage}">
+                            <img src="${day.tripShareDayImage}" alt="여행 이미지" />
                         </c:if>
                         <div class="review-content">${day.tripShareContent}</div>
                     </c:if>
@@ -90,18 +90,20 @@
             </div>
         </c:if>
     </c:forEach>
+
     <a class="back-link" href="${contextPath}/share/myShare.do">← 나의 여행 공유 목록으로</a>
 </div>
+
 <script>
     const groupedDays = {};
     const tempList = [];
     <c:forEach var="day" items="${detailList}">
-    tempList.push({
-        d: ${day.tripDayDay},
-        x: "${day.tripDayMapx}",
-        y: "${day.tripDayMapy}",
-        place: "${fn:escapeXml(day.tripDayPlace)}"
-    });
+        tempList.push({
+            d: ${day.tripShareDayDay},
+            x: "${day.tripShareDayMapx}",
+            y: "${day.tripShareDayMapy}",
+            place: "${fn:escapeXml(day.tripShareDayPlace)}"
+        });
     </c:forEach>
 
     tempList.forEach(d => {
@@ -109,7 +111,6 @@
         groupedDays[d.d].push({ x: d.x, y: d.y, place: d.place });
     });
 
-    // 탭 클릭 시 표시
     function showDay(dayNum, btn) {
         document.querySelectorAll(".trip-day").forEach(d => d.classList.remove("active"));
         document.getElementById("trip-day-" + dayNum).classList.add("active");
@@ -166,7 +167,6 @@
         map.setBounds(bounds);
     }
 
-    // 최초 Day 1 탭 클릭
     window.onload = function () {
         const firstBtn = document.querySelector(".day-tab-btn");
         if (firstBtn) firstBtn.click();

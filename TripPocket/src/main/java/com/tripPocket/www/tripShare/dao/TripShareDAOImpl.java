@@ -48,7 +48,7 @@ public class TripShareDAOImpl implements TripShareDAO{
 
 	@Override
 	public void insertContent(TripDayDTO tripDayDTO) {
-	    session.insert("mapper.trip.share.insertShareContent", tripDayDTO);
+	    session.insert("mapper.trip.share.insertTripShareDay", tripDayDTO);
 	}
 
 	@Override
@@ -82,7 +82,7 @@ public class TripShareDAOImpl implements TripShareDAO{
 	}
 
 	@Override
-	public List<TripDayDTO> getTripDayDetailList(int tripShareId) {
+	public List<TripShareContentDTO> getTripDayDetailList(int tripShareId) {
 		return session.selectList("mapper.trip.share.getTripDayDetailList", tripShareId);
 	}
 

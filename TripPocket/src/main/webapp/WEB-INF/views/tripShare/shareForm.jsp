@@ -2,7 +2,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<c:set var="contextPath" value="${pageContext.request.contextPath }" />
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <%
     String contextPath = request.getContextPath();
 %>
@@ -103,7 +103,7 @@
                         '<h3>Day ' + day.tripDayDay + ' - ' + day.tripDayDate + '</h3>' +
                         '<p>📍 ' + day.tripDayAddress + '</p>' +
                         imageTag +
-                        '<textarea name="tripShareContent" rows="4" data-key="' + key + '" data-day="' + day.tripDayDay + '"placeholder="추억을 여기에 남겨보세요! 다른 사람에게도 큰 도움이 될 거예요 ☺️">' + savedContent + '</textarea>' +
+                        '<textarea name="tripShareContent" rows="4" data-key="' + key + '" data-day="' + day.tripDayDay + '" placeholder="추억을 여기에 남겨보세요!">' + savedContent + '</textarea>' +
                         '</div>';
 
                     container.append(html);
@@ -118,8 +118,8 @@
             }
 
             function renderMap(dayPlaces) {
-                $('#map').remove(); // 기존 지도 제거
-                $('#tripDayContainer').before('<div id="map"></div>'); // 🟢 지도 위치를 위로 이동
+                $('#map').remove();
+                $('#tripDayContainer').before('<div id="map"></div>');
 
                 let mapContainer = document.getElementById('map');
                 let mapOption = {
@@ -188,7 +188,7 @@
             }
 
             $('form').submit(function (e) {
-                $('.generated-hidden').remove();
+                $('.generated-hidden').remove(); // 기존 input 제거
 
                 let form = $(this);
                 let index = 0;
@@ -196,12 +196,22 @@
                 for (let key in reviewMap) {
                     let content = reviewMap[key];
                     if (content.trim() !== '') {
-                        let matchedDay = globalTripDays.find(day => day.tripDayId === key);
-                        let dayDay = matchedDay ? matchedDay.tripDayDay : '';
+                        // tripDayId 비교 시 타입 맞춰줌
+                        let matchedDay = globalTripDays.find(day => String(day.tripDayId) === key);
+                        if (!matchedDay) continue;
 
-                        form.append('<input type="hidden" class="generated-hidden" name="tripDayList[' + index + '].tripDayId" value="' + key + '">');
-                        form.append('<input type="hidden" class="generated-hidden" name="tripDayList[' + index + '].tripDayDay" value="' + dayDay + '">');
+                        // Hidden input 생성
+                        form.append('<input type="hidden" class="generated-hidden" name="tripDayList[' + index + '].tripDayId" value="' + matchedDay.tripDayId + '">');
+                        form.append('<input type="hidden" class="generated-hidden" name="tripDayList[' + index + '].tripDayDay" value="' + matchedDay.tripDayDay + '">');
+                        form.append('<input type="hidden" class="generated-hidden" name="tripDayList[' + index + '].tripDayDate" value="' + matchedDay.tripDayDate + '">');
+                        form.append('<input type="hidden" class="generated-hidden" name="tripDayList[' + index + '].tripDayAddress" value="' + matchedDay.tripDayAddress + '">');
+                        form.append('<input type="hidden" class="generated-hidden" name="tripDayList[' + index + '].tripDayPlace" value="' + matchedDay.tripDayPlace + '">');
+                        form.append('<input type="hidden" class="generated-hidden" name="tripDayList[' + index + '].tripDayImage" value="' + matchedDay.tripDayImage + '">');
+                        form.append('<input type="hidden" class="generated-hidden" name="tripDayList[' + index + '].tripDayMapx" value="' + matchedDay.tripDayMapx + '">');
+                        form.append('<input type="hidden" class="generated-hidden" name="tripDayList[' + index + '].tripDayMapy" value="' + matchedDay.tripDayMapy + '">');
                         form.append('<input type="hidden" class="generated-hidden" name="tripDayList[' + index + '].tripShareContent" value="' + $('<div>').text(content).html() + '">');
+                        form.append('<input type="hidden" class="generated-hidden" name="tripDayList[' + index + '].tripPlanStartDay" value="' + matchedDay.tripPlanStartDay + '">');
+                        form.append('<input type="hidden" class="generated-hidden" name="tripDayList[' + index + '].tripPlanArriveDay" value="' + matchedDay.tripPlanArriveDay + '">');
                         index++;
                     }
                 }
@@ -212,7 +222,7 @@
 <body>
 <div class="container">
     <h2>나의 여행 글 쓰기</h2>
-    <form:form modelAttribute="tripShareDTO" method="get" action="${contextPath}/share/write.do">
+    <form:form modelAttribute="tripShareDTO" method="post" action="${contextPath}/share/write.do">
         <label>✈️ 공유하고 싶은 나의 여행을 골라주세요</label>
         <form:select path="tripPlanId">
             <form:option value="" label="📌 기억에 남는 여행을 선택해주세요" />
