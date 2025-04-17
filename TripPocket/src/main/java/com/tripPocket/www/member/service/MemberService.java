@@ -18,5 +18,9 @@ public interface MemberService {
 
 	void delMemberWithDependencies(String memberId);
 
+	
+		
+	}
+		
 
-}
+

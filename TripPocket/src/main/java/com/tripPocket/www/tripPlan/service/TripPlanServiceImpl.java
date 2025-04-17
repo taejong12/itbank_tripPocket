@@ -50,4 +50,7 @@ public class TripPlanServiceImpl implements TripPlanService{
 		return tripPlanDAO.deleteTripPlanByTripPlanId(tripPlanId);
 	}
 
-}
+	
+	}
+
+	

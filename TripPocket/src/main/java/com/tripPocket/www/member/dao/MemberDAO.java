@@ -7,7 +7,6 @@ public interface MemberDAO {
 	void insertMember(MemberDTO memberDTO);
 
 	boolean isMemberIdDuplicated(String memberId);
-	
 	 MemberDTO login(MemberDTO memberDTO);
 
 	void modMember(MemberDTO memberDTO);

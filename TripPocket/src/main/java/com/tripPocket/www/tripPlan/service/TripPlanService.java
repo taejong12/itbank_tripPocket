@@ -20,5 +20,8 @@ public interface TripPlanService {
 	int deleteTripDayByTripDayId(Integer tripDayId);
 
 	int deleteTripPlanByTripPlanId(Integer tripPlanId);
+	
+	
+	
 
 }

@@ -50,17 +50,18 @@ public class MemberController {
 	      MemberDTO member = memberService.login(memberDTO);
 	      HttpSession session = request.getSession();
 	      PrintWriter out = response.getWriter();
+	      String contextPath = request.getContextPath();
 	      if(member != null ) {
 	         session.setAttribute("isLogin",true);
 	         session.setAttribute("member", member);
 	         out.write("<script>");
 	         out.write("alert('로그인에 성공했습니다');");
-	         out.write("location.href='/www/main.do';");
+	         out.write("location.href='" + contextPath + " /www/main.do';");
 	         out.write("</script>");
 	      }else {
 	         out.write("<script>");
 	         out.write("alert('로그인에 실패했습니다');");
-	         out.write("location.href='/www/member/loginForm.do';");
+	         out.write("location.href='" + contextPath + "/www/member/loginForm.do';");
 	         out.write("</script>");
 	      }
 	      return null;
@@ -109,6 +110,7 @@ public class MemberController {
 		PrintWriter out = response.getWriter();
 		memberService.modMember(memberDTO);
 		MemberDTO member = memberService.update(memberDTO);
+		String contextPath = request.getContextPath();
 		session.setAttribute("member", member);
 		out.write("<script>");
 		out.write("alert('변경이 완료되었습니다');");
@@ -125,7 +127,7 @@ public class MemberController {
 	    PrintWriter out = response.getWriter();
 	    out.write("<script>");
 	    out.write("alert('탈퇴 완료되었습니다');");
-	    out.write("location.href='/www/main.do';");
+	    out.write("location.href= /www/main.do';");
 	    out.write("</script>");
 	    return null;
 	}
