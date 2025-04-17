@@ -1,6 +1,10 @@
 package com.tripPocket.www.member.service;
 
+import javax.mail.internet.MimeMessage;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import com.tripPocket.www.member.dao.MemberDAO;
@@ -9,6 +13,9 @@ import com.tripPocket.www.member.dto.MemberDTO;
 @Service
 public class MemberServiceImpl implements MemberService {
 
+	@Autowired
+	private JavaMailSender mailSender;
+	
 	@Autowired
 	private MemberDAO memberDAO;
 	
@@ -53,6 +60,24 @@ public class MemberServiceImpl implements MemberService {
 		memberDAO.delMemberById(memberId);
 		
 	}
-	
-	
+
+	@Override
+	public void sendMail(String title, String memberMail, String html) {
+		
+		MimeMessage message = mailSender.createMimeMessage();
+		
+		try {
+			MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "utf-8");
+			
+			messageHelper.setFrom("trippcoket@gmail.com", "Trip Pocket");
+			messageHelper.setSubject(title);
+			messageHelper.setTo(memberMail);
+			messageHelper.setText(html, true);
+			
+			mailSender.send(message);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

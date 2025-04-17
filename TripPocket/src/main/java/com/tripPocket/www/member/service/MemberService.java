@@ -18,5 +18,6 @@ public interface MemberService {
 
 	void delMemberWithDependencies(String memberId);
 
+	void sendMail(String title, String memberMail, String html);
 
 }
