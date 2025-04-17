@@ -48,6 +48,14 @@
                     <li><a href="${contextPath }/share/shareList.do">다른 사용자들의 여행 후기</a></li><!-- 다른 사용자들의 여행리스트 페이지로 이동 -->
                 </ul>
             </li>
+           	
+            <li><a href="#" onclick="toggleSubmenu(event, 'awards-submenu')">여행 수상</a>
+                <ul class="submenu" id="awards-submenu">
+                    <li><a href="${contextPath }/awards/awardsbest.do">여행 수상작</a></li> 
+                    <li><a href="${contextPath }/awards/awardsList.do">여행 수상목록</a></li>
+                </ul>
+            </li>
+                      
             <c:if test="${isLogin == true && member != null }">
         		 <li><a href="${contextPath }/member/logout.do">로그아웃</a></li>
         	</c:if>
