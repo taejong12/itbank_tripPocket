@@ -4,10 +4,12 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath }" />
 <link rel="stylesheet" href="${contextPath}/resources/css/member/join.css">
 
-<!-- Firebase App (Core SDK) -->
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<!-- Firebase Auth -->
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<!-- Firebase App (필수) -->
+<script src="https://www.gstatic.com/firebasejs/11.6.0/firebase-app-compat.js"></script>
+<!-- Firebase Authentication (전화번호 인증용) -->
+<script src="https://www.gstatic.com/firebasejs/11.6.0/firebase-auth-compat.js"></script>
+<!-- Firebase Analytics (선택사항) -->
+<script src="https://www.gstatic.com/firebasejs/11.6.0/firebase-analytics-compat.js"></script>
 
     <div class="container">
         <p class="form-title">Sign up</p>
@@ -43,7 +45,7 @@
 	            <p>휴대전화번호</p>
             	<div class="input-btn-wrap">
 	                <input type="tel" name="memberTel" id="memberTel" placeholder="예: 01012345678">
-					<button class="memberJoinCheckBtn" type="button" onclick="fu_sms(this)">인증</button>
+					<button class="memberJoinCheckBtn" type="button" onclick="fu_sendSMS(this)">인증</button>
             	</div>
             </div>
             <div class="gender-container">
@@ -59,68 +61,31 @@
 <!-- recaptcha 영역 -->
 <div id="recaptcha-container"></div>
 
-<script>
-  // Firebase 설정
-  const firebaseConfig = {
-    apiKey: "AIzaSyCnFapPUvfjLNot2A0LIg3nY5HK1abF4Wg",
-    authDomain: "trippocket-21bfa.firebaseapp.com",
-    projectId: "trippocket-21bfa",
-    storageBucket: "trippocket-21bfa.appspot.com",
-    messagingSenderId: "1041108579388",
-    appId: "1:1041108579388:web:28d3ea8f80b4097843ff39",
-    measurementId: "G-747WZ4ZMQJ"
-  };
-
-  // Firebase 초기화
-  firebase.initializeApp(firebaseConfig);
-</script>
-
-<script>
-  let confirmationResult = null;
-
-  function sendVerificationCode() {
-    const phoneNumber = document.getElementById("phoneNumber").value;
-    const appVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
-      size: 'invisible',
-      callback: function(response) {
-        console.log("reCAPTCHA 성공");
-      }
-    });
-
-    firebase.auth().signInWithPhoneNumber(phoneNumber, appVerifier)
-      .then(result => {
-        confirmationResult = result;
-        alert("인증번호 전송 완료!");
-      })
-      .catch(error => {
-        console.error("인증번호 전송 에러:", error.message);
-      });
-  }
-
-  function confirmCode() {
-    const code = document.getElementById("verificationCode").value;
-
-    if (confirmationResult) {
-      confirmationResult.confirm(code)
-        .then(result => {
-          alert("인증 성공!");
-          console.log("사용자 정보:", result.user);
-        })
-        .catch(error => {
-          alert("인증 실패. 다시 시도해주세요.");
-        });
-    } else {
-      alert("인증번호를 먼저 요청해주세요.");
-    }
-  }
-</script>
-
 <script type="text/javascript">
+
 	let contextPath = "${contextPath}";
+
+	//Firebase 설정
+	const firebaseConfig = {
+		apiKey: "AIzaSyCnFapPUvfjLNot2A0LIg3nY5HK1abF4Wg",
+		authDomain: "trippocket-21bfa.firebaseapp.com",
+		projectId: "trippocket-21bfa",
+		storageBucket: "trippocket-21bfa.appspot.com",
+		messagingSenderId: "1041108579388",
+		appId: "1:1041108579388:web:28d3ea8f80b4097843ff39",
+		measurementId: "G-747WZ4ZMQJ"
+	};
+
+	// Firebase 초기화
+	firebase.initializeApp(firebaseConfig);
+	firebase.analytics();
 	
-	window.fu_sms = function(btn){
-		let memberTel = document.getElementById("memberTel");
-		let memberTelVal = document.getElementById("memberTel").value.trim();
+	let confirmationResult = null;
+	
+	// 인증발송
+	window.fu_sendSMS = function(btn){
+		const memberTel = document.getElementById("memberTel");
+		const memberTelVal = document.getElementById("memberTel").value.trim();
 	   	 
 		if(memberTelVal == null || memberTelVal == ""){
 			memberTel.focus();
@@ -128,100 +93,81 @@
 			return;
 		}
 		
-		fetch(contextPath+"/member/sendSms.do", {
-			method: "POST",
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded"
-            },
-            body: new URLSearchParams({ tel: memberTelVal })
-		})
-		.then(response => {
-			if (!response.ok) {
-					throw new Error("sms 인증 응답 에러: " + response.status);
+		const appVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
+			size: 'invisible',
+			callback: function(response) {
+				console.log("reCAPTCHA 성공");
 			}
-			// JSON 데이터로 변환
-			return response.json();
-		})
-		.then(data => {
-			console.log("sms 확인용");
-			console.log(data);
+		});
+		
+		// Firebase는 국가 코드 포함된 국제전화 형식만 인식
+		const formattedPhone = memberTelVal.replace(/^0/, '+82');
+		
+		console.log("formattedPhone: "+formattedPhone);
+		
+		firebase.auth().signInWithPhoneNumber(formattedPhone, appVerifier)
+		.then(result => {
+			confirmationResult = result;
+			alert("인증번호 전송 완료");
 			
-			if(data){
-				
-				const container = btn.closest('.input-container.column');
-				
-				// 중복 추가 방지
-			    if (container.querySelector('.auth-code-wrap')) {
-			        return;
-			    }
-				
-			    // 인증번호 입력창 생성
-			    const authDiv = document.createElement('div');
-			    authDiv.className = 'input-btn-wrap';
-	
-			    const input = document.createElement('input');
-			    input.type = 'text';
-			    input.placeholder = '인증번호 입력';
-	
-			    const confirmBtn = document.createElement('button');
-			    confirmBtn.type = 'button';
-			    confirmBtn.textContent = '확인';
-			    
-			    confirmBtn.addEventListener("click", function () {
-			        const userInput = input.value.trim();
+			const container = btn.closest('.input-container.column');
+			
+			// 중복 추가 방지
+		    if (container.querySelector('.input-btn-wrap')) {
+		        return;
+		    }
+			
+		    // 인증번호 입력창 생성
+		    const authDiv = document.createElement('div');
+		    authDiv.className = 'input-btn-wrap';
 
-			        if (!userInput) {
-			            alert("인증번호를 입력하세요.");
-			            return;
-			        }
+		    const authInput = document.createElement('input');
+		    authInput.type = 'text';
+		    authInput.placeholder = '인증번호 입력';
 
-			        fetch(contextPath+"/member/codeDiff.do", {
-			            method: "POST",
-			            headers: {
-			                "Content-Type": "application/x-www-form-urlencoded"
-			            },
-			            body: new URLSearchParams({ memberCode: userInput })
-			        })
-			        .then(res => res.json())
-			        .then(data => {
-			        	
-			        	console.log("인증비교반환##");
-			        	console.log(data);
-			        	console.log(data.result);
-			        	
-			            if (data.result === true) {
-			                alert("인증 성공");
-			                input.disabled = true;
-			                confirmBtn.disabled = true;
+		    const confirmBtn = document.createElement('button');
+		    confirmBtn.type = 'button';
+		    confirmBtn.textContent = '확인';
+		    
+		 	// 인증확인
+		    confirmBtn.addEventListener("click", function () {
+		        const memberAuthInput = authInput.value.trim();
 
-			                // 성공 시 hidden input 추가
-			                const hiddenInput = document.createElement("input");
-			                hiddenInput.type = "hidden";
-			                hiddenInput.name = "isPhoneVerified";
-			                hiddenInput.value = "true";
-			                container.appendChild(hiddenInput);
-			            } else if(data.result === false) {
-			                alert("인증 실패. 코드를 다시 확인해주세요.");
-			            } else {
-			            	alert("인증번호 만료");
-			            }
-			        })
-			        .catch(err => {
-			            console.error("인증 확인 중 오류 발생:", err);
-			            alert("서버 오류가 발생했습니다.");
-			        });
-			    });
+		        if (!memberAuthInput) {
+		            alert("인증번호를 입력하세요.");
+		            return;
+		        }
+	    		
+    			confirmationResult.confirm(memberAuthInput)
+    			.then(result => {
+    				
+    				console.log("사용자 정보:"+ result.user);
+    				console.log("result:"+ result);
+    				
+    				input.disabled = true;
+	                confirmBtn.disabled = true;
 
-			    // 조립
-			    authDiv.appendChild(input);
-			    authDiv.appendChild(confirmBtn);
+	                // 성공 시 hidden input 추가
+	                const hiddenAuthInput = document.createElement("input");
+	                hiddenAuthInput.type = "hidden";
+	                hiddenAuthInput.name = "isPhoneVerified";
+	                hiddenAuthInput.value = "true";
+	                container.appendChild(hiddenAuthInput);
+    				
+    				alert("인증 성공");
+    			})
+    			.catch(error => {
+    				console.error("인증 에러: "+error);
+    			});
+		    });
 
-			    // container에 추가
-			    container.appendChild(authDiv);
-			}
+		    authDiv.appendChild(authInput);
+		    authDiv.appendChild(confirmBtn);
+
+		    container.appendChild(authDiv);
 		})
 		.catch(error => {
-			console.error("sms 인증 오류 발생: ", error);
+			console.error("인증번호 전송 에러:", error.message);
 		});
 	}
 </script>
