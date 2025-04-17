@@ -1,0 +1,28 @@
+@charset "UTF-8";
+
+.award-item {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 16px;
+    margin: 12px 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.award-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.award-item h3 {
+    font-size: 1.4em;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.award-item p {
+    font-size: 1em;
+    color: #666;
+    line-height: 1.6;
+}

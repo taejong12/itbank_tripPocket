@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+	"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+	"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+	
+<tiles-definitions>
+	<definition name="popupLayout" template="/WEB-INF/views/layout/popup/popupLayout.jsp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body" value="" />
+	</definition>
+	
+	<definition name="popup/tripPlan" extends="popupLayout">
+		<put-attribute name="title" value="여행 선택(팝업)" />
+		<put-attribute name="body" value="/WEB-INF/views/popup/tripPlan.jsp" />
+	</definition>
+</tiles-definitions>

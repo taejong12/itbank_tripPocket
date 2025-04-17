@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.trip.awards">
+
+
+<!-- 첫 번째 / 두 번째 게시글 (article_no 기준 오름차순) -->
+<select id="selectAwardByOrder" resultType="com.tripPocket.www.tripAwards.dto.TripAwardsDTO">
+  <![CDATA[
+    SELECT *
+    FROM trip_awards
+    ORDER BY trip_awards_articleno ASC
+    LIMIT #{rank - 1}, 1
+  ]]>
+</select>
+
+<!-- 사진 좋아요 수가 가장 많은 후기 -->
+<select id="selectAwardByMostLikes" resultType="com.tripPocket.www.tripAwards.dto.TripAwardsDTO">
+  <![CDATA[
+    SELECT *
+    FROM trip_awards
+    ORDER BY trip_awards_likes DESC
+    LIMIT 1
+  ]]>
+</select>
+
+<!-- 이달의 가장 많이 조회된 후기 -->
+<select id="selectAwardByMonthlyHits" resultType="com.tripPocket.www.tripAwards.dto.TripAwardsDTO">
+  <![CDATA[
+    SELECT *
+    FROM trip_awards
+    WHERE DATE_FORMAT(trip_awards_writedate, '%Y-%m') = DATE_FORMAT(NOW(), '%Y-%m')
+    ORDER BY trip_awards_hits DESC
+    LIMIT 1
+  ]]>
+</select>
+
+
+<select id="selectAllAwardsList" resultType="com.tripPocket.www.tripAwards.dto.TripAwardsDTO">
+  <![CDATA[
+    SELECT
+      trip_awards_firstawardsno AS firstAwardsNo,
+      trip_awards_secondawardsno AS secondAwardsNo,
+      trip_awards_monthlyawardsno AS monthlyAwardsNo,
+      trip_awards_photoawardsno AS photoAwardsNo,
+      trip_awards_title AS title,
+      trip_awards_articleno AS articleNo,
+      trip_awards_imagefileno AS imgFileno,
+      trip_awards_content AS content
+    FROM trip_awards
+    ORDER BY trip_awards_writedate DESC
+  ]]>
+</select>
+
+  <select id="selectAwardsRankingBySearch" parameterType="map" resultType="com.tripPocket.www.tripAwards.dto.TripAwardsDTO">
+  <![CDATA[
+    SELECT
+      trip_awards_articleNo AS articleNo,
+      trip_awards_imgFileno AS imgFileno,
+      trip_awards_title AS title,
+      trip_awards_content AS content
+    FROM trip_awards
+    WHERE 1 = 1
+  ]]>
+    <if test="articleNo != null and articleNo != ''">
+      AND trip_awards_articleNo LIKE CONCAT('%', #{articleNo}, '%')
+    </if>
+    <if test="imgFileno != null and imgFileno != ''">
+      AND trip_awards_imgFileno LIKE CONCAT('%', #{imgFileno}, '%')
+    </if>
+    <if test="title != null and title != ''">
+      AND trip_awards_title LIKE CONCAT('%', #{title}, '%')
+    </if>
+    <if test="content != null and content != ''">
+      AND trip_awards_content LIKE CONCAT('%', #{content}, '%')
+    </if>
+  <![CDATA[
+    ORDER BY trip_awards_articleNo DESC
+  ]]>
+</select>
+  
+
+</mapper>

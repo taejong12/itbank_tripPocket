@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+	"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+	"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+ <definition name="awards" template="/WEB-INF/views/layout/main/TripAwardsLayout.jsp">
+    <put-attribute name="title" value="여행어워즈수상" />
+    <put-attribute name="header" value="/WEB-INF/views/layout/main/header.jsp" />
+    <put-attribute name="body" value="" />
+    <put-attribute name="footer" value="/WEB-INF/Awards/layout/main/footer.jsp" />
+</definition>
+
+<definition name="awards/awardsList" extends="awards">
+    <put-attribute name="title" value="어워즈랭킹목록" />
+   <put-attribute name="body" value="/WEB-INF/views/Awards/tripAwards/list.jsp"/>
+</definition>
+
+<definition name="awards/awardsBest" extends="awards">
+    <put-attribute name="title" value="베스트어워즈수상" />
+    <put-attribute name="body" value="/WEB-INF/views/Awards/tripAwards/best.jsp"/>
+</definition>
+</tiles-definitions>

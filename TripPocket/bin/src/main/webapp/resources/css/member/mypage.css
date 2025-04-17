@@ -1,0 +1,162 @@
+@charset "UTF-8";
+
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: #f4f6f8;
+    margin: 0;
+    padding: 0;
+    color: #222;
+}
+
+.mypage-container {
+    width: 500px;
+    margin: 40px auto;
+    padding: 24px;
+    border-radius: 16px;
+    background-color: #ffffff;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+}
+
+/* 프로필 섹션 */
+.profile-section {
+    text-align: center;
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: none;
+}
+
+.profile-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #eee;
+}
+
+.profile-section h2 {
+    margin-top: 12px;
+    font-size: 18px;
+    color: #333;
+}
+
+/* 정보 항목 */
+.info-item {
+    padding: 16px 0;
+}
+
+.label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+    font-size: 15px;
+    color: #444;
+}
+
+.info-value-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.info-value {
+    font-size: 14px;
+    color: #444;
+}
+
+.edit-link {
+    font-size: 14px;
+    color: #009688;
+    text-decoration: none;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.edit-link:hover {
+    text-decoration: underline;
+}
+
+/* 수정 입력 필드 */
+.edit-field {
+    display: none;
+    margin-top: 6px;
+    flex-direction: column;
+}
+
+.edit-field input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 14px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+    margin-bottom: 8px;
+}
+
+.edit-field input:focus {
+    border-color: #009688;
+    outline: none;
+}
+
+/* 구분선 */
+.divider {
+    border: none;
+    height: 1px;
+    background-color: #e0e0e0;
+    margin: 0 0 0 0 ;
+}
+
+/* 버튼 영역 */
+.button-container {
+    display: flex;
+    gap: 8px;
+}
+
+button {
+    padding: 9px 16px;
+    font-size: 13px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #009688;
+    color: #fff;
+    font-weight: 500;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+button:hover {
+    background-color: #00796b;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.cancel-btn {
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+.cancel-btn:hover {
+    background-color: #ddd;
+}
+
+/* 회원탈퇴 버튼 */
+.delete-account-btn {
+    display: block;
+    margin: 20px auto 0;
+    padding: 9px 16px;
+    background-color: #ff5252;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: background-color 0.3s ease;
+    text-align: center;
+    border-top: 1px solid #e0e0e0;
+    width: 20%;
+}
+
+.delete-account-btn:hover {
+    background-color: #d32f2f;
+}

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.member">
+
+	<resultMap type="memberDTO" id="MemberResultMap">
+		<result property="memberId" column="member_id" />
+		<result property="memberPwd" column="member_pwd" />
+		<result property="memberName" column="member_name" />
+		<result property="memberEmail" column="member_email" />
+		<result property="memberAge" column="member_age" />
+		<result property="memberNickname" column="member_nickname" />
+		<result property="memberTel" column="member_tel" />
+		<result property="memberGender" column="member_gender" />
+		<result property="memberAddAate" column="member_add_date" />
+		<result property="memberModDate" column="member_mod_date" />
+	</resultMap>
+
+	<insert id="insertMember" parameterType="memberDTO">
+		insert into member(
+		member_id,
+		member_pwd,
+		member_name,
+		member_email,
+		member_age,
+		member_nickname,
+		member_tel,
+		member_gender
+		) values (
+		#{memberId},
+		#{memberPwd},
+		#{memberName},
+		#{memberEmail},
+		#{memberAge},
+		#{memberNickname},
+		#{memberTel},
+		#{memberGender}
+		)
+	</insert>
+
+	<select id="isMemberIdDuplicated" parameterType="String"
+		resultType="int">
+		select count(*) from member where member_id = #{member_id}
+	</select>
+	<select id="isMemberEmailDuplicated" parameterType="String"
+		resultType="int">
+		select count(*) from member where member_email = #{member_Email}
+	</select>
+
+	<select id="login" parameterType="memberDTO" resultMap="MemberResultMap">
+	  SELECT * FROM member
+	  <where>
+	    <choose>
+	      <when test="memberIdOrEmail != null and memberIdOrEmail.indexOf('@') != -1">
+	        member_email = #{memberIdOrEmail}
+	      </when>
+	      <otherwise>
+	        member_id = #{memberIdOrEmail}
+	      </otherwise>
+	    </choose>
+	    AND member_pwd = #{memberPwd}
+	  </where>
+	</select>
+	
+	<update id="modMember" parameterType="memberDTO">
+		UPDATE member
+        <set>
+             <if test="memberEmail != null and memberEmail != ''">
+            member_email = #{memberEmail},
+        </if>
+        <if test="memberPwd != null and memberPwd != ''">
+            member_pwd = #{memberPwd},
+        </if>
+        <if test="memberTel != null and memberTel != ''">
+            member_tel = #{memberTel},
+        </if>
+        <if test="memberAge != null and memberAge != ''">
+            member_age = #{memberAge},
+        </if>
+        <if test="memberNickname != null and memberNickname != ''">
+            member_nickname = #{memberNickname},
+        </if>
+        <if test="memberName != null and memberName != ''">
+            member_name = #{memberName},
+        </if>
+        <if test="memberGender != null and memberGender != ''">
+            member_gender = #{memberGender}
+        </if>
+        </set>
+        WHERE member_id = #{memberId}
+	</update>
+	
+	<select id="update" parameterType="memberDTO"
+		resultMap="MemberResultMap">
+		select * from member where member_id = #{memberId}
+	</select>
+	
+	<!-- 1. trip_share_content 삭제 -->
+	<delete id="deleteTripShareContentByMemberId" parameterType="String">
+	    DELETE FROM trip_share_content
+	    WHERE trip_share_id IN (
+	        SELECT trip_share_id FROM trip_share
+	        WHERE trip_plan_id IN (
+	            SELECT trip_plan_id FROM trip_plan WHERE member_id = #{memberId}
+	        )
+	    )
+	</delete>
+	
+	<!-- 2. trip_share 삭제 -->
+	<delete id="deleteTripShareByMemberId" parameterType="String">
+	    DELETE FROM trip_share
+	    WHERE trip_plan_id IN (
+	        SELECT trip_plan_id FROM trip_plan WHERE member_id = #{memberId}
+	    )
+	</delete>
+	
+	<!-- 3. trip_day 삭제 -->
+	<delete id="deleteTripDayByMemberId" parameterType="String">
+	    DELETE FROM trip_day
+	    WHERE trip_plan_id IN (
+	        SELECT trip_plan_id FROM trip_plan WHERE member_id = #{memberId}
+	    )
+	</delete>
+	
+	<!-- 4. trip_plan 삭제 -->
+	<delete id="deleteTripPlanByMemberId" parameterType="String">
+	    DELETE FROM trip_plan WHERE member_id = #{memberId}
+	</delete>
+	
+	<!-- 5. member 삭제 (기존 delMember 와 동일하지만 String 파라미터 버전도 하나 만들면 깔끔해요) -->
+	<delete id="delMemberById" parameterType="String">
+	    DELETE FROM member WHERE member_id = #{memberId}
+	</delete>
+	
+</mapper>

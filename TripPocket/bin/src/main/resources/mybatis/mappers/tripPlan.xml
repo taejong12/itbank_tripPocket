@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.trip.plan">
+
+
+	<insert id="insertPlan" parameterType="tripPlanDTO">
+		insert into trip_plan(
+			trip_plan_title,
+			trip_plan_content,
+			trip_plan_start_day,
+			trip_plan_arrive_day,
+			member_id
+		) values (
+			#{tripPlanTitle},
+			#{tripPlanContent},
+			#{tripPlanStartDay},
+			#{tripPlanArriveDay},
+			#{memberId}
+		)
+	</insert>
+	
+	<select id="selectPlanList" parameterType="String" resultType="tripPlanDTO">
+			select *
+			from trip_plan
+			where member_id = #{memberId}
+			order by trip_plan_id desc
+	</select>
+	
+	<select id="selectTripDayListByPlanId" parameterType="Integer" resultType="tripDayDTO">
+			select *
+			from trip_day
+			where trip_plan_id = #{tripPlanId}
+			order by trip_day_id
+	</select>
+	
+	
+	<insert id="insertTripDay" parameterType="tripDayDTO" useGeneratedKeys="true" keyProperty="tripDayId" keyColumn="trip_day_id">
+		insert into trip_day(
+			trip_day_day,
+			trip_day_place,
+			trip_day_address,
+			trip_day_date,
+			trip_day_image,
+			trip_plan_id,
+			trip_day_mapx,
+			trip_day_mapy
+		) values (
+			#{tripDayDay},
+			#{tripDayPlace},
+			#{tripDayAddress},
+			#{tripDayDate},
+			#{tripDayImage},
+			#{tripPlanId},
+			#{tripDayMapx},
+			#{tripDayMapy}
+		)
+	</insert>
+	
+	<select id="selectTripPlanById" parameterType="Integer" resultType="tripPlanDTO">
+		select *
+		from trip_plan
+		where trip_plan_id = #{tripPlanId}
+	</select>
+	
+	<delete id="deleteTripDayByTripDayId">
+		DELETE FROM trip_day
+		WHERE trip_day_id = #{tripDayId}
+	</delete>
+	
+	<delete id="deleteTripDayByTripPlanId">
+		DELETE FROM trip_day
+		WHERE trip_plan_id = #{tripPlanId}
+	</delete>
+	
+	<delete id="deleteTripPlanByTripPlanId">
+		DELETE FROM trip_plan
+		WHERE trip_plan_id = #{tripPlanId}
+	</delete>
+</mapper>

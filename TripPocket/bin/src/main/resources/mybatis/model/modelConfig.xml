@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<!-- settings는 typeAliases보다 먼저 와야 함 -->
+	<settings>
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+	</settings>
+
+	<typeAliases>
+		<typeAlias type="com.tripPocket.www.member.dto.MemberDTO" alias="memberDTO"/>
+		<typeAlias type="com.tripPocket.www.tripPlan.dto.TripDayDTO" alias="tripDayDTO"/>
+		<typeAlias type="com.tripPocket.www.tripPlan.dto.TripPlanDTO" alias="tripPlanDTO"/>
+		<typeAlias type="com.tripPocket.www.tripShare.dto.TripShareDTO" alias="tripShareDTO"/>
+	</typeAliases>
+</configuration>

@@ -1,0 +1,127 @@
+@charset "UTF-8";
+
+.trip-destination-serach-result {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #007BFF;
+    margin: 40px auto 20px;
+    padding: 10px 30px;
+    animation: fadeIn 0.5s ease;
+
+    width: fit-content;
+    text-align: center;
+    
+    border: 2px solid #007BFF;
+    border-radius: 20px;
+    background-color: #f0f8ff; /* 연한 블루 */
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.1);
+}
+
+.trip-destination-serach-result-non {
+    font-size: 1.2rem;
+    color: #777;
+    margin: 60px auto;
+    animation: fadeIn 0.5s ease;
+
+    width: fit-content;
+    text-align: center;
+}
+
+
+/* 나타나는 애니메이션 */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* 관광지 목록 그리드 */
+.trip-destination-list-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 한 줄에 4개 */
+    gap: 20px;
+    padding: 20px;
+}
+
+/* 개별 카드 */
+.trip-destination-div {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: transform 0.2s;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.trip-destination-div:hover {
+    transform: translateY(-5px);
+}
+
+/* 이미지 */
+.trip-destination-div img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+/* 정보 */
+.trip-destination-info {
+    padding: 10px;
+    text-align: left;
+}
+
+.trip-destination-info .trip-place {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.trip-destination-info .trip-address {
+    font-size: 14px;
+    color: #555;
+}
+
+.trip-destination-pagination {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+
+.page-btn {
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  background-color: #f5f5f5;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.page-btn:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+.page-btn.active {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+}
+
+.trip-destination-link{
+	text-decoration: none;
+	color: inherit; 
+}
+
+trip-destination-serach-result-non {
+    font-size: 1.2rem;
+    color: #777;
+    margin: 60px auto;
+    animation: fadeIn 0.5s ease;
+    width: fit-content;
+    text-align: center;
+}
+

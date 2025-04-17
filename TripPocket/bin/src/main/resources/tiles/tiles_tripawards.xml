@@ -1,0 +1,13 @@
+<tiles-definitions>
+
+    <definition name="tripAwardsLayout" template="/WEB-INF/layouts/common.jsp">
+        <put-attribute name="title" value="여행추천어워즈" />
+        <put-attribute name="body" value="/WEB-INF/Awards/tripAwards/list.jsp"/>
+    </definition>
+
+    <definition name="tripAwardsLayout/detailpage" extends="tripAwardsLayout">
+        <put-attribute name="title" value="여행추천어워즈 수상" />
+        <put-attribute name="body" value="/WEB-INF/Awards/tripAwards/best.jsp"/>
+    </definition>
+
+</tiles-definitions>

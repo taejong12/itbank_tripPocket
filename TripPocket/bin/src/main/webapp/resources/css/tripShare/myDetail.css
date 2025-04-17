@@ -1,0 +1,124 @@
+@charset "UTF-8";
+
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+.container {
+    width: 800px;
+    margin: 100px auto 30px auto; /* 헤더 아래 공간 확보 */
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    position: relative;
+    z-index: 1;
+}
+
+h2 {
+    color: #2a8fbd;
+    margin-bottom: 10px;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.share-meta {
+    color: #777;
+    font-size: 14px;
+    margin-bottom: 30px;
+}
+
+.trip-day {
+    padding: 20px;
+    border-radius: 8px;
+    background: #f6f8fa;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.trip-day h3 {
+    font-size: 18px;
+    color: #34495e;
+    margin-bottom: 10px;
+}
+
+.trip-day p {
+    font-size: 14px;
+    margin: 10px 0;
+    color: #666;
+}
+
+.trip-day img {
+    max-width: 100%;
+    border-radius: 8px;
+    margin-top: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.review-content {
+    margin-top: 15px;
+    background-color: #ffffff;
+    padding: 15px;
+    border-left: 5px solid #2a8fbd;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #333;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    min-height: 60px;
+    max-height: 80px;
+    line-height: 1.6;
+    white-space: pre-line;
+}
+
+/* 뒤로가기 링크 스타일 */
+a.back-link {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 10px 20px;
+    background: #2a8fbd;
+    color: #fff;
+    border-radius: 30px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+a.back-link:hover {
+    background: #1f6e95;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+
+    .trip-day h3 {
+        font-size: 16px;
+    }
+
+    .trip-day p {
+        font-size: 12px;
+    }
+
+    .review-content {
+        font-size: 12px;
+        padding: 12px;
+        min-height: 50px;
+        max-height: 70px;
+    }
+
+    a.back-link {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+}

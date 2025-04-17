@@ -1,0 +1,108 @@
+@charset "UTF-8";
+
+.plan-list-container {
+	width: 100%;
+	max-width: 1000px; 
+	min-width: 500px;
+	margin: 30px auto;
+	padding: 20px; 
+	box-sizing: border-box;
+	border: 1px solid #e0e0e0;         
+	border-radius: 12px;               
+	background-color: #fff;            
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);  
+}
+
+.plan-list-container h2 {
+	text-align: center;
+	font-size: 26px;
+	color: #38b6ff;
+	margin-bottom: 25px;
+}
+
+.plan-box-wrapper {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	background: #fffaf0;
+	border: 1px solid #f0e5cf;
+	border-radius: 12px;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+	padding: 20px;
+	margin-bottom: 15px;
+	transition: all 0.3s ease;
+}
+
+.plan-box-wrapper:hover {
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+	transform: translateY(-2px);
+}
+
+.plan-box {
+	text-decoration: none;
+	color: #333;
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.plan-row {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	font-size: 14px;
+}
+
+.plan-label {
+	font-weight: bold;
+	color: #444;
+	min-width: 50px;
+}
+
+.plan-period,
+.plan-title {
+	color: #333;
+	word-break: break-all;
+}
+
+/* 삭제 버튼 */
+.delete-btn {
+	background-color: #ff6b6b;
+	color: white;
+	border: none;
+	border-radius: 6px;
+	padding: 8px 12px;
+	font-size: 13px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+	flex-shrink: 0;
+	margin-left: 20px;
+}
+
+.delete-btn:hover {
+	background-color: #e63946;
+}
+
+.add-plan {
+	display: block;
+	width: 100%;
+	max-width: 1000px;
+	margin: 30px auto 0;
+	padding: 20px;
+	background: #4CAF50;
+	color: white;
+	text-align: center;
+	text-decoration: none;
+	border-radius: 12px;
+	font-size: 16px;
+	font-weight: bold;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+	transition: background-color 0.3s ease, transform 0.2s;
+	box-sizing: border-box;
+}
+
+.add-plan:hover {
+	background-color: #45a049;
+	transform: translateY(-2px);
+}
