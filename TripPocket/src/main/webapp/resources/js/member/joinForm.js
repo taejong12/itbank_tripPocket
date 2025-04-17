@@ -159,7 +159,7 @@ function fn_joinForm(event) {
 
     // 전화번호
     var tel = form.memberTel.value.trim();
-	var telPattern = /^(010\d{4}\d{4}|\d{11})$/;
+	var telPattern = /^010\d{8}$/;
 	
 	if (!telPattern.test(tel)) {
 	    alert("전화번호 형식을 확인해 주세요.\n(예: 01012345678)");

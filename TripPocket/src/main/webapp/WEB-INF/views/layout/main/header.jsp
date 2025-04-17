@@ -30,7 +30,7 @@
 								</div>
 							</div>
 							<div>
-								<img src="${contextPath}/resources/img/profile/basic.png">
+								<img src="${contextPath}/resources/img/profile/${member.memberProfileImage != null ? member.memberProfileImage : 'basic.png'}" alt="프로필 사진" id="profile-img">
 							</div>
 		                </div>
 					</div>
