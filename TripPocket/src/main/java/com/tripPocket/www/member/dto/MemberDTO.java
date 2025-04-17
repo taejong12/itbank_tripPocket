@@ -14,6 +14,7 @@ public class MemberDTO {
     private Date memberAddAate;
     private Date memberModDate;
     private String memberIdOrEmail;
+    private String memberProfileImage;
     
 	public String getMemberId() {
 		return memberId;
@@ -81,5 +82,10 @@ public class MemberDTO {
 	public void setMemberIdOrEmail(String memberIdOrEmail) {
 		this.memberIdOrEmail = memberIdOrEmail;
 	}
-    
+	public String getMemberProfileImage() {
+	    return memberProfileImage;
+	}
+	public void setMemberProfileImage(String memberProfileImage) {
+	    this.memberProfileImage = memberProfileImage;
+	}
 }

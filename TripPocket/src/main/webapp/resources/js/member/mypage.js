@@ -74,7 +74,7 @@ function mypageForm(event) {
 			    document.getElementById('tel-input').focus();
 			    return false;
 			}
-			const telPattern = /^(010\d{4}\d{4}|\d{11})$/;
+			const telPattern = /^010\d{8}$/;
 			if (!telPattern.test(tel)) {
 			    alert("전화번호를 01012345678 형식으로 입력해 주세요.");
 			    document.getElementById('tel-input').focus();
@@ -98,23 +98,79 @@ function mypageForm(event) {
 // 전화번호 입력 제한 + 최대 11자리 숫자 제한
 document.addEventListener('DOMContentLoaded', function () {
     const telInput = document.getElementById('tel-input');
+
     if (telInput) {
-        telInput.addEventListener('input', function (e) {
-            const start = telInput.selectionStart; // 커서 위치 기록
-            let value = telInput.value.replace(/\D/g, '').slice(0, 11); // 최대 11자리
-
-            // 전화번호 형식은 하이픈 없이 숫자만 입력하도록
-            telInput.value = value; // 변경된 값을 input에 적용
-
-            // 커서 위치 복원
-            const end = telInput.selectionEnd;
-            if (start === end) {
-                // 커서가 선택된 상태가 아니라면, 커서를 이동시킨 위치 그대로 유지
-                telInput.setSelectionRange(start, start);
-            } else {
-                // 커서가 선택된 상태일 때 끝으로 이동
-                telInput.setSelectionRange(value.length, value.length);
-            }
+        telInput.addEventListener('input', function () {
+            let value = telInput.value.replace(/\D/g, ''); // 숫자만 남기기
+            value = value.slice(0, 11); // 최대 8자리 제한
+            telInput.value = value;
         });
     }
 });
+
+// ➕ 버튼 클릭 시 파일 입력창 열기
+function triggerFileInput() {
+    document.getElementById('profile-img-input').click();
+}
+
+// 이미지 미리보기 및 업로드 후 리다이렉트
+function previewImage(event) {
+    const file = event.target.files[0];
+    const preview = document.getElementById('profile-img');
+
+    if (file && file.type.startsWith("image/")) {
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+            preview.src = e.target.result; // 미리보기 이미지 업데이트
+        };
+
+        reader.readAsDataURL(file);
+
+        // --- 여기서 서버로 업로드 ---
+        const formData = new FormData();
+        formData.append("profileImage", file);
+
+        fetch(contextPath + "/member/uploadProfileImage.do", {
+            method: "POST",
+            body: formData
+        })
+        .then(res => res.text())  // 서버에서 이미지 경로 반환 받기
+        .then(data => {
+            console.log("업로드 완료:", data);
+			const updatedImage = contextPath + "/resources/img/profile/" + data;
+            preview.src = updatedImage; // 업로드된 이미지로 갱신
+			alert("프로필사진이 변경되었습니다.")
+            // 업로드 완료 후 mypage로 리다이렉트
+            window.location.href = contextPath + "/member/mypage.do";  // mypage로 리다이렉트
+        })
+        .catch(err => {
+            console.error("업로드 실패:", err);
+            alert("이미지 업로드 실패. 다시 시도해 주세요.");
+        });
+    } else {
+        alert("이미지 파일만 업로드 가능합니다.");
+    }
+}
+
+// 프로필 이미지를 기본 이미지로 복원 후 리다이렉트
+function resetToBasicImage() {
+    var url = contextPath + "/member/resetProfileImage.do";  // 기본 이미지 복원을 위한 URL
+    fetch(url, {
+        method: 'POST'
+        // body는 더 이상 필요하지 않음
+    })
+    .then(response => response.text())
+    .then(data => {
+        console.log("기본 이미지로 복원 완료: ", data);
+        const preview = document.getElementById('profile-img');
+        preview.src = contextPath + "/resources/img/profile/basic.png";  // 기본 이미지로 변경
+        alert("기본 프로필사진으로 변경되었습니다.");
+
+        // 복원 후 mypage로 리다이렉트
+        window.location.href = contextPath + "/member/mypage.do";  // mypage로 리다이렉트
+    })
+    .catch(error => {
+        console.error("기본 이미지로 복원 실패:", error);
+    });
+}

@@ -1,5 +1,8 @@
 package com.tripPocket.www.member.dao;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -17,10 +20,10 @@ public class MemberDAOImpl implements MemberDAO{
 	 sqlSession.insert("mapper.member.insertMember", memberDTO);
 	}
 
-	 public boolean isMemberIdDuplicated(String memberId) {
-        int count = sqlSession.selectOne("mapper.member.isMemberIdDuplicated", memberId);
-        return count > 0;
-	 }
+	public boolean isMemberIdDuplicated(String memberId) {
+		int count = sqlSession.selectOne("mapper.member.isMemberIdDuplicated", memberId);
+		return count > 0;
+	}
 	 
 	 
 	 @Override
@@ -68,6 +71,15 @@ public class MemberDAOImpl implements MemberDAO{
 	@Override
 	public void delMemberById(String memberId) {
 	    sqlSession.delete("mapper.member.delMemberById", memberId);
+	}
+
+	@Override
+	public void updateProfileImage(String memberId, String memberProfileImage) {
+		 Map<String, Object> params = new HashMap<>();
+		 params.put("memberId", memberId);
+		 params.put("memberProfileImage", memberProfileImage);
+		 sqlSession.update("mapper.member.updateProfileImage", params);
+		
 	}
 
 	

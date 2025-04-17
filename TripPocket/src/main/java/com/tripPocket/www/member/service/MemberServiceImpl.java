@@ -53,6 +53,11 @@ public class MemberServiceImpl implements MemberService {
 		memberDAO.delMemberById(memberId);
 		
 	}
+
+	@Override
+	public void updateProfileImage(String memberId, String memberProfileImage) {
+		memberDAO.updateProfileImage(memberId, memberProfileImage);
+	}
 	
 	
 }

@@ -32,6 +32,8 @@
 		<beans:property name="maxInMemorySize" value="1000000" />
 		<beans:property name="defaultEncoding" value="utf-8" />
 	</beans:bean>
+	
+	<!-- 인터셉터 설정 -->
 	<interceptors>
       <interceptor>
          <mapping path="/"/>
@@ -40,5 +42,4 @@
       </interceptor>
      </interceptors>
      
-	
 </beans:beans>

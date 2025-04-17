@@ -133,4 +133,10 @@
 	    DELETE FROM member WHERE member_id = #{memberId}
 	</delete>
 	
+	<update id="updateProfileImage" parameterType="map">
+        UPDATE member
+        SET member_profile_image = #{memberProfileImage}
+        WHERE member_id = #{memberId}
+    </update>
+	
 </mapper>
