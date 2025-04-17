@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.tripPocket.www.member.dto.MemberDTO;
-
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Repository
 public class MemberDAOImpl implements MemberDAO{
 
@@ -14,7 +14,9 @@ public class MemberDAOImpl implements MemberDAO{
 	
 	@Override
 	public void insertMember(MemberDTO memberDTO) {
-	 sqlSession.insert("mapper.member.insertMember", memberDTO);
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		memberDTO.setMemberPwd(encoder.encode(memberDTO.getMemberPwd()));
+		sqlSession.insert("mapper.member.insertMember", memberDTO);
 	}
 
 	 public boolean isMemberIdDuplicated(String memberId) {
@@ -23,11 +25,23 @@ public class MemberDAOImpl implements MemberDAO{
 	 }
 	 
 	 
-	 @Override
-	 public MemberDTO login(MemberDTO memberDTO) {
-	      
-	    return sqlSession.selectOne("mapper.member.login",memberDTO);
-	 }
+	@Override
+	public MemberDTO memberLoginCheck(MemberDTO memberDTO) {
+		
+		String inputPwd = memberDTO.getMemberPwd();
+		
+		memberDTO = sqlSession.selectOne("mapper.member.memberLoginCheck", memberDTO);
+		
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+		String encodedPwd = memberDTO.getMemberPwd();
+
+		if (encoder.matches(inputPwd, encodedPwd)) {
+			return memberDTO;
+		} else {
+			return null;
+		}
+	}
 
 	@Override
 	public void modMember(MemberDTO memberDTO) {

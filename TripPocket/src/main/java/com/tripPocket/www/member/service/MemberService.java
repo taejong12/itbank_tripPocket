@@ -8,7 +8,7 @@ public interface MemberService {
 
 	boolean isMemberIdDuplicated(String memberId);
 	
-	MemberDTO login(MemberDTO memberDTO);
+	MemberDTO memberLoginCheck(MemberDTO memberDTO);
 
 	void modMember(MemberDTO memberDTO);
 
@@ -17,7 +17,5 @@ public interface MemberService {
 	boolean isMemberEmailDuplicated(String memberEmail);
 
 	void delMemberWithDependencies(String memberId);
-
-	void sendMail(String title, String memberMail, String html);
 
 }

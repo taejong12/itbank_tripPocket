@@ -48,19 +48,9 @@
 		select count(*) from member where member_email = #{member_Email}
 	</select>
 
-	<select id="login" parameterType="memberDTO" resultMap="MemberResultMap">
-	  SELECT * FROM member
-	  <where>
-	    <choose>
-	      <when test="memberIdOrEmail != null and memberIdOrEmail.indexOf('@') != -1">
-	        member_email = #{memberIdOrEmail}
-	      </when>
-	      <otherwise>
-	        member_id = #{memberIdOrEmail}
-	      </otherwise>
-	    </choose>
-	    AND member_pwd = #{memberPwd}
-	  </where>
+	<select id="memberLoginCheck" parameterType="memberDTO" resultType="memberDTO">
+		SELECT * FROM member
+		WHERE member_id = #{memberId}
 	</select>
 	
 	<update id="modMember" parameterType="memberDTO">

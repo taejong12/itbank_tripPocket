@@ -13,7 +13,6 @@ public class MemberDTO {
     private String memberGender;
     private Date memberAddAate;
     private Date memberModDate;
-    private String memberIdOrEmail;
     
 	public String getMemberId() {
 		return memberId;
@@ -74,12 +73,6 @@ public class MemberDTO {
 	}
 	public void setMemberModDate(Date memberModDate) {
 		this.memberModDate = memberModDate;
-	}
-	public String getMemberIdOrEmail() {
-		return memberIdOrEmail;
-	}
-	public void setMemberIdOrEmail(String memberIdOrEmail) {
-		this.memberIdOrEmail = memberIdOrEmail;
 	}
     
 }

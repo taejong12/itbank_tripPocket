@@ -5,10 +5,10 @@
 <link rel="stylesheet" href="${contextPath}/resources/css/member/login.css">
 
 <div class="container">
-	<form class="form" method="post" action="login.do">
+	<form class="form" method="post" action="memberLoginCheck.do">
 		<p class="form-title">Login</p>
 		<div class="input-container">
-			<input placeholder="ID(아이디 또는 이메일)" type="text" name="memberIdOrEmail">
+			<input placeholder="아이디" type="text" name="memberId">
 			<span class="icon">&#128100;</span>
 		</div>
 		<div class="input-container">
@@ -18,9 +18,10 @@
 		<div class="button-container">
 			<button class="submit" type="submit">로그인</button>
 		</div>
-		<p class="signup-link">
-			계정이 없으신가요?
+		<div class="signup-link">
+			<a href="${contextPath}/member/findId.do">아이디 찾기</a>
+			<a href="${contextPath}/member/findPwd.do">비밀번호 찾기</a>
 			<a href="${contextPath}/member/joinForm.do">회원가입</a>
-		</p>
+		</div>
 	</form>
 </div>
