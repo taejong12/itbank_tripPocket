@@ -61,10 +61,12 @@ body {
 	align-items: center; 
 }
 
-.profile-container img {
+.profile-img {
 	width: 80px;
 	height: 80px;
 	border-radius: 50%;
+	object-fit: cover;
+	border: 3px solid #eee;
 	margin-left: auto;
 }
 

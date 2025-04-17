@@ -24,6 +24,7 @@ import com.tripPocket.www.member.dto.MemberDTO;
 import com.tripPocket.www.member.service.MemberService;
 
 import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.geometry.Positions;
 
 @Controller
 @RequestMapping("member")
@@ -169,9 +170,9 @@ public class MemberController {
 	        // 리사이즈된 이미지 저장 경로 설정
 	        File resizedFile = new File(uploadPath + File.separator + "resized_" + fileName);
 
-	        // 리사이즈 처리 (예: 200x200 크기)
+	        // 리사이즈 처리
 	        Thumbnails.of(dest)  // 원본 이미지
-	                .size(100, 100)  // 원하는 크기로 리사이즈
+	                .size(150, 150)  // 원하는 크기로 리사이즈
 	                .outputFormat("png")  // 출력 포맷 (선택)
 	                .toFile(resizedFile);  // 리사이즈된 이미지 저장
 

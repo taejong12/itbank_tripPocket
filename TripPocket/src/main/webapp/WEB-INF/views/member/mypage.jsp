@@ -19,21 +19,17 @@
 		    <div class="profile-img-wrapper">
 		        <!-- 프로필 이미지 경로를 동적으로 처리 -->
 		        <img src="${contextPath}/resources/img/profile/${member.memberProfileImage != null ? member.memberProfileImage : 'basic.png'}" alt="프로필 사진" id="profile-img">
-
-
-		        
 		        <!-- 파일 입력을 트리거하는 버튼 -->
 		        <button type="button" onclick="triggerFileInput()" id="add" class="profile-btn">➕</button>
-		        
-		        <!-- 기본 이미지로 되돌리는 버튼 -->
-		        <button type="button" onclick="resetToBasicImage()" class="reset-btn">기본 이미지로 복원</button>
-		        
-		        <!-- 숨겨진 파일 입력 필드 -->
-		        <input type="file" id="profile-img-input" style="display:none" accept="image/*" onchange="previewImage(event)">
 		    </div>
-		    <h2>${member.memberNickname}님</h2>
+		    <input type="file" id="profile-img-input" style="display: none;" accept="image/*" onchange="previewImage(event)">
+		    <div class="profile-info-row">
+			    <h2>${member.memberNickname}님</h2>
+			    <div class="reset-btn-wrapper">
+			        <button type="button" onclick="resetToBasicImage()" class="reset-btn">기본 이미지로 복원</button>
+			    </div>
+			</div>
 		</div>
-
         <!-- 수정 form 시작 -->
         <form action="${contextPath}/member/modMember.do" method="post" onsubmit="return mypageForm(event)">
             <input type="hidden" name="memberId" value="${member.memberId}" />
