@@ -94,6 +94,7 @@
         </a>
     </c:if>
 </div>
+	<SPAN>${share.tripShareShareCount }</SPAN>
 <a href="${contextPath}/share/shareImport.do?tripShareId=${share.tripShareId}&tripPlanId=${share.tripPlanId}">불러오기</a>
 </div>
 <script>

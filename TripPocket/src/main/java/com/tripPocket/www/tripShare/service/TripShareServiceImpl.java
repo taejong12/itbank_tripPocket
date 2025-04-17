@@ -18,11 +18,17 @@ import com.tripPocket.www.tripShare.dto.TripShareDTO;
 public class TripShareServiceImpl implements TripShareService{
 	@Autowired
 	TripShareDAO tripShareDAO;
-
+	// shareList
 	@Override
-	public List<TripShareDTO> shareList(TripShareDTO tripShareDTO) {
-		// TODO Auto-generated method stub
-		return tripShareDAO.shareList(tripShareDTO);
+	public List<TripShareDTO> shareListSorted(String sortType) {
+	    switch (sortType) {
+	        case "views":
+	            return tripShareDAO.selectListOrderByViews(sortType);
+	        case "shares":
+	            return tripShareDAO.selectListOrderByShares(sortType);
+	        default: // latest
+	            return tripShareDAO.selectListOrderByLatest(sortType);
+	    }
 	}
 
 	
@@ -118,11 +124,6 @@ public class TripShareServiceImpl implements TripShareService{
 	}
 
 
-	@Override
-	public void increaseViewCount(TripShareDTO tripShareDTO) {
-		tripShareDAO.increaseViewCount(tripShareDTO);
-		
-	}
 
 
 	//중복확인 메서드
@@ -146,6 +147,30 @@ public class TripShareServiceImpl implements TripShareService{
 	public int getTripShareViewCount(Integer tripShareId) {
 		// TODO Auto-generated method stub
 		return tripShareDAO.getTripShareViewCount(tripShareId);
+	}
+
+
+
+	@Override
+	public boolean existsShareLog(Long tripShareId, String memberId) {
+			
+		return tripShareDAO.existsShareLog(tripShareId,memberId);
+	}
+
+
+
+	@Override
+	public void insertShareLog(Long tripShareId, String memberId) {
+		tripShareDAO.insertShareLog(tripShareId,memberId);
+		
+	}
+
+
+
+	@Override
+	public int getTripShareShareCount(Integer tripShareId) {
+		// TODO Auto-generated method stub
+		return tripShareDAO.getTripShareShareCount(tripShareId);
 	}
 
 

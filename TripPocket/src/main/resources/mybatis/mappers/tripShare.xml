@@ -70,12 +70,45 @@
 	    <result property="actionDate" column="action_date"/>
 	</resultMap>
     
-	<select id="selectList" parameterType="tripShareDTO" resultMap="TripShareResultMap">
-	    SELECT 
-		    ts.*
-		FROM trip_share ts
-		ORDER BY ts.trip_share_add_date DESC
+	<select id="selectListOrderByLatest" resultMap="TripShareResultMap">
+   SELECT 
+    ts.*, 
+    tp.trip_plan_start_day, 
+    tp.trip_plan_arrive_day 
+	FROM trip_share ts
+	JOIN trip_plan tp ON ts.trip_plan_id = tp.trip_plan_id
+	ORDER BY ts.trip_share_add_date DESC
 	</select>
+	<!-- 공유순  -->
+	<select id="selectListOrderByShares" resultMap="TripShareResultMap">
+		     SELECT 
+		    ts.trip_share_id, 
+		    ts.member_id, 
+		    ts.trip_share_title, 
+		    COUNT(tsl.trip_share_id) AS share_count
+			FROM trip_share ts
+			LEFT JOIN trip_share_log tsl 
+		    ON ts.trip_share_id = tsl.trip_share_id 
+		    AND tsl.action_type = 'SHARE'
+			GROUP BY 
+		    ts.trip_share_id, 
+		    ts.member_id, 
+		    ts.trip_share_title
+			ORDER BY share_count DESC
+    </select>
+    <!-- 조회순 -->
+    <select id="selectListOrderByViews" resultMap="TripShareResultMap">
+        SELECT ts.trip_share_id,
+       ts.member_id,
+       ts.trip_share_title,
+       COUNT(tsvl.trip_share_id) AS view_count
+	FROM trip_share ts
+	LEFT JOIN trip_share_log tsvl
+  	ON ts.trip_share_id = tsvl.trip_share_id
+ 	AND tsvl.action_type = 'VIEW'
+	GROUP BY ts.trip_share_id, ts.member_id, ts.trip_share_title
+	ORDER BY view_count DESC
+    </select>
 	
 	<select id="selectDayList" parameterType="tripDayDTO" resultType="tripDayDTO">
 	    SELECT 
@@ -310,7 +343,7 @@ ORDER BY tsc.trip_share_day_day ASC
 	</insert>
 	
 	<!-- 조회수 수 출력 -->
-	<select id="getTripShareViewCount" parameterType="int" resultType="int">
+	<select id="getTripShareViewCount" parameterType="Integer" resultType="int">
     SELECT COUNT(*)
     FROM trip_share_log
     WHERE trip_share_id = #{tripShareId}
@@ -331,5 +364,32 @@ ORDER BY tsc.trip_share_day_day ASC
             ELSE 0 
         END
     FROM dual
+	</select>
+	<!-- 공유수 중복확인 -->
+	<select id="existsShareLog" parameterType="map" resultType="boolean">
+		SELECT 
+        CASE 
+            WHEN EXISTS (
+                SELECT 1
+                FROM trip_share_log
+                WHERE trip_share_id = #{tripShareId}
+                AND member_id = #{memberId}
+                AND action_type = 'SHARE'
+            ) THEN 1 
+            ELSE 0 
+        END
+    FROM dual
+	</select>
+	<!-- share log테이블에 추가 -->
+	<insert id="insertShareLog" parameterType="map">
+		INSERT INTO trip_share_log (trip_share_id, member_id, action_type, action_date)
+   	 	VALUES (#{tripShareId}, #{memberId}, 'SHARE', CURRENT_TIMESTAMP)
+	</insert>
+	<!--  -->
+	<select id="getTripShareShareCount" parameterType="int" resultType="int">
+			 SELECT COUNT(*)
+  			  FROM trip_share_log
+   			 WHERE trip_share_id = #{tripShareId}
+     		 AND action_type = 'SHARE'
 	</select>
 </mapper>

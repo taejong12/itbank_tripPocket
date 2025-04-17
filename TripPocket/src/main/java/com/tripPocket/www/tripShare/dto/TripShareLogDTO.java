@@ -2,6 +2,8 @@ package com.tripPocket.www.tripShare.dto;
 
 import java.sql.Date;
 
+import org.springframework.stereotype.Component;
+@Component
 public class TripShareLogDTO {
 		private Integer tripShareId;     // 게시글 고유 ID
 	    private String memberId;        // 사용자 ID

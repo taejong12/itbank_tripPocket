@@ -1,5 +1,8 @@
 package com.tripPocket.www.tripShare.dto;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class TripShareContentDTO {
 		private Long tripShareDayId;
 	    private Integer tripShareId;

@@ -12,9 +12,13 @@ import com.tripPocket.www.tripShare.dto.TripShareContentDTO;
 import com.tripPocket.www.tripShare.dto.TripShareDTO;
 
 public interface TripShareDAO {
+	
+	List<TripShareDTO> selectListOrderByViews(String sortType);
 
-	List<TripShareDTO> shareList(TripShareDTO tripShareDTO);
+	List<TripShareDTO> selectListOrderByShares(String sortType);
 
+	List<TripShareDTO> selectListOrderByLatest(String sortType);
+	
 	List<TripDayDTO> selectData(TripDayDTO tripDayDTO);
 
 	void write(TripShareDTO tripShareDTO);
@@ -39,13 +43,19 @@ public interface TripShareDAO {
 	
 	void updateTripShareContents(List<Map<String, Object>> contentList);
 
-	void increaseViewCount(TripShareDTO tripShareDTO);
-
 	boolean existsTripShareViewLog(Integer tripShareId, String memberId);
 
 	void insertTripShareViewLog(Integer tripShareId, String memberId);
 
 	int getTripShareViewCount(Integer tripShareId);
+
+	boolean existsShareLog(Long tripShareId, String memberId);
+
+	void insertShareLog(Long tripShareId, String memberId);
+
+	int getTripShareShareCount(Integer tripShareId);
+
+	
 
 
 }

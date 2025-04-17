@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tripPocket.www.tripPlan.dto.TripDayDTO;
 @Component
 public class TripShareDTO {
@@ -14,14 +16,25 @@ public class TripShareDTO {
 	private Integer tripPlanId;
 	private Date tripShareAddDate;
 	private Date tripShareModDate;
+	 @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date tripPlanStartDay;
+	 @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date tripPlanArriveDay;
+	 @JsonIgnore
 	private List<TripDayDTO> tripDayList; 
 	private String memberId;
+	@JsonIgnore
 	private List<TripShareContentDTO> tripShareContentList;
-	private int tripShareViewCount;
+	private Integer tripShareViewCount;
+	private Integer TripShareShareCount;
 	
 	
+	public int getTripShareShareCount() {
+		return TripShareShareCount;
+	}
+	public void setTripShareShareCount(int tripShareShareCount) {
+		TripShareShareCount = tripShareShareCount;
+	}
 	public int getTripShareViewCount() {
 		return tripShareViewCount;
 	}
@@ -94,4 +107,18 @@ public class TripShareDTO {
 	public void setTripShareModDate(Date tripShareModDate) {
 		this.tripShareModDate = tripShareModDate;
 	}
+	
+	@Override
+    public String toString() {
+        return "TripShareDTO{" +
+               "tripShareId=" + tripShareId +
+               ", tripShareTitle='" + tripShareTitle + '\'' +
+               ", tripPlanId=" + tripPlanId +
+               ", tripShareAddDate=" + tripShareAddDate +
+               ", tripShareModDate=" + tripShareModDate +
+               ", tripPlanStartDay=" + tripPlanStartDay +
+               ", tripPlanArriveDay=" + tripPlanArriveDay +
+               ", memberId='" + memberId + '\'' +
+               '}';
+    }
 }
