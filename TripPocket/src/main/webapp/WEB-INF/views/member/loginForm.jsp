@@ -21,9 +21,9 @@
 		<div class="signup-link">
 			<a href="${contextPath}/member/joinForm.do">회원가입</a>
 			<span>|</span>
-			<a href="${contextPath}/member/findId.do">아이디 찾기</a>
+			<a href="${contextPath}/member/findIdForm.do">아이디 찾기</a>
 			<span>|</span>
-			<a href="${contextPath}/member/findPwd.do">비밀번호 찾기</a>
+			<a href="${contextPath}/member/findPwdForm.do">비밀번호 찾기</a>
 		</div>
 	</form>
 </div>

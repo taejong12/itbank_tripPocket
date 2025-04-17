@@ -1,5 +1,7 @@
 package com.tripPocket.www.member.dao;
 
+import java.util.List;
+
 import com.tripPocket.www.member.dto.MemberDTO;
 
 public interface MemberDAO {
@@ -26,5 +28,8 @@ public interface MemberDAO {
 
 	void delMemberById(String memberId);
 
+	int findMemberNameAndEmail(MemberDTO memberDTO);
+
+	List<MemberDTO> selectIdListByEmailAndName(MemberDTO memberDTO);
 
 }

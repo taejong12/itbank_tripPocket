@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 
 import com.tripPocket.www.common.mail.service.MailService;
 import com.tripPocket.www.common.random.AuthCodeRandom;
+import com.tripPocket.www.member.dto.MemberDTO;
 
 @Controller
 public class MailControllerImpl implements MailContoller{
@@ -55,6 +56,7 @@ public class MailControllerImpl implements MailContoller{
 		
 		if(saveCode != null && saveCode.equals(memberAuthCode)) {
 			session.removeAttribute("authCode");
+			session.setAttribute("authCheck", "true");
 			msg = "인증 성공";
 			map.put("result", true);
 			map.put("msg", msg);

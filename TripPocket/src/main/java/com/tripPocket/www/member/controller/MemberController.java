@@ -3,6 +3,7 @@ package com.tripPocket.www.member.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -139,4 +141,47 @@ public class MemberController {
 	public ResponseEntity<?> authCodeConfirm(@RequestParam String memberAuthCode, HttpSession session){
 		return mailContoller.authCodeConfirm(memberAuthCode, session);
 	}
+	
+	@RequestMapping("/findIdForm.do")
+	public String findIdForm(){
+		return "member/findIdForm";
+	}
+	
+	@RequestMapping("/sendFindIdAuthMail.do")
+	public ResponseEntity<?> sendFindIdAuthMail(@ModelAttribute MemberDTO memberDTO, HttpSession session){
+		
+		int result = memberService.findMemberNameAndEmail(memberDTO);
+		
+		if(result > 0) {
+			return mailContoller.sendAuthMail(memberDTO.getMemberEmail(), session);
+		} else {
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("result", false);
+			map.put("msg", "이메일이 존재하지 않습니다.");
+			return ResponseEntity.ok(map);
+		}
+	}
+	
+	@RequestMapping("/findIdList.do")
+	public String findIdList(@ModelAttribute MemberDTO memberDTO, Model model, HttpSession session){
+		String authCheck = (String) session.getAttribute("authCheck");
+		if(authCheck != "true" || authCheck == null || memberDTO == null) {
+			return "redirect:/member/loginForm.do";
+		}
+		
+		List<MemberDTO> memberList = memberService.selectIdListByEmailAndName(memberDTO);
+		model.addAttribute("memberList", memberList);
+		return "member/memberIdList";
+	}
+	
+	@RequestMapping("/findPwdForm.do")
+	public String findPwdForm(){
+		return "member/findPwdForm";
+	}
+	
+	@RequestMapping("/pwdUpdateForm.do")
+	public String pwdUpdateForm(){
+		return "member/pwdUpdateForm";
+	}
+	
 }

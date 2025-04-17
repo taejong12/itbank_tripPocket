@@ -1,6 +1,8 @@
 package com.tripPocket.www.member.service;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -49,5 +51,15 @@ public class MemberServiceImpl implements MemberService {
 		memberDAO.deleteTripDayByMemberId(memberId);
 		memberDAO.deleteTripPlanByMemberId(memberId);
 		memberDAO.delMemberById(memberId);
+	}
+
+	@Override
+	public int findMemberNameAndEmail(MemberDTO memberDTO) {
+		return memberDAO.findMemberNameAndEmail(memberDTO);
+	}
+
+	@Override
+	public List<MemberDTO> selectIdListByEmailAndName(MemberDTO memberDTO) {
+		return memberDAO.selectIdListByEmailAndName(memberDTO);
 	}
 }

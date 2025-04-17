@@ -13,7 +13,7 @@
 		<result property="memberNickname" column="member_nickname" />
 		<result property="memberTel" column="member_tel" />
 		<result property="memberGender" column="member_gender" />
-		<result property="memberAddAate" column="member_add_date" />
+		<result property="memberAddDate" column="member_add_date" />
 		<result property="memberModDate" column="member_mod_date" />
 	</resultMap>
 
@@ -123,4 +123,17 @@
 	    DELETE FROM member WHERE member_id = #{memberId}
 	</delete>
 	
+	<select id="findMemberNameAndEmail" parameterType="memberDTO" resultType="Integer">
+		select count(*)
+		from member
+		where member_email = #{memberEmail}
+		and member_name = #{memberName}
+	</select>
+	
+	<select id="selectIdListByEmailAndName" parameterType="memberDTO" resultType="memberDTO">
+		select *
+		from member
+		where member_email = #{memberEmail}
+		and member_name = #{memberName}
+	</select>
 </mapper>

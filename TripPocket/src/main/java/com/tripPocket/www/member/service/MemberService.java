@@ -1,5 +1,7 @@
 package com.tripPocket.www.member.service;
 
+import java.util.List;
+
 import com.tripPocket.www.member.dto.MemberDTO;
 
 public interface MemberService {
@@ -18,4 +20,8 @@ public interface MemberService {
 
 	void delMemberWithDependencies(String memberId);
 
+	int findMemberNameAndEmail(MemberDTO memberDTO);
+
+	List<MemberDTO> selectIdListByEmailAndName(MemberDTO memberDTO);
+	
 }

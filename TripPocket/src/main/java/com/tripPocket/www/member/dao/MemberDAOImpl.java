@@ -1,5 +1,7 @@
 package com.tripPocket.www.member.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -84,5 +86,13 @@ public class MemberDAOImpl implements MemberDAO{
 	    sqlSession.delete("mapper.member.delMemberById", memberId);
 	}
 
-	
+	@Override
+	public int findMemberNameAndEmail(MemberDTO memberDTO) {
+		return sqlSession.selectOne("mapper.member.findMemberNameAndEmail", memberDTO);
+	}
+
+	@Override
+	public List<MemberDTO> selectIdListByEmailAndName(MemberDTO memberDTO) {
+		return sqlSession.selectList("mapper.member.selectIdListByEmailAndName", memberDTO);
+	}
 }

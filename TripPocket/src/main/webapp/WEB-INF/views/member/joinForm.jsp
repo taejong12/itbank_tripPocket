@@ -120,26 +120,25 @@
 				// 3분 (180초)
 			    let timeLeft = 180;
 			    
-			    const startTimer = () => {
-			      const timerInterval = setInterval(() => {
-			        let minutes = String(Math.floor(timeLeft / 60)).padStart(2, '0');
-			        let seconds = String(timeLeft % 60).padStart(2, '0');
-			        timerDiv.textContent = minutes+":"+seconds;
+				const startTimer = () => {
+					const timerInterval = setInterval(() => {
+						let minutes = String(Math.floor(timeLeft / 60)).padStart(2, '0');
+						let seconds = String(timeLeft % 60).padStart(2, '0');
+						timerDiv.textContent = minutes+":"+seconds;
 
-			        if (timeLeft <= 0) {
-			          clearInterval(timerInterval);
-			          alert("인증시간초과");
-			          // 필요하다면 입력 비활성화 등 추가 처리
-			          mailAuthInput.disabled = true;
-			          authCodeConfirmBtn.disabled = true;
-			        }
-
-			        timeLeft--;
-			      }, 1000);
-			    };
+						if (timeLeft <= 0) {
+							clearInterval(timerInterval);
+							alert("인증시간초과");
+							 // 필요하다면 입력 비활성화 등 추가 처리
+							mailAuthInput.disabled = true;
+							authCodeConfirmBtn.disabled = true;
+						}
+	
+						timeLeft--;
+					}, 1000);
+				};
 			    
-			    
-			    authCodeConfirmBtn.addEventListener("click", function () {
+				authCodeConfirmBtn.addEventListener("click", function () {
 			        const mailAuthCode = mailAuthInput.value.trim();
 
 			        if (!mailAuthCode) {
@@ -163,13 +162,13 @@
 			            if (data.result === true) {
 			                alert(data.msg);
 			                mailAuthInput.readOnly  = true;
-			                mailAuthInput.style.backgroundColor = 'gray';
+			                mailAuthInput.style.backgroundColor = '#f0f0f0';
 			                authCodeConfirmBtn.disabled = true;
-			                authCodeConfirmBtn.style.backgroundColor = 'gray';
+			                authCodeConfirmBtn.style.backgroundColor = '#f0f0f0';
 			                memberMail.readOnly  = true;
-			                memberMail.style.backgroundColor = 'gray';
+			                memberMail.style.backgroundColor = '#f0f0f0';
 			                sendMailBtn.disabled = true;
-			                sendMailBtn.style.backgroundColor = 'gray';
+			                sendMailBtn.style.backgroundColor = '#f0f0f0';
 			                
 			                timerDiv.remove();
 			                

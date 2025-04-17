@@ -11,7 +11,7 @@ public class MemberDTO {
     private String memberNickname;
     private String memberTel;
     private String memberGender;
-    private Date memberAddAate;
+    private Date memberAddDate;
     private Date memberModDate;
     
 	public String getMemberId() {
@@ -62,17 +62,16 @@ public class MemberDTO {
 	public void setMemberGender(String memberGender) {
 		this.memberGender = memberGender;
 	}
-	public Date getMemberAddAate() {
-		return memberAddAate;
-	}
-	public void setMemberAddAate(Date memberAddAate) {
-		this.memberAddAate = memberAddAate;
-	}
 	public Date getMemberModDate() {
 		return memberModDate;
 	}
 	public void setMemberModDate(Date memberModDate) {
 		this.memberModDate = memberModDate;
 	}
-    
+	public Date getMemberAddDate() {
+		return memberAddDate;
+	}
+	public void setMemberAddDate(Date memberAddDate) {
+		this.memberAddDate = memberAddDate;
+	}
 }
