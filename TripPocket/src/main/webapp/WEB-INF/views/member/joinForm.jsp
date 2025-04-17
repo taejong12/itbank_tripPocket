@@ -26,7 +26,7 @@
             	<p>이메일</p>
                 <div class="input-btn-wrap">
                 	<input type="email" id="memberEmail" name="memberEmail" placeholder="이메일을 입력하세요">
-					<button class="memberJoinCheckBtn" type="button" onclick="fu_sendMail(this)">인증전송</button>
+					<button class="memberJoinCheckBtn" type="button" onclick="fu_sendAuthMail(this)">인증전송</button>
             	</div>
             </div>
             <div class="input-container column">
@@ -53,7 +53,7 @@
 <script type="text/javascript">
 	let contextPath = "${contextPath}";
 	
-	window.fu_sendMail = function(sendMailBtn){
+	window.fu_sendAuthMail = function(sendMailBtn){
 		
 		const containerDiv = sendMailBtn.closest('.input-container.column');
 		const isMailAuthDiv = containerDiv.querySelector('.mail-auth-btn-wrap');
@@ -71,7 +71,7 @@
 			return;
 		}
 		
-		fetch(contextPath+"/member/sendMail.do", {
+		fetch(contextPath+"/member/sendAuthMail.do", {
 			method: "POST",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded"
