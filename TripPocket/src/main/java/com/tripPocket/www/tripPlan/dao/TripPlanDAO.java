@@ -7,7 +7,7 @@ import com.tripPocket.www.tripPlan.dto.TripPlanDTO;
 
 public interface TripPlanDAO {
 
-	void insertPlan(TripPlanDTO tripPlanDTO);
+	int insertPlan(TripPlanDTO tripPlanDTO);
 
 	List<TripPlanDTO> selectPlanList(String memberId);
 
@@ -21,4 +21,5 @@ public interface TripPlanDAO {
 
 	int deleteTripPlanByTripPlanId(Integer tripPlanId);
 
+	List<TripDayDTO> selectTripDay(TripDayDTO tripDayDTO);
 }

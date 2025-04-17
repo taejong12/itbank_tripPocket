@@ -16,8 +16,8 @@ public class TripPlanServiceImpl implements TripPlanService{
 	private TripPlanDAO tripPlanDAO;
 	
 	@Override
-	public void insertPlan(TripPlanDTO tripPlanDTO) {
-		tripPlanDAO.insertPlan(tripPlanDTO);
+	public int insertPlan(TripPlanDTO tripPlanDTO) {
+		return tripPlanDAO.insertPlan(tripPlanDTO);
 	}
 
 	@Override
@@ -50,7 +50,8 @@ public class TripPlanServiceImpl implements TripPlanService{
 		return tripPlanDAO.deleteTripPlanByTripPlanId(tripPlanId);
 	}
 
-	
+	public List<TripDayDTO> selectTripDay(TripDayDTO tripDayDTO) {
+		return tripPlanDAO.selectTripDay(tripDayDTO);
 	}
 
-	
+}

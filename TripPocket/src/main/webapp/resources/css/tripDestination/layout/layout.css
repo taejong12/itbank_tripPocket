@@ -13,10 +13,4 @@ html, body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    margin-top:80px;
-}
-
-#content {
-    flex: 1; /* 콘텐츠가 남는 공간을 채움 */
-    padding-bottom: 20px; /* footer와 겹치지 않게 여유 공간 줄 수도 있음 */
 }

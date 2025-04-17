@@ -1,6 +1,7 @@
 package com.tripPocket.www.tripShare.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,7 @@ import com.tripPocket.www.member.dto.MemberDTO;
 import com.tripPocket.www.tripPlan.dto.TripDayDTO;
 import com.tripPocket.www.tripPlan.dto.TripPlanDTO;
 import com.tripPocket.www.tripShare.dao.TripShareDAO;
+import com.tripPocket.www.tripShare.dto.TripShareContentDTO;
 import com.tripPocket.www.tripShare.dto.TripShareDTO;
 
 @Service
@@ -25,22 +27,24 @@ public class TripShareServiceImpl implements TripShareService{
 
 	
 
-	@Override
-	@Transactional
-	public void write(TripShareDTO tripShareDTO) {
-		tripShareDAO.write(tripShareDTO);
-		// 저장된 공유 ID 가져오기 (selectKey로 세팅되었다고 가정)
-		Integer tripShareId = tripShareDTO.getTripShareId();
-
-	    // 일자별 콘텐츠 저장
-	    List<TripDayDTO> dayList = tripShareDTO.getTripDayList();
-	    if (dayList != null) {
-	        for (TripDayDTO day : dayList) {
-	            day.setTripShareId(tripShareId);
-	            tripShareDAO.insertContent(day);
-	        }
-	    }
-	}
+		@Override
+		@Transactional
+		public void write(TripShareDTO tripShareDTO) {
+			tripShareDAO.write(tripShareDTO);
+			// 저장된 공유 ID 가져오기 (selectKey로 세팅되었다고 가정)
+			Integer tripShareId = tripShareDTO.getTripShareId();
+	
+		    // 일자별 콘텐츠 저장
+		    List<TripDayDTO> dayList = tripShareDTO.getTripDayList();
+		    
+		    if (dayList != null) {
+		        for (TripDayDTO day : dayList) {
+		            day.setTripShareId(tripShareId);
+		            tripShareDAO.insertContent(day);
+		           
+		        }
+		    }
+		}
 
 	@Override
 	public List<TripPlanDTO> getTripPlansByMemberId(String memberId) {
@@ -96,7 +100,7 @@ public class TripShareServiceImpl implements TripShareService{
 
 
 	@Override
-	public List<TripDayDTO> getTripDayDetailList(int tripShareId) {
+	public List<TripShareContentDTO> getTripDayDetailList(int tripShareId) {
 		return tripShareDAO.getTripDayDetailList(tripShareId);
 	}
 
@@ -105,5 +109,13 @@ public class TripShareServiceImpl implements TripShareService{
 	@Override
 	public MemberDTO getWriterByShareId(int tripShareId) {
 		return tripShareDAO.getWriterByShareId(tripShareId);
+	}
+
+
+
+	@Override
+	public void updateTripShareContents(List<Map<String, Object>> contentList) {
+		tripShareDAO.updateTripShareContents(contentList);
+		
 	}
 }

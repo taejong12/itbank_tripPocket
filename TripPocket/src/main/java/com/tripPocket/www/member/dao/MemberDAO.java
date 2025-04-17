@@ -25,5 +25,7 @@ public interface MemberDAO {
 
 	void delMemberById(String memberId);
 
+	void updateProfileImage(String memberId, String memberProfileImage);
+
 
 }

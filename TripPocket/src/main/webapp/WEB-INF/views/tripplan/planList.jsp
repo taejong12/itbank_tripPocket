@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="${contextPath}/resources/css/tripPlan/planList.css">
 
 <div class="plan-list-container">
-	<h2>여행 계획 리스트</h2>
+	<h2>내 여행 목록</h2>
 
 	<c:forEach var="tripPlan" items="${tripPlanList}">
 	    <div id="tripPlan_${tripPlan.tripPlanId}" class="plan-box-wrapper">
@@ -24,7 +24,7 @@
 		</div>
 	</c:forEach>
 
-	<a class="add-plan" href="${contextPath}/trip/planInsertForm.do">여행계획추가</a>
+	<a class="add-plan" href="${contextPath}/trip/planInsertForm.do">내 여행 추가</a>
 </div>
 
 <script type="text/javascript">

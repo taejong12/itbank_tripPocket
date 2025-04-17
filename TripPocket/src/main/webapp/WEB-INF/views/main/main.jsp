@@ -46,16 +46,17 @@
 		        다양한 명소들을 한눈에 비교하고, 나만의 여행 루트를 만들어보세요 🌍
 		    </p>
 		</div>
-      <%--   <div class="section content">
-            <h1>나의 항공권, 적당한 가격일까?</h1>
-            <h2><img src="${contextPath }/resources/img/cherryflower.png" alt="항공권이미지"></h2>
-            <h1>항공권 가격, 지금이 적당해요</h1>
-            <p>
-                항공권 가격이 너무 비싸서 고민이신가요?<br>
-                Trip Pocket으로 최적의 항공권 가격을 확인하고 예약하세요.<br>
-                다양한 항공사와 경로를 비교하여 가장 합리적인 가격을 찾을 수 있습니다.
-            </p>
-        </div> --%>
+		<div class="section content">
+		    <h1>어디로 갈지 망설여진다면?</h1>
+		    <h2><img src="${contextPath }/resources/img/cherryflower.png" alt="랜덤 여행지 이미지"></h2>
+		    <h1>가볍게 하나 뽑아볼까요?</h1>
+		    <p>
+		        "이번엔 어디로 떠나볼까?"<br>
+		        고민이 될 땐, 살짝 뽑아보세요 🍀<br>
+		        Trip Pocket이 추천하는 여행지로<br>
+		        뜻밖의 설렘을 만나보세요 ✨
+		    </p>
+		</div>
         <c:if test="${member == null }">
         	<div class="section content">
             	<h1>

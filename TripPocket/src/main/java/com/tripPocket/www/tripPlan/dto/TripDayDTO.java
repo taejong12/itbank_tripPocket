@@ -12,12 +12,27 @@ public class TripDayDTO {
 	private String tripDayImage;
 	private double tripDayMapx;
 	private double tripDayMapy;
+	private String tripDayContentId;
 	private Integer tripPlanId;
 	private Date tripPlanAddDate;
 	private Date tripPlanModDate;
 	private String tripShareContent;
 	private Integer tripShareId;
+	private java.sql.Date tripPlanStartDay;
+    private java.sql.Date tripPlanArriveDay;
 	
+	public java.sql.Date getTripPlanStartDay() {
+		return tripPlanStartDay;
+	}
+	public void setTripPlanStartDay(java.sql.Date tripPlanStartDay) {
+		this.tripPlanStartDay = tripPlanStartDay;
+	}
+	public java.sql.Date getTripPlanArriveDay() {
+		return tripPlanArriveDay;
+	}
+	public void setTripPlanArriveDay(java.sql.Date tripPlanArriveDay) {
+		this.tripPlanArriveDay = tripPlanArriveDay;
+	}
 	public Integer getTripDayId() {
 		return tripDayId;
 	}
@@ -65,6 +80,12 @@ public class TripDayDTO {
 	}
 	public void setTripDayMapy(double tripDayMapy) {
 		this.tripDayMapy = tripDayMapy;
+	}
+	public String getTripDayContentId() {
+		return tripDayContentId;
+	}
+	public void setTripDayContentId(String tripDayContentId) {
+		this.tripDayContentId = tripDayContentId;
 	}
 	public Integer getTripPlanId() {
 		return tripPlanId;

@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		    // 정렬구분 (A=제목순, C=수정일순, D=생성일순)
 		    arrange: "C",
 		    // 관광타입 ID (문서확인)
-		    //contentTypeId: 38,
+		    contentTypeId: 12,
 		    // 요청키워드
 		    keyword: currentKeyword,
 		    // 지역 코드
@@ -112,16 +112,21 @@ document.addEventListener("DOMContentLoaded", function () {
 				    imageUrl = imageUrl.replace("http://", "https://");
 				}
 				
+				// 대체 이미지 경로
+				const altImageSrc = contextPath+"/resources/img/logo/alt_image.png";
 				// 이미지 처리
-				const imageSrc = imageUrl ? imageUrl : contextPath+"/resources/img/logo/alt_image.png";
+				const imageSrc = imageUrl ? imageUrl : altImageSrc;
 				// keyword 그냥 넘기면 에러 발생
 				const keywordData = encodeURIComponent(JSON.stringify(keyword));
+				const contentIdUrl = contextPath+"/tripDestination/detail.do?contentId="+keyword.contentid;
 
                 html += '<div class="trip-search-result-div">';
-	            html += '<img src="' + imageSrc + '" alt="이미지 없음" onerror="this.onerror=null; this.src=\'' + contextPath + '/resources/img/logo/alt_image.png\';">';
+	            html += '<a target="_blank" class="trip-destination-link" href="'+contentIdUrl+'">';
+	            html += '<img src="' + imageSrc + '" alt="이미지 없음" onerror="this.onerror=null; this.src=\'' + altImageSrc+ '\';">';
 	            html += '<div class="trip-search-result-info">';
 	            html += '<div class="trip-place">' + keyword.title + '</div>';
 	            html += '<div class="trip-address">' + keyword.addr1 + '</div>';
+	            html += '</a>';
 	            html += '</div>';
 	            html += '<button class="trip-select-btn" onclick="fu_tripSpaceSelect(\'' + keywordData + '\')">선택</button>';
 	            html += '</div>';

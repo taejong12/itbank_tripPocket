@@ -47,7 +47,7 @@
             </div>
             <div class="input-container column">
             	<p>휴대전화번호</p>
-                <input type="tel" name="memberTel" id="memberTel" placeholder="예: 010-1234-5678">
+                <input type="tel" name="memberTel" id="memberTel" placeholder="예: 01012345678">
             </div>
             <div class="gender-container">
                 <label><input type="radio" name="memberGender" value="남자"><span></span> 남자</label>

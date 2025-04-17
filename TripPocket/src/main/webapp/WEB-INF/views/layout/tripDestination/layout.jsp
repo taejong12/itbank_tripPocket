@@ -9,10 +9,9 @@
 <meta charset="UTF-8">
 <title><tiles:insertAttribute name="title"/></title>
 	<link rel="stylesheet" href="${contextPath}/resources/css/tripDestination/layout/layout.css">
-	<link rel="stylesheet" href="${contextPath}/resources/css/tripDestination/layout/header.css">
 	<link rel="stylesheet" href="${contextPath}/resources/css/tripDestination/layout/search.css">
 	<link rel="stylesheet" href="${contextPath}/resources/css/tripDestination/layout/nav.css">
-	<link rel="stylesheet" href="${contextPath}/resources/css/tripDestination/layout/footer.css">
+	<link rel="stylesheet" href="${contextPath}/resources/css/main/common.css">
 </head>
 <body>
 	<div id="container">

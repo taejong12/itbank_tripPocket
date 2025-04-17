@@ -70,9 +70,9 @@ public class TripPlanController {
 	    }
 		
 		tripPlanDTO.setMemberId(memberDTO.getMemberId());
-		tripPlanService.insertPlan(tripPlanDTO);
+		int tripPlanId = tripPlanService.insertPlan(tripPlanDTO);
 		
-		return "redirect:/trip/planList.do";
+		return "redirect:/trip/planDetail.do?tripPlanId="+tripPlanId;
 	}
 	
 	@RequestMapping("/planDetail.do")
@@ -129,13 +129,25 @@ public class TripPlanController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		int result = tripPlanService.deleteTripPlanByTripPlanId(tripPlanId);
-		
 		if (result > 0) {
 			map.put("result", "여행 계획 삭제 완료");
+			
 			return ResponseEntity.ok(map);
 		} else {
 			map.put("result", "여행 계획 삭제 실페");
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
 		}
+	}
+	
+	@RequestMapping("/selectTripDay.do")
+	public ResponseEntity<Map<String, Object>> selectTripDay(@RequestBody TripDayDTO tripDayDTO) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		List<TripDayDTO> tripDayList = tripPlanService.selectTripDay(tripDayDTO);
+		
+		map.put("tripDayList", tripDayList);
+		
+		return ResponseEntity.ok(map);
 	}
 }

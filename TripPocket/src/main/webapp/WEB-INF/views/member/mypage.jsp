@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
@@ -8,15 +7,29 @@
     <meta charset="UTF-8">
     <title>마이페이지</title>
     <link rel="stylesheet" href="${contextPath}/resources/css/member/mypage.css">
-    <script src="${contextPath }/resources/js/member/mypage.js"></script>
+    <script>
+    	var contextPath = "${pageContext.request.contextPath}";
+    	var memberId = "${member.memberId}";
+    </script>	
+    <script src="${contextPath}/resources/js/member/mypage.js"></script>
 </head>
 <body>
-    <div class="mypage-container">
-        <div class="profile-section">
-            <img src="${contextPath}/resources/img/profile/basic.png" alt="프로필 사진" class="profile-img">
-            <h2>${member.memberNickname}님</h2>
-        </div>
-
+	<div class="mypage-container">
+	   <div class="profile-section">
+		    <div class="profile-img-wrapper">
+		        <!-- 프로필 이미지 경로를 동적으로 처리 -->
+		        <img src="${contextPath}/resources/img/profile/${member.memberProfileImage != null ? member.memberProfileImage : 'basic.png'}" alt="프로필 사진" id="profile-img">
+		        <!-- 파일 입력을 트리거하는 버튼 -->
+		        <button type="button" onclick="triggerFileInput()" id="add" class="profile-btn">➕</button>
+		    </div>
+		    <input type="file" id="profile-img-input" style="display: none;" accept="image/*" onchange="previewImage(event)">
+		    <div class="profile-info-row">
+			    <h2>${member.memberNickname}님</h2>
+			    <div class="reset-btn-wrapper">
+			        <button type="button" onclick="resetToBasicImage()" class="reset-btn">기본 이미지로 복원</button>
+			    </div>
+			</div>
+		</div>
         <!-- 수정 form 시작 -->
         <form action="${contextPath}/member/modMember.do" method="post" onsubmit="return mypageForm(event)">
             <input type="hidden" name="memberId" value="${member.memberId}" />
@@ -34,9 +47,8 @@
             <div class="info-item">
                 <span class="label">비밀번호</span>
                 <div class="info-value-row" id="password-display">
-                    <span class="info-value password-value">${member.memberPwd}</span>
-                    <a href="javascript:void(0);" class="edit-link" id="password-button"
-                       onclick="showEditField('password')">변경</a>
+                    <span class="info-value password-value">********</span>
+                    <a href="javascript:void(0);" class="edit-link" id="password-button" onclick="showEditField('password')">변경</a>
                 </div>
                 <div class="edit-field" id="password-edit">
                     <input type="password" name="memberPwd" id="password-input" placeholder="변경하실 비밀번호를 입력하세요">
@@ -53,8 +65,7 @@
                 <span class="label">이메일</span>
                 <div class="info-value-row" id="email-display">
                     <span class="info-value email-value">${member.memberEmail}</span>
-                    <a href="javascript:void(0);" class="edit-link" id="email-button"
-                       onclick="showEditField('email')">변경</a>
+                    <a href="javascript:void(0);" class="edit-link" id="email-button" onclick="showEditField('email')">변경</a>
                 </div>
                 <div class="edit-field" id="email-edit">
                     <input type="email" name="memberEmail" id="email-input" value="${member.memberEmail}" placeholder="변경하실 이메일을 입력하세요">
@@ -71,8 +82,7 @@
                 <span class="label">휴대전화번호</span>
                 <div class="info-value-row" id="tel-display">
                     <span class="info-value tel-value">${member.memberTel}</span>
-                    <a href="javascript:void(0);" class="edit-link" id="tel-button"
-                       onclick="showEditField('tel')">변경</a>
+                    <a href="javascript:void(0);" class="edit-link" id="tel-button" onclick="showEditField('tel')">변경</a>
                 </div>
                 <div class="edit-field" id="tel-edit">
                     <input type="tel" name="memberTel" id="tel-input" value="${member.memberTel}" placeholder="변경하실 휴대전화번호를 입력하세요">
@@ -98,8 +108,7 @@
                 <span class="label">닉네임</span>
                 <div class="info-value-row" id="nickname-display">
                     <span class="info-value nickname-value">${member.memberNickname}</span>
-                    <a href="javascript:void(0);" class="edit-link" id="nickname-button"
-                       onclick="showEditField('nickname')">변경</a>
+                    <a href="javascript:void(0);" class="edit-link" id="nickname-button" onclick="showEditField('nickname')">변경</a>
                 </div>
                 <div class="edit-field" id="nickname-edit">
                     <input type="text" name="memberNickname" id="nickname-input" value="${member.memberNickname}" placeholder="변경하실 닉네임을 입력하세요">

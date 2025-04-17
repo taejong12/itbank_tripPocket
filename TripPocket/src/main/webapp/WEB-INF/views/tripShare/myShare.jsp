@@ -34,7 +34,7 @@
 		                수정 날짜: <fmt:formatDate value="${share.tripShareModDate}" pattern="yyyy-MM-dd" />
 		            </div>
 		            <div class="card-actions">
-		                <a href="${contextPath}/share/editForm.do?tripShareId=${share.tripShareId}" class="edit-btn">✏️ 수정</a>
+		                <a href="${contextPath}/share/modForm.do?tripShareId=${share.tripShareId}" class="edit-btn">✏️ 수정</a>
 		                <a href="${contextPath}/share/shareDelete.do?tripShareId=${share.tripShareId}" class="delete-btn"
 		                   onclick="return confirm('정말 삭제하시겠습니까?');">🗑️ 삭제</a>
 		            </div>

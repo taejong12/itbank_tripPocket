@@ -17,10 +17,8 @@ public interface MemberService {
 	boolean isMemberEmailDuplicated(String memberEmail);
 
 	void delMemberWithDependencies(String memberId);
-
 	
-		
-	}
-		
+	void updateProfileImage(String memberId, String memberProfileImage);
 
+}
 

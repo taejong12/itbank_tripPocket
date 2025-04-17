@@ -43,17 +43,13 @@ function mypageForm(event) {
     switch (target) {
         case 'password':
             const password = document.getElementById('password-input').value.trim();
-            if (password.length < 8) {
-                alert("비밀번호는 최소 8자 이상 입력해 주세요.");
+            const specialCharPattern = /[!@#$%^&*(),.?":{}|<>]/;
+            // 비밀번호 길이 + 특수문자 검사 합치기
+            if (password.length < 8 || !specialCharPattern.test(password)) {
+                alert("비밀번호는 최소 8자 이상, 특수문자(예: !, @, #, $ 등)를 포함해 주세요.");
                 document.getElementById('password-input').focus();
                 return false;
             }
-            const specialCharPattern = /[!@#$%^&*(),.?":{}|<>]/;
-			if (!specialCharPattern.test(password)) {
-			    alert("비밀번호에 최소 하나 이상의 특수문자를 포함해 주세요.\n예) !, @, #, $ 등");
-			    document.getElementById('password-input').focus();
-			    return false;
-			}
             break;
 
         case 'email':
@@ -78,9 +74,9 @@ function mypageForm(event) {
 			    document.getElementById('tel-input').focus();
 			    return false;
 			}
-			const telPattern = /^010-\d{4}-\d{4}$/;
+			const telPattern = /^010\d{8}$/;
 			if (!telPattern.test(tel)) {
-			    alert("전화번호를 010-1234-5678 형식으로 입력해 주세요.");
+			    alert("전화번호를 01012345678 형식으로 입력해 주세요.");
 			    document.getElementById('tel-input').focus();
 			    return false;
 			}
@@ -99,30 +95,82 @@ function mypageForm(event) {
     return true;
 }
 
-// 휴대전화번호 자동 하이픈 포맷터 + 최대 13자리 제한 (010-0000-0000)
-function formatPhoneNumber(value) {
-    value = value.replace(/\D/g, ''); // 숫자 외 제거
-
-    if (value.length > 11) {
-        value = value.slice(0, 11); // 11자리까지만 허용
-    }
-
-    if (value.length <= 3) {
-        return value;
-    } else if (value.length <= 7) {
-        return value.slice(0, 3) + '-' + value.slice(3);
-    } else {
-        return value.slice(0, 3) + '-' + value.slice(3, 7) + '-' + value.slice(7);
-    }
-}
-
-// 이벤트 연결
+// 전화번호 입력 제한 + 최대 11자리 숫자 제한
 document.addEventListener('DOMContentLoaded', function () {
     const telInput = document.getElementById('tel-input');
+
     if (telInput) {
         telInput.addEventListener('input', function () {
-            const numericOnly = telInput.value.replace(/\D/g, '').slice(0, 11); // 최대 11자리
-            telInput.value = formatPhoneNumber(numericOnly);
+            let value = telInput.value.replace(/\D/g, ''); // 숫자만 남기기
+            value = value.slice(0, 11); // 최대 8자리 제한
+            telInput.value = value;
         });
     }
 });
+
+// ➕ 버튼 클릭 시 파일 입력창 열기
+function triggerFileInput() {
+    document.getElementById('profile-img-input').click();
+}
+
+// 이미지 미리보기 및 업로드 후 리다이렉트
+function previewImage(event) {
+    const file = event.target.files[0];
+    const preview = document.getElementById('profile-img');
+
+    if (file && file.type.startsWith("image/")) {
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+            preview.src = e.target.result; // 미리보기 이미지 업데이트
+        };
+
+        reader.readAsDataURL(file);
+
+        // --- 여기서 서버로 업로드 ---
+        const formData = new FormData();
+        formData.append("profileImage", file);
+
+        fetch(contextPath + "/member/uploadProfileImage.do", {
+            method: "POST",
+            body: formData
+        })
+        .then(res => res.text())  // 서버에서 이미지 경로 반환 받기
+        .then(data => {
+            console.log("업로드 완료:", data);
+			const updatedImage = contextPath + "/resources/img/profile/" + data;
+            preview.src = updatedImage; // 업로드된 이미지로 갱신
+			alert("프로필사진이 변경되었습니다.")
+            // 업로드 완료 후 mypage로 리다이렉트
+            window.location.href = contextPath + "/member/mypage.do";  // mypage로 리다이렉트
+        })
+        .catch(err => {
+            console.error("업로드 실패:", err);
+            alert("이미지 업로드 실패. 다시 시도해 주세요.");
+        });
+    } else {
+        alert("이미지 파일만 업로드 가능합니다.");
+    }
+}
+
+// 프로필 이미지를 기본 이미지로 복원 후 리다이렉트
+function resetToBasicImage() {
+    var url = contextPath + "/member/resetProfileImage.do";  // 기본 이미지 복원을 위한 URL
+    fetch(url, {
+        method: 'POST'
+        // body는 더 이상 필요하지 않음
+    })
+    .then(response => response.text())
+    .then(data => {
+        console.log("기본 이미지로 복원 완료: ", data);
+        const preview = document.getElementById('profile-img');
+        preview.src = contextPath + "/resources/img/profile/basic.png";  // 기본 이미지로 변경
+        alert("기본 프로필사진으로 변경되었습니다.");
+
+        // 복원 후 mypage로 리다이렉트
+        window.location.href = contextPath + "/member/mypage.do";  // mypage로 리다이렉트
+    })
+    .catch(error => {
+        console.error("기본 이미지로 복원 실패:", error);
+    });
+}
