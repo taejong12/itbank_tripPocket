@@ -72,6 +72,8 @@
     color: #666;
     display: flex;
     gap: 10px;
+    justify-content: center;
+    align-items: center;
 }
 
 .signup-link a {

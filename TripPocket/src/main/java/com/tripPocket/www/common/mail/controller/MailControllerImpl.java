@@ -12,7 +12,6 @@ import org.springframework.stereotype.Controller;
 
 import com.tripPocket.www.common.mail.service.MailService;
 import com.tripPocket.www.common.random.AuthCodeRandom;
-import com.tripPocket.www.member.dto.MemberDTO;
 
 @Controller
 public class MailControllerImpl implements MailContoller{
@@ -29,12 +28,18 @@ public class MailControllerImpl implements MailContoller{
 				
 		String title = "[Trip Pocket] 인증번호 전송";
 		String authCode = authCodeRandom.createRandomNumber();
-
-		String html = "<html><body>";
-		html += "<div>Trip Pocket 인증번호를 안내드립니다.</div><br>";
-		html += "<div>인증번호: <h1>"+authCode+"</h1></div><br>";
-		html += "<div>감사합니다.</div>";
-		html += "</html></body>";
+		
+		String html = "<html><body style='font-family: Arial, sans-serif; background-color: #f9f9f9; padding: 20px;'>";
+		html += "<div style='max-width: 600px; margin: auto; background-color: #ffffff; padding: 30px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);'>";
+		html += "<h2 style='color: #333333;'>Trip Pocket 인증번호 안내</h2>";
+		html += "<p style='font-size: 16px; color: #555555;'>아래 인증번호를 입력하여 본인 확인을 완료해주세요.</p>";
+		html += "<div style='margin: 30px 0; text-align: center;'>";
+		html += "<span style='display: inline-block; padding: 15px 25px; font-size: 24px; background-color: #4CAF50; color: white; border-radius: 6px;'>" + authCode + "</span>";
+		html += "</div>";
+		html += "<p style='font-size: 14px; color: #999999;'>본 이메일은 발신 전용입니다. 문의가 필요하신 경우 웹사이트를 통해 연락해주세요.</p>";
+		html += "<p style='font-size: 14px; color: #999999;'>감사합니다.<br>Trip Pocket 드림</p>";
+		html += "</div>";
+		html += "</body></html>";
 		
 		mailService.sendAuthMail(title, memberMail, html);
 		
