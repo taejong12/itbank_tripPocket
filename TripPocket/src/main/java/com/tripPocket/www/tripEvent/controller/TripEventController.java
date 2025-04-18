@@ -54,6 +54,7 @@ public class TripEventController {
 	    return list;
 	}
 
+	// 랜덤결과 추출
 	private RegionDTO getRandomRegion(List<RegionDTO> regionList) {
 	    Collections.shuffle(regionList);
 	    return regionList.get(0);

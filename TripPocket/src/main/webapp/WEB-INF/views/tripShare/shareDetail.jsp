@@ -47,6 +47,7 @@
         <strong>여행 기간:</strong> 
         <fmt:formatDate value="${share.tripPlanStartDay}" pattern="yyyy-MM-dd" /> ~ 
         <fmt:formatDate value="${share.tripPlanArriveDay}" pattern="yyyy-MM-dd" />
+         <span>${share.tripShareViewCount } </span>
     </div>
 
     <!-- Day 버튼 -->
@@ -94,7 +95,6 @@
         </a>
     </c:if>
 </div>
-<a href="${contextPath}/share/shareImport.do?tripShareId=${share.tripShareId}&tripPlanId=${share.tripPlanId}">불러오기</a>
 </div>
 <script>
     const groupedDays = {};

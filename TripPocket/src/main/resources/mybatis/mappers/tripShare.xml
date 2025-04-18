@@ -4,25 +4,7 @@
 
 <mapper namespace="mapper.trip.share">
 	
-	<resultMap id="TripShareMap" type="tripShareDTO">
-	    <id property="tripShareId" column="trip_share_id"/>
-	    <result property="tripShareTitle" column="trip_share_title"/>
-	    <result property="tripShareContent" column="trip_share_content"/>
-	    <result property="tripPlanId" column="trip_plan_id"/>
-	    <result property="tripShareAddDate" column="trip_share_add_date"/>
-	    <result property="tripShareModDate" column="trip_share_mod_date"/>
-	    <result property="memberId" column="member_id"/>
-	
-	    <collection property="tripDayList" ofType="tripDayDTO">
-	        <id property="tripDayId" column="trip_day_id"/>
-	        <result property="tripDayDay" column="trip_day_day"/>
-	        <result property="tripDayAddress" column="trip_day_Address"/>
-	        <result property="tripDayDate" column="trip_day_date"/>
-	        <result property="tripDayImage" column="trip_day_image"/>
-	        <result property="tripPlanId" column="trip_plan_id"/>
-	        
-	    </collection>
-	</resultMap>
+
 	<!-- shareDay 매핑 -->
 	<resultMap id="tripShareDayResultMap" type="tripShareContentDTO">
     <id property="tripShareDayId" column="TRIP_SHARE_DAY_ID"/>
@@ -39,7 +21,7 @@
     <result property="tripPlanStartDay" column="TRIP_PLAN_START_DAY"/>
     <result property="tripPlanArriveDay" column="TRIP_PLAN_ARRIVE_DAY"/>
 </resultMap>
-
+	<!--plan매핑  -->
 	<resultMap id="tripPlanResultMap" type="tripPlanDTO">
 	    <id property="tripPlanId" column="trip_plan_id"/>
 	    <result property="tripPlanTitle" column="trip_plan_title"/>
@@ -50,20 +32,6 @@
 	    <result property="tripPlanAddDate" column="trip_plan_add_date"/>
 	    <result property="tripPlanModDate" column="trip_plan_mod_date"/>
 	</resultMap>
-
-	<resultMap id="TripDayMap" type="tripDayDTO">
-        <id property="tripDayId" column="trip_day_id"/>
-        <result property="tripDayDay" column="trip_day_day"/>
-        <result property="tripDayAddress" column="trip_day_Address"/>
-        <result property="tripDayDate" column="trip_day_date"/>
-        <result property="tripDayImage" column="trip_day_image"/>
-        <result property="tripDayPlace" column="trip_day_place" />
-        <result property="tripPlanId" column="trip_plan_id"/>
-        <result property="tripDayMapx" column="trip_day_mapx"/>
-    	<result property="tripDayMapy" column="trip_day_mapy"/>
-        <result property="tripPlanAddDate" column="trip_plan_add_date"/>
-        <result property="tripPlanModDate" column="trip_plan_mod_date"/>
-    </resultMap>
     
     <resultMap id="tripDayMap" type="com.tripPocket.www.tripPlan.dto.TripDayDTO">
     <id property="tripDayId" column="TRIP_DAY_ID"/>
@@ -89,24 +57,58 @@
         <result property="tripShareModDate" column="trip_share_mod_date"/>
         <result property="tripPlanStartDay" column="trip_plan_start_day"/>
         <result property="tripPlanArriveDay" column="trip_plan_arrive_day"/>
-        <result property="memberId" column="member_id"/>
+        <result property="memberId" column="member_id"/> 
         <!-- 1:N 관계 매핑 -->
         <collection property="tripDayList" ofType="com.tripPocket.www.tripPlan.dto.TripDayDTO" resultMap="tripDayMap"/>
         <collection property="tripShareContentList" ofType="com.tripPocket.www.tripShare.dto.TripShareContentDTO" resultMap="tripShareDayResultMap"/>
     </resultMap>
+	    
+	 <resultMap id="TripShareLogResultMap" type="tripShareLogDTO">
+	    <result property="tripShareId" column="trip_share_id"/>
+	    <result property="memberId" column="member_id"/>
+	    <result property="actionType" column="action_type"/>
+	    <result property="actionDate" column="action_date"/>
+	</resultMap>
     
-	<select id="selectList" parameterType="tripShareDTO" resultMap="TripShareMap">
-	    SELECT 
-		    ts.trip_share_id,
-		    ts.trip_share_title,
-		    ts.trip_share_content,
-		    ts.trip_plan_id,
-		    ts.trip_share_add_date,
-		    ts.trip_share_mod_date,
-		    ts.member_id
-		FROM trip_share ts
-		ORDER BY ts.trip_share_add_date DESC
+	<select id="selectListOrderByLatest" resultMap="TripShareResultMap">
+   SELECT 
+    ts.*, 
+    tp.trip_plan_start_day, 
+    tp.trip_plan_arrive_day 
+	FROM trip_share ts
+	JOIN trip_plan tp ON ts.trip_plan_id = tp.trip_plan_id
+	ORDER BY ts.trip_share_add_date DESC
 	</select>
+	<!-- 공유순  -->
+	<select id="selectListOrderByShares" resultMap="TripShareResultMap">
+		     SELECT 
+		    ts.trip_share_id, 
+		    ts.member_id, 
+		    ts.trip_share_title, 
+		    COUNT(tsl.trip_share_id) AS share_count
+			FROM trip_share ts
+			LEFT JOIN trip_share_log tsl 
+		    ON ts.trip_share_id = tsl.trip_share_id 
+		    AND tsl.action_type = 'SHARE'
+			GROUP BY 
+		    ts.trip_share_id, 
+		    ts.member_id, 
+		    ts.trip_share_title
+			ORDER BY share_count DESC
+    </select>
+    <!-- 조회순 -->
+    <select id="selectListOrderByViews" resultMap="TripShareResultMap">
+        SELECT ts.trip_share_id,
+       ts.member_id,
+       ts.trip_share_title,
+       COUNT(tsvl.trip_share_id) AS view_count
+	FROM trip_share ts
+	LEFT JOIN trip_share_log tsvl
+  	ON ts.trip_share_id = tsvl.trip_share_id
+ 	AND tsvl.action_type = 'VIEW'
+	GROUP BY ts.trip_share_id, ts.member_id, ts.trip_share_title
+	ORDER BY view_count DESC
+    </select>
 	
 	<select id="selectDayList" parameterType="tripDayDTO" resultType="tripDayDTO">
 	    SELECT 
@@ -180,7 +182,7 @@ WHERE
 		select * from trip_plan where member_id = #{memberId} 
 	</select>
 
-	<select id="myShareList" parameterType="String" resultMap="TripShareMap">
+	<select id="myShareList" parameterType="String" resultMap="TripShareResultMap">
 		SELECT 
     ts.*
 FROM 
@@ -197,7 +199,8 @@ ORDER BY
     ts.trip_share_title,
     ts.trip_share_add_date,
     ts.trip_share_mod_date,
-
+	
+	
     tsc.trip_day_id,
     tsc.trip_share_day_day,
     tsc.trip_share_day_date,
@@ -209,6 +212,7 @@ ORDER BY
     tsc.trip_share_content,
     tsc.trip_plan_start_day,
     tsc.trip_plan_arrive_day,
+    
 
     ts.member_id
 
@@ -312,7 +316,7 @@ ORDER BY tsc.trip_share_day_day ASC
     </select>
 
     <!-- 작성자 정보 조회 -->
-     <select id="getWriterByShareId" parameterType="int" resultMap="TripDayMap">
+     <select id="getWriterByShareId" parameterType="int" resultMap="tripDayMap">
          SELECT m.*
          FROM member m
          JOIN trip_plan tp ON m.member_id = tp.member_id
@@ -332,5 +336,60 @@ ORDER BY tsc.trip_share_day_day ASC
 	  WHERE trip_share_id = #{tripShareId}
 	    AND trip_day_id = #{tripDayId}
 	</update>
-
+	<!-- log추가  -->
+	<insert id="insertTripShareViewLog" parameterType="map">
+    	INSERT INTO trip_share_log (trip_share_id, member_id, action_type, action_date)
+   	 	VALUES (#{tripShareId}, #{memberId}, 'VIEW', CURRENT_TIMESTAMP)
+	</insert>
+	
+	<!-- 조회수 수 출력 -->
+	<select id="getTripShareViewCount" parameterType="int" resultType="int">
+    SELECT COUNT(*) 
+	FROM trip_share_log
+	WHERE action_type = 'VIEW' 
+  	AND trip_share_id = #{trip_share_id}
+	</select>	
+	
+	<!-- 조회수 중복확인 -->
+	<select id="existsTripShareViewLog" parameterType="map" resultType="boolean">
+		SELECT 
+        CASE 
+            WHEN EXISTS (
+                SELECT 1
+                FROM trip_share_log
+                WHERE trip_share_id = #{tripShareId}
+                AND member_id = #{memberId}
+                AND action_type = 'VIEW'
+            ) THEN 1 
+            ELSE 0 
+        END
+    FROM dual
+	</select>
+	<!-- 공유수 중복확인 -->
+	<select id="existsShareLog" parameterType="map" resultType="boolean">
+		SELECT 
+        CASE 
+            WHEN EXISTS (
+                SELECT 1
+                FROM trip_share_log
+                WHERE trip_share_id = #{tripShareId}
+                AND member_id = #{memberId}
+                AND action_type = 'SHARE'
+            ) THEN 1 
+            ELSE 0 
+        END
+    FROM dual
+	</select>
+	<!-- share log테이블에 추가 -->
+	<insert id="insertShareLog" parameterType="map">
+		INSERT INTO trip_share_log (trip_share_id, member_id, action_type, action_date)
+   	 	VALUES (#{tripShareId}, #{memberId}, 'SHARE', CURRENT_TIMESTAMP)
+	</insert>
+	<!--  -->
+	<select id="getTripShareShareCount" parameterType="int" resultType="int">
+    SELECT COUNT(*) 
+	FROM trip_share_log
+	WHERE action_type = 'SHARE' 
+  AND trip_share_id = #{trip_share_id}
+	</select>	
 </mapper>

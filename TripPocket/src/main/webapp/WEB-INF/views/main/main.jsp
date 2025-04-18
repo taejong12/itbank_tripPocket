@@ -7,10 +7,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Trip Pocket Intro</title>
-
 </head>
 <body onclick="closeMenu(event)">
-    
     <div class="background-overlay">
         <div class="main content">
             <p>여행의 모든 순간을 간편하게</p>
@@ -66,8 +64,6 @@
             	</h1>
        		</div>
         </c:if>
-        
     </div>
-   
 </body>
 </html>

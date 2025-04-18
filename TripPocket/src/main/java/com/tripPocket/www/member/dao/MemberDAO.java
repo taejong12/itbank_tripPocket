@@ -37,5 +37,7 @@ public interface MemberDAO {
 	int updateMemberPwd(MemberDTO memberDTO);
 
 	MemberDTO selectMember(String memberId);
+	
+	void updateProfileImage(String memberId, String memberProfileImage);
 
 }

@@ -24,13 +24,13 @@
 					<div>
 						<div class="profile-container">
 							<div>
-								<div class="profile-nickname">${member.memberNickname}</div>
+								<div class="profile-nickname">${member.memberNickname}님</div>
 								<div>
 									<a href="${contextPath }/member/mypage.do">프로필 편집 ></a>
 								</div>
 							</div>
 							<div>
-								<img src="${contextPath}/resources/img/profile/basic.png">
+								<img src="${contextPath}/resources/img/profile/${member.memberProfileImage != null ? member.memberProfileImage : 'basic.png'}" alt="프로필 사진" class="profile-img">
 							</div>
 		                </div>
 					</div>
@@ -44,7 +44,7 @@
 							</a>
 		                </div>
 						<div>
-							<a href="#">
+							<a href="${contextPath}/share/myShare.do">
 								<div>
 									<img src="${contextPath}/resources/img/profile/MyTripStoryIcon.png" alt="내 여행기 이미지">
 								</div>

@@ -18,11 +18,17 @@ import com.tripPocket.www.tripShare.dto.TripShareDTO;
 public class TripShareServiceImpl implements TripShareService{
 	@Autowired
 	TripShareDAO tripShareDAO;
-
+	// shareList
 	@Override
-	public List<TripShareDTO> shareList(TripShareDTO tripShareDTO) {
-		// TODO Auto-generated method stub
-		return tripShareDAO.shareList(tripShareDTO);
+	public List<TripShareDTO> shareListSorted(String sortType) {
+	    switch (sortType) {
+	        case "views":
+	            return tripShareDAO.selectListOrderByViews(sortType);
+	        case "shares":
+	            return tripShareDAO.selectListOrderByShares(sortType);
+	        default: // latest
+	            return tripShareDAO.selectListOrderByLatest(sortType);
+	    }
 	}
 
 	
@@ -111,11 +117,70 @@ public class TripShareServiceImpl implements TripShareService{
 		return tripShareDAO.getWriterByShareId(tripShareId);
 	}
 
-
-
 	@Override
 	public void updateTripShareContents(List<Map<String, Object>> contentList) {
 		tripShareDAO.updateTripShareContents(contentList);
 		
 	}
+
+
+
+
+	//중복확인 메서드
+	@Override
+	public boolean existsTripShareViewLog(Integer tripShareId, String memberId) {
+		// TODO Auto-generated method stub
+		return tripShareDAO.existsTripShareViewLog(tripShareId,memberId);
+	}
+
+
+	// log에 인서트
+	@Override
+	public void insertTripShareViewLog(Integer tripShareId, String memberId) {
+		tripShareDAO.insertTripShareViewLog(tripShareId,memberId);
+		
+	}
+
+
+	
+
+
+
+	@Override
+	public boolean existsShareLog(Long tripShareId, String memberId) {
+			
+		return tripShareDAO.existsShareLog(tripShareId,memberId);
+	}
+
+
+
+	@Override
+	public void insertShareLog(Long tripShareId, String memberId) {
+		tripShareDAO.insertShareLog(tripShareId,memberId);
+		
+	}
+
+
+
+	@Override
+	public int getTripShareViewCount(Integer tripShareId) {
+		// TODO Auto-generated method stub
+		return tripShareDAO.getTripShareViewCount(tripShareId);
+	}
+
+
+
+	@Override
+	public int getTripShareShareCount(Integer tripShareId) {
+		// TODO Auto-generated method stub
+		return tripShareDAO.getTripShareShareCount(tripShareId);
+	}
+
+
+
+	
+
+	
+
+
 }

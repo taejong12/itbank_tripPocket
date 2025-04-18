@@ -13,6 +13,7 @@ public class MemberDTO {
     private String memberGender;
     private Date memberAddDate;
     private Date memberModDate;
+    private String memberProfileImage;
     
     // 쿠키용
     private String loginKeep;
@@ -82,5 +83,11 @@ public class MemberDTO {
 	}
 	public void setLoginKeep(String loginKeep) {
 		this.loginKeep = loginKeep;
+	}
+	public String getMemberProfileImage() {
+	    return memberProfileImage;
+	}
+	public void setMemberProfileImage(String memberProfileImage) {
+	    this.memberProfileImage = memberProfileImage;
 	}
 }

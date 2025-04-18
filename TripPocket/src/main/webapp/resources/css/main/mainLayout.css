@@ -1,6 +1,6 @@
 html {
 	height: 100%;
-	overflow-y: auto; /* 세로 스크롤 허용 */
+	overflow-y: auto;
 	overflow: hidden;
 	margin: 0;
     padding: 0;
@@ -10,7 +10,7 @@ body {
 	height: 100%;
 	margin: 0;
 	padding: 0;
-	overflow-x: hidden; /* 가로 스크롤 방지 */
+	overflow-x: hidden;
 	font-family: 'Noto Sans', sans-serif;
 }
 
@@ -54,16 +54,18 @@ body {
 
  .profile-container {
 	display: flex;
-	align-items: center;
 	gap: 10px;
 	padding: 15px;
 	justify-content: space-between;
 	align-items: center; 
 }
 
-.profile-container img {
+.profile-img {
+	width: 80px;
 	height: 80px;
 	border-radius: 50%;
+	object-fit: cover;
+	border: 3px solid #eee;
 	margin-left: auto;
 }
 

@@ -158,4 +158,11 @@
 		from member
 		where member_id = #{memberId}
 	</select>
+	
+	<update id="updateProfileImage" parameterType="map">
+        UPDATE member
+        SET member_profile_image = #{memberProfileImage}
+        WHERE member_id = #{memberId}
+    </update>
+	
 </mapper>

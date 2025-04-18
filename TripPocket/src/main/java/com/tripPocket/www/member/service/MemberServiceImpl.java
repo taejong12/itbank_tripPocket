@@ -77,4 +77,8 @@ public class MemberServiceImpl implements MemberService {
 	public MemberDTO selectMember(String memberId) {
 		return memberDAO.selectMember(memberId);
 	}
+	
+	public void updateProfileImage(String memberId, String memberProfileImage) {
+		memberDAO.updateProfileImage(memberId, memberProfileImage);
+	}
 }

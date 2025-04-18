@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -26,6 +27,7 @@ import com.tripPocket.www.tripPlan.dto.TripDayDTO;
 import com.tripPocket.www.tripPlan.dto.TripPlanDTO;
 import com.tripPocket.www.tripShare.dto.TripShareContentDTO;
 import com.tripPocket.www.tripShare.dto.TripShareDTO;
+import com.tripPocket.www.tripShare.dto.TripShareLogDTO;
 import com.tripPocket.www.tripShare.service.TripShareService;
 
 @Controller
@@ -37,20 +39,21 @@ public class TripShareController {
 	
 	@RequestMapping("/shareList.do")
 	public String shareListPage(@ModelAttribute()TripShareDTO tripShareDTO, Model model, HttpServletRequest request) {
-	    HttpSession session = request.getSession();
-	    MemberDTO memberDTO = (MemberDTO) session.getAttribute("member");
-
-	    if (memberDTO == null) {
-	        System.out.println("세션에 회원 정보가 없습니다.");
-	        return "redirect:/member/loginForm.do"; // 로그인 페이지로 이동
-	    }
-
-	    List<TripShareDTO> tripShareList = tripShareService.shareList(tripShareDTO);
-	    model.addAttribute("tripShareList", tripShareList);
+	    
 	    return "tripShare/shareList"; // 공유 리스트 페이지의 뷰 이름 반환
 	    
 	}
-	
+	@RequestMapping(value = "/shareListAjax.do", method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> shareListAjax(@RequestParam String sortType) {
+	    Map<String, Object> result = new HashMap<>();
+
+	    List<TripShareDTO> tripShareList = tripShareService.shareListSorted(sortType);
+	    result.put("list", tripShareList);
+
+	    return ResponseEntity.ok(result);
+	}
+		
 	@RequestMapping("/myShare.do")
 	public String myShare(@ModelAttribute()TripShareDTO tripShareDTO, Model model, HttpServletRequest request) {
 	    HttpSession session = request.getSession();
@@ -114,10 +117,24 @@ public class TripShareController {
 	 }
 	
 	@RequestMapping("/shareDetail.do")
-	public ModelAndView shareDetail(@ModelAttribute TripShareDTO tripShareDTO) {
-	    // 공유 정보 (작성자 포함)
-	    TripShareDTO share = tripShareService.detailList(tripShareDTO);
+	public ModelAndView shareDetail(@ModelAttribute TripShareDTO tripShareDTO, HttpSession session) {
+		MemberDTO member = (MemberDTO) session.getAttribute("member"); // 로그인된 사용자 ID
+		TripShareDTO share = tripShareService.detailList(tripShareDTO);
+		 
 
+	    // 중복 조회 방지
+	    boolean alreadyViewed = tripShareService.existsTripShareViewLog(tripShareDTO.getTripShareId(), member.getMemberId());
+	    if (!alreadyViewed) {
+	        tripShareService.insertTripShareViewLog(tripShareDTO.getTripShareId(), member.getMemberId());
+	       
+	    }
+	    // 조회수 count 가져와서 DTO에 세팅
+	    int viewCount = tripShareService.getTripShareViewCount(tripShareDTO.getTripShareId());
+	    share.setTripShareViewCount(viewCount); // DTO에 넣기 (JSP에서 사용 가능)
+	    
+	    int ShareCount = tripShareService.getTripShareShareCount(tripShareDTO.getTripShareId());
+	    share.setTripShareShareCount(ShareCount); 
+	    
 	    // 여행 일차 정렬 (tripDayDay 기준)
 	    List<TripShareContentDTO> sortedList = share.getTripShareContentList();
 	    Collections.sort(sortedList, new Comparator<TripShareContentDTO>() {
@@ -152,6 +169,13 @@ public class TripShareController {
 
 	    // ✅ tripPlanId도 서비스에 같이 넘김
 	    tripShareService.importToMyPlan(tripShareId, member.getMemberId());
+	    
+	    boolean alreadyShared = tripShareService.existsShareLog(tripShareId, member.getMemberId()); 
+	    
+	    if (!alreadyShared) {
+	    	//로그추가
+	    	tripShareService.insertShareLog(tripShareId,member.getMemberId());
+	    }
 
 	    return "redirect:/plan/planList.do";
 	}
@@ -213,3 +237,4 @@ public class TripShareController {
 	}
 
 	
+

@@ -18,12 +18,25 @@ import com.tripPocket.www.tripShare.dto.TripShareDTO;
 public class TripShareDAOImpl implements TripShareDAO{
 	@Autowired
 	SqlSession session;
-
+	//shareList
 	@Override
-	public List<TripShareDTO> shareList(TripShareDTO tripShareDTO) {
-		return session.selectList("mapper.trip.share.selectList", tripShareDTO);
+	public List<TripShareDTO> selectListOrderByViews(String sortType) {
+		// TODO Auto-generated method stub
+		return session.selectList("mapper.trip.share.selectListOrderByViews",sortType);
 	}
 
+	@Override
+	public List<TripShareDTO> selectListOrderByShares(String sortType) {
+		// TODO Auto-generated method stub
+		return session.selectList("mapper.trip.share.selectListOrderByShares",sortType);
+	}
+
+	@Override
+	public List<TripShareDTO> selectListOrderByLatest(String sortType) {
+		// TODO Auto-generated method stub
+		return session.selectList("mapper.trip.share.selectListOrderByLatest",sortType);
+	}
+	
 	@Override
 	public List<TripDayDTO> selectData(TripDayDTO tripDayDTO) {
 		List<TripDayDTO> tripDayList = session.selectList("mapper.trip.share.selectDayList", tripDayDTO);
@@ -89,11 +102,67 @@ public class TripShareDAOImpl implements TripShareDAO{
 	public MemberDTO getWriterByShareId(int tripShareId) {
 		return session.selectOne("mapper.trip.share.getWriterByShareId", tripShareId);
 	}
-
+	
 	@Override
 	public void updateTripShareContents(List<Map<String, Object>> contentList) {
 		 for (Map<String, Object> map : contentList) {
 		        session.update("mapper.trip.share.updateTripShareContent", map);
 		    }
 	}
+
+
+
+	@Override
+	public boolean existsTripShareViewLog(Integer tripShareId, String memberId) {
+		
+		Map<String, Object> params = new HashMap<>();
+		params.put("tripShareId", tripShareId);
+		params.put("memberId", memberId);
+		
+		return session.selectOne("mapper.trip.share.existsTripShareViewLog",params);
+	}
+
+	@Override
+	public void insertTripShareViewLog(Integer tripShareId, String memberId) {
+		
+		Map<String, Object> params = new HashMap<>();
+		params.put("tripShareId", tripShareId);
+		params.put("memberId", memberId);
+		session.insert("mapper.trip.share.insertTripShareViewLog",params);
+	}
+	
+	@Override
+	public int getTripShareViewCount(Integer tripShareId) {
+		// TODO Auto-generated method stub
+		
+		return session.selectOne("mapper.trip.share.getTripShareViewCount", tripShareId);
+	}
+	// 공유 수 중복확인
+	@Override
+	public boolean existsShareLog(Long tripShareId, String memberId) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("tripShareId", tripShareId);
+		params.put("memberId", memberId);
+		session.selectOne("mapper.trip.share.existsShareLog",params);
+		
+		return false;
+	}
+	//로그 테이블에 추가
+	@Override
+	public void insertShareLog(Long tripShareId, String memberId) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("tripShareId", tripShareId);
+		params.put("memberId", memberId);
+		session.insert("mapper.trip.share.insertShareLog",params);
+		
+	}
+
+	@Override
+	public int getTripShareShareCount(Integer tripShareId) {
+	
+		return session.selectOne("mapper.trip.share.getTripShareShareCount",tripShareId);
+	}
+
+	
+
 } 

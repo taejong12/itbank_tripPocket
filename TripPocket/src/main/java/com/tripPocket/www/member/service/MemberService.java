@@ -19,6 +19,8 @@ public interface MemberService {
 	void delMemberWithDependencies(String memberId);
 
 	int findMemberNameAndEmail(MemberDTO memberDTO);
+	
+	void updateProfileImage(String memberId, String memberProfileImage);
 
 	List<MemberDTO> selectIdListByEmailAndName(MemberDTO memberDTO);
 
@@ -29,5 +31,4 @@ public interface MemberService {
 	int updateMemberPwd(MemberDTO memberDTO);
 
 	MemberDTO selectMember(String memberId);
-	
 }
