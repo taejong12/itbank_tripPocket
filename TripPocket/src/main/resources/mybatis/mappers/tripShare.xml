@@ -343,12 +343,12 @@ ORDER BY tsc.trip_share_day_day ASC
 	</insert>
 	
 	<!-- 조회수 수 출력 -->
-	<select id="getTripShareViewCount" parameterType="Integer" resultType="int">
-    SELECT COUNT(*)
-    FROM trip_share_log
-    WHERE trip_share_id = #{tripShareId}
-      AND action_type = 'VIEW'
-	</select>
+	<select id="getTripShareViewCount" parameterType="int" resultType="int">
+    SELECT COUNT(*) 
+	FROM trip_share_log
+	WHERE action_type = 'VIEW' 
+  	AND trip_share_id = #{trip_share_id}
+	</select>	
 	
 	<!-- 조회수 중복확인 -->
 	<select id="existsTripShareViewLog" parameterType="map" resultType="boolean">
@@ -387,9 +387,9 @@ ORDER BY tsc.trip_share_day_day ASC
 	</insert>
 	<!--  -->
 	<select id="getTripShareShareCount" parameterType="int" resultType="int">
-			 SELECT COUNT(*)
-  			  FROM trip_share_log
-   			 WHERE trip_share_id = #{tripShareId}
-     		 AND action_type = 'SHARE'
-	</select>
+    SELECT COUNT(*) 
+	FROM trip_share_log
+	WHERE action_type = 'SHARE' 
+  AND trip_share_id = #{trip_share_id}
+	</select>	
 </mapper>

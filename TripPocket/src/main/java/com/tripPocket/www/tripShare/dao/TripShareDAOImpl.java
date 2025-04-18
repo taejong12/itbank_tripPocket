@@ -135,7 +135,7 @@ public class TripShareDAOImpl implements TripShareDAO{
 	public int getTripShareViewCount(Integer tripShareId) {
 		// TODO Auto-generated method stub
 		
-		return session.selectOne("mapper.trip.share.getTripShareViewCount",tripShareId);
+		return session.selectOne("mapper.trip.share.getTripShareViewCount", tripShareId);
 	}
 	// 공유 수 중복확인
 	@Override

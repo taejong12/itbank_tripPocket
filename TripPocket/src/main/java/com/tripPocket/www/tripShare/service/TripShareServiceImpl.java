@@ -142,12 +142,7 @@ public class TripShareServiceImpl implements TripShareService{
 	}
 
 
-	// shareDTO에 카운트값 넘기기
-	@Override
-	public int getTripShareViewCount(Integer tripShareId) {
-		// TODO Auto-generated method stub
-		return tripShareDAO.getTripShareViewCount(tripShareId);
-	}
+	
 
 
 
@@ -168,11 +163,24 @@ public class TripShareServiceImpl implements TripShareService{
 
 
 	@Override
+	public int getTripShareViewCount(Integer tripShareId) {
+		// TODO Auto-generated method stub
+		return tripShareDAO.getTripShareViewCount(tripShareId);
+	}
+
+
+
+	@Override
 	public int getTripShareShareCount(Integer tripShareId) {
 		// TODO Auto-generated method stub
 		return tripShareDAO.getTripShareShareCount(tripShareId);
 	}
 
+
+
+	
+
+	
 
 
 }

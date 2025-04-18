@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tripPocket.www.tripPlan.dto.TripDayDTO;
 @Component
+
 public class TripShareDTO {
 	private Integer tripShareId;
 	private String tripShareTitle;
@@ -25,15 +26,15 @@ public class TripShareDTO {
 	private String memberId;
 	@JsonIgnore
 	private List<TripShareContentDTO> tripShareContentList;
-	private Integer tripShareViewCount;
-	private Integer TripShareShareCount;
+	private Integer tripShareViewCount = 0;
+	private Integer tripShareShareCount = 0;
 	
 	
 	public int getTripShareShareCount() {
-		return TripShareShareCount;
+		return tripShareShareCount;
 	}
 	public void setTripShareShareCount(int tripShareShareCount) {
-		TripShareShareCount = tripShareShareCount;
+		this.tripShareShareCount = tripShareShareCount;
 	}
 	public int getTripShareViewCount() {
 		return tripShareViewCount;
