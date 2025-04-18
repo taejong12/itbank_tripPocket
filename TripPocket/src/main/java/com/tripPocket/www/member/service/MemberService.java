@@ -18,5 +18,7 @@ public interface MemberService {
 
 	void delMemberWithDependencies(String memberId);
 
+	void updateProfileImage(String memberId, String memberProfileImage);
+
 
 }

@@ -1,5 +1,11 @@
+#trip-day-btn-list {
+	width: 100%;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(33%, 1fr));
+}
+
 #trip-day-btn-list button {
-    background-color: #ffcd4a; /* 따뜻한 노란색으로 여행 느낌 */
+    background-color: #ffcd4a;
     color: #333;
     border: none;
     border-radius: 8px;
@@ -10,8 +16,10 @@
     cursor: pointer;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s ease, transform 0.2s ease;
-    white-space: nowrap; /* 날짜 길어도 한 줄로 표시 */
-    max-width: 100%;
+    white-space: nowrap;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #trip-day-btn-list button:hover {
@@ -40,11 +48,10 @@
 }
 
 .trip-day-form {
+	width: 50%;
     border: 2px solid #e0e0e0;
     border-radius: 12px;
     padding: 30px;
-    margin: 40px auto;
-    min-width: 800px;
     background-color: #fafafa;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
@@ -91,12 +98,14 @@
     padding: 12px 16px;
     margin: 12px 0;
     box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.05);
+    gap: 10px;
 }
 
 /* 왼쪽 전체 묶음 */
 .trip-day-left {
     display: flex;
     align-items: center;
+    gap: 15px;
 }
 
 
@@ -106,7 +115,6 @@
     height: 80px;
     object-fit: cover;
     border-radius: 10px;
-    margin-right: 16px;
     border: 1px solid #ddd;
     background-color: #f0f0f0;
 }
@@ -135,7 +143,6 @@
     font-size: 18px;
     font-weight: bold;
     color: #ff9800;
-    margin-right: 10px;
 }
 
 .trip-day-delete-btn {
@@ -147,7 +154,6 @@
     font-size: 15px;
     font-weight: bold;
     cursor: pointer;
-    margin-left: 10px;
     text-align: center;
     transition: background-color 0.3s ease;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
@@ -190,12 +196,12 @@
     text-decoration: none;
     text-align: center;
     cursor: pointer;
-    margin-left: 10px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s ease;
-    width: 100%; /* 부모 div 기준 너비로 맞춤 */
+    width: 100%;
     box-sizing: border-box;
     align-items: center;
+    white-space: nowrap;
 }
 
 .trip-destination-link:hover {
@@ -204,11 +210,9 @@
 
 .trip-day-btn-group {
     display: flex;
-    flex-direction: column; /* 세로 정렬 */
-    align-items: flex-start; /* 왼쪽 정렬 (원하면 center로 변경 가능) */
-    gap: 8px; /* 버튼 간 간격 */
-    margin-top: 10px;
-    width: 110px; /* 원하는 고정 너비 */
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
 }
 
 /* 거리 정보 (화살표 + 거리 텍스트) */

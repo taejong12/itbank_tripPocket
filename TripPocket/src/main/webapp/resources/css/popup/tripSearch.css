@@ -1,40 +1,36 @@
 @charset "UTF-8";
 
-/* 검색창, 셀렉트박스, 버튼을 감싸는 전체 컨테이너 */
 .trip-search-bar {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
     align-items: center;
-    justify-content: center;
-    padding: 20px;
-    background: linear-gradient(to right, #e0f7fa, #ffffff);
-    border-radius: 12px;
+    padding: 10px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    margin-bottom: 20px;
+    display:flex; 
+    background: #f5f5f5; 
+    border-radius:100px; 
+    justify-content: space-between;
+    gap: 10px;
 }
 
 /* 검색어 입력창 */
 #tripSearchKeyword {
     padding: 10px 15px;
-    width: 200px;
-    border: 1px solid #b2dfdb;
-    border-radius: 8px;
+    width: 100%;
+    border: none;
     font-size: 16px;
     transition: border 0.2s;
+    background: #f5f5f5;
 }
 #tripSearchKeyword:focus {
     outline: none;
-    border-color: #26a69a;
 }
 
 /* 지역 선택 셀렉트 박스 */
 #tripSearchAreaCode {
+	width: 100%;
     padding: 10px;
     font-size: 16px;
-    border-radius: 8px;
-    border: 1px solid #b2dfdb;
-    background-color: #ffffff;
+    border: none;
+    background-color: #f5f5f5;
     transition: border 0.2s;
 }
 #tripSearchAreaCode:focus {
@@ -42,19 +38,15 @@
     border-color: #26a69a;
 }
 
-/* 버튼 공통 스타일 (검색 / 닫기) */
 .trip-search-bar button {
-    background-color: #26a69a;
-    color: white;
-    padding: 10px 16px;
+    background-color: #f5f5f5;
+    padding: 10px;
     border: none;
-    border-radius: 8px;
-    font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.2s;
 }
-.trip-search-bar button:hover {
-    background-color: #00796b;
+
+.trip-search-bar img {
+    width: 20px;
 }
 
 .trip-search-result-non {
@@ -100,6 +92,8 @@
     flex-direction: column;
     gap: 10px;
     margin-top: 20px;
+    overflow-y: auto;
+	max-height: 500px;
 }
 
 .trip-search-result-div {
@@ -151,4 +145,36 @@
 .trip-destination-link{
 	text-decoration: none;
 	color: inherit; 
+}
+
+.popup-search-form{
+	display: flex; 
+	flex-direction: column;
+}
+
+.popup-search-left{
+	display: flex; 
+	gap: 20px; 
+	justify-content:center; 
+	align-items:center;
+}
+
+.popup-search-btn-div button{
+	display: flex; 
+	align-items: center; 
+	justify-content: center;
+}
+
+.popup-close-btn-div{
+	 display: flex; 
+	 justify-content: center; 
+	 align-items: center;
+}
+
+.popup-close-btn-div button{
+	 color: black; 
+	 border: none; 
+	 font-size: 26px; 
+	 background: white;
+	 cursor: pointer;
 }

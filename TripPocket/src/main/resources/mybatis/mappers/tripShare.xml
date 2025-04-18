@@ -253,7 +253,7 @@ ORDER BY tsc.trip_share_day_day ASC
 	</insert>
 	
 	<insert id="insertTripDaysFromShare" parameterType="map">
-	  INSERT INTO trip_day (
+	  INSERT INTO trip_content (
 	  trip_plan_id,
 	  trip_day_day,
 	  trip_day_address,
