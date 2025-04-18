@@ -16,8 +16,6 @@ public interface MemberDAO {
 
 	MemberDTO update(MemberDTO memberDTO);
 
-	boolean isMemberEmailDuplicated(String memberEmail);
-
 	void deleteTripShareContentByMemberId(String memberId);
 
 	void deleteTripShareByMemberId(String memberId);
@@ -38,6 +36,6 @@ public interface MemberDAO {
 
 	int updateMemberPwd(MemberDTO memberDTO);
 
-	MemberDTO selectMember(String memeberId);
+	MemberDTO selectMember(String memberId);
 
 }

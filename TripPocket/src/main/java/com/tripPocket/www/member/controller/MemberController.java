@@ -64,7 +64,7 @@ public class MemberController {
 			
 			if ("on".equals(memberDTO.getLoginKeep())) {
 				Cookie loginCookie = new Cookie("loginKeep", member.getMemberId());
-				loginCookie.setMaxAge(60 * 60 * 24 * 7);
+				loginCookie.setMaxAge(60 * 60 * 24 * 30);
 				loginCookie.setPath("/");
 				response.addCookie(loginCookie);
 			}
@@ -94,17 +94,6 @@ public class MemberController {
 	@ResponseBody // 이 메서드가 반환하는 값을 http body로 직접 반환하게 해주는 어노테이션
 	public String memberIdCheck(@RequestParam("memberId") String memberId) {
 		boolean isDuplicated = memberService.isMemberIdDuplicated(memberId); // 아이디 중복값 확인 메서드
-		if (isDuplicated) { // 존재여부
-			return "DUPLICATED"; // 존재한다
-		} else {
-			return "OK"; // 존재하지 않는다
-		}
-	}
-	
-	@RequestMapping(value = "memberEmailCheck.do", method = RequestMethod.GET)
-	@ResponseBody // 이 메서드가 반환하는 값을 http body로 직접 반환하게 해주는 어노테이션
-	public String memberEmailCheck(@RequestParam("memberEmail") String memberEmail) {
-		boolean isDuplicated = memberService.isMemberEmailDuplicated(memberEmail); // 아이디 중복값 확인 메서드
 		if (isDuplicated) { // 존재여부
 			return "DUPLICATED"; // 존재한다
 		} else {
@@ -232,7 +221,7 @@ public class MemberController {
 	@RequestMapping("/pwdUpdate.do")
 	public String pwdUpdate(@ModelAttribute MemberDTO memberDTO, Model model, HttpSession session){
 		String pwdUpdateAuth = (String) session.getAttribute("pwdUpdateAuth");
-		System.out.println("pwdUpdate.do: " + pwdUpdateAuth);
+		
 		if(pwdUpdateAuth != "true" || pwdUpdateAuth == null || memberDTO == null) {
 			return "redirect:/member/loginForm.do";
 		}
@@ -253,13 +242,13 @@ public class MemberController {
 	
 	@RequestMapping("/loginKeep.do")
 	public String cookieLoginKeep(HttpSession session, HttpServletResponse response) {
-		String memeberId = (String) session.getAttribute("memebrId");
+		String memberId = (String) session.getAttribute("memberId");
 		
-		if(memeberId == null || memeberId == "") {
+		if(memberId == null || memberId == "") {
 			return "redirect:/";
 		}
 		
-		MemberDTO memberDTO = memberService.selectMember(memeberId);
+		MemberDTO memberDTO = memberService.selectMember(memberId);
 		
 		if(memberDTO == null) {
 			session.invalidate();
@@ -272,7 +261,7 @@ public class MemberController {
 		
 		session.setAttribute("isLogin", true);
 		session.setAttribute("member", memberDTO);
-		session.removeAttribute("memebrId");
+		session.removeAttribute("memberId");
 		
 		return "redirect:/";
 	}

@@ -153,7 +153,7 @@ public class TripShareController {
 	    // ✅ tripPlanId도 서비스에 같이 넘김
 	    tripShareService.importToMyPlan(tripShareId, member.getMemberId());
 
-	    return "redirect:/trip/planList.do";
+	    return "redirect:/plan/planList.do";
 	}
 	
 	@RequestMapping("/shareDelete.do")

@@ -36,7 +36,7 @@
 					</div>
 					<div class="profile-submenu">
 						<div>
-							<a href="${contextPath}/trip/planList.do">
+							<a href="${contextPath}/plan/planList.do">
 								<div>
 									<img src="${contextPath}/resources/img/profile/MyTripIcon.png" alt="내 여행 이미지">
 								</div>

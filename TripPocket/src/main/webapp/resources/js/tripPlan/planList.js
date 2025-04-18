@@ -1,6 +1,6 @@
 window.fu_deleteTripPlan = function(tripPlanId){
 			
-	fetch(contextPath+"/trip/deleteTripPlan.do", {
+	fetch(contextPath+"/plan/deleteTripPlan.do", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

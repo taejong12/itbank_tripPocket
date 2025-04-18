@@ -40,11 +40,6 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public boolean isMemberEmailDuplicated(String memberEmail) {
-		return memberDAO.isMemberEmailDuplicated(memberEmail);
-	}
-
-	@Override
 	public void delMemberWithDependencies(String memberId) {
 		memberDAO.deleteTripShareContentByMemberId(memberId);
 		memberDAO.deleteTripShareByMemberId(memberId);
@@ -79,7 +74,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public MemberDTO selectMember(String memeberId) {
-		return memberDAO.selectMember(memeberId);
+	public MemberDTO selectMember(String memberId) {
+		return memberDAO.selectMember(memberId);
 	}
 }

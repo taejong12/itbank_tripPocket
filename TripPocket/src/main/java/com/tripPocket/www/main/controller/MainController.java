@@ -1,6 +1,5 @@
 package com.tripPocket.www.main.controller;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -21,19 +20,6 @@ public class MainController {
 		HttpSession session = request.getSession();
 		Boolean isLogin = (Boolean) session.getAttribute("isLogin"); // 세션에서 값 가져오기
 	    MemberDTO member = (MemberDTO) session.getAttribute("member"); // 세션에서 값 가져오기
-	    
-	    if(isLogin == null || !isLogin) {  	
-	    	Cookie[] cookies = request.getCookies();
-	    	if (cookies != null) {
-	    		for (Cookie cookie : cookies) {
-	    			if ("loginKeep".equals(cookie.getName())) {
-	    				ModelAndView view = new ModelAndView("redirect:/member/loginKeep.do");
-	    				session.setAttribute("memebrId", cookie.getValue());
-	    				return view;
-	    			}
-	    		}
-	    	}
-	    }
 	    
 	    mav.addObject("isLogin", isLogin);
 	    mav.addObject("member", member);

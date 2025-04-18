@@ -16,8 +16,6 @@ public interface MemberService {
 
 	MemberDTO update(MemberDTO memberDTO);
 
-	boolean isMemberEmailDuplicated(String memberEmail);
-
 	void delMemberWithDependencies(String memberId);
 
 	int findMemberNameAndEmail(MemberDTO memberDTO);
@@ -30,6 +28,6 @@ public interface MemberService {
 
 	int updateMemberPwd(MemberDTO memberDTO);
 
-	MemberDTO selectMember(String memeberId);
+	MemberDTO selectMember(String memberId);
 	
 }

@@ -58,12 +58,6 @@ public class MemberDAOImpl implements MemberDAO{
 	}
 
 	@Override
-	public boolean isMemberEmailDuplicated(String memberEmail) {
-		 int count = sqlSession.selectOne("mapper.member.isMemberEmailDuplicated", memberEmail);
-	        return count > 0;
-	}
-
-	@Override
 	public void deleteTripShareContentByMemberId(String memberId) {
 	    sqlSession.delete("mapper.member.deleteTripShareContentByMemberId", memberId);
 	}
@@ -116,7 +110,7 @@ public class MemberDAOImpl implements MemberDAO{
 	}
 
 	@Override
-	public MemberDTO selectMember(String memeberId) {
-		return sqlSession.selectOne("mapper.member.selectMember", memeberId);
+	public MemberDTO selectMember(String memberId) {
+		return sqlSession.selectOne("mapper.member.selectMember", memberId);
 	}
 }
