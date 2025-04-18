@@ -44,6 +44,11 @@
 		<put-attribute name="body" value="/WEB-INF/views/member/pwdUpdateForm.jsp" />
 	</definition>
 	
+	<definition name="member/pwdUpdateComplete" extends="common">
+		<put-attribute name="title" value="비밀번호 변경완료" />
+		<put-attribute name="body" value="/WEB-INF/views/member/pwdUpdateComplete.jsp" />
+	</definition>
+	
 </tiles-definitions>
 
 

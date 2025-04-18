@@ -5,5 +5,6 @@ window.addEventListener("pageshow", function (event) {
 		// 문서 내 모든 form을 초기화
 		const forms = document.querySelectorAll("form");
 		forms.forEach(form => form.reset());
+		window.location.reload();
 	}
 });

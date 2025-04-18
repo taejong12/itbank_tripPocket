@@ -127,13 +127,34 @@
 		select count(*)
 		from member
 		where member_email = #{memberEmail}
-		and member_name = #{memberName}
+			and member_name = #{memberName}
 	</select>
 	
 	<select id="selectIdListByEmailAndName" parameterType="memberDTO" resultType="memberDTO">
 		select *
 		from member
 		where member_email = #{memberEmail}
-		and member_name = #{memberName}
+			and member_name = #{memberName}
 	</select>
+	
+	<select id="findMemberIdAndEmail" parameterType="memberDTO" resultType="Integer">
+		select count(*)
+		from member
+		where member_email = #{memberEmail}
+			and member_id = #{memberId}
+	</select>
+	
+	<select id="selectMemberId" parameterType="memberDTO" resultType="String">
+		select member_id
+		from member
+		where member_email = #{memberEmail}
+			and member_id = #{memberId}
+	</select>
+	
+	<update id="updateMemberPwd" parameterType="memberDTO">
+		update member
+		set member_pwd = #{memberPwd}
+		where member_id = #{memberId}
+	</update>
+	
 </mapper>

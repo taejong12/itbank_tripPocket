@@ -54,7 +54,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "memberLoginCheck.do", method = RequestMethod.POST)
-	public String memberLoginCheck(@ModelAttribute MemberDTO memberDTO, HttpSession session) throws Exception {
+	public String memberLoginCheck(@ModelAttribute MemberDTO memberDTO, HttpSession session, Model model) throws Exception {
 		MemberDTO member = memberService.memberLoginCheck(memberDTO);
 
 		if(member != null) {
@@ -62,6 +62,7 @@ public class MemberController {
 			session.setAttribute("member", member);
 			return "main/main";
 		}else {
+			model.addAttribute("loginFail", "fail");
 			return "member/loginForm";
 		}
 	}
@@ -143,16 +144,12 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/findIdForm.do")
-	public String findIdForm(HttpServletResponse response){
-		response.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
-	    response.setHeader("Pragma", "no-cache");
-	    response.setDateHeader("Expires", 0);
+	public String findIdForm(){
 		return "member/findIdForm";
 	}
 	
 	@RequestMapping("/sendFindIdAuthMail.do")
 	public ResponseEntity<?> sendFindIdAuthMail(@ModelAttribute MemberDTO memberDTO, HttpSession session){
-		
 		int result = memberService.findMemberNameAndEmail(memberDTO);
 		
 		if(result > 0) {
@@ -182,19 +179,60 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/findPwdForm.do")
-	public String findPwdForm(HttpServletResponse response){
-	    response.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
-	    response.setHeader("Pragma", "no-cache");
-	    response.setDateHeader("Expires", 0);
+	public String findPwdForm(){
 		return "member/findPwdForm";
 	}
 	
-	@RequestMapping("/pwdUpdateForm.do")
-	public String pwdUpdateForm(HttpServletResponse response){
-		response.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
-	    response.setHeader("Pragma", "no-cache");
-	    response.setDateHeader("Expires", 0);
+	@RequestMapping("/sendFindPwdAuthMail.do")
+	public ResponseEntity<?> sendFindPwdAuthMail(@ModelAttribute MemberDTO memberDTO, HttpSession session){
+		int result = memberService.findMemberIdAndEmail(memberDTO);
+		
+		if(result > 0) {
+			return mailContoller.sendAuthMail(memberDTO.getMemberEmail(), session);
+		} else {
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("result", false);
+			map.put("msg", "이메일이 존재하지 않습니다.");
+			return ResponseEntity.ok(map);
+		}
+	}
+	
+	@RequestMapping("/findPwd.do")
+	public String findPwd(@ModelAttribute MemberDTO memberDTO, Model model, HttpSession session){
+		String authCheck = (String) session.getAttribute("authCheck");
+		
+		if(authCheck != "true" || authCheck == null || memberDTO == null) {
+			return "redirect:/member/loginForm.do";
+		}
+		
+		String memberId = memberService.selectMemberId(memberDTO);
+		model.addAttribute("memberId", memberId);
+		
+		session.removeAttribute("authCheck");
+		session.setAttribute("pwdUpdateAuth", "true");
+		
 		return "member/pwdUpdateForm";
 	}
 	
+	@RequestMapping("/pwdUpdate.do")
+	public String pwdUpdate(@ModelAttribute MemberDTO memberDTO, Model model, HttpSession session){
+		String pwdUpdateAuth = (String) session.getAttribute("pwdUpdateAuth");
+		System.out.println("pwdUpdate.do: " + pwdUpdateAuth);
+		if(pwdUpdateAuth != "true" || pwdUpdateAuth == null || memberDTO == null) {
+			return "redirect:/member/loginForm.do";
+		}
+		
+		int result = memberService.updateMemberPwd(memberDTO);
+		
+		String updateCheck = null;
+		
+		if(result > 0) {
+			updateCheck = "true";
+		}
+		
+		session.removeAttribute("pwdUpdateAuth");
+		model.addAttribute("updateCheck", updateCheck);
+		
+		return "member/pwdUpdateComplete";
+	}
 }

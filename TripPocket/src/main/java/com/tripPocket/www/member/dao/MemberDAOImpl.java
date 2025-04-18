@@ -31,11 +31,13 @@ public class MemberDAOImpl implements MemberDAO{
 	public MemberDTO memberLoginCheck(MemberDTO memberDTO) {
 		
 		String inputPwd = memberDTO.getMemberPwd();
-		
 		memberDTO = sqlSession.selectOne("mapper.member.memberLoginCheck", memberDTO);
 		
+		if(memberDTO == null || memberDTO.getMemberPwd() == null) {
+			return null;
+		}
+		
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-
 		String encodedPwd = memberDTO.getMemberPwd();
 
 		if (encoder.matches(inputPwd, encodedPwd)) {
@@ -94,5 +96,22 @@ public class MemberDAOImpl implements MemberDAO{
 	@Override
 	public List<MemberDTO> selectIdListByEmailAndName(MemberDTO memberDTO) {
 		return sqlSession.selectList("mapper.member.selectIdListByEmailAndName", memberDTO);
+	}
+
+	@Override
+	public int findMemberIdAndEmail(MemberDTO memberDTO) {
+		return sqlSession.selectOne("mapper.member.findMemberIdAndEmail", memberDTO);
+	}
+
+	@Override
+	public String selectMemberId(MemberDTO memberDTO) {
+		return sqlSession.selectOne("mapper.member.selectMemberId", memberDTO);
+	}
+
+	@Override
+	public int updateMemberPwd(MemberDTO memberDTO) {
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		memberDTO.setMemberPwd(encoder.encode(memberDTO.getMemberPwd()));
+		return sqlSession.update("mapper.member.updateMemberPwd", memberDTO);
 	}
 }

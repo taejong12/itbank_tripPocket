@@ -62,4 +62,19 @@ public class MemberServiceImpl implements MemberService {
 	public List<MemberDTO> selectIdListByEmailAndName(MemberDTO memberDTO) {
 		return memberDAO.selectIdListByEmailAndName(memberDTO);
 	}
+
+	@Override
+	public int findMemberIdAndEmail(MemberDTO memberDTO) {
+		return memberDAO.findMemberIdAndEmail(memberDTO);
+	}
+
+	@Override
+	public String selectMemberId(MemberDTO memberDTO) {
+		return memberDAO.selectMemberId(memberDTO);
+	}
+
+	@Override
+	public int updateMemberPwd(MemberDTO memberDTO) {
+		return memberDAO.updateMemberPwd(memberDTO);
+	}
 }

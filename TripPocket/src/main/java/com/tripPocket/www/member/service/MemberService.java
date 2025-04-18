@@ -23,5 +23,11 @@ public interface MemberService {
 	int findMemberNameAndEmail(MemberDTO memberDTO);
 
 	List<MemberDTO> selectIdListByEmailAndName(MemberDTO memberDTO);
+
+	int findMemberIdAndEmail(MemberDTO memberDTO);
+
+	String selectMemberId(MemberDTO memberDTO);
+
+	int updateMemberPwd(MemberDTO memberDTO);
 	
 }

@@ -32,4 +32,10 @@ public interface MemberDAO {
 
 	List<MemberDTO> selectIdListByEmailAndName(MemberDTO memberDTO);
 
+	int findMemberIdAndEmail(MemberDTO memberDTO);
+
+	String selectMemberId(MemberDTO memberDTO);
+
+	int updateMemberPwd(MemberDTO memberDTO);
+
 }

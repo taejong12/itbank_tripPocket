@@ -82,8 +82,8 @@
 			    }
 				
 			    // 인증번호 입력창 생성
-			    const findIdemailAuthWrap = document.createElement('div');
-			    findIdemailAuthWrap.className = 'find-id-email-auth-wrap';
+			    const findIdEmailAuthWrap = document.createElement('div');
+			    findIdEmailAuthWrap.className = 'find-id-email-auth-wrap';
 			    
 			    const mailAuthLabelDiv = document.createElement('div');
 			    mailAuthLabelDiv.className = 'email-auth-label';
@@ -147,9 +147,6 @@
 			        .then(res => res.json())
 			        .then(data => {
 			        	
-			        	console.log(data);
-			        	console.log(data.result);
-			        	
 			            if (data.result === true) {
 			                alert(data.msg);
 			                mailAuthInput.readOnly  = true;
@@ -183,11 +180,11 @@
 			    mailAuthDiv.appendChild(mailAuthInput);
 			    mailAuthDiv.appendChild(authCodeConfirmBtn);
 
-			    findIdemailAuthWrap.appendChild(mailAuthLabelDiv);
-			    findIdemailAuthWrap.appendChild(mailAuthDiv);
-			    findIdemailAuthWrap.appendChild(timerDiv);
+			    findIdEmailAuthWrap.appendChild(mailAuthLabelDiv);
+			    findIdEmailAuthWrap.appendChild(mailAuthDiv);
+			    findIdEmailAuthWrap.appendChild(timerDiv);
 			    
-			    findIdFormDiv.appendChild(findIdemailAuthWrap);
+			    findIdFormDiv.appendChild(findIdEmailAuthWrap);
 			    
 			    startTimer();
 			}

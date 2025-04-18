@@ -23,7 +23,6 @@
 </div>
 
 <script>
-	
 	window.fu_loginForm = function(){
 		window.location.href = "${contextPath}/member/loginForm.do";
 	}

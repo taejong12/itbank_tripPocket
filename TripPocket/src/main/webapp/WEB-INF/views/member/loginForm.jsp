@@ -30,5 +30,10 @@
 </div>
 
 <script>
-	/* 아이디, 비밀번호 체크 확인하기 */
+	let loginFail = "${loginFail}";
+	
+	// 아이디 또는 비밀번호가 잘못 되었습니다. 아이디와 비밀번호를 정확히 입력해 주세요.
+	if(loginFail == "fail"){
+		
+	}
 </script>
