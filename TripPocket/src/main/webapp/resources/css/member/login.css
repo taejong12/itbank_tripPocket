@@ -67,7 +67,6 @@
 }
 
 .signup-link {
-    margin-top: 20px;
     font-size: 0.875rem;
     color: #666;
     display: flex;
@@ -84,4 +83,65 @@
 
 .signup-link a:hover {
     text-decoration: underline;
+}
+
+.login-keep-check {
+    display: flex;
+    justify-content: flex-start;
+    padding: 10px 0px;
+    color: #4F46E5;
+}
+
+.input-keep {
+	display: none;
+}
+
+.input-keep-text{
+	position: relative;
+	padding-left: 30px;
+	cursor: pointer;
+	font-size: 14px;
+	line-height: 20px;
+	user-select: none;
+}
+
+.input-keep-text::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 20px;
+	height: 20px;
+	border: 2px solid #ccc;
+	border-radius: 50%;
+	background-color: #fff;
+	box-sizing: border-box;
+	transition: all 0.2s ease;
+}
+
+.input-keep-text::after {
+	content: "✔";
+	position: absolute;
+	left: 5px;
+	top: 50%;
+	transform: translateY(-50%);
+	font-size: 13px;
+	color: #ccc;
+	opacity: 1;
+	transition: color 0.2s ease;
+}
+
+.input-keep:checked + .input-keep-text::before {
+	background-color: #4F46E5;
+	border-color: #4CAF50;
+}
+
+.input-keep:checked + .input-keep-text::after {
+	position: absolute;
+	left: 5px;
+	top: 50%;
+	transform: translateY(-50%);
+	font-size: 12px;
+	color: white;
 }

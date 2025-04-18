@@ -114,4 +114,9 @@ public class MemberDAOImpl implements MemberDAO{
 		memberDTO.setMemberPwd(encoder.encode(memberDTO.getMemberPwd()));
 		return sqlSession.update("mapper.member.updateMemberPwd", memberDTO);
 	}
+
+	@Override
+	public MemberDTO selectMember(String memeberId) {
+		return sqlSession.selectOne("mapper.member.selectMember", memeberId);
+	}
 }

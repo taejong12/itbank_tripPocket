@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -54,13 +55,21 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "memberLoginCheck.do", method = RequestMethod.POST)
-	public String memberLoginCheck(@ModelAttribute MemberDTO memberDTO, HttpSession session, Model model) throws Exception {
+	public String memberLoginCheck(@ModelAttribute MemberDTO memberDTO, HttpSession session, Model model, HttpServletResponse response) throws Exception {
 		MemberDTO member = memberService.memberLoginCheck(memberDTO);
 
 		if(member != null) {
 			session.setAttribute("isLogin", true);
 			session.setAttribute("member", member);
-			return "main/main";
+			
+			if ("on".equals(memberDTO.getLoginKeep())) {
+				Cookie loginCookie = new Cookie("loginKeep", member.getMemberId());
+				loginCookie.setMaxAge(60 * 60 * 24 * 7);
+				loginCookie.setPath("/");
+				response.addCookie(loginCookie);
+			}
+			
+			return "redirect:/";
 		}else {
 			model.addAttribute("loginFail", "fail");
 			return "member/loginForm";
@@ -68,10 +77,16 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "logout.do", method = RequestMethod.GET)
-	public ModelAndView logout(@ModelAttribute() MemberDTO memberDTO, HttpServletRequest request,HttpServletResponse response) {
+	public ModelAndView logout(@ModelAttribute() MemberDTO memberDTO, HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView("redirect:/");
 		HttpSession session = request.getSession();
 		session.invalidate();
+		
+	    Cookie loginCookie = new Cookie("loginKeep", null);
+	    loginCookie.setMaxAge(0);
+	    loginCookie.setPath("/");
+	    response.addCookie(loginCookie);
+		
 		return mav;
 	}
 	
@@ -234,5 +249,31 @@ public class MemberController {
 		model.addAttribute("updateCheck", updateCheck);
 		
 		return "member/pwdUpdateComplete";
+	}
+	
+	@RequestMapping("/loginKeep.do")
+	public String cookieLoginKeep(HttpSession session, HttpServletResponse response) {
+		String memeberId = (String) session.getAttribute("memebrId");
+		
+		if(memeberId == null || memeberId == "") {
+			return "redirect:/";
+		}
+		
+		MemberDTO memberDTO = memberService.selectMember(memeberId);
+		
+		if(memberDTO == null) {
+			session.invalidate();
+		    Cookie loginCookie = new Cookie("loginKeep", null);
+		    loginCookie.setMaxAge(0);
+		    loginCookie.setPath("/");
+		    response.addCookie(loginCookie);
+			return "redirect:/";
+		}
+		
+		session.setAttribute("isLogin", true);
+		session.setAttribute("member", memberDTO);
+		session.removeAttribute("memebrId");
+		
+		return "redirect:/";
 	}
 }

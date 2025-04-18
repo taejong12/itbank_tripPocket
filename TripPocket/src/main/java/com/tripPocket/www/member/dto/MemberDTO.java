@@ -14,6 +14,9 @@ public class MemberDTO {
     private Date memberAddDate;
     private Date memberModDate;
     
+    // 쿠키용
+    private String loginKeep;
+    
 	public String getMemberId() {
 		return memberId;
 	}
@@ -73,5 +76,11 @@ public class MemberDTO {
 	}
 	public void setMemberAddDate(Date memberAddDate) {
 		this.memberAddDate = memberAddDate;
+	}
+	public String getLoginKeep() {
+		return loginKeep;
+	}
+	public void setLoginKeep(String loginKeep) {
+		this.loginKeep = loginKeep;
 	}
 }

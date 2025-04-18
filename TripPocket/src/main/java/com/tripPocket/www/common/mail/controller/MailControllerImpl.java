@@ -73,5 +73,4 @@ public class MailControllerImpl implements MailContoller{
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(map);
 		}
 	}
-
 }

@@ -21,6 +21,10 @@
 		<div class="button-container">
 			<button class="submit" type="submit">로그인</button>
 		</div>
+		<div class="login-keep-check">
+			<input type="checkbox" name="loginKeep" id="loginKeep" value="on" class="input-keep">
+			<label for="loginKeep" class="input-keep-text">로그인 상태 유지</label>
+		</div>
 		<div class="signup-link">
 			<a href="${contextPath}/member/joinForm.do">회원가입</a>
 			<span>|</span>

@@ -77,4 +77,9 @@ public class MemberServiceImpl implements MemberService {
 	public int updateMemberPwd(MemberDTO memberDTO) {
 		return memberDAO.updateMemberPwd(memberDTO);
 	}
+
+	@Override
+	public MemberDTO selectMember(String memeberId) {
+		return memberDAO.selectMember(memeberId);
+	}
 }

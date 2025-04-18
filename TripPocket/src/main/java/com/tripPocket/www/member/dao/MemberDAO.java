@@ -38,4 +38,6 @@ public interface MemberDAO {
 
 	int updateMemberPwd(MemberDTO memberDTO);
 
+	MemberDTO selectMember(String memeberId);
+
 }

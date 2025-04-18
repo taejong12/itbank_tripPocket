@@ -29,5 +29,7 @@ public interface MemberService {
 	String selectMemberId(MemberDTO memberDTO);
 
 	int updateMemberPwd(MemberDTO memberDTO);
+
+	MemberDTO selectMember(String memeberId);
 	
 }
