@@ -81,33 +81,59 @@
 	</select>
 	<!-- 공유순  -->
 	<select id="selectListOrderByShares" resultMap="TripShareResultMap">
-		     SELECT 
-		    ts.trip_share_id, 
-		    ts.member_id, 
-		    ts.trip_share_title, 
-		    COUNT(tsl.trip_share_id) AS share_count
-			FROM trip_share ts
-			LEFT JOIN trip_share_log tsl 
-		    ON ts.trip_share_id = tsl.trip_share_id 
-		    AND tsl.action_type = 'SHARE'
-			GROUP BY 
-		    ts.trip_share_id, 
-		    ts.member_id, 
-		    ts.trip_share_title
-			ORDER BY share_count DESC
+				     SELECT 
+		    ts.TRIP_SHARE_ID,
+		    ts.TRIP_SHARE_TITLE,
+		    ts.TRIP_SHARE_CONTENT,
+		    ts.TRIP_PLAN_ID,
+		    ts.TRIP_SHARE_ADD_DATE,
+		    ts.TRIP_SHARE_MOD_DATE,
+		    ts.MEMBER_ID,
+		    COUNT(tsl.TRIP_SHARE_ID) AS VIEW_COUNT
+		FROM 
+		    TRIP_SHARE ts
+		LEFT JOIN 
+		    TRIP_SHARE_LOG tsl 
+		    ON ts.TRIP_SHARE_ID = tsl.TRIP_SHARE_ID 
+		    AND tsl.ACTION_TYPE = 'VIEW'
+		GROUP BY 
+		    ts.TRIP_SHARE_ID,
+		    ts.TRIP_SHARE_TITLE,
+		    ts.TRIP_SHARE_CONTENT,
+		    ts.TRIP_PLAN_ID,
+		    ts.TRIP_SHARE_ADD_DATE,
+		    ts.TRIP_SHARE_MOD_DATE,
+		    ts.MEMBER_ID
+		ORDER BY 
+		    VIEW_COUNT DESC
     </select>
     <!-- 조회순 -->
     <select id="selectListOrderByViews" resultMap="TripShareResultMap">
-        SELECT ts.trip_share_id,
-       ts.member_id,
-       ts.trip_share_title,
-       COUNT(tsvl.trip_share_id) AS view_count
-	FROM trip_share ts
-	LEFT JOIN trip_share_log tsvl
-  	ON ts.trip_share_id = tsvl.trip_share_id
- 	AND tsvl.action_type = 'VIEW'
-	GROUP BY ts.trip_share_id, ts.member_id, ts.trip_share_title
-	ORDER BY view_count DESC
+       SELECT 
+    ts.TRIP_SHARE_ID,
+    ts.TRIP_SHARE_TITLE,
+    ts.TRIP_SHARE_CONTENT,
+    ts.TRIP_PLAN_ID,
+    ts.TRIP_SHARE_ADD_DATE,
+    ts.TRIP_SHARE_MOD_DATE,
+    ts.MEMBER_ID,
+    COUNT(tsl.TRIP_SHARE_ID) AS VIEW_COUNT
+FROM 
+    TRIP_SHARE ts
+LEFT JOIN 
+    TRIP_SHARE_LOG tsl 
+    ON ts.TRIP_SHARE_ID = tsl.TRIP_SHARE_ID 
+    AND tsl.ACTION_TYPE = 'VIEW'
+GROUP BY 
+    ts.TRIP_SHARE_ID,
+    ts.TRIP_SHARE_TITLE,
+    ts.TRIP_SHARE_CONTENT,
+    ts.TRIP_PLAN_ID,
+    ts.TRIP_SHARE_ADD_DATE,
+    ts.TRIP_SHARE_MOD_DATE,
+    ts.MEMBER_ID
+ORDER BY 
+    COUNT(tsl.TRIP_SHARE_ID) DESC
     </select>
 	
 	<select id="selectDayList" parameterType="tripDayDTO" resultType="tripDayDTO">

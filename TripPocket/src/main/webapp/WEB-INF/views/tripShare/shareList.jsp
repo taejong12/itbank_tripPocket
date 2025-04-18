@@ -14,15 +14,14 @@
 
     <!-- 검색 입력란 추가 -->
     <div class="search-section">
-        <label for="searchCriteria">검색 기준:</label>
-        <select id="searchCriteria">
-            <option value="title">제목</option>
-            <option value="id">아이디</option>
-        </select>
+    <label for="searchCriteria">검색 기준:</label>
+    <select id="searchCriteria">
+        <option value="title">제목</option>
+        <option value="id">아이디</option>
+    </select>
 
-        <!-- 검색 입력창 -->
-        <input type="text" id="searchInput" placeholder="검색어를 입력하세요">
-    </div>
+    <input type="text" id="searchInput" placeholder="검색어를 입력하세요">
+	</div>
 
     <div class="sort-section">
         <label for="sortType">정렬:</label>
@@ -104,7 +103,7 @@
         // 1. 입력된 검색어를 가져옴
         const searchTerm = $('#searchInput').val().toLowerCase();
         // 2. 검색 기준을 가져옴 (제목 또는 ID)
-        const searchCriteria = $('#searchCriteria').val();
+        const searchCriteria = $('#searchCriteria').val(); 
 
         // 3. 전체 리스트(allList)에서 선택된 검색 기준에 맞게 필터링
         filteredList = allList.filter(function (item) {
