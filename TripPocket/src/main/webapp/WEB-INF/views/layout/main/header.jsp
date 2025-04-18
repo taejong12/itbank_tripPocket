@@ -44,7 +44,7 @@
 							</a>
 		                </div>
 						<div>
-							<a href="#">
+							<a href="${contextPath}/share/myShare.do">
 								<div>
 									<img src="${contextPath}/resources/img/profile/MyTripStoryIcon.png" alt="내 여행기 이미지">
 								</div>
