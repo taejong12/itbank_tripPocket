@@ -3,13 +3,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <c:set var="contextPath" value="${pageContext.request.contextPath }" />
 <link rel="stylesheet" href="${contextPath}/resources/css/member/findIdForm.css">
+<script src="${contextPath}/resources/js/common/back/formReset.js"></script>
 
 <form name="findIdForm">
 	<div class="find-id-form-wrap">
 		<h2>아이디 찾기</h2>
 		<p class="find-id-text">본인확인 이메일 주소와 입력한 이메일 주소가 같아야, 인증번호를 받을 수 있습니다.</p>
 		<hr>
-		<div class="find-id-form">
+		<div class="find-id-form-div">
 			<div class="find-id-name-wrap">
 				<div class="name-label">이름</div>
 				<div>
@@ -33,6 +34,7 @@
 <script>
 	
 	let contextPath = "${contextPath}";
+	let memberNameCheck = null;
 	
 	window.fu_findIdSendMail = function(sendMailBtn){
 		const memberName = document.getElementById('memberName');
@@ -72,7 +74,7 @@
 			
 			if(data.result == true){
 				const container = sendMailBtn.closest('.find-id-email-wrap');
-				const findIdForm = document.querySelector('.find-id-form');
+				const findIdFormDiv = document.querySelector('.find-id-form-div');
 				
 				// 중복 추가 방지
 			    if (container.querySelector('.mail-auth-wrap')) {
@@ -161,6 +163,8 @@
 			                
 			                timerDiv.remove();
 			                
+			                memberNameCheck = nameVal;
+			                
 			                // 성공 시 hidden input 추가
 			                const mailAuthSuccess = document.createElement("input");
 			                mailAuthSuccess.type = "hidden";
@@ -183,7 +187,7 @@
 			    findIdemailAuthWrap.appendChild(mailAuthDiv);
 			    findIdemailAuthWrap.appendChild(timerDiv);
 			    
-			    findIdForm.appendChild(findIdemailAuthWrap);
+			    findIdFormDiv.appendChild(findIdemailAuthWrap);
 			    
 			    startTimer();
 			}
@@ -221,7 +225,12 @@
 		    return;
 		}
 		
-		alert("아이디 찾기 완료");
+		if(nameVal != memberNameCheck){
+			findIdForm.memberName.focus();
+			alert("인증한 이름과 다릅니다. 수정해주세요.");
+			return;
+		}
+		
 		findIdForm.method="post";
 		findIdForm.action= contextPath+"/member/findIdList.do";
 		findIdForm.submit();

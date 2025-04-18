@@ -143,7 +143,10 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/findIdForm.do")
-	public String findIdForm(){
+	public String findIdForm(HttpServletResponse response){
+		response.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
+	    response.setHeader("Pragma", "no-cache");
+	    response.setDateHeader("Expires", 0);
 		return "member/findIdForm";
 	}
 	
@@ -165,22 +168,32 @@ public class MemberController {
 	@RequestMapping("/findIdList.do")
 	public String findIdList(@ModelAttribute MemberDTO memberDTO, Model model, HttpSession session){
 		String authCheck = (String) session.getAttribute("authCheck");
+		
 		if(authCheck != "true" || authCheck == null || memberDTO == null) {
 			return "redirect:/member/loginForm.do";
 		}
 		
 		List<MemberDTO> memberList = memberService.selectIdListByEmailAndName(memberDTO);
 		model.addAttribute("memberList", memberList);
+		
+		session.removeAttribute("authCheck");
+		
 		return "member/memberIdList";
 	}
 	
 	@RequestMapping("/findPwdForm.do")
-	public String findPwdForm(){
+	public String findPwdForm(HttpServletResponse response){
+	    response.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
+	    response.setHeader("Pragma", "no-cache");
+	    response.setDateHeader("Expires", 0);
 		return "member/findPwdForm";
 	}
 	
 	@RequestMapping("/pwdUpdateForm.do")
-	public String pwdUpdateForm(){
+	public String pwdUpdateForm(HttpServletResponse response){
+		response.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
+	    response.setHeader("Pragma", "no-cache");
+	    response.setDateHeader("Expires", 0);
 		return "member/pwdUpdateForm";
 	}
 	

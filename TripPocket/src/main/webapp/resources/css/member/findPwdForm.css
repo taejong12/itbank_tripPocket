@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-.find-id-form-div{
+.find-pwd-form-div{
     display: flex;
     flex-direction: column;
     margin: 30px 0px;
@@ -11,13 +11,13 @@
     min-height: 140px;
 }
 
-.find-id-name-wrap, .find-id-email-wrap, .find-id-email-auth-wrap{
+.find-pwd-id-wrap, .find-pwd-email-wrap, .find-pwd-email-auth-wrap{
 	display: flex;
 	align-items: center;
 	gap: 10px;
 }
 
-.name-label, .email-label, .email-auth-label{
+.id-label, .email-label, .email-auth-label{
 	width: 80px;
 }
 
@@ -26,18 +26,18 @@
 	gap: 10px;
 }
 
-#memberName, #memberEmail, #emailAuthCode {
+#memberId, #memberEmail, #emailAuthCode {
 	padding: 5px;
 	box-sizing: border-box;
 }
 
-.find-id-button-wrap {
+.find-pwd-button-wrap {
 	display: flex;
 	justify-content: center;
 }
 
 
-.find-id-btn, .send-mail-btn, .mail-auth-btn {
+.find-pwd-btn, .send-mail-btn, .mail-auth-btn {
 	white-space: nowrap;
 	background: white;
 	border: 1px solid black;
@@ -48,7 +48,7 @@ button:hover{
 	cursor: pointer;
 }
 
-.find-id-text {
+.find-pwd-text {
 	color: #666;
 	font-size: 14px;
 }

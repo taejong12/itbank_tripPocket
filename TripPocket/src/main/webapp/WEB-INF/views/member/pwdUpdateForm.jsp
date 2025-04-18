@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <c:set var="contextPath" value="${pageContext.request.contextPath }" />
+<script src="${contextPath}/resources/js/common/back/formReset.js"></script>
 
 <h1>비밀번호 재설정</h1>
 <p>비밀번호를 변경해주세요.</p>

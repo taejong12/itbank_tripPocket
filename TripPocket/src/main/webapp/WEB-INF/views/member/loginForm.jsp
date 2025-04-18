@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <c:set var="contextPath" value="${pageContext.request.contextPath }" />
 <link rel="stylesheet" href="${contextPath}/resources/css/member/login.css">
+<script src="${contextPath}/resources/js/common/back/formReset.js"></script>
 
 <div class="container">
 	<form class="form" method="post" action="memberLoginCheck.do">
@@ -27,3 +28,7 @@
 		</div>
 	</form>
 </div>
+
+<script>
+	/* 아이디, 비밀번호 체크 확인하기 */
+</script>
