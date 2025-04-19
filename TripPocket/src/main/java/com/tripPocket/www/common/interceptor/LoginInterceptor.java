@@ -29,9 +29,13 @@ public class LoginInterceptor implements HandlerInterceptor {
         
         if (isLogin != null) {
 	        List<String> blockedUrls = Arrays.asList(
-        		"/member/loginForm.do", "/member/joinForm.do", "/member/join.do", 
-        		"/member/memberLoginCheck.do", "/member/findIdForm.do", 
-        		"/member/findIdList.do", "/member/findPwdForm.do"
+        		"/member/loginForm.do", 
+        		"/member/joinForm.do", 
+        		"/member/join.do", 
+        		"/member/memberLoginCheck.do", 
+        		"/member/findIdForm.do", 
+        		"/member/findIdList.do", 
+        		"/member/findPwdForm.do"
 	        );
 	        
 	        for (String url : blockedUrls) {
@@ -70,7 +74,9 @@ public class LoginInterceptor implements HandlerInterceptor {
 	        }
         	
         	List<String> blockedUrls = Arrays.asList(
-    			"/member/mypage.do", "/member/modMember.do", "/member/delMember.do"
+    			"/member/mypage.do", 
+    			"/member/modMember.do", 
+    			"/member/delMember.do"
         	);
         	
         	for (String url : blockedUrls) {
