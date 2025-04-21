@@ -6,6 +6,7 @@ import java.util.Map;
 import com.tripPocket.www.member.dto.MemberDTO;
 import com.tripPocket.www.tripPlan.dto.TripDayDTO;
 import com.tripPocket.www.tripPlan.dto.TripPlanDTO;
+import com.tripPocket.www.tripShare.dto.TripShareCommentDTO;
 import com.tripPocket.www.tripShare.dto.TripShareContentDTO;
 import com.tripPocket.www.tripShare.dto.TripShareDTO;
 
@@ -46,6 +47,14 @@ public interface TripShareService {
 	void insertShareLog(Long tripShareId, String memberId);
 
 	int getTripShareShareCount(Integer tripShareId);
+
+	void commentAdd(TripShareCommentDTO tripShareCommnetDTO);
+
+	List<TripShareCommentDTO> getCommentsByTripShareId(Integer integer);
+
+	void commentMod(TripShareCommentDTO tripShareCommnetDTO);
+
+	void commentDel(int commentId);
 
 	
 

@@ -25,6 +25,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.tripPocket.www.member.dto.MemberDTO;
 import com.tripPocket.www.tripPlan.dto.TripDayDTO;
 import com.tripPocket.www.tripPlan.dto.TripPlanDTO;
+import com.tripPocket.www.tripShare.dto.TripShareCommentDTO;
 import com.tripPocket.www.tripShare.dto.TripShareContentDTO;
 import com.tripPocket.www.tripShare.dto.TripShareDTO;
 import com.tripPocket.www.tripShare.dto.TripShareLogDTO;
@@ -121,7 +122,11 @@ public class TripShareController {
 		MemberDTO member = (MemberDTO) session.getAttribute("member"); // 로그인된 사용자 ID
 		TripShareDTO share = tripShareService.detailList(tripShareDTO);
 		 
-
+		
+		List<TripShareCommentDTO> commentList = tripShareService.getCommentsByTripShareId(tripShareDTO.getTripShareId());
+		
+		
+		
 	    // 중복 조회 방지
 	    boolean alreadyViewed = tripShareService.existsTripShareViewLog(tripShareDTO.getTripShareId(), member.getMemberId());
 	    if (!alreadyViewed) {
@@ -154,7 +159,7 @@ public class TripShareController {
 	    ModelAndView mav = new ModelAndView("tripShare/shareDetail");
 	    mav.addObject("share", share); // 전체 공유 정보 (제목, 작성자 등)
 	    mav.addObject("detailList", sortedList); // 정렬된 Day별 내용 리스트
-
+	    mav.addObject("commentList",commentList);
 	    return mav;
 	}
 	
@@ -234,7 +239,78 @@ public class TripShareController {
 		    redirectAttributes.addFlashAttribute("message", "후기 수정 완료");
 		    return "redirect:/share/myDetail.do?tripShareId=" + tripShareId;
 		}
-	}
+	 
+	 @RequestMapping(value = "/commentAdd", method = RequestMethod.POST)
+	 @ResponseBody
+	 public ResponseEntity<Map<String, Object>> commentAdd(
+	         @ModelAttribute TripShareCommentDTO tripShareCommnetDTO,
+	         HttpSession session) {
+
+	     Map<String, Object> response = new HashMap<>();
+	     MemberDTO member = (MemberDTO) session.getAttribute("member");
+	     tripShareCommnetDTO.setMemberId(member.getMemberId());
+	    
+
+	     try {
+	         tripShareService.commentAdd(tripShareCommnetDTO);
+	         List<TripShareCommentDTO> updatedComments = tripShareService.getCommentsByTripShareId(tripShareCommnetDTO.getTripShareId());
+	         response.put("status", "success");
+	         response.put("commentList", updatedComments);
+	     } catch (Exception e) {
+	         response.put("status", "error");
+	         response.put("message", e.getMessage());
+	     }
+
+	     return ResponseEntity.ok(response);
+	 }
+		
+	 @RequestMapping("commentMod")
+	 @ResponseBody
+	 public Map<String, Object> commentMod(@RequestParam("commentId") int commentId,
+	                                       @RequestParam("commentContent") String commentContent) {
+	     Map<String, Object> response = new HashMap<>();
+
+	     try {
+	         // DTO 생성 및 데이터 설정
+	         TripShareCommentDTO dto = new TripShareCommentDTO();
+	         dto.setCommentId((long) commentId);
+	         dto.setCommentContent(commentContent);
+
+	         // 서비스 호출
+	         tripShareService.commentMod(dto);
+
+	         // 응답 성공
+	         response.put("status", "success");
+	     } catch (Exception e) {
+	         response.put("status", "error");
+	         response.put("message", e.getMessage());
+	     }
+
+	     return response;
+	 }
+	 
+	 
+	 @RequestMapping("commentDel")
+	 @ResponseBody
+	 public Map<String, Object> deleteComment(@RequestParam("commentId") int commentId) {
+	     Map<String, Object> response = new HashMap<>();
+
+	     try {
+	         // 댓글 삭제 권한 확인 및 삭제 서비스 호출
+	        tripShareService.commentDel(commentId); // 삭제 로직 처리
+
+	        
+	             response.put("status", "success");
+	         
+	     } catch (Exception e) {
+	         response.put("status", "error");
+	         response.put("message", e.getMessage());
+	     }
+
+	     return response;
+	 }
+
+}
 
 	
 

@@ -11,6 +11,7 @@ import com.tripPocket.www.member.dto.MemberDTO;
 import com.tripPocket.www.tripPlan.dto.TripDayDTO;
 import com.tripPocket.www.tripPlan.dto.TripPlanDTO;
 import com.tripPocket.www.tripShare.dao.TripShareDAO;
+import com.tripPocket.www.tripShare.dto.TripShareCommentDTO;
 import com.tripPocket.www.tripShare.dto.TripShareContentDTO;
 import com.tripPocket.www.tripShare.dto.TripShareDTO;
 
@@ -174,6 +175,38 @@ public class TripShareServiceImpl implements TripShareService{
 	public int getTripShareShareCount(Integer tripShareId) {
 		// TODO Auto-generated method stub
 		return tripShareDAO.getTripShareShareCount(tripShareId);
+	}
+
+
+
+	@Override
+	public void commentAdd(TripShareCommentDTO tripShareCommnetDTO) {
+		tripShareDAO.commentAdd(tripShareCommnetDTO);
+		
+	}
+
+
+
+	@Override
+	public List<TripShareCommentDTO> getCommentsByTripShareId(Integer tripShareId) {
+		// TODO Auto-generated method stub
+		return tripShareDAO.getCommentsByTripShareId(tripShareId);
+	}
+
+
+
+	@Override
+	public void commentMod(TripShareCommentDTO tripShareCommnetDTO) {
+		tripShareDAO.commentMod(tripShareCommnetDTO);
+		
+	}
+
+
+
+	@Override
+	public void commentDel(int commentId) {
+	 	tripShareDAO.commentDel(commentId); 
+		
 	}
 
 
