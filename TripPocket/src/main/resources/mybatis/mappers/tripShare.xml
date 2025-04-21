@@ -155,6 +155,9 @@ JOIN
     trip_plan tp ON td.trip_plan_id = tp.trip_plan_id
 WHERE 
     td.trip_plan_id = #{tripPlanId}
+ORDER BY 
+    td.trip_day_id asc 
+
 	</select>
 
 	<insert id="insertTripShare" parameterType="tripShareDTO">
