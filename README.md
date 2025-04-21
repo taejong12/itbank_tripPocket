@@ -13,11 +13,15 @@
 ### 🔗 도메인 주소
 - [trippocket.duckdns.org](http://trippocket.duckdns.org)
 
+---
+
 ### 👨‍💻 프로젝트 팀원
 - 유태종
 - 김범룡
 - 최건
 - 이지현
+
+---
 
 ### 🎯 주제 선정
 **프로젝트명: Trip Pocket**
@@ -47,6 +51,8 @@
 - Oracle (ojdbc8)
 - MyBatis
 - Maven
+
+---
 
 ### ⚙ 개발 도구
 - STS3 (Spring Tool Suite 3)
