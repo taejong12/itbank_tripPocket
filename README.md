@@ -67,7 +67,8 @@
 ---
 
 ### 🗂 WBS (Work Breakdown Structure)
-![Trip Pocket 일정 차트](https://github.com/user-attachments/assets/a4c35c52-a3df-4dea-aaf1-85883b0f11c5)
+[🔗 WBS 스프레드시트 보기](https://docs.google.com/spreadsheets/d/e/2PACX-1vSGk6rWZbM7f4B8FllXBJr7r3vIunj4LSrDQ8NfP6oxkaVTLaUT_jiq3yyinkiYvw55qejFqRs8-3En/pubhtml?gid=1115838130&single=true)
+
 
 ---
 
@@ -77,7 +78,7 @@
 ---
 
 ### 🗃 DB 설계
-(ERD 이미지나 표 삽입 예정 - 필요 시 도와드릴게요!)
+[🔗 DB 스프레드시트 보기](https://docs.google.com/spreadsheets/d/e/2PACX-1vSGk6rWZbM7f4B8FllXBJr7r3vIunj4LSrDQ8NfP6oxkaVTLaUT_jiq3yyinkiYvw55qejFqRs8-3En/pubhtml?gid=1763198525&single=true)
 
 ---
 
