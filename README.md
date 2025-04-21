@@ -73,7 +73,7 @@
 ---
 
 ### 🧭 스토리보드
-<img src="https://your-image-host.com/TripPocket_스토리보드.png" width="600" alt="Trip Pocket 스토리보드"/>
+<img src="https://github.com/user-attachments/assets/85dee6ae-eab9-4a37-99a9-e15b7e25ce14" width="600" alt="Trip Pocket 스토리보드"/>
 
 ---
 
