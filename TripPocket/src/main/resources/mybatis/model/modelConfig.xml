@@ -15,5 +15,6 @@
 		<typeAlias type="com.tripPocket.www.tripShare.dto.TripShareDTO" alias="tripShareDTO"/>
 		<typeAlias type="com.tripPocket.www.tripShare.dto.TripShareContentDTO" alias="tripShareContentDTO"/>
 		<typeAlias type="com.tripPocket.www.tripShare.dto.TripShareLogDTO" alias="tripShareLogDTO"/>
+		<typeAlias type="com.tripPocket.www.tripShare.dto.TripShareCommentDTO" alias="tripShareCommentDTO"/>
 	</typeAliases>
 </configuration>

@@ -47,6 +47,14 @@
     	<result property="tripDayAddDate" column="TRIP_DAY_ADD_DATE"/>
     	<result property="tripDayModDate" column="TRIP_DAY_MOD_DATE"/>
 </resultMap>
+		<!-- 댓글 매핑 -->
+		<resultMap id="TripShareCommentResultMap" type="TripShareCommentDTO">
+		    <result property="tripShareId" column="trip_share_id"/>
+		    <result property="memberId" column="member_id"/>
+		    <result property="commentContent" column="comment_content"/>
+		    <result property="createdDate" column="created_at"/>
+		    <result property="updatedDate" column="updated_at"/>
+		</resultMap>
 
     <!-- TripShareDTO 매핑 -->
     <resultMap id="TripShareResultMap" type="com.tripPocket.www.tripShare.dto.TripShareDTO">
@@ -81,33 +89,59 @@
 	</select>
 	<!-- 공유순  -->
 	<select id="selectListOrderByShares" resultMap="TripShareResultMap">
-		     SELECT 
-		    ts.trip_share_id, 
-		    ts.member_id, 
-		    ts.trip_share_title, 
-		    COUNT(tsl.trip_share_id) AS share_count
-			FROM trip_share ts
-			LEFT JOIN trip_share_log tsl 
-		    ON ts.trip_share_id = tsl.trip_share_id 
-		    AND tsl.action_type = 'SHARE'
-			GROUP BY 
-		    ts.trip_share_id, 
-		    ts.member_id, 
-		    ts.trip_share_title
-			ORDER BY share_count DESC
+				     SELECT 
+		    ts.TRIP_SHARE_ID,
+		    ts.TRIP_SHARE_TITLE,
+		    ts.TRIP_SHARE_CONTENT,
+		    ts.TRIP_PLAN_ID,
+		    ts.TRIP_SHARE_ADD_DATE,
+		    ts.TRIP_SHARE_MOD_DATE,
+		    ts.MEMBER_ID,
+		    COUNT(tsl.TRIP_SHARE_ID) AS VIEW_COUNT
+		FROM 
+		    TRIP_SHARE ts
+		LEFT JOIN 
+		    TRIP_SHARE_LOG tsl 
+		    ON ts.TRIP_SHARE_ID = tsl.TRIP_SHARE_ID 
+		    AND tsl.ACTION_TYPE = 'VIEW'
+		GROUP BY 
+		    ts.TRIP_SHARE_ID,
+		    ts.TRIP_SHARE_TITLE,
+		    ts.TRIP_SHARE_CONTENT,
+		    ts.TRIP_PLAN_ID,
+		    ts.TRIP_SHARE_ADD_DATE,
+		    ts.TRIP_SHARE_MOD_DATE,
+		    ts.MEMBER_ID
+		ORDER BY 
+		    VIEW_COUNT DESC
     </select>
     <!-- 조회순 -->
     <select id="selectListOrderByViews" resultMap="TripShareResultMap">
-        SELECT ts.trip_share_id,
-       ts.member_id,
-       ts.trip_share_title,
-       COUNT(tsvl.trip_share_id) AS view_count
-	FROM trip_share ts
-	LEFT JOIN trip_share_log tsvl
-  	ON ts.trip_share_id = tsvl.trip_share_id
- 	AND tsvl.action_type = 'VIEW'
-	GROUP BY ts.trip_share_id, ts.member_id, ts.trip_share_title
-	ORDER BY view_count DESC
+       SELECT 
+    ts.TRIP_SHARE_ID,
+    ts.TRIP_SHARE_TITLE,
+    ts.TRIP_SHARE_CONTENT,
+    ts.TRIP_PLAN_ID,
+    ts.TRIP_SHARE_ADD_DATE,
+    ts.TRIP_SHARE_MOD_DATE,
+    ts.MEMBER_ID,
+    COUNT(tsl.TRIP_SHARE_ID) AS VIEW_COUNT
+FROM 
+    TRIP_SHARE ts
+LEFT JOIN 
+    TRIP_SHARE_LOG tsl 
+    ON ts.TRIP_SHARE_ID = tsl.TRIP_SHARE_ID 
+    AND tsl.ACTION_TYPE = 'VIEW'
+GROUP BY 
+    ts.TRIP_SHARE_ID,
+    ts.TRIP_SHARE_TITLE,
+    ts.TRIP_SHARE_CONTENT,
+    ts.TRIP_PLAN_ID,
+    ts.TRIP_SHARE_ADD_DATE,
+    ts.TRIP_SHARE_MOD_DATE,
+    ts.MEMBER_ID
+ORDER BY 
+    COUNT(tsl.TRIP_SHARE_ID) DESC
     </select>
 	
 	<select id="selectDayList" parameterType="tripDayDTO" resultType="tripDayDTO">
@@ -392,4 +426,40 @@ ORDER BY tsc.trip_share_day_day ASC
 	WHERE action_type = 'SHARE' 
   AND trip_share_id = #{trip_share_id}
 	</select>	
+	
+	<insert id="insertComment" parameterType="tripShareCommentDTO">
+		 INSERT INTO trip_share_comment (
+        trip_share_id,
+        member_id,
+       COMMENT_CONTENT,
+        created_at,
+        updated_at
+    ) VALUES (
+        #{tripShareId, jdbcType=INTEGER},
+        #{memberId, jdbcType=VARCHAR},
+        #{commentContent, jdbcType=VARCHAR},
+        SYSDATE,
+        SYSDATE
+    )
+	</insert>
+	
+	<select id="getCommentsByTripShareId" parameterType="Integer" resultMap="TripShareCommentResultMap">
+    	SELECT * 
+   	 	FROM trip_share_comment 
+   		 WHERE trip_share_id = #{tripShareId} 
+    	ORDER BY CREATED_AT ASC
+	</select>
+	
+	
+   <update id="commentMod" parameterType="TripShareCommentDTO">
+  UPDATE trip_share_comment
+  SET comment_content = #{commentContent, jdbcType=VARCHAR}
+  WHERE comment_id = #{commentId, jdbcType=INTEGER}
+</update>
+
+	
+	<update id="commentDel" parameterType="int">
+    	DELETE FROM TRIP_SHARE_COMMENT
+    	WHERE comment_id = #{commentId}
+</update>
 </mapper>

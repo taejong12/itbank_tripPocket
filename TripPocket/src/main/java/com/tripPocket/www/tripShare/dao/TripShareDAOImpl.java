@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.tripPocket.www.member.dto.MemberDTO;
 import com.tripPocket.www.tripPlan.dto.TripDayDTO;
 import com.tripPocket.www.tripPlan.dto.TripPlanDTO;
+import com.tripPocket.www.tripShare.dto.TripShareCommentDTO;
 import com.tripPocket.www.tripShare.dto.TripShareContentDTO;
 import com.tripPocket.www.tripShare.dto.TripShareDTO;
 
@@ -161,6 +162,30 @@ public class TripShareDAOImpl implements TripShareDAO{
 	public int getTripShareShareCount(Integer tripShareId) {
 	
 		return session.selectOne("mapper.trip.share.getTripShareShareCount",tripShareId);
+	}
+
+	@Override
+	public void commentAdd(TripShareCommentDTO tripShareCommnetDTO) {
+		session.insert("mapper.trip.share.insertComment",tripShareCommnetDTO);
+		
+	}
+
+	@Override
+	public List<TripShareCommentDTO> getCommentsByTripShareId(Integer tripShareId) {
+		// TODO Auto-generated method stub
+		return session.selectList("mapper.trip.share.getCommentsByTripShareId",tripShareId);
+	}
+
+	@Override
+	public void commentMod(TripShareCommentDTO tripShareCommnetDTO) {
+		session.update("mapper.trip.share.commentMod",tripShareCommnetDTO);
+		
+	}
+
+	@Override
+	public void commentDel(int commentId) {
+		session.delete("mapper.trip.share.commentDel",commentId);
+		
 	}
 
 	
