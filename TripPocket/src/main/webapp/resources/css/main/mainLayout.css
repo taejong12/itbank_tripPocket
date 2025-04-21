@@ -22,19 +22,13 @@ body::before {
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background-image: url('../../img/back/back_sky.png');
+	background-image: url('../../img/back/back.png');
 	background-size: cover;
-	background-position: center;
 	background-repeat: no-repeat;
-	background-attachment: fixed;
+	background-position: center;
+	background-attachment: scroll;
 	opacity: 1;
 	z-index: -1;
-}
-
-.background-overlay {
-	position: relative;
-	z-index: 1;
-	background-color: rgba(255, 255, 255, 0.3);
 }
 
 /* ===== 헤더 스타일 ===== */
@@ -173,7 +167,7 @@ header .burger span {
     display: block;            
     margin-left: auto;         
     margin-right: auto;
-    max-width: 400px;
+    max-height: 540px;
     width: 100%;
     height: auto;
     border-radius: 20px;
@@ -181,6 +175,12 @@ header .burger span {
     margin-top: 30px;
     margin-bottom: 30px;
     animation: zoomIn 1s ease-in;
+    overflow: hidden;
+    
+     /* 이미지 렌더링 향상 */
+    image-rendering: -webkit-optimize-contrast; /* Webkit/Chrome 브라우저용 */
+    image-rendering: crisp-edges; /* 다른 브라우저용 */
+    -ms-interpolation-mode: nearest-neighbor; /* IE용 */
 }
  
 .section p {
@@ -197,7 +197,6 @@ header .burger span {
 .section a {
 	color: white;
 	text-decoration: none;
-	padding: 10px 20px;
 	border-radius: 5px;
 	transition: transform 0.3s ease, font-size 0.3s ease;
 	font-size: 28px;
@@ -217,19 +216,20 @@ header .burger span {
 	text-decoration: none;
 	color: #00c4c4;
 	white-space: nowrap;
-	padding-left: 30px;
 	overflow: hidden;
-	width: max-content;
+	padding-left: 135px;
+	padding-right: 135px;
+	width: auto;
 	transition: transform 0.3s ease;
 }
 
 .start-button:hover {
-    transform: scale(1.1);
+    transform: scale(2.0);
 }
 
 /* ===== 메인 컨텐츠 스타일 ===== */
 .main {
-	padding: 20px;
+	padding: 100px;
 	box-sizing: border-box;
 }
 
@@ -243,6 +243,7 @@ header .burger span {
 
 /* ===== 사이드 메뉴 스타일 ===== */
 .side-menu {
+	position: absolute;
 	width: 300px;
 	height: 100%;
 	background-color: #f8f9fa;
@@ -329,19 +330,6 @@ header .burger span {
     display: block;
 }
 
-/* ===== 푸터 스타일 ===== */
-footer {
-	width: 100%;
-	background-color: rgba(255, 255, 255, 0.3);
-	color: black;
-	text-align: center;
-	padding: 20px;
-	position: relative;
-	bottom: 0;
-	left: 0;
-	animation: slideUp 1s ease-out;
-}
-
 /* ===== 기타 스타일 ===== */
 .gray-gap {
     height: 10px;
@@ -349,9 +337,9 @@ footer {
 }
 
 /* ===== 라이선스 지우기 ===== */
-/* .fp-watermark {
+.fp-watermark {
 	display: none !important;	
-} */
+}
 
 /* ===== 애니메이션 ===== */
 @keyframes slideDown {
