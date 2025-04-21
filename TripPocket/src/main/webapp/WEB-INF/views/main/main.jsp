@@ -13,7 +13,6 @@
 </head>
 <body>
 <div id="fullpage">
-
 	<div class="section first-section">
 		<div class="content">
 			<p>여행의 모든 순간을 간편하게</p>
@@ -24,7 +23,7 @@
 	<div class="section">
 		<div class="content">
 			<h1>내 마음대로, 나만의 특별한 여행</h1>
-			<img src="${contextPath}/resources/img/cherryflower.png" alt="여행 일정">
+			<img src="${contextPath}/resources/img/content/plan.png" alt="여행 일정">
 			<h1>맞춤형 일정으로 완성하는 나만의 루트</h1>
 			<p>
 				여행 준비, 어렵게 느껴지시나요? 🗺️<br>
@@ -37,7 +36,7 @@
 	<div class="section">
 		<div class="content">
 			<h1>가고 싶은 그곳, 여행지로 어때요?</h1>
-			<img src="${contextPath}/resources/img/cherryflower.png" alt="여행지 보드 이미지">
+			<img src="${contextPath}/resources/img/content/.png" alt="여행지 보드 이미지">
 			<h1>여행지 정보, 한눈에 확인해 보세요</h1>
 			<p>
 				궁금한 여행지, 다른 사람들과 함께 확인해보세요 ✨<br>
@@ -50,7 +49,7 @@
 	<div class="section">
 		<div class="content">
 			<h1>나의 여행, 어디부터 시작할까요?</h1>
-			<img src="${contextPath}/resources/img/cherryflower.png" alt="관광지 이미지">
+			<img src="${contextPath}/resources/img/content/destination.png" alt="관광지 이미지">
 			<h1>일정에 맞는 관광지를 한눈에 찾아보세요</h1>
 			<p>
 				설레는 여행의 시작, 바로 관광지 찾기!<br>
@@ -63,7 +62,7 @@
 	<div class="section">
 		<div class="content">
 			<h1>어디로 갈지 망설여진다면?</h1>
-			<img src="${contextPath}/resources/img/cherryflower.png" alt="랜덤 여행지 이미지">
+			<img src="${contextPath}/resources/img/content/random.png" alt="랜덤 여행지 이미지">
 			<h1>가볍게 하나 뽑아볼까요?</h1>
 			<p>
 				"이번엔 어디로 떠나볼까?"<br>
@@ -85,13 +84,12 @@
 		</div>
 	</div>
 	</c:if>
-
 </div>
-
 <script>
     new fullpage('#fullpage', {
         autoScrolling: true,
         navigation: true,
+        navigationPosition: 'left',
         scrollingSpeed: 1000,
         navigationTooltips: ['', '', '', '', '', ''],
         showActiveTooltip: true,
@@ -108,6 +106,5 @@
         }
     });
 </script>
-
 </body>
 </html>
