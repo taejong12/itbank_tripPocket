@@ -29,17 +29,17 @@ public class LoginInterceptor implements HandlerInterceptor {
         
         if (isLogin != null) {
 	        List<String> blockedUrls = Arrays.asList(
-        		"/member/loginForm.do", 
-        		"/member/joinForm.do", 
-        		"/member/join.do", 
-        		"/member/memberLoginCheck.do", 
-        		"/member/findIdForm.do", 
-        		"/member/findIdList.do", 
+        		"/member/loginForm.do",
+        		"/member/joinForm.do",
+        		"/member/join.do",
+        		"/member/memberLoginCheck.do",
+        		"/member/findIdForm.do",
+        		"/member/findIdList.do",
         		"/member/findPwdForm.do"
 	        );
 	        
 	        for (String url : blockedUrls) {
-	            if (uri.contains(contextPath+url)) {
+	            if (uri.equals(contextPath+url)) {
 	                response.sendRedirect(contextPath + "/");
 	                return false;
 	            }
@@ -80,7 +80,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         	);
         	
         	for (String url : blockedUrls) {
-	            if (uri.contains(contextPath+url)) {
+	            if (uri.equals(contextPath+url)) {
 	                response.sendRedirect(contextPath + "/member/loginForm.do");
 	                return false;
 	            }
