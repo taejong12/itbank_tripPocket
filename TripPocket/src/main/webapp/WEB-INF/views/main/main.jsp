@@ -36,11 +36,11 @@
 	<div class="section">
 		<div class="content">
 			<h1>가고 싶은 그곳, 여행지로 어때요?</h1>
-			<img src="${contextPath}/resources/img/content/.png" alt="여행지 보드 이미지">
+			<img src="${contextPath}/resources/img/content/blog.png" alt="여행지 보드 이미지">
 			<h1>여행지 정보, 한눈에 확인해 보세요</h1>
 			<p>
 				궁금한 여행지, 다른 사람들과 함께 확인해보세요 ✨<br>
-				Trip Pocket에서는 인기 여행지 정보부터 후기가 담긴 공유까지 한 번에 볼 수 있어요.<br>
+				Trip Pocket에서는 인기 여행지 정보부터 후기까지 한 번에 볼 수 있어요.<br>
 				여행 준비, 더 쉽고 즐겁게 만들어드릴게요.
 			</p>
 		</div>

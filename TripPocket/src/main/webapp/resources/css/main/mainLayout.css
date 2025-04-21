@@ -144,7 +144,11 @@ header .burger span {
 }
 
 .first-section .content p {
-    font-size: 1.5rem;
+    font-size: 38px;
+}
+
+.first-section .content h1 {
+    font-size: 58px;
 }
 
 /* 마지막 섹션 특별 스타일 */
@@ -176,15 +180,20 @@ header .burger span {
     margin-bottom: 30px;
     animation: zoomIn 1s ease-in;
     overflow: hidden;
+    transition: transform 0.2s ease;
     
      /* 이미지 렌더링 향상 */
     image-rendering: -webkit-optimize-contrast; /* Webkit/Chrome 브라우저용 */
     image-rendering: crisp-edges; /* 다른 브라우저용 */
     -ms-interpolation-mode: nearest-neighbor; /* IE용 */
 }
+
+.section img:hover {
+	transform: translateY(-15px);
+}
  
 .section p {
-	font-size: 1.2rem;
+	font-size: 24px;
 	line-height: 1.8;
     color: white;
 	max-width: 800px;
@@ -211,7 +220,7 @@ header .burger span {
 .start-button {
 	position: relative;
 	display: inline-block;
-	font-size: 24px;
+	font-size: 30px;
 	font-weight: bold;
 	text-decoration: none;
 	color: #00c4c4;
