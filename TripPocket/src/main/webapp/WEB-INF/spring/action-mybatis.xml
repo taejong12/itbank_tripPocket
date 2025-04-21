@@ -5,20 +5,6 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
 	
-	<!-- Spring과 MyBatis를 활용하여 데이터베이스 연동을 구성하는 설정 -->
-	
-	<!-- 
-		propertyConfigurer (속성 파일 설정) 
-		데이터베이스 접속 정보를 별도의 프로퍼티 파일 (jdbc.properties)에서 불러오는 역할
-	-->
-	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="locations">
-			<list>
-				<value>/WEB-INF/config/jdbc/jdbc.properties</value>
-			</list>
-		</property>
-	</bean>
-	
 	<!-- 
 		dataSource (데이터베이스 연결)
 		SimpleDriverDataSource는 간단한 데이터베이스 연결을 위한 DataSource 구현체

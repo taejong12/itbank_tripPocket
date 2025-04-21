@@ -1,5 +1,7 @@
 package com.tripPocket.www.member.service;
 
+import java.util.List;
+
 import com.tripPocket.www.member.dto.MemberDTO;
 
 public interface MemberService {
@@ -8,17 +10,25 @@ public interface MemberService {
 
 	boolean isMemberIdDuplicated(String memberId);
 	
-	MemberDTO login(MemberDTO memberDTO);
+	MemberDTO memberLoginCheck(MemberDTO memberDTO);
 
 	void modMember(MemberDTO memberDTO);
 
 	MemberDTO update(MemberDTO memberDTO);
 
-	boolean isMemberEmailDuplicated(String memberEmail);
-
 	void delMemberWithDependencies(String memberId);
 
+	int findMemberNameAndEmail(MemberDTO memberDTO);
+	
 	void updateProfileImage(String memberId, String memberProfileImage);
 
+	List<MemberDTO> selectIdListByEmailAndName(MemberDTO memberDTO);
 
+	int findMemberIdAndEmail(MemberDTO memberDTO);
+
+	String selectMemberId(MemberDTO memberDTO);
+
+	int updateMemberPwd(MemberDTO memberDTO);
+
+	MemberDTO selectMember(String memberId);
 }

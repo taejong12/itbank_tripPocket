@@ -20,8 +20,9 @@ public class MainController {
 		HttpSession session = request.getSession();
 		Boolean isLogin = (Boolean) session.getAttribute("isLogin"); // 세션에서 값 가져오기
 	    MemberDTO member = (MemberDTO) session.getAttribute("member"); // 세션에서 값 가져오기
-	    mav.addObject("isLogin",isLogin);
-	    mav.addObject("member",member);
+	    
+	    mav.addObject("isLogin", isLogin);
+	    mav.addObject("member", member);
 		return mav;
 	}
 }

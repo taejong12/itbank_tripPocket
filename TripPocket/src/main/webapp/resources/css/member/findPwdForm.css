@@ -1,0 +1,54 @@
+@charset "UTF-8";
+
+.find-pwd-form-div{
+    display: flex;
+    flex-direction: column;
+    margin: 30px 0px;
+    padding: 20px;
+    border: 1px solid black;
+    gap: 20px;
+    justify-content:center;
+    min-height: 140px;
+}
+
+.find-pwd-id-wrap, .find-pwd-email-wrap, .find-pwd-email-auth-wrap{
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.id-label, .email-label, .email-auth-label{
+	width: 80px;
+}
+
+.send-mail-wrap, .mail-auth-wrap {
+	display: flex;
+	gap: 10px;
+}
+
+#memberId, #memberEmail, #emailAuthCode {
+	padding: 5px;
+	box-sizing: border-box;
+}
+
+.find-pwd-button-wrap {
+	display: flex;
+	justify-content: center;
+}
+
+
+.find-pwd-btn, .send-mail-btn, .mail-auth-btn {
+	white-space: nowrap;
+	background: white;
+	border: 1px solid black;
+	padding: 7px 15px;
+}
+
+button:hover{
+	cursor: pointer;
+}
+
+.find-pwd-text {
+	color: #666;
+	font-size: 14px;
+}

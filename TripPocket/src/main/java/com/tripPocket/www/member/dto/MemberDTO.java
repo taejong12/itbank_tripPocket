@@ -11,10 +11,12 @@ public class MemberDTO {
     private String memberNickname;
     private String memberTel;
     private String memberGender;
-    private Date memberAddAate;
+    private Date memberAddDate;
     private Date memberModDate;
-    private String memberIdOrEmail;
     private String memberProfileImage;
+    
+    // 쿠키용
+    private String loginKeep;
     
 	public String getMemberId() {
 		return memberId;
@@ -64,23 +66,23 @@ public class MemberDTO {
 	public void setMemberGender(String memberGender) {
 		this.memberGender = memberGender;
 	}
-	public Date getMemberAddAate() {
-		return memberAddAate;
-	}
-	public void setMemberAddAate(Date memberAddAate) {
-		this.memberAddAate = memberAddAate;
-	}
 	public Date getMemberModDate() {
 		return memberModDate;
 	}
 	public void setMemberModDate(Date memberModDate) {
 		this.memberModDate = memberModDate;
 	}
-	public String getMemberIdOrEmail() {
-		return memberIdOrEmail;
+	public Date getMemberAddDate() {
+		return memberAddDate;
 	}
-	public void setMemberIdOrEmail(String memberIdOrEmail) {
-		this.memberIdOrEmail = memberIdOrEmail;
+	public void setMemberAddDate(Date memberAddDate) {
+		this.memberAddDate = memberAddDate;
+	}
+	public String getLoginKeep() {
+		return loginKeep;
+	}
+	public void setLoginKeep(String loginKeep) {
+		this.loginKeep = loginKeep;
 	}
 	public String getMemberProfileImage() {
 	    return memberProfileImage;

@@ -177,7 +177,7 @@ public class TripShareController {
 	    	tripShareService.insertShareLog(tripShareId,member.getMemberId());
 	    }
 
-	    return "redirect:/trip/planList.do";
+	    return "redirect:/plan/planList.do";
 	}
 	
 	@RequestMapping("/shareDelete.do")

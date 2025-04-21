@@ -1,5 +1,7 @@
 package com.tripPocket.www.member.dao;
 
+import java.util.List;
+
 import com.tripPocket.www.member.dto.MemberDTO;
 
 public interface MemberDAO {
@@ -8,13 +10,11 @@ public interface MemberDAO {
 
 	boolean isMemberIdDuplicated(String memberId);
 	
-	 MemberDTO login(MemberDTO memberDTO);
+	MemberDTO memberLoginCheck(MemberDTO memberDTO);
 
 	void modMember(MemberDTO memberDTO);
 
 	MemberDTO update(MemberDTO memberDTO);
-
-	boolean isMemberEmailDuplicated(String memberEmail);
 
 	void deleteTripShareContentByMemberId(String memberId);
 
@@ -26,7 +26,18 @@ public interface MemberDAO {
 
 	void delMemberById(String memberId);
 
-	void updateProfileImage(String memberId, String memberProfileImage);
+	int findMemberNameAndEmail(MemberDTO memberDTO);
 
+	List<MemberDTO> selectIdListByEmailAndName(MemberDTO memberDTO);
+
+	int findMemberIdAndEmail(MemberDTO memberDTO);
+
+	String selectMemberId(MemberDTO memberDTO);
+
+	int updateMemberPwd(MemberDTO memberDTO);
+
+	MemberDTO selectMember(String memberId);
+	
+	void updateProfileImage(String memberId, String memberProfileImage);
 
 }

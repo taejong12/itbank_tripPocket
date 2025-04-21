@@ -29,30 +29,6 @@ function fn_memberIdCheck() {
     }
 }
 
-// 이메일 중복 체크
-function fn_emailCheck() {
-    var memberEmail = document.joinForm.memberEmail.value.trim();
-    if (memberEmail === "") {
-        alert("이메일을 입력해 주세요.");
-        return false;
-    }
-
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", contextPath + "/member/memberEmailCheck.do?memberEmail=" + encodeURIComponent(memberEmail), false); // 동기 처리
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
-    xhr.send();
-    var responseText = xhr.responseText.trim();
-    if (responseText === "OK") {
-        isEmailValid = true;
-        return true;
-    } else {
-        alert("중복된 이메일입니다. 다른 이메일을 입력해 주세요.");
-        isEmailValid = false;
-        return false;
-    }
-}
-
 // 입력값 변경 시 유효성 초기화
 document.addEventListener("DOMContentLoaded", function () {
     document.joinForm.memberId.addEventListener("input", function () {
@@ -110,13 +86,21 @@ function fn_joinForm(event) {
         form.memberEmail.focus();
         return false;
     }
+    
     var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    
     if (!emailPattern.test(form.memberEmail.value)) {
         alert("정확한 이메일을 입력해 주세요.");
         form.memberEmail.focus();
         return false;
     }
-    if (!isEmailValid && !fn_emailCheck()) return false;
+    
+	// 이메일 인증
+	if (!form.mailAuthSuccess || form.mailAuthSuccess.value !== "true") {
+		alert("이메일 인증해주세요.");
+	    form.memberEmail.focus();
+	    return false;
+	}
 
     // 나이
     var age = parseInt(form.memberAge.value.trim(), 10);
@@ -159,7 +143,7 @@ function fn_joinForm(event) {
 
     // 전화번호
     var tel = form.memberTel.value.trim();
-	var telPattern = /^010\d{8}$/;
+	const telPattern = /^010\d{8}$/;
 	
 	if (!telPattern.test(tel)) {
 	    alert("전화번호 형식을 확인해 주세요.\n(예: 01012345678)");

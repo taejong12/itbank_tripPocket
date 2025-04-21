@@ -18,11 +18,36 @@
 		<put-attribute name="title" value="회원정보" />
 		<put-attribute name="body" value="/WEB-INF/views/member/memberDetail.jsp" />
 	</definition>
+	
 	<definition name="/member/mypage" extends="common">
 		<put-attribute name="title" value="회원정보" />
 		<put-attribute name="body" value="/WEB-INF/views/member/mypage.jsp" />
 	</definition>
 	
+	<definition name="member/findIdForm" extends="common">
+		<put-attribute name="title" value="아이디찾기" />
+		<put-attribute name="body" value="/WEB-INF/views/member/findIdForm.jsp" />
+	</definition>
+	
+	<definition name="member/memberIdList" extends="common">
+		<put-attribute name="title" value="아이디 목록" />
+		<put-attribute name="body" value="/WEB-INF/views/member/memberIdList.jsp" />
+	</definition>
+	
+	<definition name="member/findPwdForm" extends="common">
+		<put-attribute name="title" value="비밀번호 찾기" />
+		<put-attribute name="body" value="/WEB-INF/views/member/findPwdForm.jsp" />
+	</definition>
+	
+	<definition name="member/pwdUpdateForm" extends="common">
+		<put-attribute name="title" value="비밀번호 재설정" />
+		<put-attribute name="body" value="/WEB-INF/views/member/pwdUpdateForm.jsp" />
+	</definition>
+	
+	<definition name="member/pwdUpdateComplete" extends="common">
+		<put-attribute name="title" value="비밀번호 변경완료" />
+		<put-attribute name="body" value="/WEB-INF/views/member/pwdUpdateComplete.jsp" />
+	</definition>
 	
 </tiles-definitions>
 

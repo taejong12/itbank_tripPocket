@@ -12,7 +12,7 @@
 	<div id="kakao_map"></div>
 	<div id="trip-day-list"></div>
 	<div class="plan-list-btn-wrapper">
-		<a class="plan-list-btn" href="${contextPath}/trip/planList.do">목록</a>
+		<a class="plan-list-btn" href="${contextPath}/plan/planList.do">목록</a>
 	</div>
 </div>
 
@@ -64,7 +64,7 @@
     	
         let tripDayDate = year + "-" + month + "-" + day;
         
-    	let selectUrl = contextPath+"/trip/selectTripDay.do"
+    	let selectUrl = contextPath+"/plan/selectTripDay.do"
     	
    		let selectData = {
    	    	tripDayDay: tripDayDay,
@@ -240,7 +240,7 @@
             tripDayMapy: keyword.mapy
         };
      	
-        fetch(contextPath+"/trip/insertTripDay.do", {
+        fetch(contextPath+"/plan/insertTripDay.do", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -468,7 +468,7 @@
     	    }
      	}
      	
-        fetch(contextPath+"/trip/deleteTripDay.do", {
+        fetch(contextPath+"/plan/deleteTripDay.do", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

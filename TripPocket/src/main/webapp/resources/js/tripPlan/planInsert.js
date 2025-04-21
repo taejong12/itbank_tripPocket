@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		} else {
 			alert("여행 계획 등록 완료");
 			form.method="post";
-			form.action= contextPath+"/trip/insertPlan.do";
+			form.action= contextPath+"/plan/insertPlan.do";
 			form.submit();
 		}
 	}
