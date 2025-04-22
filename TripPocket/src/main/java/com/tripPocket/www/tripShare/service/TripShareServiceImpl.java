@@ -33,7 +33,7 @@ public class TripShareServiceImpl implements TripShareService{
 	}
 
 	
-
+ 
 		@Override
 		@Transactional
 		public void write(TripShareDTO tripShareDTO) {

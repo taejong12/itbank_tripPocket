@@ -175,11 +175,14 @@ public class TripShareController {
 	    // ✅ tripPlanId도 서비스에 같이 넘김
 	    tripShareService.importToMyPlan(tripShareId, member.getMemberId());
 	    
-	    boolean alreadyShared = tripShareService.existsShareLog(tripShareId, member.getMemberId()); 
 	    
-	    if (!alreadyShared) {
-	    	//로그추가
-	    	tripShareService.insertShareLog(tripShareId,member.getMemberId());
+	    
+	    try {
+	        if (!tripShareService.existsShareLog(tripShareId, member.getMemberId())) {
+	            tripShareService.insertShareLog(tripShareId, member.getMemberId());
+	        }
+	    } catch (Exception e) {
+	        // 중복 공유 로그 → 무시 또는 로그 출력만
 	    }
 
 	    return "redirect:/plan/planList.do";
