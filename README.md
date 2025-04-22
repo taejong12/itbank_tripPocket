@@ -1,4 +1,4 @@
-<h1 align="center">🌍 Trip Pocket</h1>
+<h1 align="center">Trip Pocket</h1>
 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/ea5685c9-3eee-4f53-8e66-effb38b4fa0b" width="300"/>
