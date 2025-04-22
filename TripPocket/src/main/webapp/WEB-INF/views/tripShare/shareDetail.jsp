@@ -70,20 +70,30 @@
 
     <!-- 버튼 -->
     <div class="button-container">
+    	<c:if test="${memberId != 'guest' }">
         <a class="back-link" href="${contextPath}/share/myShare.do">← 나의 여행 글쓰기로</a>
-        <c:if test="${share.memberId ne member.memberId}">
+        </c:if>
+        <c:choose>
+            <c:when test="${memberId eq 'guest' }">
+            	<a class="fetch-button" href="${contextPath}/member/loginForm.do">
+                <span class="plus-button">+</span> 로그인하고 여행 계획에 추가하기
+            </a>
+            </c:when>
+        	<c:when test="${share.memberId ne member.memberId}">
             <a class="fetch-button" href="${contextPath}/share/shareImport.do?tripShareId=${share.tripShareId}&tripPlanId=${share.tripPlanId}">
                 <span class="plus-button">+</span> 내 여행 계획에 추가하기
             </a>
-        </c:if>
+            </c:when>
+        </c:choose>
     </div>
 
     <!-- 댓글 -->
     <div class="comment-section">
+    	<c:if test="${memberId != 'guest' }">
         <h2>댓글을 남겨주세요</h2>
         <textarea id="commentContent" placeholder="당신의 여행 경험을 공유해주세요..." required></textarea>
         <button type="button" onclick="submitComment()">댓글 작성</button>
-
+		</c:if>
         <div class="comment-list" id="commentList">
             <c:forEach var="comment" items="${commentList}">
                 <div class="comment-item" data-id="${comment.commentId}">
