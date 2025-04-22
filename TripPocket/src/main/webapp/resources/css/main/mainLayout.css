@@ -1,6 +1,6 @@
+/* ===== 기본 레이아웃 설정 ===== */
 html {
 	height: 100%;
-	overflow-y: auto;
 	overflow: hidden;
 	margin: 0;
     padding: 0;
@@ -10,11 +10,29 @@ body {
 	height: 100%;
 	margin: 0;
 	padding: 0;
-	overflow-x: hidden;
+	overflow: hidden;
 	font-family: 'Noto Sans', sans-serif;
 }
 
- header {
+/* 배경 이미지 설정 */
+body::before {
+	content: "";
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-image: url('../../img/back/back.png');
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-attachment: scroll;
+	opacity: 1;
+	z-index: -1;
+}
+
+/* ===== 헤더 스타일 ===== */
+header {
 	width: 99.2%;
 	height: 80px;
 	color: white;
@@ -28,31 +46,32 @@ body {
 	padding: 0 20px;
 	box-sizing: border-box;
 	animation: slideDown 1.5s ease-out;
- }
+}
 
- header .logo {
+header .logo {
 	font-size: 24px;
 	font-weight: bold;
 	cursor: pointer;
 	color: white;
 	text-decoration: none;
- }
+}
 
- header .burger {
+header .burger {
 	display: inline-block;
 	cursor: pointer;
- }
+}
 
- header .burger span {
+header .burger span {
 	display: block;
 	width: 25px;
 	height: 3px;
 	margin: 5px;
 	background: white;
 	transition: all 0.3s ease;
- }
+}
 
- .profile-container {
+/* ===== 프로필 관련 스타일 ===== */
+.profile-container {
 	display: flex;
 	gap: 10px;
 	padding: 15px;
@@ -69,110 +88,171 @@ body {
 	margin-left: auto;
 }
 
- body::before {
-	content: "";
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background-image: url('../../img/back/back_sky.png');
-	background-size: cover;
-	background-position: center;
-	background-repeat: no-repeat;
-	background-attachment: fixed;
-	opacity: 1;
-	z-index: -1;
- }
-
- .background-overlay {
-	position: relative;
-	z-index: 1;
-	background-color: rgba(255, 255, 255, 0.3);
- }
-
- .content {
+.profile-submenu {
 	display: flex;
-	flex-direction: column;
-	align-items: center;
 	justify-content: center;
-	min-height: 100vh;
 	text-align: center;
-	padding-bottom: 100px;
-	padding-top: 80px;
-	animation: fadeIn 2s ease-in;
- }
+}
 
- .main {
-	padding: 20px;
-	box-sizing: border-box;
+.profile-submenu a {
+	padding: 10px;
+}
+
+.profile-submenu img {
+	width: 50px;
+}
+
+.profile-container a {
+	color: gray; 
+	font-size: small; 
+	padding: 0px;
+}
+
+.profile-nickname {
+	width: 150px; 
+	display: flex; 
+	height: 45px; 
+	align-items: center; 
+	font-size: larger; 
+	margin-bottom: 5px;
+}
+
+/* ===== 섹션 기본 스타일 ===== */
+.section {
+	overflow: hidden;
 	color: white;
- }
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.3);
+}
 
- .main p {
-	font-size: 28px;
- }
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
 
- .main h1 {
-	font-size: 48px;
- }
-
- .section {
-	padding: 80px;
-	box-sizing: border-box;
+/* 첫 번째 섹션 특별 스타일 */
+.first-section .content {
 	color: white;
-	display: flex;
-	flex-direction: column;
 	align-items: center;
-	justify-content: center;
-	min-height: 100vh;
-	animation: fadeInUp 1s ease-out;
- }
+	text-align: center;
+	overflow: hidden;
+}
 
- .section h1 {
-	font-size: 28px;
+.first-section .content p {
+    font-size: 38px;
+}
+
+.first-section .content h1 {
+    font-size: 58px;
+}
+
+/* 마지막 섹션 특별 스타일 */
+.section:last-child .content {
+    overflow: hidden;
+}
+
+/* ===== 섹션 내부 요소 스타일 ===== */
+.section h1 {
+	font-size: 2.5rem;
+	font-weight: 700;
+	color: white;
+	margin: 20px 0 10px;
+	line-height: 1.4;
 	animation: fadeInUp 1.5s ease-out;
- }
+	text-align: center;
+}
 
- .section img {
-	max-width: 100%;
-	height: auto;
-	border-radius: 10px;
-	animation: zoomIn 1s ease-in;
- }
+.section img {
+    display: block;            
+    margin-left: auto;         
+    margin-right: auto;
+    max-height: 540px;
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    margin-top: 30px;
+    margin-bottom: 30px;
+    animation: zoomIn 1s ease-in;
+    overflow: hidden;
+    transition: transform 0.2s ease;
+    
+     /* 이미지 렌더링 향상 */
+    image-rendering: -webkit-optimize-contrast; /* Webkit/Chrome 브라우저용 */
+    image-rendering: crisp-edges; /* 다른 브라우저용 */
+    -ms-interpolation-mode: nearest-neighbor; /* IE용 */
+}
+
+.section img:hover {
+	transform: translateY(-15px);
+}
  
- .section p {
-	font-size: 18px;
+.section p {
+	font-size: 24px;
+	line-height: 1.8;
+    color: white;
+	max-width: 800px;
+	margin-top: 20px;
 	animation: fadeInUp 2s ease-out;
- }
+	text-align: center;
+}
 
- .section a {
+/* 섹션 내 링크 스타일 */
+.section a {
 	color: white;
 	text-decoration: none;
-	padding: 10px 20px;
 	border-radius: 5px;
 	transition: transform 0.3s ease, font-size 0.3s ease;
 	font-size: 28px;
- }
+}
 
- .section a:hover {
-	transform: scale(1.1);
-	font-size: 48px;
- }
+.section a:not(.start-button):hover {
+    transform: scale(1.1);
+    font-size: 48px;
+}
 
- footer {
-	width: 100%;
-	background-color: rgba(255, 255, 255, 0.3);
-	color: black;
-	text-align: center;
-	padding: 20px;
+/* ===== 시작 버튼 스타일 ===== */
+.start-button {
 	position: relative;
-	bottom: 0;
-	left: 0;
-	animation: slideUp 1s ease-out;
- }
+	display: inline-block;
+	font-size: 30px;
+	font-weight: bold;
+	text-decoration: none;
+	color: #00c4c4;
+	white-space: nowrap;
+	overflow: hidden;
+	padding-left: 135px;
+	padding-right: 135px;
+	width: auto;
+	transition: transform 0.3s ease;
+}
 
- .side-menu {
+.start-button:hover {
+    transform: scale(2.0);
+}
+
+/* ===== 메인 컨텐츠 스타일 ===== */
+.main {
+	padding: 100px;
+	box-sizing: border-box;
+}
+
+.main p {
+	font-size: 28px;
+}
+
+.main h1 {
+	font-size: 48px;
+}
+
+/* ===== 사이드 메뉴 스타일 ===== */
+.side-menu {
+	position: absolute;
 	width: 300px;
 	height: 100%;
 	background-color: #f8f9fa;
@@ -186,7 +266,7 @@ body {
 	flex-direction: column;
 	box-sizing: border-box;
 	box-shadow: -5px 0 5px -5px #333;
-	overflow-y: auto;
+	overflow: hidden;
 }
 
 .side-menu.show {
@@ -243,6 +323,7 @@ body {
     color: #343a40;
 }
 
+/* ===== 오버레이 스타일 ===== */
 .dark-overlay {
     position: fixed;
     top: 0;
@@ -258,29 +339,18 @@ body {
     display: block;
 }
 
-.start-button {
-	position: relative;
-	display: inline-block;
-	font-size: 24px;
-	font-weight: bold;
-	text-decoration: none;
-	color: #00c4c4;
-	white-space: nowrap;
+/* ===== 기타 스타일 ===== */
+.gray-gap {
+    height: 10px;
+    background-color: #f0f0f0;
 }
 
-.emoji {
-	position: absolute;
-	top: 5px;
-	left: 0;
-	font-size: 20px;
-	opacity: 0;
-	pointer-events: none;
+/* ===== 라이선스 지우기 ===== */
+.fp-watermark {
+	display: none !important;	
 }
 
-.start-button:hover .emoji {
-	animation: flyExact 0.5s ease-out forwards;
-}
-
+/* ===== 애니메이션 ===== */
 @keyframes slideDown {
     from { top: -80px; }
     to { top: 0; }
@@ -291,11 +361,6 @@ body {
     to { bottom: 0; }
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
 @keyframes fadeInUp {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
@@ -304,52 +369,4 @@ body {
 @keyframes zoomIn {
     from { transform: scale(0.8); opacity: 0; }
     to { transform: scale(1); opacity: 1; }
-}
-
-@keyframes flyExact {
-	0% {
-	  transform: translate(0, 0) rotate(0deg);
-	  opacity: 0;
-	}
-	30% {
-	  opacity: 1;
-	}
-	100% {
-	  transform: translate(470px, -28px) rotate(30deg);
-	  opacity: 1;
-	}
-}
-
-.profile-submenu {
-	display: flex;
-	justify-content: center;
-	text-align: center;
-}
-
-.profile-submenu a{
-	padding: 10px;
-}
-
-.profile-submenu img{
-	width: 50px;
-}
-
-.gray-gap {
-    height: 10px;
-    background-color: #f0f0f0;
-}
-
-.profile-container a {
-	color: gray; 
-	font-size: small; 
-	padding: 0px;
-}
-
-.profile-nickname{
-	width: 150px; 
-	display:flex; 
-	height: 45px; 
-	align-items:center; 
-	larger; 
-	margin-bottom: 5px;
 }
