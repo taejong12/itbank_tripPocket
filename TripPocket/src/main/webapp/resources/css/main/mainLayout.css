@@ -175,7 +175,7 @@ header .burger span {
 	display: block;            
     margin-left: auto;         
     margin-right: auto;
-    max-width: 100%; /* 부모 요소를 초과하지 않도록 제한 */
+    max-width: 80%; /* 부모 요소를 초과하지 않도록 제한 */
     object-fit: contain; /* 이미지가 비율을 유지하며 잘리거나 왜곡되지 않도록 설정 */
     border-radius: 20px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
