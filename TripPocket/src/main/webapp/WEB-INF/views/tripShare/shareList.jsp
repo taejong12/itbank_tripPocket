@@ -39,9 +39,11 @@
     <div class="pagination" id="pagination">
         <!-- 페이지네이션 버튼 -->
     </div>
-
+	
     <div class="add-btn-wrapper">
-        <a class="add-btn" href="<c:url value='/share/shareForm.do' />">✍️ 여행 이야기 공유하기</a>
+    	<c:if test="${memberId != 'guest' }">
+        <a class="add-btn" href="<c:url value='/share/shareForm.do' />">✍️ 여행 이야기 공유하기</a>x
+        </c:if>
     </div>
 </div>
 

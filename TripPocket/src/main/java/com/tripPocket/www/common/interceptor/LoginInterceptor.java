@@ -77,6 +77,7 @@ public class LoginInterceptor implements HandlerInterceptor {
     			"/member/mypage.do", 
     			"/member/modMember.do", 
     			"/member/delMember.do"
+    			
         	);
         	
         	for (String url : blockedUrls) {
@@ -96,9 +97,25 @@ public class LoginInterceptor implements HandlerInterceptor {
         	        return false;
         	    }
         	}
+        	
+        	List<String> shareblockedUrls = Arrays.asList(
+        			"/share/myShare.do",
+        			"/share/myDetail.do"
+        			
+            	);
+            	
+            	for (String url : shareblockedUrls) {
+    	            if (uri.equals(contextPath+url)) {
+    	                response.sendRedirect(contextPath + "/member/loginForm.do");
+    	                return false;
+    	            }
+    	        }
+        	
         }
         return true;
+        
 	}
+	
 
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
