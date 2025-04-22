@@ -86,25 +86,26 @@
 	</c:if>
 </div>
 <script>
-    new fullpage('#fullpage', {
-        autoScrolling: true,
-        navigation: true,
-        navigationPosition: 'left',
-        scrollingSpeed: 1000,
-        navigationTooltips: ['', '', '', '', '', ''],
-        showActiveTooltip: true,
-        anchors: ['main', 'plan', 'destinations', 'attractions', 'random', 'start'],
-        afterLoad: function(anchorLink, index) {
-            if (index == 1) {
-                document.body.style.overflow = 'hidden';  // 첫 번째 섹션 로드 시 스크롤 숨기기
-            }
-        },
-        onLeave: function(index, nextIndex, direction) {
-            if (nextIndex == 1) {
-                document.body.style.overflow = 'hidden';  // 스크롤 숨기기
-            }
-        }
-    });
+	new fullpage('#fullpage', {
+		autoScrolling: true, // 자동 스크롤 활성화
+	    fitToSection: true, // 각 섹션을 화면 크기에 맞춤
+	    scrollOverflow: true, // 섹션 내부에서 스크롤 가능
+	    scrollBar: false, // 스크롤바 숨김
+	    navigation: true, // 네비게이션 활성화
+	    navigationPosition: 'left',
+	    scrollingSpeed: 1000, // 스크롤 속도 조정
+	    anchors: ['main', 'plan', 'destinations', 'attractions', 'random', 'start'], // 섹션 앵커 설정
+	    afterLoad: function (anchorLink, index) {
+	        if (index === 1) {
+	            document.body.style.overflow = 'hidden'; // 첫 번째 섹션에서 스크롤 숨김
+	        }
+	    },
+	    onLeave: function (index, nextIndex, direction) {
+	        if (nextIndex === 1) {
+	            document.body.style.overflow = 'hidden'; // 다음 섹션으로 이동 시 스크롤 숨김
+	        }
+	    }
+	});
 </script>
 </body>
 </html>

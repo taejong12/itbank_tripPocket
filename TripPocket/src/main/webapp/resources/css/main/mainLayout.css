@@ -1,17 +1,19 @@
 /* ===== 기본 레이아웃 설정 ===== */
 html {
 	height: 100%;
-	overflow: hidden;
+	overflow: auto;
 	margin: 0;
     padding: 0;
+	scrollbar-width: none;
 }
 
 body {
 	height: 100%;
 	margin: 0;
 	padding: 0;
-	overflow: hidden;
+	overflow: auto;
 	font-family: 'Noto Sans', sans-serif;
+	scrollbar-width: none;
 }
 
 /* 배경 이미지 설정 */
@@ -119,13 +121,15 @@ header .burger span {
 
 /* ===== 섹션 기본 스타일 ===== */
 .section {
+	height: 50vh;
 	overflow: hidden;
 	color: white;
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     text-align: center;
     background-color: rgba(255, 255, 255, 0.3);
+	box-sizing: border-box;
 }
 
 .content {
@@ -168,17 +172,15 @@ header .burger span {
 }
 
 .section img {
-    display: block;            
+	display: block;            
     margin-left: auto;         
     margin-right: auto;
-    max-height: 540px;
-    width: 100%;
-    height: auto;
+    max-width: 100%; /* 부모 요소를 초과하지 않도록 제한 */
+    object-fit: contain; /* 이미지가 비율을 유지하며 잘리거나 왜곡되지 않도록 설정 */
     border-radius: 20px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
     margin-top: 30px;
     margin-bottom: 30px;
-    animation: zoomIn 1s ease-in;
     overflow: hidden;
     transition: transform 0.2s ease;
     
@@ -369,4 +371,12 @@ header .burger span {
 @keyframes zoomIn {
     from { transform: scale(0.8); opacity: 0; }
     to { transform: scale(1); opacity: 1; }
+}
+
+.fp-overflow {
+    scrollbar-width: none; /* Firefox에서 스크롤바 숨김 */
+}
+
+.fp-overflow::-webkit-scrollbar {
+    display: none; /* Chrome, Safari에서 스크롤바 숨김 */
 }
