@@ -50,13 +50,6 @@
                     <span class="info-value password-value">********</span>
                     <a href="javascript:void(0);" class="edit-link" id="password-button" onclick="showEditField('password')">변경</a>
                 </div>
-                <div class="edit-field" id="password-edit">
-                    <input type="password" name="memberPwd" id="password-input" placeholder="변경하실 비밀번호를 입력하세요">
-                    <div class="button-container">
-                        <button type="submit">저장</button>
-                        <button class="cancel-btn" type="button" onclick="hideEditField('password')">취소</button>
-                    </div>
-                </div>
             </div>
 
             <!-- 이메일 -->

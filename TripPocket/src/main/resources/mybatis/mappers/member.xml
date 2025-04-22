@@ -55,9 +55,6 @@
              <if test="memberEmail != null and memberEmail != ''">
             member_email = #{memberEmail},
         </if>
-        <if test="memberPwd != null and memberPwd != ''">
-            member_pwd = #{memberPwd},
-        </if>
         <if test="memberTel != null and memberTel != ''">
             member_tel = #{memberTel},
         </if>

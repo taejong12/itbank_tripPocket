@@ -1,5 +1,5 @@
 function showEditField(label) {
-    const fields = ['password', 'tel', 'nickname', 'email'];
+    const fields = ['tel', 'nickname', 'email'];
     fields.forEach(function (key) {
         if (key !== label) {
             hideEditField(key);
@@ -24,7 +24,7 @@ function hideEditField(label) {
 
 function mypageForm(event) {
     // 어떤 입력 영역이 현재 보이고 있는지 확인
-    const editFields = ['password', 'email', 'tel', 'nickname'];
+    const editFields = ['email', 'tel', 'nickname'];
     let target = null;
 
     for (const field of editFields) {
@@ -41,17 +41,6 @@ function mypageForm(event) {
     }
 
     switch (target) {
-        case 'password':
-            const password = document.getElementById('password-input').value.trim();
-            const specialCharPattern = /[!@#$%^&*(),.?":{}|<>]/;
-            // 비밀번호 길이 + 특수문자 검사 합치기
-            if (password.length < 8 || !specialCharPattern.test(password)) {
-                alert("비밀번호는 최소 8자 이상, 특수문자(예: !, @, #, $ 등)를 포함해 주세요.");
-                document.getElementById('password-input').focus();
-                return false;
-            }
-            break;
-
         case 'email':
             const email = document.getElementById('email-input').value.trim();
             if (!email) {
