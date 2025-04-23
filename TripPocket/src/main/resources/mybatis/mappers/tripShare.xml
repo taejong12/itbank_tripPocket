@@ -161,19 +161,14 @@ ORDER BY
 	</select>
 
 	<insert id="insertTripShare" parameterType="tripShareDTO">
-	    <selectKey keyProperty="tripShareId" order="BEFORE" resultType="int">
-	        SELECT trip_share_id_seq.NEXTVAL FROM dual
-	    </selectKey>
 	    
 	    	INSERT INTO trip_share (
-		        trip_share_id,
 		        trip_share_title,
 		        trip_plan_id,
 		        trip_share_add_date,
 		        trip_share_mod_date,
 		        member_id
 	    	) VALUES (
-		        #{tripShareId},
 		        #{tripShareTitle},
 		        #{tripPlanId, jdbcType=INTEGER},
 		        SYSDATE,
