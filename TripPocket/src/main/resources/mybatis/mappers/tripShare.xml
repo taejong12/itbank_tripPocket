@@ -161,14 +161,19 @@ ORDER BY
 	</select>
 
 	<insert id="insertTripShare" parameterType="tripShareDTO">
+	    <selectKey keyProperty="tripShareId" order="BEFORE" resultType="int">
+	        SELECT trip_share_id_seq.NEXTVAL FROM dual
+	    </selectKey>
 	    
 	    	INSERT INTO trip_share (
+		        trip_share_id,
 		        trip_share_title,
 		        trip_plan_id,
 		        trip_share_add_date,
 		        trip_share_mod_date,
 		        member_id
 	    	) VALUES (
+		        #{tripShareId},
 		        #{tripShareTitle},
 		        #{tripPlanId, jdbcType=INTEGER},
 		        SYSDATE,
@@ -179,7 +184,9 @@ ORDER BY
 
 	
 	   <insert id="insertTripShareDay" parameterType="tripDayDTO">
+	   
     INSERT INTO trip_share_content (
+        TRIP_SHARE_ID, 
         TRIP_DAY_ID, 
         TRIP_SHARE_DAY_DAY, 
         TRIP_SHARE_DAY_PLACE, 
@@ -191,19 +198,20 @@ ORDER BY
         TRIP_SHARE_CONTENT,
         TRIP_PLAN_START_DAY,  
     	TRIP_PLAN_ARRIVE_DAY
-    ) 
+    )
     VALUES (
-        #{tripDayId}, 
-        #{tripDayDay, jdbcType=INTEGER}, 
-        #{tripDayPlace}, 
-        #{tripDayAddress}, 
-        #{tripDayDate, jdbcType=DATE}, 
-        #{tripDayImage}, 
-        #{tripDayMapx, jdbcType=NUMERIC}, 
-        #{tripDayMapy, jdbcType=NUMERIC}, 
+        #{tripShareId,jdbcType=INTEGER},
+        #{tripDayId},
+        #{tripDayDay, jdbcType=INTEGER},
+        #{tripDayPlace},
+        #{tripDayAddress},
+        #{tripDayDate, jdbcType=DATE},
+        #{tripDayImage},
+        #{tripDayMapx, jdbcType=NUMERIC},
+        #{tripDayMapy, jdbcType=NUMERIC},
         #{tripShareContent},
-        #{tripPlanStartDay, jdbcType=DATE}, 
-   	 	#{tripPlanArriveDay, jdbcType=DATE} 
+        #{tripPlanStartDay, jdbcType=DATE},
+   	 	#{tripPlanArriveDay, jdbcType=DATE}
     )
 </insert>
 	
@@ -376,7 +384,7 @@ ORDER BY tsc.trip_share_day_day ASC
 	<select id="getTripShareViewCount" parameterType="int" resultType="int">
     SELECT COUNT(*) 
 	FROM trip_share_log
-	WHERE action_type = 'VIEW' 
+	WHERE action_type = 'VIEW'
   	AND trip_share_id = #{trip_share_id}
 	</select>	
 	
