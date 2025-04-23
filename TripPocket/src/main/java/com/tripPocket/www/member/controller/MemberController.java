@@ -292,14 +292,14 @@ public class MemberController {
 	    
 	    // 확장자를 포함한 새로운 파일 이름 생성
 	    String fileName = UUID.randomUUID().toString() + extension;
-	    File dest = new File(uploadPath + File.separator + fileName);
+	    File dest = new File(uploadPath + File.separator + fileName + ".png");
 	    
 	    try {
 	        // 파일을 임시로 저장 (리사이즈 작업을 위해 먼저 업로드)
 	        profileImage.transferTo(dest);
 
 	        // 리사이즈된 이미지 저장 경로 설정
-	        File resizedFile = new File(uploadPath + File.separator + "resized_" + fileName);
+	        File resizedFile = new File(uploadPath + File.separator + "resized_" + fileName + ".png");
 
 	        // 리사이즈 처리
 	        Thumbnails.of(dest)  // 원본 이미지
@@ -320,7 +320,7 @@ public class MemberController {
 	    }
 
 	    // DB에 상대 경로만 저장 (예: hong123/resized_uuid_image.jpg)
-	    String savedPath = memberFolder + "/" + "resized_" + fileName;
+	    String savedPath = memberFolder + "/" + "resized_" + fileName + ".png";
 	    member.setMemberProfileImage(savedPath);
 	    memberService.updateProfileImage(member.getMemberId(), savedPath);
 
