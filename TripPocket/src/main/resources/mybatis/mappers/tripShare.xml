@@ -180,7 +180,6 @@ ORDER BY
 	
 	   <insert id="insertTripShareDay" parameterType="tripDayDTO">
     INSERT INTO trip_share_content (
-        TRIP_SHARE_ID, 
         TRIP_DAY_ID, 
         TRIP_SHARE_DAY_DAY, 
         TRIP_SHARE_DAY_PLACE, 
@@ -194,7 +193,6 @@ ORDER BY
     	TRIP_PLAN_ARRIVE_DAY
     ) 
     VALUES (
-        #{tripShareId,jdbcType=INTEGER}, 
         #{tripDayId}, 
         #{tripDayDay, jdbcType=INTEGER}, 
         #{tripDayPlace}, 
