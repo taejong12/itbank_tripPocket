@@ -23,7 +23,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         String uri = request.getRequestURI();
         String contextPath = request.getContextPath();
         
-        if (uri.equals(contextPath+"/member/loginKeep.do")) {
+        if (uri.equals(contextPath + "/member/loginKeep.do")) {
             return true;
         }
         
@@ -76,8 +76,9 @@ public class LoginInterceptor implements HandlerInterceptor {
         	List<String> blockedUrls = Arrays.asList(
     			"/member/mypage.do", 
     			"/member/modMember.do", 
-    			"/member/delMember.do"
-    			
+    			"/member/delMember.do",
+    			"/share/myShare.do",
+    			"/share/myDetail.do"
         	);
         	
         	for (String url : blockedUrls) {
@@ -97,25 +98,9 @@ public class LoginInterceptor implements HandlerInterceptor {
         	        return false;
         	    }
         	}
-        	
-        	List<String> shareblockedUrls = Arrays.asList(
-        			"/share/myShare.do",
-        			"/share/myDetail.do"
-        			
-            	);
-            	
-            	for (String url : shareblockedUrls) {
-    	            if (uri.equals(contextPath+url)) {
-    	                response.sendRedirect(contextPath + "/member/loginForm.do");
-    	                return false;
-    	            }
-    	        }
-        	
         }
         return true;
-        
 	}
-	
 
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
