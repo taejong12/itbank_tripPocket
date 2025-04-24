@@ -66,19 +66,23 @@
 
 ---
 
-### 🗂 WBS (Work Breakdown Structure)
-[🔗 WBS 스프레드시트 보기](https://docs.google.com/spreadsheets/d/e/2PACX-1vSGk6rWZbM7f4B8FllXBJr7r3vIunj4LSrDQ8NfP6oxkaVTLaUT_jiq3yyinkiYvw55qejFqRs8-3En/pubhtml?gid=1115838130&single=true)
-
-
----
-
 ### 🧭 스토리보드
 <img src="https://github.com/user-attachments/assets/a1fe81a2-e786-4a37-8ff2-c8d71cbfd61c" width="600" alt="Trip Pocket 스토리보드"/>
 
 ---
 
+### 🗂 WBS (Work Breakdown Structure)
+[🔗 WBS 스프레드시트 보기](https://docs.google.com/spreadsheets/d/e/2PACX-1vSGk6rWZbM7f4B8FllXBJr7r3vIunj4LSrDQ8NfP6oxkaVTLaUT_jiq3yyinkiYvw55qejFqRs8-3En/pubhtml?gid=1115838130&single=true)
+
+---
+
 ### 🗃 DB 설계
 [🔗 DB 스프레드시트 보기](https://docs.google.com/spreadsheets/d/e/2PACX-1vSGk6rWZbM7f4B8FllXBJr7r3vIunj4LSrDQ8NfP6oxkaVTLaUT_jiq3yyinkiYvw55qejFqRs8-3En/pubhtml?gid=1763198525&single=true)
+
+---
+
+### <img src="https://github.com/user-attachments/assets/d6f45ab4-5cd7-44f8-a2e8-5e4628672acb" width="28" alt="Trip Pocket 스토리보드"/> PRESENTATION
+[🔗 나를 아는 여행, Trip Pocket](https://onedrive.live.com/:p:/g/personal/CF9840277DAAC9D2/EZB4S-4ZAy9HojmpS2UOzMQB0PXNCLztvVyT2kk-7ZGmOg?resid=CF9840277DAAC9D2!see4b78900319472fa239a94b650eccc4&ithint=file%2Cpptx&e=hs6meM&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy9jZjk4NDAyNzdkYWFjOWQyL0VaQjRTLTRaQXk5SG9qbXBTMlVPek1RQjBQWE5DTHp0dlZ5VDJray03WkdtT2c_ZT1oczZtZU0)
 
 ---
 
