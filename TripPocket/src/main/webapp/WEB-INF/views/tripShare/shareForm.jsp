@@ -240,6 +240,7 @@
                     form.append('<input type="hidden" class="generated-hidden" name="tripDayList[' + index + '].tripShareContent" value="' + $('<div>').text(content).html() + '">');
                     form.append('<input type="hidden" class="generated-hidden" name="tripDayList[' + index + '].tripPlanStartDay" value="' + day.tripPlanStartDay + '">');
                     form.append('<input type="hidden" class="generated-hidden" name="tripDayList[' + index + '].tripPlanArriveDay" value="' + day.tripPlanArriveDay + '">');
+                    form.append('<input type="hidden" class="generated-hidden" name="tripDayList[' + index + '].tripDayContentId" value="' + day.tripDayContentId + '">');
 
                     index++;
                 });

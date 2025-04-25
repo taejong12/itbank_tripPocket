@@ -42,7 +42,7 @@
 	
     <div class="add-btn-wrapper">
     	<c:if test="${memberId != 'guest' }">
-        <a class="add-btn" href="<c:url value='/share/shareForm.do' />">✍️ 여행 이야기 공유하기</a>x
+        <a class="add-btn" href="<c:url value='/share/shareForm.do' />">✍️ 여행 이야기 공유하기</a>
         </c:if>
     </div>
 </div>
