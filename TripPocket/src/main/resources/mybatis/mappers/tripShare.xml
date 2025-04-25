@@ -197,8 +197,9 @@ ORDER BY
         TRIP_SHARE_DAY_MAPY, 
         TRIP_SHARE_CONTENT,
         TRIP_PLAN_START_DAY,  
-    	TRIP_PLAN_ARRIVE_DAY
-    )
+    	TRIP_PLAN_ARRIVE_DAY,
+    	TRIP_DAY_CONTENT_ID
+    ) 
     VALUES (
         #{tripShareId,jdbcType=INTEGER},
         #{tripDayId},
@@ -210,8 +211,9 @@ ORDER BY
         #{tripDayMapx, jdbcType=NUMERIC},
         #{tripDayMapy, jdbcType=NUMERIC},
         #{tripShareContent},
-        #{tripPlanStartDay, jdbcType=DATE},
-   	 	#{tripPlanArriveDay, jdbcType=DATE}
+        #{tripPlanStartDay, jdbcType=DATE}, 
+   	 	#{tripPlanArriveDay, jdbcType=DATE},
+   	 	#{tripDayContentId} 
     )
 </insert>
 	
@@ -311,7 +313,7 @@ ORDER BY tsc.trip_share_day_day ASC
 	  tsc.trip_share_day_place,
 	  tsc.trip_share_day_mapy,
 	  tsc.trip_share_day_mapx,
-	  tsc.trip_share_content_id
+	  tsc.trip_day_content_id
 	FROM trip_share_content tsc
 	WHERE tsc.trip_share_id = #{tripShareId}
 	ORDER BY tsc.trip_share_day_day ASC

@@ -15,7 +15,7 @@ public class TripShareContentDTO {
 	    private String tripShareDayImage;
 	    private double tripShareDayMapx;
 	    private double tripShareDayMapy;
-	    	
+	    private String TripDayContentId;
 	    private String tripShareContent;
 	    private java.sql.Date tripPlanStartDay;
 	    private java.sql.Date tripPlanArriveDay;
@@ -126,5 +126,13 @@ public class TripShareContentDTO {
 
 		public void setTripShareContent(String tripShareContent) {
 			this.tripShareContent = tripShareContent;
+		}
+
+		public String getTripDayContentId() {
+			return TripDayContentId;
+		}
+
+		public void setTripDayContentId(String tripDayContentId) {
+			TripDayContentId = tripDayContentId;
 		}
 }
