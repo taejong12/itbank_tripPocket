@@ -82,7 +82,7 @@
 ---
 
 ### <img src="https://github.com/user-attachments/assets/d6f45ab4-5cd7-44f8-a2e8-5e4628672acb" width="28" alt="Trip Pocket 스토리보드"/> PRESENTATION
-[🔗 나를 아는 여행, Trip Pocket](https://onedrive.live.com/:p:/g/personal/CF9840277DAAC9D2/EZB4S-4ZAy9HojmpS2UOzMQB0PXNCLztvVyT2kk-7ZGmOg?resid=CF9840277DAAC9D2!see4b78900319472fa239a94b650eccc4&ithint=file%2Cpptx&e=hs6meM&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy9jZjk4NDAyNzdkYWFjOWQyL0VaQjRTLTRaQXk5SG9qbXBTMlVPek1RQjBQWE5DTHp0dlZ5VDJray03WkdtT2c_ZT1oczZtZU0)
+[🔗 나를 아는 여행, Trip Pocket](https://docs.google.com/presentation/d/1uCutOPhXCcy04D7ggRay7AeAQddHk7tDvJ9lEynVMes/edit#slide=id.p6)
 
 ---
 
