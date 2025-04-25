@@ -71,6 +71,20 @@ public class TripShareController {
 	    return "tripShare/myShare"; // 공유 리스트 페이지의 뷰 이름 반환
 	    
 	}
+	@RequestMapping("/myShareListAjax.do")
+	@ResponseBody
+	public List<TripShareDTO> myShareListAjax(HttpServletRequest request) {
+	    HttpSession session = request.getSession();
+	    MemberDTO memberDTO = (MemberDTO) session.getAttribute("member");
+	    
+	    // memberDTO가 null인 경우 처리
+	    if (memberDTO == null) {
+	        return new ArrayList<>(); // 빈 리스트 반환
+	    }
+
+	    List<TripShareDTO> myList = tripShareService.myList(memberDTO.getMemberId());
+	    return myList;  // JSON으로 자동 변환되어 반환됨
+	}
 	
 	@RequestMapping(value = "/shareForm.do", method = RequestMethod.GET)
 	public String writeForm(@ModelAttribute()TripShareDTO tripShareDTO, Model model,HttpServletRequest request) {

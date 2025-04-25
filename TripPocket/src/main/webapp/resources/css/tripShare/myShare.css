@@ -1,14 +1,38 @@
 @charset "UTF-8";
 
+/* 전체 페이지 중앙 정렬 */
 .container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    position: relative; /* 상대 위치로 변경 */
     width: 1200px;
     padding: 0 20px;
+    margin: 0 auto; /* 좌우 중앙 정렬 */
+    top: 20px; /* 화면 상단에 위치 */
 }
 
+/* 페이지네이션 스타일 */
+.pagination{
+  display: flex;
+    justify-content: center; /* 수평 중앙 정렬 */
+    align-items: center; /* 수직 중앙 정렬 */
+    margin: 20px 0; /* 카드와 간격 추가 */
+   
+}
+
+.page-btn {
+    margin: 0 5px;
+    padding: 5px 10px;
+    border: none;
+    background-color: #eee;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.page-btn.active {
+    background-color: #007BFF;
+    color: white;
+}
+
+/* 카드 스타일 */
 .card {
     background: white;
     border-radius: 12px;
@@ -62,6 +86,7 @@
     transition: all 0.2s ease;
 }
 
+/* 수정 버튼 스타일 */
 .edit-btn {
     background-color: #e3f2fd;
     color: #1976d2;
@@ -72,21 +97,26 @@
     background-color: #bbdefb;
 }
 
+/* 삭제 버튼 스타일 */
 .delete-btn {
     background-color: #ffebee;
     color: #d32f2f;
     border: 1px solid #ef9a9a;
 }
 
-.add-btn-container {
-    text-align: center;
-    margin-top: 30px;
-}
-
 .delete-btn:hover {
     background-color: #ffcdd2;
 }
 
+/* 글쓰기 버튼 컨테이너 */
+.add-btn-container {
+    position: fixed; /* 화면 오른쪽 하단에 고정 */
+    bottom: 20px;
+    right: 20px; /* 오른쪽에 위치 */
+    z-index: 10;
+}
+
+/* 글쓰기 버튼 스타일 */
 .add-btn {
     display: inline-block;
     padding: 12px 20px;
@@ -100,7 +130,6 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s, transform 0.2s;
     width: auto;
-    margin: 0 auto;
 }
 
 .add-btn:hover {
@@ -108,25 +137,32 @@
     transform: translateY(-3px);
 }
 
+/* 반응형 디자인 */
 @media (max-width: 768px) {
-	.card {
-	    padding: 15px;
-	}
+    .container {
+        width: 100%;
+        padding: 10px;
+    }
 
-	.card-title {
-	    font-size: 18px;
-	}
-	
-	.card-meta {
-	    font-size: 12px;
-	}
-	
-	.add-btn {
-	    width: 80%;
-	    font-size: 14px;
-	}
+    .card {
+        padding: 15px;
+    }
+
+    .card-title {
+        font-size: 18px;
+    }
+
+    .card-meta {
+        font-size: 12px;
+    }
+
+    .add-btn {
+        width: 80%;
+        font-size: 14px;
+    }
 }
 
+/* 공유 리스트가 비어 있을 때 스타일 */
 .empty-box {
     text-align: center;
     padding: 60px 20px;
@@ -148,3 +184,6 @@
     margin-bottom: 30px;
     line-height: 1.6;
 }
+
+/* 페이지 버튼을 카드 아래 중앙에 배치 */
+
