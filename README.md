@@ -65,20 +65,19 @@
 ---
 
 ## 🛠 사용 기술
-- Java 11
-- Spring Framework 4.1.1
-- JSP
-- Oracle (ojdbc8)
-- MyBatis
+- **Backend**: Java 11, Spring Framework 4.1.1, MyBatis
+- **Frontend**: JSP, HTML5, CSS3, JavaScript
+- **Database**: Oracle (ojdbc8)
+- **Version Control**: Git, GitHub
 
 ---
 
 ## ⚙ 개발 도구
-- STS3 (Spring Tool Suite 3)
-- SQL Developer
-- Tomcat 9
-- Maven
-
+- **IDE**: STS3 (Spring Tool Suite 3)
+- **Database Tool**: SQL Developer
+- **Server**: Tomcat 9
+- **Build Tool**: Maven
+  
 ---
 
 ## 📅 프로젝트 기간
