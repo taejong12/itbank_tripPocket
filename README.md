@@ -105,7 +105,7 @@
 ---
 
 ## <img src="https://github.com/user-attachments/assets/d6f45ab4-5cd7-44f8-a2e8-5e4628672acb" width="28" alt="Trip Pocket 스토리보드"/> PRESENTATION
-[🔗 나를 아는 여행, Trip Pocket](https://docs.google.com/presentation/d/1uCutOPhXCcy04D7ggRay7AeAQddHk7tDvJ9lEynVMes/edit#slide=id.p6)
+[🔗 나를 아는 여행, Trip Pocket](https://docs.google.com/presentation/d/1uCutOPhXCcy04D7ggRay7AeAQddHk7tDvJ9lEynVMes/edit#slide=id.p1)
 
 ---
 
@@ -151,7 +151,6 @@
 
 💬 댓글 기능
 - 상세 페이지 댓글 작성 / 수정 / 삭제
-
 
 ---
 
